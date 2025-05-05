@@ -33,27 +33,7 @@
         }
       };
     });
-  </script>
-  
-  <div 
-    bind:this={cardElement}
-    class={`bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all border border-gray-100 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-    style={`transition: all 0.6s ease-out ${delay}s;`}
-  >
-    {#if icon}
-      <div class="w-12 h-12 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded-lg mb-4">
-        {@html icon}
-      </div>
-    {/if}
-    
-    <h3 class="text-xl font-bold text-gray-900 mb-2">
-      {title}
-    </h3>
-    
-    <p class="text-gray-600">
-      {description}
-    </p>
-  </div>
+</script>
 
 <section class="py-20 bg-gray-50">
   <div class="container mx-auto px-4">

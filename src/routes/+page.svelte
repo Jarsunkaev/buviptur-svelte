@@ -10,7 +10,6 @@
     import WhyChooseUs from '$lib/components/WhyChooseUs.svelte';
     import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
     import BlogSection from '$lib/components/BlogSection.svelte';
-    import SubscribeSection from '$lib/components/SubscribeSection.svelte';
     
     // For responsive design
     let windowWidth;
@@ -200,6 +199,7 @@
         font-family: 'Roboto', sans-serif;
         color: #333;
         background-color: #f9fafb;
+        overflow-x: hidden;
       }
       
       /* Animation classes */
@@ -229,63 +229,92 @@
       .animate-delay-300 {
         animation-delay: 0.3s;
       }
+
+      /* Container styles */
+      .container {
+        width: 100%;
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .container {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .container {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+      }
     </style>
   </svelte:head>
   
   <svelte:window bind:innerWidth={windowWidth} />
   
-  <Header />
-  
-  <main>
-    <Hero 
-      {carouselImages} 
-      isMobile={windowWidth < 1024} 
-    />
+  <div class="min-h-screen flex flex-col">
+    <Header />
     
-    <TourSection 
-      title="Best of Budapest" 
-      tours={tourData} 
-    />
+    <main class="flex-grow">
+      <Hero 
+        {carouselImages} 
+        isMobile={windowWidth < 1024} 
+      />
+      
+      <section id="tours">
+        <TourSection 
+          title="Best of Budapest"
+          tours={tourData} 
+        />
+      </section>
+      
+      <PromoSection 
+        promos={promoData} 
+      />
+      
+      <section id="activities">
+        <ActivitiesSection 
+          title="Popular things to do" 
+          subtitle="Explore the most sought-after activities and experiences with our expert guides" 
+          activities={activitiesData} 
+        />
+      </section>
+      
+      <section id="destinations">
+        <DestinationsSection 
+          title="Trending Destinations" 
+          destinations={destinationsData} 
+        />
+      </section>
+      
+      <section id="about">
+        <WhyChooseUs 
+          title="Why choose BuVipTur" 
+          benefits={benefitsData} 
+          stats={statsData} 
+          image="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80" 
+        />
+      </section>
+      
+      <TestimonialsSection 
+        title="What our Travelers are saying" 
+        averageRating={4.9} 
+        reviewCount="1000+" 
+        certificationText="Certificate of Excellence" 
+        testimonials={testimonialsData} 
+      />
+      
+      <BlogSection 
+        title="Travel Articles" 
+        articles={articlesData} 
+      />
+    </main>
     
-    <PromoSection 
-      promos={promoData} 
-    />
-    
-    <ActivitiesSection 
-      title="Popular things to do" 
-      subtitle="Explore the most sought-after activities and experiences with our expert guides" 
-      activities={activitiesData} 
-    />
-    
-    <DestinationsSection 
-      title="Trending Destinations" 
-      destinations={destinationsData} 
-    />
-    
-    <WhyChooseUs 
-      title="Why choose BuVipTur" 
-      benefits={benefitsData} 
-      stats={statsData} 
-      image="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80" 
-    />
-    
-    <TestimonialsSection 
-      title="What our Travelers are saying" 
-      averageRating={4.9} 
-      reviewCount="1000+" 
-      certificationText="Certificate of Excellence" 
-      testimonials={testimonialsData} 
-    />
-    
-    <BlogSection 
-      title="Travel Articles" 
-      articles={articlesData} 
-    />
-    
-    <SubscribeSection 
-      title="Subscribe To Our Mailing List" 
-      description="Stay updated with our latest tours, travel tips, and exclusive offers. Join our community of travelers!" 
-    />
-  </main>
-  
-  <Footer />
+    <Footer />
+  </div>
