@@ -1,8 +1,5 @@
 <script>
     export let title = '';
-    export let description = '';
-    export let icon = null; // SVG icon as a string
-    export let delay = 0; // For staggered animation
     export let tours = [];
     
     let visible = false;

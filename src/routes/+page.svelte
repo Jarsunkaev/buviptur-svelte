@@ -10,6 +10,7 @@
     import WhyChooseUs from '$lib/components/WhyChooseUs.svelte';
     import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
     import BlogSection from '$lib/components/BlogSection.svelte';
+    import LazyImage from '$lib/components/LazyImage.svelte';
     
     // For responsive design
     let windowWidth;
@@ -25,7 +26,7 @@
     const tourData = [
       {
         title: 'Budapest Castle Tour',
-        image: 'https://images.unsplash.com/photo-1516550893885-eed71dff7b72?q=80',
+        image: 'https://via.placeholder.com/800x600.png?text=Budapest+Castle+Tour',
         location: 'Budapest, Hungary',
         rating: 4.8,
         reviews: 243,
@@ -91,8 +92,8 @@
     ];
     
     const destinationsData = [
-      { name: 'Paris', tours: 245, image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80' },
-      { name: 'Rome', tours: 197, image: 'https://images.unsplash.com/photo-1541343672885-9be56236302a?q=80' },
+      { name: 'Paris', tours: 245, image: 'https://via.placeholder.com/800x600.png?text=Paris+Tours' },
+      { name: 'Rome', tours: 197, image: 'https://via.placeholder.com/800x600.png?text=Rome+Tours' },
       { name: 'London', tours: 210, image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80' },
       { name: 'Budapest', tours: 124, image: 'https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80' },
       { name: 'Prague', tours: 165, image: 'https://images.unsplash.com/photo-1504512485720-7d83a16ee930?q=80' },
@@ -273,34 +274,18 @@
           tours={tourData} 
         />
       </section>
-      
-      <PromoSection 
-        promos={promoData} 
       />
       
-      <section id="activities">
-        <ActivitiesSection 
-          title="Popular things to do" 
-          subtitle="Explore the most sought-after activities and experiences with our expert guides" 
-          activities={activitiesData} 
-        />
-      </section>
+      <DestinationsSection 
+        title="Explore Our Destinations" 
+        destinations={destinationsData} 
+      />
       
-      <section id="destinations">
-        <DestinationsSection 
-          title="Trending Destinations" 
-          destinations={destinationsData} 
-        />
-      </section>
-      
-      <section id="about">
-        <WhyChooseUs 
-          title="Why choose BuVipTur" 
-          benefits={benefitsData} 
-          stats={statsData} 
-          image="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80" 
-        />
-      </section>
+      <WhyChooseUs 
+        title="Why Travel With Us" 
+        benefits={benefitsData} 
+        stats={statsData} 
+      />
       
       <TestimonialsSection 
         title="What our Travelers are saying" 
@@ -308,11 +293,6 @@
         reviewCount="1000+" 
         certificationText="Certificate of Excellence" 
         testimonials={testimonialsData} 
-      />
-      
-      <BlogSection 
-        title="Travel Articles" 
-        articles={articlesData} 
       />
     </main>
     

@@ -9,13 +9,13 @@
         <h3 class="text-2xl font-bold mb-6 text-[#dcb660]">About BuVipTur</h3>
         <p class="text-gray-300 leading-relaxed">Your trusted partner in creating unforgettable travel experiences since 2010. We specialize in unique local tours that show you the authentic side of every destination.</p>
         <div class="flex space-x-4 mt-6">
-          <a href="#" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors">
+          <a href="https://facebook.com" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors" aria-label="Visit our Facebook page">
             <i class="fab fa-facebook-f"></i>
           </a>
-          <a href="#" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors">
+          <a href="https://twitter.com" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors" aria-label="Visit our Twitter page">
             <i class="fab fa-twitter"></i>
           </a>
-          <a href="#" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors">
+          <a href="https://instagram.com" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors" aria-label="Visit our Instagram page">
             <i class="fab fa-instagram"></i>
           </a>
         </div>
@@ -24,11 +24,10 @@
       <div class="space-y-4">
         <h3 class="text-2xl font-bold mb-6 text-[#dcb660]">Quick Links</h3>
         <ul class="space-y-3">
-          <li><a href="#tours" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> Tours</a></li>
-          <li><a href="#destinations" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> Destinations</a></li>
-          <li><a href="#activities" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> Activities</a></li>
-          <li><a href="#about" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> About Us</a></li>
-          <li><a href="#contact" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> Contact</a></li>
+          <li><a href="/tours" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> Tours</a></li>
+          <li><a href="/about" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> About Us</a></li>
+          <li><a href="/services" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> Services</a></li>
+          <li><a href="/contact" class="text-gray-300 hover:text-[#dcb660] transition duration-300 flex items-center"><i class="fas fa-chevron-right mr-2 text-[#dcb660] text-sm"></i> Contact</a></li>
         </ul>
       </div>
       
@@ -46,9 +45,9 @@
     <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
       <p class="text-gray-400 mb-4 md:mb-0">&copy; {currentYear} <span class="text-[#dcb660]">BuVipTur</span>. All rights reserved.</p>
       <div class="flex space-x-6">
-        <a href="#" class="text-gray-400 hover:text-[#dcb660] transition-colors">Privacy Policy</a>
-        <a href="#" class="text-gray-400 hover:text-[#dcb660] transition-colors">Terms of Service</a>
-        <a href="#" class="text-gray-400 hover:text-[#dcb660] transition-colors">Sitemap</a>
+        <a href="/privacy-policy" class="text-gray-400 hover:text-[#dcb660] transition-colors">Privacy Policy</a>
+        <a href="/terms-of-service" class="text-gray-400 hover:text-[#dcb660] transition-colors">Terms of Service</a>
+        <a href="/sitemap" class="text-gray-400 hover:text-[#dcb660] transition-colors">Sitemap</a>
       </div>
     </div>
   </div>
