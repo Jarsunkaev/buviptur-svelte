@@ -200,22 +200,41 @@
     }
 
     // Initialize flatpickr datepicker
+    let flatpickrInstance = null;
     onMount(() => {
-        if (typeof window !== 'undefined') {
-            import('flatpickr').then(module => {
-                const flatpickr = module.default;
-                flatpickr('#tourDate', {
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today',
-                    disable: [
-                        function(date) {
-                            // Disable Mondays (1) in this example
-                            return date.getDay() === 1;
-                        }
-                    ]
-                });
-            });
-        }
+        const initFlatpickr = async () => {
+            if (typeof window !== 'undefined') {
+                try {
+                    const module = await import('flatpickr');
+                    const flatpickr = module.default;
+                    const tourDateInput = document.getElementById('tourDate');
+                    
+                    if (tourDateInput) {
+                        flatpickrInstance = flatpickr(tourDateInput, {
+                            dateFormat: 'Y-m-d',
+                            minDate: 'today',
+                            disable: [
+                                function(date) {
+                                    // Disable Mondays (1) in this example
+                                    return date.getDay() === 1;
+                                }
+                            ]
+                        });
+                    }
+                } catch (error) {
+                    console.error('Failed to load flatpickr:', error);
+                }
+            }
+        };
+
+        initFlatpickr();
+
+        return () => {
+            // Cleanup function to destroy flatpickr instance
+            if (flatpickrInstance) {
+                flatpickrInstance.destroy();
+            }
+        };
     });
 </script>
 

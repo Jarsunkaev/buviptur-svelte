@@ -85,6 +85,7 @@
             src={image} 
             alt="Travel destination" 
             class="w-full h-full object-cover"
+            loading="eager"
           />
           <div class="absolute inset-0 bg-gradient-to-b from-transparent to-teal-900/50"></div>
         </div>
@@ -115,6 +116,12 @@
       <div class="absolute -right-12 -bottom-12 w-40 h-40 bg-[#dcb660]/20 rounded-full blur-xl z-0"></div>
     </div>
   </div>
+  
+  <!-- Floating Get Offer Button -->
+  <a href="/contact" class="fixed bottom-8 right-8 z-50 bg-teal-900 text-white px-4 py-3 rounded-full shadow-lg hover:bg-teal-800 transition-all duration-300 flex items-center space-x-2 animate-pulse hover:animate-none">
+    <span class="font-semibold">Get Offer</span>
+    <i class="fas fa-arrow-right"></i>
+  </a>
 </section>
 
 <style>
@@ -156,5 +163,21 @@
   
   .category-pill:hover {
     transform: translateY(-2px);
+  }
+  
+  /* Pulse animation for the floating button */
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s infinite ease-in-out;
   }
 </style>
