@@ -106,13 +106,14 @@
       class="fixed inset-0 bg-teal-900/95 backdrop-blur-lg z-40 lg:hidden flex items-center justify-center"
       role="dialog"
       aria-modal="true"
+      id="mobile-menu-overlay"
     >
       <div class="w-full h-full flex flex-col items-center justify-center">
         <nav class="flex flex-col items-center justify-center space-y-8 w-full max-w-md mx-auto px-4">
           {#each navItems as item, index}
             <a
               href={item.href}
-              class="nav-link text-2xl font-medium text-white hover:text-[#dcb660] transition-colors duration-300 animate-fadeIn w-full text-center py-3
+              class="nav-link text-2xl font-medium text-white hover:text-[#dcb660] transition-colors duration-300 animate-fadeIn text-center py-3 
                      {$page.url.pathname === item.href ? 'active-link' : ''}"
               style="animation-delay: {(index + 1) * 0.1}s"
               on:click={closeMenu}
@@ -140,7 +141,7 @@
 
   .nav-link {
     position: relative;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0; 
     overflow: hidden;
   }
 
@@ -165,7 +166,7 @@
   }
 
   .active-link::before {
-    transform: translateX(100%);
+    transform: translateX(100%); 
   }
 
   .animate-fadeIn {
@@ -184,5 +185,12 @@
     outline: 2px solid #dcb660;
     outline-offset: 2px;
     border-radius: 2px;
+  }
+
+  /* MODIFICATION: Added CSS for mobile menu links */
+  #mobile-menu-overlay .nav-link {
+    display: inline-block;  
+    /* py-3 class provides vertical padding, text-center remains from HTML */
+    /* The parent <nav> is already using 'items-center', which will center these inline-block links */
   }
 </style>

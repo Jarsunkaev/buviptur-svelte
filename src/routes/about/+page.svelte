@@ -281,9 +281,9 @@
                             <p class="text-[#dcb660] font-medium mb-3">{member.position}</p>
                             <p class="text-gray-600">{member.bio}</p>
                             <div class="mt-4 flex space-x-3">
-                                <a href="#" class="text-gray-400 hover:text-[#dcb660]"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" class="text-gray-400 hover:text-[#dcb660]"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="text-gray-400 hover:text-[#dcb660]"><i class="fas fa-envelope"></i></a>
+                                <a href="{member.linkedin}" aria-label="{member.name} LinkedIn Profile" class="text-gray-400 hover:text-[#dcb660]"><i class="fab fa-linkedin"></i></a>
+                                <a href="{member.twitter}" aria-label="{member.name} Twitter Profile" class="text-gray-400 hover:text-[#dcb660]"><i class="fab fa-twitter"></i></a>
+                                <a href="mailto:{member.email}" aria-label="Email {member.name}" class="text-gray-400 hover:text-[#dcb660]"><i class="fas fa-envelope"></i></a>
                             </div>
                         </div>
                     </div>

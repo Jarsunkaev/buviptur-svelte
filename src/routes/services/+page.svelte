@@ -10,17 +10,17 @@
     // Enhanced services data with more details and features
     const services = [
         {
-            title: 'Luxury Accommodation',
-            description: 'Experience the finest accommodations across Central Europe, from boutique hotels to historic castles converted into luxury lodgings. Our team personally vets each property to ensure exceptional quality and authentic character.',
+            title: 'Accommodation', // Changed from 'Luxury Accommodation'
+            description: 'We arrange and customize accommodation to perfectly suit your needs and preferences. From charming boutique hotels to unique historic stays, our team ensures every option offers quality, comfort, and authentic local character. Let us find the ideal place for your stay.', // Updated description
             icon: 'fa-hotel',
             image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80',
-            features: [
-                'Handpicked boutique and luxury hotels',
-                'Historic properties with modern amenities',
-                'Authentic local hospitality experiences',
-                'Centrally located accommodations',
-                'Special welcome amenities',
-                'Flexible booking options'
+            features: [ // Updated features
+                'Personalized accommodation planning',
+                'Wide range of vetted properties',
+                'Customizable to your budget and style',
+                'Focus on quality, comfort, and character',
+                'Arrangements for boutique hotels, historic stays, and more',
+                'Flexible options tailored to your itinerary'
             ],
             cta: 'View Accommodations'
         },
@@ -101,24 +101,7 @@
         }
     ];
 
-    // Showcase exceptional experiences with images
-    const showcaseExperiences = [
-        {
-            title: 'Private Castle Dinner',
-            description: 'Enjoy an exclusive gourmet dinner in a historic castle with panoramic views',
-            image: 'https://images.unsplash.com/photo-1464852045489-bccb3d238cbe?q=80'
-        },
-        {
-            title: 'Artisan Workshop',
-            description: 'Learn traditional crafts directly from master artisans in intimate workshop settings',
-            image: 'https://images.unsplash.com/photo-1530016555861-3d1f3f5ca94b?q=80'
-        },
-        {
-            title: 'Hidden Vineyard Tour',
-            description: 'Discover family-owned vineyards with private tastings of rare local varieties',
-            image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80'
-        }
-    ];
+    // showcaseExperiences constant REMOVED
 
     // Customer benefits
     const benefits = [
@@ -181,7 +164,6 @@
         </div>
     </section>
 
-    <!-- Services Introduction -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -193,13 +175,13 @@
         </div>
     </section>
 
-    <!-- Detailed Services Section -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="space-y-24">
                 {#each services as service, i}
-                    <div class="grid md:grid-cols-2 gap-12 items-center {i % 2 === 1 ? 'md:flex-row-reverse' : ''}">
-                        <div class="relative overflow-hidden rounded-xl shadow-xl">
+                    <div class="grid md:grid-cols-2 gap-12 items-center"> 
+                        
+                        <div class="relative overflow-hidden rounded-xl shadow-xl {i % 2 === 0 ? 'md:order-2' : 'md:order-1'}"> 
                             <img 
                                 src={service.image} 
                                 alt={service.title}
@@ -211,7 +193,7 @@
                             </div>
                         </div>
                         
-                        <div class="{i % 2 === 1 ? 'md:pr-8' : 'md:pl-8'}">
+                        <div class="{i % 2 === 0 ? 'md:order-1 md:pr-8' : 'md:order-2 md:pl-8'}"> 
                             <h3 class="text-3xl font-bold text-gray-900 mb-4">{service.title}</h3>
                             <p class="text-lg text-gray-600 mb-6">{service.description}</p>
                             
@@ -242,39 +224,6 @@
         </div>
     </section>
 
-    <!-- Showcase Exceptional Experiences -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Exceptional Experiences</h2>
-                <p class="text-lg text-gray-600">
-                    Beyond our core services, we create unforgettable moments that transform a trip into a life-changing journey.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {#each showcaseExperiences as experience}
-                    <div class="group relative overflow-hidden rounded-xl aspect-[3/4] shadow-lg">
-                        <img 
-                            src={experience.image} 
-                            alt={experience.title}
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6 text-white">
-                            <h3 class="text-2xl font-bold mb-2">{experience.title}</h3>
-                            <p class="text-white/90 mb-6">{experience.description}</p>
-                            <button class="bg-[#dcb660] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#dcb660]/90 transition-all hover:-translate-y-1">
-                                Explore
-                            </button>
-                        </div>
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Process Section -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -300,7 +249,6 @@
         </div>
     </section>
 
-    <!-- Customer Benefits Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -317,7 +265,6 @@
         </div>
     </section>
 
-    <!-- Call to Action -->
     <section class="py-20 bg-teal-900 text-white">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto">

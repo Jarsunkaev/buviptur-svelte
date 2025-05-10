@@ -7,7 +7,7 @@
     import SubscribeSection from '$lib/components/SubscribeSection.svelte';
     import TourSection from '$lib/components/TourSection.svelte';
     import Button from '$lib/components/Button.svelte';
-    import LazyImage from '$lib/components/LazyImage.svelte';
+    import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
     import { onMount } from 'svelte';
 
     // Tour categories with expanded details
@@ -15,7 +15,7 @@
         {
             title: 'Historical Tours',
             description: 'Dive deep into the rich history of Central Europe. Our expert guides bring centuries of stories to life, from medieval castles to World War II sites.',
-            languages: ['English', 'Turkish', 'German', 'French'],
+            languages: ['English', 'Hungarian', 'Turkish'],
             image: 'https://images.unsplash.com/photo-1583091618471-bf133efb0a9c?q=80',
             highlights: [
                 'Medieval Castle Tours in Hungary',
@@ -24,13 +24,12 @@
                 'Ancient Roman Archaeological Tours'
             ],
             featured: true,
-            duration: '1-5 days',
-            startingPrice: 99
+            duration: '1-5 days'
         },
         {
             title: 'Cultural Immersion Tours',
             description: 'Experience the authentic local culture, traditions, and daily life in Central European countries. Connect with local communities and understand their unique heritage.',
-            languages: ['English', 'Turkish', 'French', 'Spanish'],
+            languages: ['English', 'Hungarian', 'Turkish'],
             image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80',
             highlights: [
                 'Traditional Craft Workshops',
@@ -38,13 +37,12 @@
                 'Folk Music and Dance Experiences',
                 'Community Interaction Programs'
             ],
-            duration: '1-3 days',
-            startingPrice: 89
+            duration: '1-3 days'
         },
         {
             title: 'EU Multi-Country Tours',
             description: 'Explore multiple European countries in one comprehensive journey. Our multi-country tours offer a seamless travel experience across borders, highlighting the distinct character of each nation.',
-            languages: ['English', 'Turkish', 'Spanish', 'Italian'],
+            languages: ['English', 'Hungarian', 'Turkish'],
             image: 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80',
             highlights: [
                 'Hungary-Austria-Slovakia Circuit',
@@ -53,13 +51,12 @@
                 'Western European Capital Cities Tour'
             ],
             featured: true,
-            duration: '7-14 days',
-            startingPrice: 199
+            duration: '7-14 days'
         },
         {
             title: 'Specialized Thematic Tours',
             description: 'Tailored tours for specific interests, including wine tours, architectural journeys, and industrial heritage explorations. These unique experiences dive deep into your particular passions.',
-            languages: ['English', 'Turkish', 'Italian', 'German'],
+            languages: ['English', 'Hungarian', 'Turkish'],
             image: 'https://images.unsplash.com/photo-1542301388-529ae0bc7d2a?q=80',
             highlights: [
                 'Wine Tasting Routes in Hungary',
@@ -67,21 +64,15 @@
                 'Industrial Heritage and Factory Tours',
                 'Art and Museum Exploration'
             ],
-            duration: '1-4 days',
-            startingPrice: 129
+            duration: '1-4 days'
         }
     ];
 
     // Available languages with flags
     const tourLanguages = [
         { name: 'English', flag: '🇬🇧', available: true },
-        { name: 'Turkish', flag: '🇹🇷', available: true },
-        { name: 'German', flag: '🇩🇪', available: true },
-        { name: 'French', flag: '🇫🇷', available: true },
-        { name: 'Spanish', flag: '🇪🇸', available: true },
-        { name: 'Italian', flag: '🇮🇹', available: true },
-        { name: 'Russian', flag: '🇷🇺', available: false },
-        { name: 'Japanese', flag: '🇯🇵', available: false }
+        { name: 'Hungarian', flag: '🇭🇺', available: true },
+        { name: 'Turkish', flag: '🇹🇷', available: true }
     ];
 
     // Sample tour data
@@ -93,7 +84,6 @@
             rating: 4.8,
             reviews: 243,
             duration: '1 day',
-            price: 125,
             badge: 'BESTSELLER'
         },
         {
@@ -103,7 +93,6 @@
             rating: 4.9,
             reviews: 186,
             duration: '1 day',
-            price: 89,
             badge: 'NEW'
         },
         {
@@ -112,8 +101,7 @@
             location: 'Budapest, Hungary',
             rating: 4.7,
             reviews: 152,
-            duration: '1 day',
-            price: 75
+            duration: '1 day'
         },
         {
             title: 'Vienna Day Trip',
@@ -122,7 +110,6 @@
             rating: 4.6,
             reviews: 97,
             duration: '1 day',
-            price: 145,
             badge: 'POPULAR'
         }
     ];
@@ -199,46 +186,34 @@
         showBookingForm = false;
     }
 
+    // Handle image error
+    function handleImageError(event) {
+        event.target.src = '/api/placeholder/800/600';
+        event.target.alt = 'Image placeholder';
+    }
+
     // Initialize flatpickr datepicker
-    let flatpickrInstance = null;
     onMount(() => {
-        const initFlatpickr = async () => {
-            if (typeof window !== 'undefined') {
-                try {
-                    const module = await import('flatpickr');
-                    const flatpickr = module.default;
-                    const tourDateInput = document.getElementById('tourDate');
-                    
-                    if (tourDateInput) {
-                        flatpickrInstance = flatpickr(tourDateInput, {
-                            dateFormat: 'Y-m-d',
-                            minDate: 'today',
-                            disable: [
-                                function(date) {
-                                    // Disable Mondays (1) in this example
-                                    return date.getDay() === 1;
-                                }
-                            ]
-                        });
-                    }
-                } catch (error) {
-                    console.error('Failed to load flatpickr:', error);
-                }
-            }
-        };
-
-        initFlatpickr();
-
-        return () => {
-            // Cleanup function to destroy flatpickr instance
-            if (flatpickrInstance) {
-                flatpickrInstance.destroy();
-            }
-        };
+        if (typeof window !== 'undefined') {
+            import('flatpickr').then(module => {
+                const flatpickr = module.default;
+                flatpickr('#tourDate', {
+                    dateFormat: 'Y-m-d',
+                    minDate: 'today',
+                    disable: [
+                        function(date) {
+                            // Disable Mondays (1) in this example
+                            return date.getDay() === 1;
+                        }
+                    ]
+                });
+            });
+        }
     });
 </script>
 
 <svelte:head>
+    <title>Our Tours - BuVipTur</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </svelte:head>
 
@@ -250,126 +225,12 @@
             <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#dcb660]">Our Tours</h1>
             <p class="text-xl md:text-2xl mb-8">Discover extraordinary journeys tailored to your wanderlust</p>
             <div class="flex flex-wrap gap-4 justify-center">
-                <Button 
-                    variant="primary"
-                    size="lg"
-                    href="#featured-tours"
-                >
-                    View Featured Tours
-                </Button>
-                <Button 
-                    variant="outline"
-                    size="lg"
-                    href="#tour-categories"
-                >
-                    Explore Categories
-                </Button>
+            
+               
             </div>
         </div>
     </section>
 
-    <!-- Tour filter section -->
-    <section class="py-8 bg-gray-50 sticky top-20 z-20 shadow-md">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap items-center justify-center gap-4">
-                <button 
-                    class={`px-6 py-2 rounded-full transition-all ${activeFilter === 'all' ? 'bg-[#dcb660] text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                    on:click={() => filterTours('all')}
-                >
-                    All Tours
-                </button>
-                <button 
-                    class={`px-6 py-2 rounded-full transition-all ${activeFilter === 'historical' ? 'bg-[#dcb660] text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                    on:click={() => filterTours('historical')}
-                >
-                    Historical
-                </button>
-                <button 
-                    class={`px-6 py-2 rounded-full transition-all ${activeFilter === 'cultural' ? 'bg-[#dcb660] text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                    on:click={() => filterTours('cultural')}
-                >
-                    Cultural
-                </button>
-                <button 
-                    class={`px-6 py-2 rounded-full transition-all ${activeFilter === 'factory' ? 'bg-[#dcb660] text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                    on:click={() => filterTours('factory')}
-                >
-                    Factory & Industrial
-                </button>
-                <button 
-                    class={`px-6 py-2 rounded-full transition-all ${activeFilter === 'multi-country' ? 'bg-[#dcb660] text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                    on:click={() => filterTours('multi-country')}
-                >
-                    Multi-Country
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Tours Section -->
-    <section id="featured-tours" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Tours</h2>
-                <p class="text-lg text-gray-600">
-                    Our most popular experiences, curated to showcase the best of Central Europe.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {#each featuredTours as tour}
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <div class="relative">
-                            <img 
-                                src={tour.image} 
-                                alt={tour.title}
-                                class="w-full h-48 object-cover"
-                            />
-                            {#if tour.badge}
-                                <span class="absolute top-4 right-4 bg-[#dcb660] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                                    {tour.badge}
-                                </span>
-                            {/if}
-                        </div>
-                        
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">{tour.title}</h3>
-                            <p class="text-gray-600 mb-4">{tour.location}</p>
-                            
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-star text-[#dcb660] mr-1"></i>
-                                    <span class="font-semibold">{tour.rating}</span>
-                                    <span class="text-gray-500 ml-1">({tour.reviews} reviews)</span>
-                                </div>
-                                <span class="text-gray-600">{tour.duration}</span>
-                            </div>
-                            
-                            <div class="flex items-center justify-between">
-                                <span class="text-2xl font-bold text-[#dcb660]">${tour.price}</span>
-                                <button 
-                                    class="bg-[#dcb660] text-white px-4 py-2 rounded-lg hover:bg-[#dcb660]/90 transition-colors"
-                                    on:click={toggleBookingForm}
-                                >
-                                    Book Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                {/each}
-            </div>
-            
-            <div class="text-center mt-12">
-                <Button 
-                    variant="secondary"
-                    size="lg"
-                    href="#"
-                >
-                    View All Tours <i class="fas fa-arrow-right ml-2"></i>
-                </Button>
-            </div>
-        </div>
-    </section>
 
     <!-- Tour Categories Section -->
     <section id="tour-categories" class="py-16 bg-gray-50">
@@ -389,6 +250,8 @@
                                 src={tour.image} 
                                 alt={tour.title} 
                                 class="w-full h-64 object-cover" 
+                                loading="lazy"
+                                on:error={handleImageError}
                             />
                             {#if tour.featured}
                                 <div class="absolute top-4 right-4 bg-[#dcb660] text-white px-3 py-1 rounded-full text-sm">
@@ -398,7 +261,6 @@
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
                                 <h3 class="text-2xl font-bold mb-2">{tour.title}</h3>
                                 <div class="flex justify-between">
-                                    <span>Starting at <strong class="text-[#dcb660]">${tour.startingPrice}</strong></span>
                                     <span>{tour.duration}</span>
                                 </div>
                             </div>
@@ -452,14 +314,12 @@
                 </p>
             </div>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
                 {#each tourLanguages as language}
-                    <div class="bg-white rounded-xl p-4 shadow-md border-2 {language.available ? 'border-[#dcb660]' : 'border-gray-200'} flex flex-col items-center hover:shadow-lg transition-shadow">
+                    <div class="bg-white rounded-xl p-4 shadow-md border-2 border-[#dcb660] flex flex-col items-center hover:shadow-lg transition-shadow">
                         <span class="text-4xl mb-2">{language.flag}</span>
                         <h3 class="text-lg font-bold text-gray-900">{language.name}</h3>
-                        <span class="text-sm {language.available ? 'text-green-600' : 'text-gray-400'}">
-                            {language.available ? 'Available' : 'Coming Soon'}
-                        </span>
+                        <span class="text-sm text-green-600">Available</span>
                     </div>
                 {/each}
             </div>
@@ -506,7 +366,7 @@
                         >
                             <option value="">-- Select a Tour --</option>
                             {#each featuredTours as tour}
-                                <option value={tour.title}>{tour.title} - ${tour.price}</option>
+                                <option value={tour.title}>{tour.title}</option>
                             {/each}
                         </select>
                     </div>
@@ -573,3 +433,4 @@
     />
 </main>
 <Footer />
+<ScrollToTopButton />
