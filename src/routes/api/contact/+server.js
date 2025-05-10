@@ -2,7 +2,8 @@
 
 import nodemailer from 'nodemailer';
 // Import private environment variables using SvelteKit's $env module
-import { EMAIL_USER, EMAIL_PASS } from '$env/static/private';
+const EMAIL_USER = import.meta.env.VITE_EMAIL_USER || process.env.EMAIL_USER;
+const EMAIL_PASS = import.meta.env.VITE_EMAIL_PASS || process.env.EMAIL_PASS;
 
 /**
  * @type {import('./$types').RequestHandler}
@@ -64,15 +65,13 @@ export async function POST({ request }) {
     }
 
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465, // Or 587 for TLS
+        secure: true, // Use SSL
         auth: {
-            user: EMAIL_USER, // From $env/static/private
-            pass: EMAIL_PASS  // From $env/static/private (Gmail App Password)
-        },
-        // Optional: Add timeout configurations if needed
-        // connectionTimeout: 5000, // 5 seconds
-        // greetingTimeout: 5000,
-        // socketTimeout: 5000,
+            user: EMAIL_USER, // Your Google Workspace email address (info@buviptur.com) from env
+            pass: EMAIL_PASS  // Your Google Workspace password OR an App Password
+        }
     });
 
     const mailOptions = {

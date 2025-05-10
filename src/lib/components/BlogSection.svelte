@@ -28,7 +28,7 @@
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-3">{article.title}</h3>
             <p class="text-gray-600 mb-4">{article.excerpt}</p>
-            <a href="#" class="text-[#dcb660] font-semibold hover:text-[#dcb660]/80 transition-colors inline-flex items-center">
+            <a href="/blog/{article.slug}" class="text-[#dcb660] font-semibold hover:text-[#dcb660]/80 transition-colors inline-flex items-center">
               Read More
               <i class="fas fa-arrow-right ml-2"></i>
             </a>

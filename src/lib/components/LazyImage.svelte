@@ -21,7 +21,7 @@
         error = true;
         console.error(`Failed to load image: ${src}`, event);
         // Fallback to a generic placeholder image
-        event.target.src = '/api/placeholder/800/600';
+        event.target.src = placeholder;
         event.target.alt = 'Image placeholder';
     }
 
