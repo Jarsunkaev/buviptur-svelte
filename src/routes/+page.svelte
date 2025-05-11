@@ -93,11 +93,8 @@
     
     const destinationsData = [
       { name: 'Paris', tours: 245, image: 'https://via.placeholder.com/800x600.png?text=Paris+Tours' },
-      { name: 'Rome', tours: 197, image: 'https://via.placeholder.com/800x600.png?text=Rome+Tours' },
-      { name: 'London', tours: 210, image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80' },
       { name: 'Budapest', tours: 124, image: 'https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80' },
-      { name: 'Prague', tours: 165, image: 'https://images.unsplash.com/photo-1504512485720-7d83a16ee930?q=80' },
-      { name: 'Barcelona', tours: 178, image: 'https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80' }
+      { name: 'Prague', tours: 165, image: 'https://images.unsplash.com/photo-1504512485720-7d83a16ee930?q=80' }
     ];
     
     const benefitsData = [
@@ -274,7 +271,6 @@
           tours={tourData} 
         />
       </section>
-      />
       
       <DestinationsSection 
         title="Explore Our Destinations" 

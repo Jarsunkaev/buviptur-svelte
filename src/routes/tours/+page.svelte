@@ -233,76 +233,96 @@
 
 
     <!-- Tour Categories Section -->
-    <section id="tour-categories" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-[#113946] mb-4">Explore Our Unique Tour Experiences</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Immerse yourself in the heart of Central Europe with our meticulously crafted tours, offering deep cultural insights and unforgettable experiences.
-                </p>
+    <!-- Tour Categories Section with Modern Alternating Layout -->
+<section id="tour-categories" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#113946] mb-4">Explore Our Unique Tour Experiences</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Immerse yourself in the heart of Central Europe with our meticulously crafted tours, offering deep cultural insights and unforgettable experiences.
+        </p>
+      </div>
+  
+      <!-- Tour Types with alternating layout -->
+      <div class="space-y-24">
+        {#each tourTypes as tour, i}
+          <div class="flex flex-col lg:flex-row {i % 2 === 1 ? 'lg:flex-row-reverse' : ''} gap-12 items-center">
+            <!-- Image Section -->
+            <div class="w-full lg:w-1/2">
+              <div class="relative overflow-hidden rounded-xl shadow-xl h-[350px]">
+                <img 
+                  src={tour.image} 
+                  alt={tour.title} 
+                  class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" 
+                  loading="lazy"
+                  on:error={handleImageError}
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-60"></div>
+                {#if tour.featured}
+                  <div class="absolute top-4 right-4 bg-[#dcb660] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+                    Featured
+                  </div>
+                {/if}
+                <div class="absolute bottom-0 left-0 w-full p-6">
+                  <span class="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-1 rounded-full text-sm">
+                    Duration: {tour.duration}
+                  </span>
+                </div>
+              </div>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                {#each tourTypes as tour}
-                    <div class="bg-white shadow-xl rounded-lg overflow-hidden transform transition duration-300 hover:scale-[1.02]">
-                        <div class="relative">
-                            <img 
-                                src={tour.image} 
-                                alt={tour.title} 
-                                class="w-full h-64 object-cover" 
-                                loading="lazy"
-                                on:error={handleImageError}
-                            />
-                            {#if tour.featured}
-                                <div class="absolute top-4 right-4 bg-[#dcb660] text-white px-3 py-1 rounded-full text-sm">
-                                    Featured
-                                </div>
-                            {/if}
-                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-                                <h3 class="text-2xl font-bold mb-2">{tour.title}</h3>
-                                <div class="flex justify-between">
-                                    <span>{tour.duration}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-4">{tour.description}</p>
-                            <div class="mb-4">
-                                <h4 class="font-semibold text-[#113946] mb-2">Available Languages:</h4>
-                                <div class="flex space-x-2">
-                                    {#each tour.languages as lang}
-                                        <span class="text-lg">
-                                            {tourLanguages.find(l => l.name === lang)?.flag} {lang}
-                                        </span>
-                                    {/each}
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <h4 class="font-semibold text-[#113946] mb-2">Tour Highlights:</h4>
-                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-600">
-                                    {#each tour.highlights as highlight}
-                                        <li class="flex items-start">
-                                            <i class="fas fa-check-circle text-[#dcb660] mt-1 mr-2"></i>
-                                            <span>{highlight}</span>
-                                        </li>
-                                    {/each}
-                                </ul>
-                            </div>
-                            <div class="text-center mt-6">
-                                <Button 
-                                    variant="primary"
-                                    size="md"
-                                    href="#"
-                                >
-                                    Explore {tour.title}
-                                </Button>
-                            </div>
-                        </div>
+            
+            <!-- Content Section -->
+            <div class="w-full lg:w-1/2">
+              <h3 class="text-3xl font-bold text-[#113946] mb-4 relative">
+                {tour.title}
+                <span class="absolute -bottom-2 left-0 w-16 h-1 bg-[#dcb660]"></span>
+              </h3>
+              <p class="text-lg text-gray-600 mb-6">{tour.description}</p>
+              
+              <!-- Language Section -->
+              <div class="mb-6">
+                <h4 class="font-semibold text-[#113946] mb-3 flex items-center">
+                  <i class="fas fa-language mr-2 text-[#dcb660]"></i> Available Languages
+                </h4>
+                <div class="flex flex-wrap gap-3">
+                  {#each tour.languages as lang}
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-gray-800 flex items-center">
+                      <span class="text-xl mr-2">{tourLanguages.find(l => l.name === lang)?.flag}</span> 
+                      <span>{lang}</span>
+                    </span>
+                  {/each}
+                </div>
+              </div>
+              
+              <!-- Highlights Section -->
+              <div class="mb-8">
+                <h4 class="font-semibold text-[#113946] mb-3 flex items-center">
+                  <i class="fas fa-map-marker-alt mr-2 text-[#dcb660]"></i> Tour Highlights
+                </h4>
+                <div class="grid grid-cols-1 gap-y-3">
+                  {#each tour.highlights as highlight}
+                    <div class="flex items-start bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                      <i class="fas fa-check-circle text-[#dcb660] mt-1 mr-3 flex-shrink-0"></i>
+                      <span class="text-gray-700">{highlight}</span>
                     </div>
-                {/each}
+                  {/each}
+                </div>
+              </div>
+              
+              <!-- CTA Button -->
+              <a 
+                href="/contact?tour={encodeURIComponent(tour.title)}" 
+                class="inline-flex items-center px-6 py-3 bg-[#dcb660] text-white rounded-lg hover:bg-[#dcb660]/90 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1"
+              >
+                <span>Inquire About {tour.title}</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </a>
             </div>
-        </div>
-    </section>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </section>
     
     <!-- Tour Languages Section -->
     <section class="py-16 bg-white">
@@ -427,10 +447,6 @@
         testimonials={testimonials} 
     />
 
-    <SubscribeSection
-        title="Get Tour Updates"
-        description="Subscribe to receive new tour announcements, seasonal special offers, and travel tips."
-    />
 </main>
 <Footer />
 <ScrollToTopButton />

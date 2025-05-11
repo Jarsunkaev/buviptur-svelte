@@ -258,40 +258,6 @@
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
-                <p class="text-lg text-gray-600">
-                    Our passionate team of travel experts works tirelessly to craft unforgettable experiences for our travelers.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {#each teamMembers as member}
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img 
-                            src={member.image} 
-                            alt={member.name}
-                            class="w-full h-64 object-cover"
-                        />
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                            <p class="text-[#dcb660] font-medium mb-3">{member.position}</p>
-                            <p class="text-gray-600">{member.bio}</p>
-                            <div class="mt-4 flex space-x-3">
-                                <a href="{member.linkedin}" aria-label="{member.name} LinkedIn Profile" class="text-gray-400 hover:text-[#dcb660]"><i class="fab fa-linkedin"></i></a>
-                                <a href="{member.twitter}" aria-label="{member.name} Twitter Profile" class="text-gray-400 hover:text-[#dcb660]"><i class="fab fa-twitter"></i></a>
-                                <a href="mailto:{member.email}" aria-label="Email {member.name}" class="text-gray-400 hover:text-[#dcb660]"><i class="fas fa-envelope"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </section>
-
     <WhyChooseUs 
         title="Why Travel With Us" 
         benefits={benefits} 

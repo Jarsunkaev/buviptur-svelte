@@ -4,7 +4,6 @@
     import WhyChooseUs from '$lib/components/WhyChooseUs.svelte';
     import DestinationsSection from '$lib/components/DestinationsSection.svelte';
     import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
-    import SubscribeSection from '$lib/components/SubscribeSection.svelte';
     import Button from '$lib/components/Button.svelte';
 
     // Enhanced services data with more details and features
@@ -100,8 +99,6 @@
             cta: 'Discover Factory Tours'
         }
     ];
-
-    // showcaseExperiences constant REMOVED
 
     // Customer benefits
     const benefits = [
@@ -208,15 +205,6 @@
                                     {/each}
                                 </ul>
                             </div>
-                            
-                            <Button 
-                                variant="primary" 
-                                size="lg" 
-                                href="#" 
-                                classes="mt-4"
-                            >
-                                {service.cta}
-                            </Button>
                         </div>
                     </div>
                 {/each}
@@ -295,11 +283,6 @@
     <DestinationsSection 
         title="Destinations We Serve" 
         destinations={destinations} 
-    />
-
-    <SubscribeSection
-        title="Stay Updated on Our Services"
-        description="Subscribe to receive exclusive offers and information about new service offerings."
     />
 </main>
 <Footer />

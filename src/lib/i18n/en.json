@@ -1,0 +1,21 @@
+{
+    "header": {
+      "home": "Home",
+      "tours": "Tours",
+      "services": "Services",
+      "about": "About",
+      "contact": "Get Offer"
+    },
+    "footer": {
+      "about": "About BuVipTur",
+      "aboutText": "Your trusted partner in creating unforgettable travel experiences since 2010...",
+      "quickLinks": "Quick Links",
+      "contactInfo": "Contact Info"
+    },
+    "home": {
+      "hero": {
+        "title": "Every Journey Is A Privilege",
+        "subtitle": "From local escapes to far flung adventures"
+      }
+    }
+  }

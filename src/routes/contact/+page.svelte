@@ -6,6 +6,7 @@
     import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
     import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
     import SubscribeSection from '$lib/components/SubscribeSection.svelte';
+    import DatePicker from '$lib/components/DatePicker.svelte';
 
     // Form submission state
     let name = '';
@@ -17,6 +18,7 @@
     let participants = 2;
     let ageGroup = '';
     let comments = '';
+    let privacyAccepted = false;
     let isSubmitting = false;
     let submitSuccess = false;
 
@@ -69,7 +71,7 @@
 
     async function handleSubmit() {
     // Basic validation
-    if (!name || !surname || !email || !fromDate || !toDate || !ageGroup) {
+    if (!name || !surname || !email || !fromDate || !toDate || !ageGroup || !privacyAccepted) {
         alert('Please fill in all required fields');
         return;
     }
@@ -130,27 +132,17 @@
         event.target.alt = 'Image placeholder';
     }
 
-    // Initialize flatpickr for date selection
     onMount(() => {
-        if (typeof window !== 'undefined') {
-            import('flatpickr').then(module => {
-                const flatpickr = module.default;
-                flatpickr('#fromDate', {
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today'
-                });
-                flatpickr('#toDate', {
-                    dateFormat: 'Y-m-d',
-                    minDate: 'today'
-                });
-            });
-        }
+        // Get URL parameters and populate form fields
+        const params = new URLSearchParams(window.location.search);
+        name = params.get('name') || '';
+        surname = params.get('surname') || '';
+        email = params.get('email') || '';
     });
 </script>
 
 <svelte:head>
     <title>Get Offer - BuVipTur</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </svelte:head>
 
 <Header />
@@ -245,25 +237,21 @@
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label for="fromDate" class="block text-sm font-medium text-gray-700 mb-2">From Date *</label>
-                                <input 
-                                    type="text" 
-                                    id="fromDate" 
-                                    bind:value={fromDate} 
-                                    required 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
+                                <DatePicker
+                                    bind:value={fromDate}
                                     placeholder="Select start date"
-                                >
+                                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                                    required
+                                />
                             </div>
                             <div>
                                 <label for="toDate" class="block text-sm font-medium text-gray-700 mb-2">To Date *</label>
-                                <input 
-                                    type="text" 
-                                    id="toDate" 
-                                    bind:value={toDate} 
-                                    required 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
-                                    placeholder="Select end date"
-                                >
+                                <DatePicker
+                                    bind:value={toDate}
+                                    placeholder="Select date"
+                                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                                    required
+                                />
                             </div>
                         </div>
                         
@@ -322,6 +310,20 @@
                                 class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
                                 placeholder="Tell us about any special requirements, accessibility needs, or specific experiences you're looking for..."
                             ></textarea>
+                        </div>
+                        <div class="col-span-2">
+                            <div class="flex items-start space-x-3">
+                                <input
+                                    type="checkbox"
+                                    id="privacy"
+                                    bind:checked={privacyAccepted}
+                                    class="mt-1 h-4 w-4 text-[#dcb660] border-gray-300 rounded focus:ring-[#dcb660]"
+                                    required
+                                />
+                                <label for="privacy" class="text-sm text-gray-600">
+                                    I agree to the processing of my personal data according to the <a href="/privacy" class="text-[#dcb660] hover:underline">Privacy Policy</a>. *
+                                </label>
+                            </div>
                         </div>
                         
                         <div class="mt-4 p-4 bg-gray-50 rounded-md border border-gray-200">

@@ -45,9 +45,7 @@
     <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
       <p class="text-gray-400 mb-4 md:mb-0">&copy; {currentYear} <span class="text-[#dcb660]">BuVipTur</span>. All rights reserved.</p>
       <div class="flex space-x-6">
-        <a href="/privacy-policy" class="text-gray-400 hover:text-[#dcb660] transition-colors">Privacy Policy</a>
-        <a href="/terms-of-service" class="text-gray-400 hover:text-[#dcb660] transition-colors">Terms of Service</a>
-        <a href="/sitemap" class="text-gray-400 hover:text-[#dcb660] transition-colors">Sitemap</a>
+        <a href="/privacy" class="text-gray-400 hover:text-[#dcb660] transition-colors">Privacy Policy</a>
       </div>
     </div>
   </div>

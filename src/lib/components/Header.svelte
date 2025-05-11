@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { page } from '$app/stores';
+  import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 
   // State for header
   let isMenuOpen = false;
