@@ -228,7 +228,7 @@
           {#each mainServices as service, i}
             <div class="flex flex-col lg:flex-row {i % 2 === 1 ? 'lg:flex-row-reverse' : ''} gap-12 items-center">
               <!-- Image Section -->
-              <div class="w-full lg:w-1/2 transform transition-all duration-700 translate-y-4 opacity-80" class:translate-y-0={isVisible['services-showcase']} class:opacity-100={isVisible['services-showcase']} style="transition-delay: {i * 150}ms">
+              <div class="w-full lg:w-1/2 transform transition-all duration-700 translate-y-4" class:translate-y-0={isVisible['services-showcase']}  style="transition-delay: {i * 150}ms">
                 <div class="relative overflow-hidden rounded-2xl shadow-xl">
                   <img 
                     src={service.image} 
@@ -243,7 +243,7 @@
               </div>
               
               <!-- Content Section -->
-              <div class="w-full lg:w-1/2 transform transition-all duration-700 translate-y-4 opacity-80" class:translate-y-0={isVisible['services-showcase']} class:opacity-100={isVisible['services-showcase']} style="transition-delay: {(i * 150) + 100}ms">
+              <div class="w-full lg:w-1/2 transform transition-all duration-700 translate-y-4" class:translate-y-0={isVisible['services-showcase']} style="transition-delay: {(i * 150) + 100}ms">
                 <h3 class="text-3xl font-bold text-teal-900 mb-6 relative">
                   {service.title}
                   <span class="absolute -bottom-2 left-0 w-20 h-1 bg-[#dcb660]"></span>
@@ -286,7 +286,7 @@
           
           <div class="space-y-16 lg:space-y-24 relative z-10">
             {#each supportServices as service, i}
-              <div class="transform transition-all duration-700 translate-y-4 opacity-80" class:translate-y-0={isVisible['support-services']} class:opacity-100={isVisible['support-services']} style="transition-delay: {i * 150}ms">
+              <div class="transform transition-all duration-700 translate-y-4" class:translate-y-0={isVisible['support-services']} style="transition-delay: {i * 150}ms">
                 <div class="flex flex-col lg:flex-row {i % 2 === 0 ? 'lg:items-start' : 'lg:flex-row-reverse lg:items-start'} gap-6 lg:gap-12">
                   <!-- Icon for larger screens -->
                   <div class="hidden lg:flex lg:w-1/2 {i % 2 === 0 ? 'lg:justify-end' : 'lg:justify-start'}">
@@ -351,9 +351,8 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
           {#each destinations as destination, i}
             <div 
-              class="transform transition-all duration-700 translate-y-4 opacity-80" 
-              class:translate-y-0={isVisible['destinations']} 
-              class:opacity-100={isVisible['destinations']} 
+              class="transform transition-all duration-700 translate-y-4" 
+              class:translate-y-0={isVisible['destinations']}
               style="transition-delay: {i * 150}ms"
             >
               <div class="relative overflow-hidden rounded-2xl aspect-square group bg-gradient-to-br from-teal-800 to-teal-900 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">

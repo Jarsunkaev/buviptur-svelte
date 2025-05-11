@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'teal-900': '#0C4A6E',
+        'teal-900': '#134E4A',
       },
       animation: {
         'fadeIn': 'fadeIn 1s ease-in forwards',

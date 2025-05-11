@@ -5,6 +5,8 @@
     import { locale, t } from 'svelte-i18n';
     import '$lib/app.css';
     import CookieConsent from '$lib/components/CookieConsent.svelte';
+    import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
+    import '../app.postcss';
 </script>
 
 <svelte:head>
@@ -16,3 +18,4 @@
     <slot />
 </div>
 <CookieConsent />
+<ScrollToTopButton />

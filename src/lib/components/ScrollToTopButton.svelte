@@ -25,12 +25,12 @@
     });
   </script>
   
-  {#if showButton}
+<div class="fixed bottom-6 right-6 z-50 transition-opacity duration-300" style="opacity: {showButton ? '1' : '0'} ; pointer-events: {showButton ? 'auto' : 'none'}">
     <button 
       on:click={scrollToTop}
-      class="fixed bottom-6 right-6 bg-teal-900 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-teal-800 transition-all hover:scale-110 z-50"
+      class="bg-teal-900 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-teal-800 transition-all hover:scale-110"
       aria-label="Scroll to top"
     >
       <i class="fas fa-chevron-up"></i>
     </button>
-  {/if}
+  </div>

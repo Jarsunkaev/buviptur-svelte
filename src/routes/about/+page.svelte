@@ -218,56 +218,13 @@
         </div>
     </section>
 
-    <!-- Milestones/Timeline Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
-                <p class="text-lg text-gray-600">
-                    From our humble beginnings to becoming a leading tour provider in Central Europe, here's how our story unfolded.
-                </p>
-            </div>
-            
-            <div class="relative">
-                <!-- Timeline line -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#dcb660]/30 hidden md:block"></div>
-                
-                <!-- Timeline events -->
-                <div class="space-y-12 relative">
-                    {#each milestones as milestone, i}
-                        <div class="flex flex-col md:flex-row items-center">
-                            <div class="md:w-1/2 {i % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16 md:order-last'}">
-                                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                                    <span class="text-[#dcb660] font-bold text-2xl block mb-2">{milestone.year}</span>
-                                    <h3 class="text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
-                                    <p class="text-gray-600">{milestone.description}</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Timeline dot -->
-                            <div class="w-8 h-8 bg-[#dcb660] rounded-full flex items-center justify-center text-white z-10 my-4 md:my-0">
-                                <i class="fas fa-check text-sm"></i>
-                            </div>
-                            
-                            <!-- Placeholder for alignment -->
-                            <div class="md:w-1/2 {i % 2 === 0 ? 'md:pl-16 md:order-last' : 'md:pr-16'}"></div>
-                        </div>
-                    {/each}
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <WhyChooseUs 
         title="Why Travel With Us" 
         benefits={benefits} 
         stats={stats}
         image={whyImage}
-    />
-    
-    <DestinationsSection 
-        title="Our Top Destinations" 
-        destinations={destinations} 
     />
     
     <TestimonialsSection 
