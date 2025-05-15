@@ -42,7 +42,7 @@
   });
 </script>
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16" style="background-color: var(--teal-900);">
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28" style="background-color: var(--teal-900);">
   <!-- Background Elements -->
   <div class="absolute inset-0 overflow-hidden opacity-40">
     <div class="absolute -top-32 -right-32 w-96 h-96 bg-teal-400/30 rounded-full blur-3xl"></div>
