@@ -187,7 +187,9 @@
   
   <main class="flex-grow">
     <!-- Hero Section (Untouched as requested) -->
-    <Hero {carouselImages} isMobile={windowWidth < 1024} />
+    <section class="pt-20 md:pt-0"> <!-- Adjust 'pt-20' as needed -->
+      <Hero {carouselImages} isMobile={windowWidth < 1024} />
+    </section>
     
     <!-- Journey Promise Section -->
     <section class="py-16 bg-gradient-to-b from-teal-900 to-teal-800 text-white relative overflow-hidden">
