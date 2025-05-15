@@ -187,7 +187,7 @@
   
   <main class="flex-grow">
     <!-- Hero Section (Untouched as requested) -->
-    <section class="pt-20 md:pt-0 bg-teal-900"> <!-- Adjust 'pt-20' as needed -->
+    <section class="pt-20 md:pt-0"  style="background-color: #113946> <!-- Adjust 'pt-20' as needed -->
       <Hero {carouselImages} isMobile={windowWidth < 1024} />
     </section>
     
