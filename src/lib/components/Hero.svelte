@@ -13,7 +13,6 @@
     '/vajda.webp',
     '/var.webp'
   ];
-  export let isMobile = false; // Pass this from parent based on window.innerWidth
   
   // Form data
   let name = '';

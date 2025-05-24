@@ -250,7 +250,7 @@
   
   <main class="flex-grow">
     <!-- Hero Section -->
-    <Hero {carouselImages} isMobile={windowWidth < 1024} />
+    <Hero {carouselImages} />
     
     <!-- Journey Promise Section -->
     <section class="py-16 bg-gradient-to-b from-teal-900 to-teal-800 text-white relative overflow-hidden">
