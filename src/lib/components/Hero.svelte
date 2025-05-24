@@ -13,6 +13,7 @@
     '/vajda.webp',
     '/var.webp'
   ];
+  export let isMobile = false; // Pass this from parent based on window.innerWidth
   
   // Form data
   let name = '';
@@ -22,6 +23,10 @@
   // Current carousel slide index
   let currentSlide = 0;
   const totalSlides = carouselImages.length;
+  
+  // Touch tracking for mobile swipe
+  let touchStartX = 0;
+  let touchEndX = 0;
   
   // Auto carousel
   function nextSlide() {
@@ -41,6 +46,26 @@
     goto(`/contact?${searchParams}`);
   }
   
+  // Touch handlers for swipe functionality
+  function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+  }
+  
+  function handleTouchMove(e) {
+    touchEndX = e.touches[0].clientX;
+  }
+  
+  function handleTouchEnd() {
+    const swipeDistance = touchEndX - touchStartX;
+    const threshold = 75; // Minimum distance for a swipe to register
+    
+    if (swipeDistance > threshold) {
+      prevSlide();
+    } else if (swipeDistance < -threshold) {
+      nextSlide();
+    }
+  }
+  
   onMount(() => {
     // Carousel interval
     const carouselInterval = setInterval(nextSlide, 5000);
@@ -51,8 +76,13 @@
   });
 </script>
 
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
-  <!-- Full Background Carousel -->
+<section 
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  on:touchstart={handleTouchStart}
+  on:touchmove={handleTouchMove}
+  on:touchend={handleTouchEnd}
+>
+  <!-- Full Background Carousel with fixed height to prevent layout shift -->
   <div class="absolute inset-0 z-0">
     {#each carouselImages as image, i}
       <div 
@@ -73,7 +103,7 @@
     
     <!-- Subtle pattern overlay -->
     <div class="absolute inset-0 bg-black/10 z-10 opacity-30" 
-         style="background-image: url('data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E');">
+         style="background-image: url('data:image/svg+xml,%3Csvg width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22 fill-rule=%22evenodd%22%3E%3Ccircle cx=%223%22 cy=%223%22 r=%223%22/%3E%3Ccircle cx=%2213%22 cy=%2213%22 r=%223%22/%3E%3C/g%3E%3C/svg%3E');">
     </div>
   </div>
   
@@ -98,35 +128,35 @@
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
     {#each Array(totalSlides) as _, i}
       <button 
-        class="w-3 h-3 rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660] w-10' : 'bg-white/60 hover:bg-white/80'}"
+        class="transition-all duration-300 rounded-full {i === currentSlide ? 'bg-[#dcb660] w-8 h-2' : 'bg-white/60 hover:bg-white/80 w-2 h-2'}"
         on:click={() => currentSlide = i}
         aria-label={`Go to slide ${i + 1}`}
       ></button>
     {/each}
   </div>
   
-  <!-- Content Container -->
-  <div class="container mx-auto px-4 sm:px-6 relative z-10 mt-16">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+  <!-- Content Container with fixed positioning to prevent layout shift -->
+  <div class="container mx-auto px-4 sm:px-6 relative z-10 pt-20 md:pt-0">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       <!-- Left Content Area -->
-      <div class="text-white max-w-xl" style="animation: fadeInUp 0.8s ease-out;">
+      <div class="text-white max-w-xl mx-auto lg:mx-0" style="animation: fadeInUp 0.8s ease-out;">
         <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/20 backdrop-blur-sm border border-[#dcb660]/30 mb-6">
           <span class="text-[#dcb660] font-medium">Discover Central Europe</span>
         </div>
         
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
           Every Journey Is A <span class="text-[#dcb660]">Privilege</span>
         </h1>
         
-        <p class="text-xl text-white/90 mb-8 max-w-lg">
+        <p class="text-lg sm:text-xl text-white/90 mb-8 max-w-lg">
           From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.
         </p>
         
-        <!-- Form Container -->
+        <!-- Form Container - Fixed height on mobile to prevent layout shift -->
         <div class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 shadow-xl">
           <h3 class="text-xl font-semibold mb-4">Start Your Journey</h3>
           
-          <form class="space-y-4" on:submit|preventDefault={handleGetOffer}>
+          <div class="space-y-4" on:submit|preventDefault={handleGetOffer}>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <input
@@ -159,13 +189,14 @@
             </div>
             
             <button
-              type="submit"
+              type="button"
+              on:click={handleGetOffer}
               class="w-full bg-[#dcb660] text-[#113946] font-semibold py-3 px-6 rounded-lg hover:bg-[#dcb660]/90 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center"
             >
               <span>Get Your Personalized Offer</span>
               <i class="fas fa-arrow-right ml-2"></i>
             </button>
-          </form>
+          </div>
         </div>
       </div>
       
@@ -217,10 +248,27 @@
     box-shadow: 0 0 0 2px rgba(220, 182, 96, 0.3);
   }
   
+  /* Fixed height section to prevent layout shift */
+  section {
+    min-height: 100vh;
+    padding-top: 80px; /* Account for header height */
+  }
+  
   /* Ensure images cover the entire viewport */
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  
+  /* Improve mobile stability */
+  @media (max-width: 768px) {
+    section {
+      height: 100vh;
+    }
+    
+    .container {
+      padding-top: 5rem;
+    }
   }
 </style>
