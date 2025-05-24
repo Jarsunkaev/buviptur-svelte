@@ -52,19 +52,6 @@
             ],
             featured: true,
             duration: '7-14 days'
-        },
-        {
-            title: 'Specialized Thematic Tours',
-            description: 'Tailored tours for specific interests, including wine tours, architectural journeys, and industrial heritage explorations. These unique experiences dive deep into your particular passions.',
-            languages: ['English', 'Hungarian', 'Turkish'],
-            image: 'https://images.unsplash.com/photo-1542301388-529ae0bc7d2a?q=80',
-            highlights: [
-                'Wine Tasting Routes in Hungary',
-                'Architectural Photography Tours',
-                'Industrial Heritage and Factory Tours',
-                'Art and Museum Exploration'
-            ],
-            duration: '1-4 days'
         }
     ];
 

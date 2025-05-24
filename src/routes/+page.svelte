@@ -10,11 +10,58 @@
   let windowWidth;
   let isVisible = {};
   
-  // Images and data
+  // Touch tracking variables for mobile swipe
+  let currentSlide = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let swiping = false;
+  
+  // Handle touch events for swiping
+  function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+    swiping = true;
+  }
+  
+  function handleTouchMove(e) {
+    if (!swiping) return;
+    touchEndX = e.touches[0].clientX;
+  }
+  
+  function handleTouchEnd() {
+    if (!swiping) return;
+    
+    const swipeDistance = touchEndX - touchStartX;
+    const threshold = 50; // Minimum distance for a swipe to register
+    
+    if (swipeDistance > threshold) {
+      // Swipe right - go to previous slide
+      prevSlide();
+    } else if (swipeDistance < -threshold) {
+      // Swipe left - go to next slide
+      nextSlide();
+    }
+    
+    swiping = false;
+  }
+  
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % supportServices.length;
+  }
+  
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + supportServices.length) % supportServices.length;
+  }
+  
+  // Local carousel images
   const carouselImages = [
-    'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&q=80',
-    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&q=80',
-    'https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80'
+    '/above.webp',
+    '/matyas.webp',
+    '/matyasii.webp',
+    '/parlament.webp',
+    '/prague.webp',
+    '/stefan.webp',
+    '/vajda.webp',
+    '/var.webp'
   ];
 
   // Main services/products overview
@@ -29,18 +76,6 @@
         "Expert university-educated guides",
         "Hidden gems and local experiences",
         "Flexible and customizable itineraries"
-      ]
-    },
-    {
-      title: "Industrial Heritage Tours",
-      description: "Discover the fascinating industrial past and present of Hungary with exclusive access to working factories and historic industrial sites.",
-      icon: "fa-industry",
-      image: "https://images.unsplash.com/photo-1543013309-0d1f4edeb868?q=80",
-      features: [
-        "Behind-the-scenes factory access",
-        "Meet master craftspeople",
-        "Industrial heritage exploration",
-        "Small groups for optimal experience"
       ]
     },
     {
@@ -90,7 +125,7 @@
       color: "#2aa1b7"
     },
     {
-      title: "Support",
+      title: "24/7 Support",
       description: "Our dedicated team ensures your journey runs smoothly from start to finish.",
       icon: "fa-headset",
       color: "#113946"
@@ -127,10 +162,34 @@
   
   // Destinations focus
   const destinations = [
-    { name: "Budapest", country: "Hungary", highlight: "Cultural Heart of Hungary" },
-    { name: "Vienna", country: "Austria", highlight: "City of Music & Dreams" },
-    { name: "Prague", country: "Czech Republic", highlight: "The Golden City" },
-    { name: "Bratislava", country: "Slovakia", highlight: "The Little Big City" }
+    {
+      country: "Hungary",
+      cities: [
+        { name: "Budapest", highlight: "Cultural Heart of Hungary" },
+        { name: "Szentendre", highlight: "Artistic Riverside Town" },
+        { name: "Visegrád", highlight: "Royal Castle on the Danube" }
+      ]
+    },
+    {
+      country: "Austria",
+      cities: [
+        { name: "Vienna", highlight: "City of Music & Dreams" },
+        { name: "Salzburg", highlight: "Mozart's Birthplace" }
+      ]
+    },
+    {
+      country: "Czech Republic",
+      cities: [
+        { name: "Prague", highlight: "The Golden City" },
+        { name: "Karlovy Vary", highlight: "Historic Spa Town" }
+      ]
+    },
+    {
+      country: "Slovakia",
+      cities: [
+        { name: "Bratislava", highlight: "The Little Big City" }
+      ]
+    }
   ];
   
   const testimonialsData = [
@@ -172,6 +231,10 @@
   
   onMount(() => {
     setupIntersectionObserver();
+    
+    // Optional: auto-rotate slides every 5 seconds
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
   });
 </script>
 
@@ -186,7 +249,7 @@
   <Header />
   
   <main class="flex-grow">
-    <!-- Hero Section (Untouched as requested) -->
+    <!-- Hero Section -->
     <Hero {carouselImages} isMobile={windowWidth < 1024} />
     
     <!-- Journey Promise Section -->
@@ -270,62 +333,145 @@
       </div>
     </section>
     
-    <!-- Support Services Section - Flowing Design -->
-    <section id="support-services" class="py-20 bg-gray-50 animate-on-scroll">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">Comprehensive Travel Solutions</h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+    <!-- Support Services Section - Swipeable on Mobile -->
+    <section id="support-services" class="relative py-16 md:py-24 overflow-hidden animate-on-scroll">
+      <!-- Map Background -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-[url('/map.webp')] bg-cover bg-center opacity-30"></div>
+        <div class="absolute inset-0 bg-white/60"></div>
+        <div class="absolute inset-0 bg-[#113946]/10"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 relative z-10">
+        <!-- Section Heading -->
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/10 border border-[#dcb660]/30 mb-4">
+            <span class="text-[#dcb660] font-semibold">Full-Service Travel</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-[#113946] mb-4">
+            Comprehensive Travel Solutions
+          </h2>
+          <p class="text-lg md:text-xl text-[#113946]/80 max-w-2xl mx-auto">
             We handle all aspects of your journey so you can focus on creating memories.
           </p>
         </div>
         
-        <div class="relative">
-          <!-- Connecting line for desktop -->
-          <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-teal-600 to-teal-900 transform -translate-x-1/2 z-0"></div>
-          
-          <div class="space-y-16 lg:space-y-24 relative z-10">
+        <!-- Desktop: Horizontal Services Grid -->
+        <div class="max-w-4xl mx-auto hidden md:block">
+          <div class="grid grid-cols-2 gap-6">
             {#each supportServices as service, i}
-              <div class="transform transition-all duration-700 translate-y-4" class:translate-y-0={isVisible['support-services']} style="transition-delay: {i * 150}ms">
-                <div class="flex flex-col lg:flex-row {i % 2 === 0 ? 'lg:items-start' : 'lg:flex-row-reverse lg:items-start'} gap-6 lg:gap-12">
-                  <!-- Icon for larger screens -->
-                  <div class="hidden lg:flex lg:w-1/2 {i % 2 === 0 ? 'lg:justify-end' : 'lg:justify-start'}">
-                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg" style="background-color: {service.color}">
-                      <i class="fas {service.icon} text-3xl text-white"></i>
-                    </div>
+              <div 
+                class="transform transition-all duration-700 translate-y-4"
+                class:translate-y-0={isVisible['support-services']}
+                style="transition-delay: {i * 100}ms"
+              >
+                <div class="relative bg-white/70 backdrop-blur-sm rounded-xl p-8 shadow-sm border border-[#113946]/10 h-full hover:shadow-md transition-all hover:-translate-y-1 duration-300 overflow-hidden">
+                  <!-- Background Icon -->
+                  <div class="absolute -right-4 -bottom-4 opacity-10 text-[#113946]">
+                    <i class="fas {service.icon} text-8xl"></i>
                   </div>
                   
-                  <!-- Content box -->
-                  <div class="lg:w-1/2 bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                    <!-- Icon for mobile -->
-                    <div class="flex items-center mb-4 lg:hidden">
-                      <div class="w-16 h-16 rounded-full flex items-center justify-center mr-4" style="background-color: {service.color}">
-                        <i class="fas {service.icon} text-2xl text-white"></i>
-                      </div>
-                      <h3 class="text-2xl font-bold text-teal-900">{service.title}</h3>
+                  <!-- Icon Header -->
+                  <div class="flex items-center mb-6 z-10 relative">
+                    <div class="w-14 h-14 bg-gradient-to-br from-[#113946] to-[#1e4b5a] rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
+                      <i class="fas {service.icon} text-xl"></i>
                     </div>
-                    
-                    <!-- Title for desktop -->
-                    <h3 class="hidden lg:block text-2xl font-bold text-teal-900 mb-4">{service.title}</h3>
-                    
-                    <p class="text-gray-600 text-lg">{service.description}</p>
+                    <h3 class="text-xl font-bold text-[#113946]">{service.title}</h3>
                   </div>
+                  
+                  <div class="w-12 h-0.5 bg-[#dcb660] mb-4"></div>
+                  
+                  <p class="text-[#113946]/80 text-base leading-relaxed mb-4">
+                    {service.description}
+                  </p>
+                  
+                  {#if service.features && service.features.length > 0}
+                    <ul class="space-y-2 mt-4">
+                      {#each service.features as feature}
+                        <li class="flex items-start">
+                          <i class="fas fa-check text-[#dcb660] mt-1 mr-2 text-sm"></i>
+                          <span class="text-[#113946]/90 text-sm">{feature}</span>
+                        </li>
+                      {/each}
+                    </ul>
+                  {/if}
                 </div>
               </div>
             {/each}
           </div>
         </div>
         
-        <div class="text-center mt-24">
-          <a href="/services" class="inline-flex items-center px-8 py-3 bg-teal-800 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors shadow-md">
-            <span>View All Our Services</span>
+        <!-- Mobile: Swipeable Carousel -->
+        <div 
+          class="max-w-sm mx-auto md:hidden relative"
+          on:touchstart={handleTouchStart}
+          on:touchmove={handleTouchMove}
+          on:touchend={handleTouchEnd}
+        >
+          <div class="overflow-hidden">
+            <div 
+              class="flex transition-transform duration-300 ease-out"
+              style="transform: translateX(-{currentSlide * 100}%);"
+            >
+              {#each supportServices as service, i}
+                <div class="w-full flex-shrink-0 px-2">
+                  <div 
+                    class="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#113946]/10 transform transition-all duration-700 translate-y-4"
+                    class:translate-y-0={isVisible['support-services']}
+                    style="transition-delay: {i * 100}ms"
+                  >
+                    <!-- Icon Header -->
+                    <div class="flex items-center mb-4">
+                      <div class="w-12 h-12 bg-[#113946] rounded-full flex items-center justify-center text-white mr-4">
+                        <i class="fas {service.icon} text-xl"></i>
+                      </div>
+                      <h3 class="text-lg font-bold text-[#113946]">{service.title}</h3>
+                    </div>
+                    
+                    <div class="w-12 h-0.5 bg-[#dcb660] mb-4"></div>
+                    
+                    <p class="text-[#113946]/80">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </div>
+          
+          <!-- Mobile Pagination Indicator -->
+          <div class="flex justify-center mt-6 space-x-2">
+            {#each supportServices as _, i}
+              <button 
+                class="w-2 h-2 rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660] w-6' : 'bg-[#113946]/30'}"
+                on:click={() => currentSlide = i}
+                aria-label={`Go to service ${i + 1}`}
+              ></button>
+            {/each}
+          </div>
+          
+          <!-- Mobile Swipe Hint -->
+          <div class="text-center mt-4 text-sm text-[#113946]/60 italic">
+            <span>Swipe to see more</span>
+            <div class="flex justify-center mt-1">
+              <i class="fas fa-arrow-left text-xs mr-3"></i>
+              <i class="fas fa-arrow-right text-xs"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- CTA Button -->
+        <div class="mt-10 text-center">
+          <a 
+            href="/services" 
+            class="inline-flex items-center px-8 py-3 bg-[#dcb660] text-[#113946] font-medium rounded-lg hover:bg-[#113946] hover:text-white transition-colors shadow-sm"
+          >
+            <span>View All Services</span>
             <i class="fas fa-arrow-right ml-2"></i>
           </a>
         </div>
       </div>
     </section>
-    
-
     
     <!-- Destinations Highlight - Map-inspired Design -->
     <section id="destinations" class="py-20 bg-gray-50 animate-on-scroll relative overflow-hidden">
@@ -348,24 +494,32 @@
           </p>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
           {#each destinations as destination, i}
             <div 
               class="transform transition-all duration-700 translate-y-4" 
               class:translate-y-0={isVisible['destinations']}
               style="transition-delay: {i * 150}ms"
             >
-              <div class="relative overflow-hidden rounded-2xl aspect-square group bg-gradient-to-br from-teal-800 to-teal-900 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+              <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-teal-900 to-teal-800 p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 h-full">
                 <!-- Decorative elements -->
                 <div class="absolute top-0 left-0 w-full h-full opacity-10">
                   <div class="absolute inset-0 bg-[#dcb660] rounded-full blur-3xl transform scale-75 translate-x-1/4 -translate-y-1/4"></div>
                 </div>
                 
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-                  <h3 class="text-2xl font-bold text-white mb-1">{destination.name}</h3>
-                  <div class="w-12 h-1 bg-[#dcb660] rounded-full mb-3"></div>
-                  <p class="text-white/80 mb-2">{destination.country}</p>
-                  <p class="text-[#dcb660] font-medium text-sm mt-2 italic">"{destination.highlight}"</p>
+                <div class="relative z-10">
+                  <h3 class="text-2xl font-bold text-white mb-4">{destination.country}</h3>
+                  <div class="space-y-3">
+                    {#each destination.cities as city, j}
+                      <div class="flex items-start group">
+                        <i class="fas fa-map-marker-alt text-[#dcb660] mt-1 mr-3 text-sm"></i>
+                        <div>
+                          <h4 class="font-medium text-white">{city.name}</h4>
+                          <p class="text-sm text-teal-100 italic">{city.highlight}</p>
+                        </div>
+                      </div>
+                    {/each}
+                  </div>
                 </div>
               </div>
             </div>
@@ -422,5 +576,23 @@
       background: #dcb660;
       border-radius: 3px;
     }
+  }
+
+  /* Add these styles to make the horizontal scroll animation smoother */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Ensure smooth transitions */
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 </style>

@@ -61,29 +61,30 @@
 </svelte:head>
 
 <header
-  class="fixed top-0 left-0 right-0 z-30 flex items-center transition-all duration-500 ease-out
+  class="fixed top-0 left-0 right-0 z-30 transition-all duration-500 ease-out
          {isScrolled
-           ? 'h-20 bg-white shadow-md'
-           : 'h-24 bg-transparent'}"
+           ? 'h-20 bg-white shadow-md flex items-center'
+           : 'h-28 bg-transparent flex items-start pt-2'}"
 >
-  <div class="container mx-auto px-4 sm:px-6 h-full">
+  <div class="container mx-auto px-4 sm:px-6 h-full flex items-center">
     <nav class="flex items-center justify-between w-full h-full">
       <a href="/" class="flex items-center z-50" aria-label="BuVipTur Home">
         <img
           src="/logo.PNG"
           alt="BuVipTur Logo"
           class="rounded-lg transition-all duration-500 ease-out
-                 {isScrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-20'}"
+                 {isScrolled ? 'h-14 sm:h-16' : 'h-20 sm:h-24'}"
         />
       </a>
 
-      <div class="hidden lg:flex items-center space-x-8">
+      <div class="hidden lg:flex items-center space-x-10">
         {#each navItems as item}
            <a
              href={item.href}
-             class="nav-link text-lg font-medium transition-all duration-300 relative
+             class="nav-link text-xl font-medium transition-all duration-300 relative
                     {isScrolled ? 'text-gray-800 hover:text-[#dcb660]' : 'text-white hover:text-[#dcb660]'}
-                    {$page.url.pathname === item.href ? 'active-link' : ''}"
+                    {$page.url.pathname === item.href ? 'active-link' : ''}
+                    hover:-translate-y-0.5"
            >
              {item.label}
            </a>

@@ -15,18 +15,14 @@
     let toDate = '';
     let email = '';
     let phone = '';
-    let participants = 2;
-    let ageGroup = '';
     let comments = '';
     let privacyAccepted = false;
     let isSubmitting = false;
     let submitSuccess = false;
-
-    // Age groups
-    const ageGroups = [
-        { value: '0-12', label: '0-12 years' },
-        { value: '12-18', label: '12-18 years' },
-        { value: '19-above', label: '19+ years' }
+    let ageGroups = [
+        { id: 1, value: '0-12', label: '0-12 years', participants: 0 },
+        { id: 2, value: '13-18', label: '13-18 years', participants: 0 },
+        { id: 3, value: '19+', label: '19+ years', participants: 0 }
     ];
 
     // Testimonials for section below form
@@ -85,8 +81,8 @@
         phone,
         fromDate,
         toDate,
-        participants,
-        ageGroup,
+        ageGroups: ageGroups.filter(group => group.participants > 0),
+        totalParticipants: ageGroups.reduce((sum, group) => sum + (group.participants || 0), 0),
         comments
     };
 
@@ -114,9 +110,11 @@
             phone = '';
             fromDate = '';
             toDate = '';
-            participants = 2;
-            ageGroup = '';
             comments = '';
+            ageGroups = ageGroups.map(group => ({
+                ...group,
+                participants: 0
+            }));
         }, 5000);
     } catch (error) {
         console.error('Submission error:', error);
@@ -255,49 +253,54 @@
                             </div>
                         </div>
                         
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
                             <div>
-                                <label for="participants" class="block text-sm font-medium text-gray-700 mb-2">Number of Participants</label>
-                                <div class="flex items-center w-full">
-                                     <button 
-                                         type="button"
-                                         class="px-4 py-3 bg-gray-200 text-gray-700 rounded-l-md hover:bg-gray-300"
-                                         on:click={() => participants = Math.max(1, participants - 1)}
-                                         aria-label="Decrease number of participants"
-                                     >
-                                         <i class="fas fa-minus" aria-hidden="true"></i>
-                                     </button>
-                                    <input 
-                                        type="number" 
-                                        id="participants" 
-                                        bind:value={participants} 
-                                        min="1" 
-                                        max="20"
-                                        class="w-full px-4 py-3 border-y border-gray-300 text-center focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
-                                    >
-                                     <button 
-                                         type="button"
-                                         class="px-4 py-3 bg-gray-200 text-gray-700 rounded-r-md hover:bg-gray-300"
-                                         on:click={() => participants = Math.min(20, participants + 1)}
-                                         aria-label="Increase number of participants"
-                                     >
-                                         <i class="fas fa-plus" aria-hidden="true"></i>
-                                     </button>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="ageGroup" class="block text-sm font-medium text-gray-700 mb-2">Age Group *</label>
-                                <select 
-                                    id="ageGroup" 
-                                    bind:value={ageGroup} 
-                                    required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
-                                >
-                                    <option value="">Select Age Group</option>
-                                    {#each ageGroups as group}
-                                        <option value={group.value}>{group.label}</option>
+                                <label for="age-group-0" class="block text-sm font-medium text-gray-700 mb-3">Number of Participants by Age Group</label>
+                                <div class="space-y-3">
+                                    {#each ageGroups as group, i}
+                                        <div class="flex items-center justify-between">
+                                            <label for={`age-group-${i}`} class="text-sm text-gray-700 w-32">{group.label}:</label>
+                                            <div class="flex items-center">
+                                                <button 
+                                                    type="button"
+                                                    class="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-700 rounded-l-md hover:bg-gray-200 transition-colors"
+                                                    on:click={() => {
+                                                        if (group.participants > 0) {
+                                                            ageGroups[i].participants--;
+                                                            ageGroups = ageGroups;
+                                                        }
+                                                    }}
+                                                    aria-label={`Decrease ${group.label} participants`}
+                                                >
+                                                    <i class="fas fa-minus text-xs" aria-hidden="true"></i>
+                                                </button>
+                                                <input 
+                                                    id={`age-group-${i}`}
+                                                    type="number" 
+                                                    min="0" 
+                                                    value={group.participants} 
+                                                    on:input={e => handleParticipantsChange(i, e.target.value)}
+                                                    class="w-16 h-10 text-center border-t border-b border-gray-300 focus:ring-2 focus:ring-teal-200 focus:border-teal-500 outline-none"
+                                                    aria-label={`Number of ${group.label} participants`}
+                                                />
+                                                <button 
+                                                    type="button"
+                                                    class="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-700 rounded-r-md hover:bg-gray-200 transition-colors"
+                                                    on:click={() => {
+                                                        ageGroups[i].participants++;
+                                                        ageGroups = ageGroups;
+                                                    }}
+                                                    aria-label={`Increase ${group.label} participants`}
+                                                >
+                                                    <i class="fas fa-plus text-xs" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     {/each}
-                                </select>
+                                </div>
+                                <p class="mt-3 text-sm font-medium text-gray-700">
+                                    Total participants: <span class="text-[#dcb660]">{ageGroups.reduce((sum, group) => sum + (group.participants || 0), 0)}</span>
+                                </p>
                             </div>
                         </div>
                         
@@ -311,31 +314,17 @@
                                 placeholder="Tell us about any special requirements, accessibility needs, or specific experiences you're looking for..."
                             ></textarea>
                         </div>
-                        <div class="col-span-2">
-                            <div class="flex items-start space-x-3">
-                                <input
-                                    type="checkbox"
-                                    id="privacy"
-                                    bind:checked={privacyAccepted}
-                                    class="mt-1 h-4 w-4 text-[#dcb660] border-gray-300 rounded focus:ring-[#dcb660]"
-                                    required
-                                />
-                                <label for="privacy" class="text-sm text-gray-600">
-                                    I agree to the processing of my personal data according to the <a href="/privacy" class="text-[#dcb660] hover:underline">Privacy Policy</a>. *
-                                </label>
-                            </div>
-                        </div>
-                        
                         <div class="mt-4 p-4 bg-gray-50 rounded-md border border-gray-200">
                             <div class="flex items-start">
                                 <input 
                                     type="checkbox" 
                                     id="terms" 
+                                    bind:checked={privacyAccepted}
                                     required
-                                    class="mt-1 mr-3"
+                                    class="mt-1 h-4 w-4 text-[#dcb660] border-gray-300 rounded focus:ring-[#dcb660] mr-3"
                                 >
                                 <label for="terms" class="text-sm text-gray-700">
-                                    I agree to receive email communications about my tour request and understand that my data will be processed according to the <a href="/privacy-policy" class="text-[#dcb660] hover:underline">Privacy Policy</a>.
+                                    I agree to receive email communications about my tour request and understand that my data will be processed according to the <a href="/privacy-policy" class="text-[#dcb660] hover:underline">Privacy Policy</a>. *
                                 </label>
                             </div>
                         </div>
@@ -444,11 +433,6 @@
         reviewCount="1000+" 
         certificationText="Certificate of Excellence" 
         testimonials={testimonials} 
-    />
-
-    <SubscribeSection
-        title="Stay Connected"
-        description="Subscribe to receive travel inspiration, exclusive offers, and updates on new destinations."
     />
 </main>
 
