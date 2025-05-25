@@ -30,12 +30,16 @@
   let touchStartX = 0;
   let touchEndX = 0;
   
-  // Auto carousel
+  // Auto carousel with smoother transitions
   function nextSlide() {
+    // Force reflow before updating the slide
+    document.querySelector('.carousel-slide')?.offsetHeight;
     currentSlide = (currentSlide + 1) % totalSlides;
   }
   
   function prevSlide() {
+    // Force reflow before updating the slide
+    document.querySelector('.carousel-slide')?.offsetHeight;
     currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
   }
   
@@ -74,11 +78,20 @@
       isVisible = true;
     }, 100);
     
-    // Carousel interval
-    const carouselInterval = setInterval(nextSlide, 5000);
+    // Carousel interval with check for reduced motion preference
+    let carouselInterval;
     
+    const setupCarousel = () => {
+      if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        carouselInterval = setInterval(nextSlide, 6000); // Slightly longer interval for better UX
+      }
+    };
+    
+    setupCarousel();
+    
+    // Cleanup function
     return () => {
-      clearInterval(carouselInterval);
+      if (carouselInterval) clearInterval(carouselInterval);
     };
   });
   
@@ -101,8 +114,8 @@
   <div class="absolute inset-0 z-0">
     {#each carouselImages as image, i}
       <div 
-        class="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-        style="opacity: {i === currentSlide ? '1' : '0'}"
+        class="carousel-slide absolute inset-0 transition-all duration-1000 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform-gpu"
+        style="opacity: {i === currentSlide ? '1' : '0'}; transform: scale({i === currentSlide ? '1' : '1.03'}); will-change: transform, opacity;"
       >
         <img 
           src={image} 
@@ -231,8 +244,18 @@
   
   /* Improved mobile sizing */
   @media (max-width: 768px) {
-    section {
-      min-height: 100vh;
+    /* Mobile-specific styles */
+    .hero-content {
+      padding-top: 2rem;
+    }
+    
+    .hero-text {
+      text-align: center;
+    }
+    
+    /* Smoother transitions on mobile */
+    .carousel-slide {
+      transition-duration: 1200ms;
     }
   }
   

@@ -180,7 +180,7 @@
           <img
             src="/logo.PNG"
             alt="BuVipTur Logo"
-            class="rounded-lg transition-all duration-300 ease-out h-20 sm:h-16 lg:h-20 object-contain"
+            class="rounded-lg transition-all duration-300 ease-out h-16 sm:h-16 lg:h-20 object-contain"
             class:scale-110={!isScrolled}
             class:lg:scale-110={!isScrolled}
           />
