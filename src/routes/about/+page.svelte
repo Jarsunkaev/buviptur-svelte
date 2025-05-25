@@ -1,6 +1,4 @@
 <script>
-    import Header from '$lib/components/Header.svelte';
-    import Footer from '$lib/components/Footer.svelte';
     import WhyChooseUs from '$lib/components/WhyChooseUs.svelte';
     import DestinationsSection from '$lib/components/DestinationsSection.svelte';
     import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
@@ -153,9 +151,8 @@
 
 </script>
 
-<Header />
 <main class="bg-white">
-    <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center"
+    <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center -mt-24 pt-24"
         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80')">
         <div class="text-center max-w-4xl px-4">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#dcb660]">About BuVipTur</h1>
@@ -240,4 +237,3 @@
         description="Subscribe to receive exclusive offers, travel tips, and inspiration for your next adventure."
     />
 </main>
-<Footer />

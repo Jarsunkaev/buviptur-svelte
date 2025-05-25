@@ -146,7 +146,7 @@
         class:translate-y-8={!isVisible}
         class:opacity-0={!isVisible}
       >
-        <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/20 backdrop-blur-sm border border-[#dcb660]/30 mb-6">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/20 backdrop-blur-sm border border-[#dcb660]/30 mb-6 mt-8 sm:mt-0">
           <span class="text-[#dcb660] font-medium">Discover Central Europe</span>
         </div>
         

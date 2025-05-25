@@ -435,6 +435,3 @@
         testimonials={testimonials} 
     />
 </main>
-
-<Footer />
-<ScrollToTopButton />

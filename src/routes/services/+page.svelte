@@ -285,4 +285,3 @@
         destinations={destinations} 
     />
 </main>
-<Footer />

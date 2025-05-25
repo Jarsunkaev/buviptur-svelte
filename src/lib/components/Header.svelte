@@ -79,6 +79,13 @@
     }
   }
 
+  // Handle visual viewport changes for mobile
+  function handleViewportChange() {
+    if (window.visualViewport && window.visualViewport.height < window.innerHeight * 0.75) {
+      closeMenu();
+    }
+  }
+
   onMount(() => {
     // Optimized scroll handler with sticky header logic
     let ticking = false;
@@ -115,14 +122,7 @@
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Handle visual viewport changes for mobile
-    if (window.visualViewport) {
-      const handleViewportChange = () => {
-        // Close menu if keyboard opens
-        if (window.visualViewport.height < window.innerHeight * 0.75) {
-          closeMenu();
-        }
-      };
-      
+    if (browser && 'visualViewport' in window) {
       window.visualViewport.addEventListener('resize', handleViewportChange, { passive: true });
     }
 
@@ -152,7 +152,7 @@
     };
   });
 
-  // Navigation items
+  // Navigation items with clean URLs
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/tours', label: 'Tours' },
@@ -191,10 +191,9 @@
         {#each navItems as item}
           <a
             href={item.href}
-            class="nav-link text-xl font-medium transition-all duration-300 relative
-                   {isScrolled ? 'text-gray-800 hover:text-[#dcb660]' : 'text-white hover:text-[#dcb660]'}
-                   {$page.url.pathname === item.href ? 'active-link' : ''}
-                   hover:-translate-y-0.5"
+            class="nav-link relative px-5 py-4 text-xl font-medium text-white hover:text-[#dcb660] transition-colors duration-300"
+            class:active={$page.url.pathname === item.href}
+            style="color: white !important;"
           >
             {item.label}
           </a>
@@ -273,41 +272,42 @@
 </header>
 
 <style>
+  /* Navigation link styles */
+  .nav-link {
+    position: relative;
+    padding: 0.5rem 0;
+    color: white !important; /* Force white color */
+    transition: color 0.3s ease;
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 500;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #dcb660;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after,
+  .nav-link:focus::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    color: #dcb660 !important; /* Force gold color on hover/active */
+  }
+  
   /* Smooth scrolling for the whole app */
   :global(html) {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-  }
-  
-  .nav-link {
-    position: relative;
-    padding: 0.5rem 0;
-    overflow: hidden;
-  }
-
-  .nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #dcb660, #f0c674, #dcb660);
-    transition: all 0.3s ease-out;
-    transform: translateX(-50%);
-  }
-
-  .nav-link:hover::before {
-    width: 100%;
-  }
-
-  .active-link {
-    color: #dcb660 !important;
-    font-weight: 600;
-  }
-
-  .active-link::before {
-    width: 100%;
   }
 
   /* CRITICAL: Better mobile menu scroll lock */

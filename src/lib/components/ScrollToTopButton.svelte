@@ -1,10 +1,9 @@
 <script>
   import { onMount } from 'svelte';
   import { browser } from '$app/environment';
+  import { fly } from 'svelte/transition';
   
-  // Show button when page is scrolled down
   let showButton = false;
-  let scrollY = 0;
   
   function scrollToTop() {
     window.scrollTo({
@@ -15,12 +14,9 @@
   
   function checkScrollPosition() {
     if (!browser) return;
-    scrollY = window.scrollY;
-    // Show button when scrolled down 300px
-    showButton = scrollY > 300;
+    showButton = window.scrollY > 300;
   }
   
-  // Throttle scroll events for better performance
   function throttle(callback, limit) {
     let waiting = false;
     return function() {
@@ -37,10 +33,8 @@
   onMount(() => {
     if (!browser) return;
     
-    const throttledScroll = throttle(checkScrollPosition, 100);
+    const throttledScroll = throttle(checkScrollPosition, 50);
     window.addEventListener('scroll', throttledScroll, { passive: true });
-    
-    // Initial check
     checkScrollPosition();
     
     return () => {
@@ -49,49 +43,54 @@
   });
 </script>
 
-<div 
-  class="fixed bottom-6 right-6 z-[9999] transition-all duration-300 ease-out"
-  class:translate-y-0={showButton}
-  class:translate-y-20={!showButton}
-  class:opacity-100={showButton}
-  class:opacity-0={!showButton}
-  style="transform: translateY({showButton ? '0' : '80px'});"
->
-  <button 
-    on:click={scrollToTop}
-    class="bg-[#dcb660] hover:bg-[#c9a64f] text-white w-14 h-14 md:w-16 md:h-16 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dcb660] pointer-events-auto"
+<div class="fixed bottom-8 right-8 z-50">
+  <button
+    on:click|preventDefault={scrollToTop}
+    class="w-14 h-14 bg-[#dcb660] text-white rounded-full shadow-xl flex items-center justify-center hover:bg-[#c9a34f] transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dcb660]"
+    class:opacity-0={!showButton}
+    class:translate-y-4={!showButton}
+    class:opacity-100={showButton}
+    class:translate-y-0={showButton}
     aria-label="Scroll to top"
-    style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); border: 2px solid rgba(255, 255, 255, 0.3)"
   >
-    <i class="fas fa-chevron-up text-xl"></i>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
   </button>
 </div>
 
 <style>
   button {
-    will-change: transform, box-shadow;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    position: relative;
-    z-index: 9999;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
   }
   
-  /* Smooth appearance/disappearance */
-  .transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+  }
+  
+  button:active {
+    transform: scale(0.95);
   }
   
   /* Ensure the button is above other content */
-  .z-\[9999\] {
-    z-index: 9999 !important;
+  .z-50 {
+    z-index: 50;
+  }
+  
+  /* Smooth appearance animation */
+  :global(html) {
+    scroll-behavior: smooth;
   }
   
   /* Make sure the button is visible on all screen sizes */
   @media (max-width: 768px) {
     .fixed {
-      right: 1.25rem !important;
-      bottom: 5rem !important; /* Increased bottom spacing to avoid mobile browser UI */
+      bottom: 1.5rem;
+      right: 1.5rem;
     }
   }
   

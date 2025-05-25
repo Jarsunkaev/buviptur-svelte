@@ -435,5 +435,3 @@
     />
 
 </main>
-<Footer />
-<ScrollToTopButton />

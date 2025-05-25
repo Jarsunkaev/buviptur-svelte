@@ -6,6 +6,8 @@
   import '$lib/app.css';
   import CookieConsent from '$lib/components/CookieConsent.svelte';
   import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
+  import Header from '$lib/components/Header.svelte';
+  import Footer from '$lib/components/Footer.svelte';
   import '../app.postcss';
   
   // Detect if user prefers reduced motion
@@ -72,12 +74,16 @@
   <meta name="theme-color" content="#113946">
 </svelte:head>
 
+
+
 <div class="site-wrapper min-h-screen flex flex-col opacity-0 transition-opacity duration-500" 
      class:opacity-100={browser}
      style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
-  <div class="flex-grow flex flex-col">
+  <Header />
+  <main class="flex-grow flex flex-col">
     <slot />
-  </div>
+  </main>
+  <Footer />
   <ScrollToTopButton />
 </div>
 
