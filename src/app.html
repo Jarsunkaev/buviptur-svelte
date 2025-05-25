@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1.0" />
 		<!-- Include Tailwind CSS via CDN -->
 		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 		<!-- Custom styles -->
@@ -19,12 +19,17 @@
 			html {
 				scroll-behavior: smooth;
 				scroll-padding-top: 8rem;
+				-webkit-text-size-adjust: 100%;
+				-webkit-tap-highlight-color: transparent;
 			}
 
 			body {
 				overflow-x: hidden;
 				width: 100%;
 				position: relative;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-rendering: optimizeLegibility;
 			}
 
 			/* Prevent content shift when scrollbar appears */
@@ -72,6 +77,51 @@
 			
 			.animate-fadeInUp {
 				animation: fadeInUp 0.6s ease-out forwards;
+			}
+			
+			/* Mobile optimizations */
+			@media (max-width: 640px) {
+				html {
+					font-size: 15px; /* Slightly smaller base font on mobile */
+				}
+				
+				/* Fix for iOS Safari 100vh issue */
+				.min-h-screen {
+					min-height: 100vh;
+					min-height: -webkit-fill-available;
+				}
+				
+				/* Improve tap targets for mobile */
+				button, a {
+					min-height: 44px;
+					min-width: 44px;
+				}
+			}
+			
+			/* Fix for iOS Safari 100vh issue */
+			@supports (-webkit-touch-callout: none) {
+				.min-h-screen {
+					min-height: -webkit-fill-available;
+				}
+			}
+			
+			/* Better input handling on iOS */
+			input, 
+			textarea, 
+			button, 
+			select, 
+			a {
+				-webkit-tap-highlight-color: transparent;
+			}
+			
+			/* Fix for iOS momentum scrolling */
+			.overflow-y-scroll {
+				-webkit-overflow-scrolling: touch;
+			}
+			
+			/* Fix for iOS text size adjustment */
+			* {
+				-webkit-text-size-adjust: none;
 			}
 		</style>
 		%sveltekit.head%

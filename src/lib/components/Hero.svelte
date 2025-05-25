@@ -23,6 +23,9 @@
   let currentSlide = 0;
   const totalSlides = carouselImages.length;
   
+  // Animation control
+  let isVisible = false;
+  
   // Touch tracking for mobile swipe
   let touchStartX = 0;
   let touchEndX = 0;
@@ -66,6 +69,11 @@
   }
   
   onMount(() => {
+    // Trigger fade-in animation after a short delay
+    setTimeout(() => {
+      isVisible = true;
+    }, 100);
+    
     // Carousel interval
     const carouselInterval = setInterval(nextSlide, 5000);
     
@@ -73,15 +81,23 @@
       clearInterval(carouselInterval);
     };
   });
+  
+  // Highlights for desktop view
+  const highlights = [
+    { icon: 'fa-map-marked-alt', title: 'Expert Local Guides' },
+    { icon: 'fa-building', title: 'Accommodation' },
+    { icon: 'fa-globe-europe', title: 'Multi-Country Experiences' },
+    { icon: 'fa-ship', title: 'Scenic Boat Cruises' }
+  ];
 </script>
 
 <section 
-  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  class="relative min-h-screen flex items-center overflow-hidden pt-16 md:pt-0"
   on:touchstart={handleTouchStart}
   on:touchmove={handleTouchMove}
   on:touchend={handleTouchEnd}
 >
-  <!-- Full Background Carousel with fixed height to prevent layout shift -->
+  <!-- Full Background Carousel -->
   <div class="absolute inset-0 z-0">
     {#each carouselImages as image, i}
       <div 
@@ -106,39 +122,17 @@
     </div>
   </div>
   
-  <!-- Carousel Controls - Hidden on mobile, visible on md screens and up -->
-  <button 
-    class="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-[#dcb660] w-12 h-12 rounded-full items-center justify-center z-20 transition-all hover:scale-105 shadow-lg opacity-70 hover:opacity-100"
-    on:click={prevSlide}
-    aria-label="Previous slide"
-  >
-    <i class="fas fa-chevron-left text-lg"></i>
-  </button>
-  
-  <button 
-    class="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-[#dcb660] w-12 h-12 rounded-full items-center justify-center z-20 transition-all hover:scale-105 shadow-lg opacity-70 hover:opacity-100"
-    on:click={nextSlide}
-    aria-label="Next slide"
-  >
-    <i class="fas fa-chevron-right text-lg"></i>
-  </button>
-  
-  <!-- Carousel Indicators -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-    {#each Array(totalSlides) as _, i}
-      <button 
-        class="transition-all duration-300 rounded-full {i === currentSlide ? 'bg-[#dcb660] w-8 h-2' : 'bg-white/60 hover:bg-white/80 w-2 h-2'}"
-        on:click={() => currentSlide = i}
-        aria-label={`Go to slide ${i + 1}`}
-      ></button>
-    {/each}
-  </div>
-  
-  <!-- Content Container with fixed positioning to prevent layout shift -->
-  <div class="container mx-auto px-4 sm:px-6 relative z-10 pt-20 md:pt-0">
+  <!-- Content Container with better mobile spacing -->
+  <div class="container mx-auto px-4 sm:px-6 relative z-10 flex flex-col min-h-screen justify-center">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       <!-- Left Content Area -->
-      <div class="text-white max-w-xl mx-auto lg:mx-0" style="animation: fadeInUp 0.8s ease-out;">
+      <div 
+        class="text-white max-w-xl mx-auto lg:mx-0 transform transition-all duration-1000"
+        class:translate-y-0={isVisible}
+        class:opacity-100={isVisible}
+        class:translate-y-8={!isVisible}
+        class:opacity-0={!isVisible}
+      >
         <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/20 backdrop-blur-sm border border-[#dcb660]/30 mb-6">
           <span class="text-[#dcb660] font-medium">Discover Central Europe</span>
         </div>
@@ -151,8 +145,8 @@
           From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.
         </p>
         
-        <!-- Form Container - Fixed height on mobile to prevent layout shift -->
-        <div class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 shadow-xl">
+        <!-- Form Container with improved mobile spacing -->
+        <div class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 shadow-xl mb-12 md:mb-0">
           <h3 class="text-xl font-semibold mb-4">Start Your Journey</h3>
           
           <div class="space-y-4" on:submit|preventDefault={handleGetOffer}>
@@ -199,18 +193,17 @@
         </div>
       </div>
       
-      <!-- Right side - Mobile visible highlights -->
+      <!-- Right side - Desktop visible highlights -->
       <div class="hidden lg:block">
         <div class="grid grid-cols-2 gap-4">
-          {#each [
-            { icon: 'fa-map-marked-alt', title: 'Expert Local Guides' },
-            { icon: 'fa-building', title: 'Accommodation' },
-            { icon: 'fa-globe-europe', title: 'Multi-Country Experiences' },
-            { icon: 'fa-ship', title: 'Scenic Boat Cruises' }
-          ] as highlight, i}
+          {#each highlights as highlight, i}
             <div 
-              class="bg-white/10 backdrop-blur-md rounded-lg border border-white/20 p-4 flex items-center space-x-3 transform transition-all hover:-translate-y-1"
-              style="animation: fadeInUp {0.8 + (i * 0.1)}s ease-out;"
+              class="bg-white/10 backdrop-blur-md rounded-lg border border-white/20 p-4 flex items-center space-x-3 transform transition-all duration-1000"
+              class:translate-y-0={isVisible}
+              class:opacity-100={isVisible}
+              class:translate-y-8={!isVisible}
+              class:opacity-0={!isVisible}
+              style="transition-delay: {300 + (i * 100)}ms"
             >
               <div class="w-12 h-12 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660]">
                 <i class="fas {highlight.icon}"></i>
@@ -225,17 +218,6 @@
 </section>
 
 <style>
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
   /* Glass effect enhancement */
   .backdrop-blur-md {
     backdrop-filter: blur(12px);
@@ -247,10 +229,11 @@
     box-shadow: 0 0 0 2px rgba(220, 182, 96, 0.3);
   }
   
-  /* Fixed height section to prevent layout shift */
-  section {
-    min-height: 100vh;
-    padding-top: 80px; /* Account for header height */
+  /* Improved mobile sizing */
+  @media (max-width: 768px) {
+    section {
+      min-height: 100vh;
+    }
   }
   
   /* Ensure images cover the entire viewport */
@@ -260,14 +243,20 @@
     object-fit: cover;
   }
   
-  /* Improve mobile stability */
-  @media (max-width: 768px) {
-    section {
-      height: 100vh;
-    }
-    
-    .container {
-      padding-top: 5rem;
-    }
+  /* Smooth transitions */
+  .translate-y-0 {
+    transform: translateY(0);
+  }
+  
+  .translate-y-8 {
+    transform: translateY(2rem);
+  }
+  
+  .opacity-0 {
+    opacity: 0;
+  }
+  
+  .opacity-100 {
+    opacity: 1;
   }
 </style>

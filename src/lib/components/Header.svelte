@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
+  import { fade, fly } from 'svelte/transition';
   import { page } from '$app/stores';
   import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 
@@ -63,8 +63,8 @@
 <header
   class="fixed top-0 left-0 right-0 z-30 transition-all duration-500 ease-out
          {isScrolled
-           ? 'h-20 bg-white shadow-md flex items-center'
-           : 'h-28 bg-transparent flex items-start pt-2'}"
+           ? 'h-16 md:h-20 bg-white shadow-md flex items-center'
+           : 'h-20 md:h-28 bg-transparent flex items-start pt-2'}"
 >
   <div class="container mx-auto px-4 sm:px-6 h-full flex items-center">
     <nav class="flex items-center justify-between w-full h-full">
@@ -73,7 +73,7 @@
           src="/logo.PNG"
           alt="BuVipTur Logo"
           class="rounded-lg transition-all duration-500 ease-out
-                 {isScrolled ? 'h-14 sm:h-16' : 'h-20 sm:h-24'}"
+                 {isScrolled ? 'h-10 sm:h-12 md:h-16' : 'h-14 sm:h-18 md:h-24'}"
         />
       </a>
 
@@ -115,9 +115,9 @@
           {#each navItems as item, index}
             <a
               href={item.href}
-              class="nav-link text-2xl font-medium text-white hover:text-[#dcb660] transition-colors duration-300 animate-fadeIn text-center py-3 
+              in:fly={{ y: 20, delay: index * 75, duration: 200 }}
+              class="nav-link text-2xl font-medium text-white hover:text-[#dcb660] transition-colors duration-300 text-center py-3 
                      {$page.url.pathname === item.href ? 'active-link' : ''}"
-              style="animation-delay: {(index + 1) * 0.1}s"
               on:click={closeMenu}
             >
               {item.label}
@@ -130,17 +130,6 @@
 </header>
 
 <style>
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .nav-link {
     position: relative;
     padding: 0.5rem 0; 
@@ -171,11 +160,6 @@
     transform: translateX(100%); 
   }
 
-  .animate-fadeIn {
-    opacity: 0;
-    animation: fadeIn 0.4s ease-out forwards;
-  }
-
   /* Improve focus visibility for accessibility */
   .nav-link:focus-visible {
     outline: 2px solid #dcb660;
@@ -189,10 +173,17 @@
     border-radius: 2px;
   }
 
-  /* MODIFICATION: Added CSS for mobile menu links */
+  /* Mobile menu links with better spacing */
   #mobile-menu-overlay .nav-link {
-    display: inline-block;  
-    /* py-3 class provides vertical padding, text-center remains from HTML */
-    /* The parent <nav> is already using 'items-center', which will center these inline-block links */
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 0;
+  }
+  
+  /* Glass effect for mobile menu */
+  #mobile-menu-overlay {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 </style>
