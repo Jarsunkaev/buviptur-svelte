@@ -35,31 +35,32 @@
   // State for header
   let isMenuOpen = false;
   let isScrolled = false;
-  const scrollThreshold = 50; // Pixels to scroll before changing header state
+  let isHeaderVisible = true;
+  const scrollThreshold = 50;
+  let currentScrollY = 0;
+  let lastScrollY = 0;
 
-  // Toggle mobile menu function
+  // Toggle mobile menu function with improved body scroll lock
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
     
     if (isMenuOpen) {
       // Store current scroll position
-      const scrollY = window.scrollY;
-      // Apply styles to prevent scrolling
+      currentScrollY = window.scrollY;
+      
+      // Apply scroll lock styles
       document.documentElement.classList.add('menu-open');
       document.body.classList.add('menu-open');
-      // Restore scroll position after styles are applied
-      setTimeout(() => {
-        window.scrollTo(0, scrollY);
-      }, 0);
+      document.body.style.top = `-${currentScrollY}px`;
+      
     } else {
-      // Remove the menu-open class to re-enable scrolling
+      // Remove scroll lock
       document.documentElement.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
-      // Small delay to ensure smooth transition
-      setTimeout(() => {
-        // Force a reflow to ensure styles are applied
-        document.body.offsetHeight;
-      }, 10);
+      document.body.style.top = '';
+      
+      // Restore scroll position
+      window.scrollTo(0, currentScrollY);
     }
   }
 
@@ -67,25 +68,43 @@
   function closeMenu() {
     if (isMenuOpen) {
       isMenuOpen = false;
-      // Remove the menu-open class to re-enable scrolling
+      
+      // Remove scroll lock
       document.documentElement.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
-      // Small delay to ensure smooth transition
-      setTimeout(() => {
-        // Force a reflow to ensure styles are applied
-        document.body.offsetHeight;
-      }, 10);
+      document.body.style.top = '';
+      
+      // Restore scroll position
+      window.scrollTo(0, currentScrollY);
     }
   }
 
   onMount(() => {
-    // Use requestAnimationFrame for smoother scroll handling
+    // Optimized scroll handler with sticky header logic
     let ticking = false;
     
     const handleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          isScrolled = window.scrollY > scrollThreshold;
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          
+          // Only update if scroll changed significantly
+          if (Math.abs(scrollY - lastScrollY) > 5) {
+            // Update scrolled state
+            isScrolled = scrollY > scrollThreshold;
+            
+            // Sticky header logic - hide when scrolling down, show when scrolling up
+            if (scrollY > lastScrollY && scrollY > 100) {
+              // Scrolling down - hide header
+              isHeaderVisible = false;
+            } else if (scrollY < lastScrollY || scrollY <= scrollThreshold) {
+              // Scrolling up or near top - show header
+              isHeaderVisible = true;
+            }
+            
+            lastScrollY = scrollY;
+          }
+          
           ticking = false;
         });
         ticking = true;
@@ -95,31 +114,41 @@
     // Use passive event listener for better performance
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Close menu on navigation
+    // Handle visual viewport changes for mobile
+    if (window.visualViewport) {
+      const handleViewportChange = () => {
+        // Close menu if keyboard opens
+        if (window.visualViewport.height < window.innerHeight * 0.75) {
+          closeMenu();
+        }
+      };
+      
+      window.visualViewport.addEventListener('resize', handleViewportChange, { passive: true });
+    }
+
+    // Close menu on navigation with header show
     const unsubscribe = page.subscribe(() => {
       closeMenu();
-      // Small delay to ensure smooth navigation
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'auto'
-        });
-      }, 50);
+      // Always show header on page navigation
+      isHeaderVisible = true;
     });
 
-    // Initialize header state on page load
+    // Initialize header state
     handleScroll();
 
     // Cleanup function
     return () => {
       window.removeEventListener('scroll', handleScroll);
       unsubscribe();
+      
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleViewportChange);
+      }
+      
       // Reset styles on unmount
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      document.documentElement.style.position = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
+      document.documentElement.classList.remove('menu-open');
+      document.body.classList.remove('menu-open');
+      document.body.style.top = '';
     };
   });
 
@@ -141,18 +170,21 @@
   class="fixed top-0 left-0 right-0 z-30 transition-all duration-300 ease-out flex items-start pt-2 lg:pt-3 h-auto min-h-[72px] lg:min-h-[88px]"
   class:bg-white={isScrolled}
   class:shadow-md={isScrolled}
-  style="background-color: {isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'}; backdrop-filter: {isScrolled ? 'blur(8px)' : 'none'}"
+  class:-translate-y-full={!isHeaderVisible && !isMenuOpen}
+  style="background-color: {isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'}; backdrop-filter: {isScrolled ? 'blur(8px)' : 'none'}; transform: translate3d(0, {!isHeaderVisible && !isMenuOpen ? '-100%' : '0'}, 0);"
 >
   <div class="container mx-auto px-4 sm:px-6 h-full flex items-center py-1">
     <nav class="flex items-center justify-between w-full h-full">
       <a href="/" class="flex items-center z-50" aria-label="BuVipTur Home">
-        <img
-          src="/logo.PNG"
-          alt="BuVipTur Logo"
-          class="rounded-lg transition-all duration-300 ease-out h-12 sm:h-14 lg:h-16"
-          class:scale-125={!isScrolled}
-          class:lg:scale-125={!isScrolled}
-        />
+        <div class="relative">
+          <img
+            src="/logo.PNG"
+            alt="BuVipTur Logo"
+            class="rounded-lg transition-all duration-300 ease-out h-20 sm:h-16 lg:h-20 object-contain"
+            class:scale-110={!isScrolled}
+            class:lg:scale-110={!isScrolled}
+          />
+        </div>
       </a>
 
       <div class="hidden lg:flex items-center space-x-10">
@@ -197,11 +229,12 @@
     <div
       transition:fade={{ duration: 300 }}
       class="fixed inset-0 bg-teal-900/95 backdrop-blur-lg z-40 lg:hidden flex items-center justify-center"
+      style="height: 100vh; height: calc(var(--vh, 1vh) * 100); overscroll-behavior: none;"
       role="dialog"
       aria-modal="true"
       id="mobile-menu-overlay"
     >
-      <div class="w-full h-full flex flex-col items-center justify-center">
+      <div class="w-full h-full flex flex-col items-center justify-center overflow-hidden">
         <nav class="flex flex-col items-center space-y-8 w-full max-w-md mx-auto px-4">
           {#each navItems as item, index}
             <div class="relative w-full text-center">
@@ -277,30 +310,56 @@
     width: 100%;
   }
 
-  /* Improve focus visibility for accessibility */
-  .nav-link:focus-visible {
-    outline: 2px solid #dcb660;
-    outline-offset: 2px;
-    border-radius: 2px;
+  /* CRITICAL: Better mobile menu scroll lock */
+  :global(html.menu-open),
+  :global(body.menu-open) {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  /* Improve performance with hardware acceleration */
+  header {
+    will-change: transform, background-color;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    /* Ensure smooth sticky behavior */
+    transform: translate3d(0, 0, 0);
   }
   
+  /* Header hide/show animation */
+
+
+  /* Mobile menu improvements */
+  #mobile-menu-overlay {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    /* Prevent scrolling issues */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+  }
+
+  /* Better focus visibility */
+  .nav-link:focus-visible,
   button:focus-visible {
     outline: 2px solid #dcb660;
     outline-offset: 2px;
     border-radius: 2px;
   }
 
-  /* Mobile menu links with better spacing */
+  /* Mobile menu links optimization */
   #mobile-menu-overlay .nav-link {
     display: inline-block;
     width: 100%;
     text-align: center;
     padding: 0.75rem 0;
-  }
-  
-  /* Glass effect for mobile menu */
-  #mobile-menu-overlay {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    -webkit-tap-highlight-color: transparent;
   }
 </style>

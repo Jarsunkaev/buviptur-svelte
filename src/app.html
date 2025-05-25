@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1.0" />
+		<!-- CRITICAL: Fixed viewport meta tag for mobile browsers -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, interactive-widget=resizes-content" />
 		<!-- Include Tailwind CSS via CDN -->
 		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 		<!-- Custom styles -->
@@ -14,6 +15,12 @@
 				--teal-700: #228291;
 				--teal-600: #2aa1b7;
 				--accent: #dfb964;
+				
+				/* Dynamic viewport units for mobile */
+				--vh: 1vh;
+				--dvh: 1dvh;
+				--svh: 1svh;
+				--lvh: 1lvh;
 			}
 
 			html {
@@ -21,6 +28,12 @@
 				scroll-padding-top: 8rem;
 				-webkit-text-size-adjust: 100%;
 				-webkit-tap-highlight-color: transparent;
+				/* Prevent bounce scrolling on iOS */
+				overscroll-behavior: none;
+				/* Fix for mobile viewport issues */
+				height: 100%;
+				height: 100vh;
+				height: 100dvh; /* Dynamic viewport height */
 			}
 
 			body {
@@ -30,6 +43,12 @@
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
 				text-rendering: optimizeLegibility;
+				/* Fix for mobile viewport */
+				min-height: 100vh;
+				min-height: 100dvh; /* Dynamic viewport height */
+				/* Prevent bounce scrolling */
+				overscroll-behavior: none;
+				-webkit-overflow-scrolling: touch;
 			}
 
 			/* Prevent content shift when scrollbar appears */
@@ -79,16 +98,28 @@
 				animation: fadeInUp 0.6s ease-out forwards;
 			}
 			
-			/* Mobile optimizations */
+			/* CRITICAL: Mobile optimizations for viewport issues */
 			@media (max-width: 640px) {
 				html {
-					font-size: 15px; /* Slightly smaller base font on mobile */
+					font-size: 15px;
+					/* Force constant height to prevent address bar glitches */
+					height: 100vh;
+					height: 100dvh;
 				}
 				
-				/* Fix for iOS Safari 100vh issue */
+				body {
+					/* Use dvh instead of vh for better mobile support */
+					min-height: 100vh;
+					min-height: 100dvh;
+					/* Prevent elastic scrolling on iOS */
+					position: relative;
+					overflow-x: hidden;
+				}
+				
+				/* Fix viewport height issues */
 				.min-h-screen {
 					min-height: 100vh;
-					min-height: -webkit-fill-available;
+					min-height: 100dvh !important;
 				}
 				
 				/* Improve tap targets for mobile */
@@ -96,12 +127,21 @@
 					min-height: 44px;
 					min-width: 44px;
 				}
+				
+				/* Prevent zoom on inputs */
+				input, select, textarea {
+					font-size: 16px !important;
+				}
 			}
 			
-			/* Fix for iOS Safari 100vh issue */
-			@supports (-webkit-touch-callout: none) {
+			/* CRITICAL: Fix for Chrome mobile address bar */
+			@supports (height: 100dvh) {
 				.min-h-screen {
-					min-height: -webkit-fill-available;
+					min-height: 100dvh;
+				}
+				
+				html, body {
+					height: 100dvh;
 				}
 			}
 			
@@ -119,14 +159,92 @@
 				-webkit-overflow-scrolling: touch;
 			}
 			
-			/* Fix for iOS text size adjustment */
-			* {
-				-webkit-text-size-adjust: none;
+			/* CRITICAL: Prevent layout shifts from mobile browser UI */
+			.site-wrapper {
+				position: relative;
+				min-height: 100vh;
+				min-height: 100dvh;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			/* Prevent menu scroll issues */
+			html.menu-open,
+			body.menu-open {
+				overflow: hidden !important;
+				position: fixed !important;
+				width: 100% !important;
+				height: 100% !important;
+			}
+			
+			/* Fix hero section height on mobile */
+			@media (max-width: 768px) {
+				.hero-section {
+					min-height: 100vh;
+					min-height: 100dvh;
+					height: 100vh;
+					height: 100dvh;
+				}
 			}
 		</style>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover" class="bg-white text-gray-900">
 		<div style="display: contents">%sveltekit.body%</div>
+		
+		<!-- CRITICAL: JavaScript to handle viewport height changes -->
+		<script>
+			(function() {
+				function setViewportHeight() {
+					// Set CSS custom property for current viewport height
+					const vh = window.innerHeight * 0.01;
+					document.documentElement.style.setProperty('--vh', vh + 'px');
+					
+					// Handle dynamic viewport height for modern browsers
+					if (window.visualViewport) {
+						const dvh = window.visualViewport.height * 0.01;
+						document.documentElement.style.setProperty('--dvh', dvh + 'px');
+					}
+				}
+				
+				// Set initial viewport height
+				setViewportHeight();
+				
+				// Throttled resize handler
+				let resizeTimer;
+				function handleResize() {
+					clearTimeout(resizeTimer);
+					resizeTimer = setTimeout(setViewportHeight, 100);
+				}
+				
+				// Listen for resize events
+				window.addEventListener('resize', handleResize, { passive: true });
+				
+				// Listen for visual viewport changes (better for mobile)
+				if (window.visualViewport) {
+					window.visualViewport.addEventListener('resize', handleResize, { passive: true });
+				}
+				
+				// Prevent zoom on input focus for iOS
+				const addMaximumScaleToMetaViewport = () => {
+					const el = document.querySelector('meta[name=viewport]');
+					if (el !== null && !el.content.includes('maximum-scale')) {
+						el.content = el.content + ', maximum-scale=1.0';
+					}
+				};
+				
+				// Add event listeners for input focus/blur
+				const inputs = ['input', 'select', 'textarea'];
+				inputs.forEach(input => {
+					document.addEventListener(input + 'focus', addMaximumScaleToMetaViewport, false);
+					document.addEventListener(input + 'blur', () => {
+						const el = document.querySelector('meta[name=viewport]');
+						if (el !== null) {
+							el.content = el.content.replace(', maximum-scale=1.0', '');
+						}
+					}, false);
+				});
+			})();
+		</script>
 	</body>
 </html>

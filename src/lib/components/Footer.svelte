@@ -2,7 +2,7 @@
   const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="bg-teal-900 text-white py-16">
+<footer class="bg-teal-900 text-white pt-12 pb-6 w-full mt-auto">
   <div class="container mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <div class="space-y-4">
@@ -56,7 +56,7 @@
       </div>
     </div>
     
-    <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <div class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center w-full">
       <p class="text-gray-400 mb-4 md:mb-0">&copy; {currentYear} <span class="text-[#dcb660]">BuVipTur</span>. All rights reserved.</p>
       <div class="flex space-x-6">
         <a href="/privacy" class="text-gray-400 hover:text-[#dcb660] transition-colors">Privacy Policy</a>
