@@ -440,10 +440,12 @@
           </div>
           
           <!-- Mobile Pagination Indicator -->
-          <div class="flex justify-center mt-6 space-x-2">
+          <div class="flex justify-center mt-6 space-x-1.5" style="font-size: 0;">
             {#each supportServices as _, i}
               <button 
-                class="w-2 h-2 rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660] w-6' : 'bg-[#113946]/30'}"
+                class="rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660]' : 'bg-[#113946]/30'}"
+                style="width: 6px; height: 6px; min-width: 6px; min-height: 6px; {i === currentSlide ? 'width: 16px; min-width: 16px;' : ''}"
+                style:sm="width: 8px; height: 8px; min-width: 8px; min-height: 8px; {i === currentSlide ? 'width: 24px; min-width: 24px;' : ''}"
                 on:click={() => currentSlide = i}
                 aria-label={`Go to service ${i + 1}`}
               ></button>

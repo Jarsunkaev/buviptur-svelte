@@ -86,10 +86,11 @@
     </button>
     
     <!-- Dots Indicators -->
-    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-1.5 z-10" style="font-size: 0;">
       {#each images as _, i}
         <button 
-          class="w-2 h-2 rounded-full transition-all duration-300 {i === currentIndex ? 'bg-white w-6' : 'bg-white/60'}"
+          class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] rounded-full transition-all duration-300 {i === currentIndex ? 'bg-white w-4 sm:w-6' : 'bg-white/60'}"
+          style="min-width: 6px; min-height: 6px; {i === currentIndex ? 'min-width: 1rem;' : ''}"
           on:click={() => goToSlide(i)}
           aria-label={`Go to slide ${i + 1}`}
         ></button>

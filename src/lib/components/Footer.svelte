@@ -31,14 +31,28 @@
         </ul>
       </div>
       
-      <div class="space-y-4">
+      <div>
         <h3 class="text-2xl font-bold mb-6 text-[#dcb660]">Contact Info</h3>
-        <ul class="space-y-3 text-gray-300">
-          <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-[#dcb660]"></i> <span>Váci Street 12, Budapest, Hungary</span></li>
-          <li class="flex items-center"><i class="fas fa-phone mr-3 text-[#dcb660]"></i> <span>+36 1 234 5678</span></li>
-          <li class="flex items-center"><i class="fas fa-envelope mr-3 text-[#dcb660]"></i> <span>info@buviptur.com</span></li>
-          <li class="flex items-center"><i class="fas fa-clock mr-3 text-[#dcb660]"></i> <span>Mon-Fri: 9AM - 6PM</span></li>
-        </ul>
+        <table class="border-collapse">
+          <tbody>
+            <tr>
+              <td class="align-top pr-3"><i class="fas fa-map-marker-alt text-[#dcb660]"></i></td>
+              <td class="pb-3">Budapest, Hungary</td>
+            </tr>
+            <tr>
+              <td class="align-middle pr-3"><i class="fas fa-phone text-[#dcb660]"></i></td>
+              <td class="pb-3">
+                <a href="tel:+36707343444" class="hover:text-[#dcb660] transition-colors">+36 70 734 3444</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="align-middle pr-3"><i class="fas fa-envelope text-[#dcb660]"></i></td>
+              <td class="pb-3">
+                <a href="mailto:info@buviptur.com" class="hover:text-[#dcb660] transition-colors">info@buviptur.com</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     
