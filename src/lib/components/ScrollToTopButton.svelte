@@ -6,15 +6,23 @@
   let showButton = false;
   
   function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    try {
+      // Try the modern method first
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    } catch (e) {
+      // Fallback for browsers that don't support smooth scrolling
+      document.documentElement.scrollTop = 0;
+    }
   }
   
   function checkScrollPosition() {
     if (!browser) return;
-    showButton = window.scrollY > 300;
+    // Use either window.scrollY or document.documentElement.scrollTop for better cross-browser support
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    showButton = scrollPosition > 300;
   }
   
   function throttle(callback, limit) {
@@ -43,7 +51,7 @@
   });
 </script>
 
-<div class="fixed bottom-8 right-8 z-50">
+<div class="fixed bottom-8 right-8 z-[9999] transition-all duration-300" class:opacity-0={!showButton} class:translate-y-4={!showButton} class:opacity-100={showButton} class:translate-y-0={showButton} style="will-change: transform, opacity;">
   <button
     on:click|preventDefault={scrollToTop}
     class="w-14 h-14 bg-[#dcb660] text-white rounded-full shadow-xl flex items-center justify-center hover:bg-[#c9a34f] transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dcb660]"
@@ -61,10 +69,14 @@
 
 <style>
   button {
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     border: 2px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
+    opacity: 0.9;
+    transform: translateZ(0); /* Force hardware acceleration */
+    -webkit-backface-visibility: hidden; /* Fix for iOS */
+    backface-visibility: hidden;
   }
   
   button:hover {
@@ -74,11 +86,6 @@
   
   button:active {
     transform: scale(0.95);
-  }
-  
-  /* Ensure the button is above other content */
-  .z-50 {
-    z-index: 50;
   }
   
   /* Smooth appearance animation */

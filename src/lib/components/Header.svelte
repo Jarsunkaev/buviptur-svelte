@@ -191,11 +191,10 @@
         {#each navItems as item}
           <a
             href={item.href}
-            class="nav-link relative px-5 py-4 text-xl font-medium text-white hover:text-[#dcb660] transition-colors duration-300"
+            class="nav-link"
             class:active={$page.url.pathname === item.href}
-            style="color: white !important;"
           >
-            {item.label}
+            <span class="nav-link-text">{item.label}</span>
           </a>
         {/each}
         
@@ -275,33 +274,41 @@
   /* Navigation link styles */
   .nav-link {
     position: relative;
-    padding: 0.5rem 0;
-    color: white !important; /* Force white color */
-    transition: color 0.3s ease;
-    font-size: 1.25rem; /* text-xl */
+    padding: 1rem 1.25rem;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .nav-link-text {
+    color: white !important;
+    font-size: 1.25rem;
     font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 1;
   }
   
   .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
+    bottom: 0.75rem;
+    left: 1.25rem;
+    right: 1.25rem;
     height: 2px;
     background-color: #dcb660;
-    transition: width 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav-link:hover .nav-link-text,
+  .nav-link.active .nav-link-text {
+    color: #dcb660 !important;
   }
   
   .nav-link:hover::after,
-  .nav-link:focus::after,
   .nav-link.active::after {
-    width: 100%;
-  }
-  
-  .nav-link:hover,
-  .nav-link.active {
-    color: #dcb660 !important; /* Force gold color on hover/active */
+    transform: scaleX(1);
   }
   
   /* Smooth scrolling for the whole app */
