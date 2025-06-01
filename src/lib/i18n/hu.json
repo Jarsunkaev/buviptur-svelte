@@ -1,0 +1,362 @@
+{
+    "nav": {
+      "home": "Főoldal",
+      "tours": "Túrák",
+      "services": "Szolgáltatások",
+      "about": "Rólunk",
+      "contact": "Ajánlatkérés"
+    },
+    "hero": {
+      "badge": "Fedezze fel Közép-Európát",
+      "title": "Minden utazás egy",
+      "titleHighlight": "Kiváltság",
+      "subtitle": "A helyi kirándulóktól a távoli kalandokig Közép-Európában, szakértelemmel és aprólékos figyelemmel megalkotva.",
+      "formTitle": "Kezdje el utazását",
+      "firstName": "Keresztnév",
+      "lastName": "Vezetéknév",
+      "email": "E-mail cím",
+      "submitButton": "Személyre szabott ajánlat kérése",
+      "highlights": {
+        "guides": "Szakértő helyi idegenvezetők",
+        "accommodation": "Szállás",
+        "experiences": "Többországos élmények",
+        "cruises": "Festői hajókirándulások"
+      }
+    },
+
+    "home": {
+      "journeyPromise": {
+        "title": "Az Ön utazása, a mi szakértelmünk",
+        "description": "A BuVipTur autentikus utazási élmények létrehozására specializálódott Közép-Európában, különös tekintettel Magyarország kulturális kincseire és ipari örökségére. Akár elmélyült helyi élményeket, gyártúrákat, várlátogatásokat vagy folyami hajózást keres, szakértő csapatunk minden utazást aprólékosan és bennfentes tudással készít el.",
+        "cta": "Fedezze fel túráinkat",
+        "cta2": "Nézd meg szolgáltatásainkat"
+      },
+      "services": {
+        "title": "Egyedülálló utazási élmények",
+        "subtitle": "Merüljön el Közép-Európában az autentikus helyi szív felfedésére készített jellegzetes élményeinkkel.",
+        "services": [
+          {
+            "id": "guidedTours",
+            "title": "Vezetett túrák",
+            "description": "Tapasztalja meg Közép-Európa gazdag történelmét és kultúráját szakértő helyi idegenvezetőinkkel, akik bennfentes tudásukkal életre keltik a célpontokat.",
+            "icon": "fa-map-marked-alt",
+            "features": [
+              "Kis csoportok maximum 12 utazóval",
+              "Szakértő, egyetemi végzettségű idegenvezetők",
+              "Rejtett gyöngyszemek és helyi élmények",
+              "Rugalmas és testreszabható útvonalak"
+            ]
+          },
+          {
+            "id": "multiCountry",
+            "title": "Többországos élmény",
+            "description": "Fedezzen fel zökkenőmentesen több európai országot egy utazás során, átélve Közép-Európa változatos kultúráit, konyháit és tájait.",
+            "icon": "fa-globe-europe",
+            "features": [
+              "Gördülékeny határátkelések",
+              "Összefüggő többországos útvonalak",
+              "Helyi idegenvezetők minden helyszínen",
+              "Átfogó kulturális elmélyülés"
+            ]
+          },
+          {
+            "id": "boatExperiences",
+            "title": "Festői hajózási élmények",
+            "description": "Lássa a jellegzetes városokat történelmi vízi útvonalaikról exkluzív hajókázásainkon, amelyek egyedi perspektívákat nyújtanak a folyóparti kincsekre.",
+            "icon": "fa-ship",
+            "features": [
+              "Bensőséges kis csoportos hajókázások",
+              "Naplementés és esti világításos túrák",
+              "Történelmi kommentár",
+              "Gasztronómiai élmények",
+              "Tudjon meg többet szolgáltatásainkról"
+            ]
+          }
+        ]
+      },
+
+      "destinations": {
+        "title": "Általunk kiszolgált célpontok",
+        "subtitle": "Fedezze fel Közép-Európa szívét szakértően kidolgozott élményeinkkel.",
+        "countries": {
+          "hungary": "Magyarország",
+          "austria": "Ausztria",
+          "czechRepublic": "Cseh Köztársaság",
+          "slovakia": "Szlovákia"
+        },
+        "cities": {
+          "budapest": "Budapest",
+          "vienna": "Bécs",
+          "prague": "Prága",
+          "bratislava": "Pozsony",
+          "szentendre": "Szentendre",
+          "visegrad": "Visegrád",
+          "salzburg": "Salzburg",
+          "karlovyVary": "Karlovy Vary"
+        },
+        "highlights": {
+          "budapest": "Magyarország kulturális szíve",
+          "vienna": "A zene és álmok városa",
+          "prague": "Az arany város",
+          "bratislava": "A kis nagy város",
+          "szentendre": "Művészi folyóparti város",
+          "visegrad": "Királyi vár a Dunán",
+          "salzburg": "Mozart szülővárosa",
+          "karlovyVary": "Történelmi fürdőváros"
+        },
+        "planJourney": "Tervezze meg utazását"
+      },
+      "testimonials": {
+        "title": "Mit mondanak utazóink",
+        "rating": "4.9",
+        "reviewCount": "1000+",
+        "certification": "Kiválósági tanúsítvány"
+      }
+    },
+    "tours": {
+      "title": "Túráink",
+      "subtitle": "Fedezzen fel vándorvágyára szabott rendkívüli utakat",
+      "categories": {
+        "title": "Fedezze fel egyedülálló túraélményeinket",
+        "subtitle": "Merüljön el Közép-Európa szívében aprólékosan kidolgozott túráinkkal, amelyek mély kulturális betekintést és felejthetetlen élményeket kínálnak.",
+        "historical": {
+          "title": "Történelmi túrák",
+          "description": "Merüljön el Közép-Európa gazdag történelmében. Szakértő idegenvezetőink évszázadok történeteit keltik életre, a középkori váraktól a második világháborús helyszínekig.",
+          "highlights": [
+            "Középkori várak Magyarországon",
+            "Habsburg Birodalom történelmi útvonalai",
+            "Második világháborús emlékhelyek",
+            "Ókori római régészeti túrák"
+          ],
+          "duration": "1-5 nap"
+        },
+        "cultural": {
+          "title": "Kulturális elmélyülő túrák",
+          "description": "Tapasztalja meg az autentikus helyi kultúrát, hagyományokat és mindennapi életet közép-európai országokban. Kapcsolódjon helyi közösségekhez és értse meg egyedülálló örökségüket.",
+          "highlights": [
+            "Hagyományos kézműves műhelyek",
+            "Helyi konyha és főzőtanfolyamok",
+            "Népzene és tánc élmények",
+            "Közösségi interakciós programok"
+          ],
+          "duration": "1-3 nap"
+        },
+        "multiCountry": {
+          "title": "Többországos EU körutak",
+          "description": "Fedezzen fel több európai országot egyetlen átfogó utazás során. Többországos túráink zökkenőmentes utazási élményt kínálnak a határokon át, kiemelve minden nemzet egyedi jellegét.",
+          "highlights": [
+            "Magyarország-Ausztria-Szlovákia körút",
+            "Csehország-Németország-Lengyelország útvonal",
+            "Balkáni kulturális expedíció",
+            "Nyugat-európai fővárosok túra"
+          ],
+          "duration": "7-14 nap"
+        }
+      },
+      "languages": {
+        "title": "Elérhető túranyelvek",
+        "subtitle": "Több nyelven kínálunk túrákat, hogy a lehető legjobb élményben legyen része.",
+        "available": "Elérhető"
+      },
+      "whyChoose": {
+        "title": "Miért válassza túráinkat?",
+        "smallGroups": {
+          "title": "Kis csoportlétszám",
+          "description": "Túránként maximum 12 utassal személyes figyelmet és meghitt élményt élvezhet."
+        },
+        "hiddenGems": {
+          "title": "Rejtett kincsekhez való hozzáférés",
+          "description": "Helyi kapcsolataink révén olyan helyekre és élményekhez juthat hozzá, amelyeket nem talál meg az útikönyvekben."
+        },
+        "flexibility": {
+          "title": "Rugalmasság és testreszabás",
+          "description": "Minden túrát az Ön érdeklődéséhez, tempójához és preferenciáihoz igazítunk egy igazán személyre szabott utazás érdekében."
+        }
+      },
+      "inquireAbout": "Érdeklődés"
+    },
+    "services": {
+      "title": "Szolgáltatásaink",
+      "subtitle": "Ismerje meg Közép-Európa legjobbjait aláírós utazási szolgáltatásainkkal",
+      "services": [
+        {
+          "id": "guidedTours",
+          "title": "Vezetett túrák",
+          "description": "Tapasztalja meg Közép-Európa gazdag történelmét és kultúráját szakértő helyi idegenvezetőinkkel, akik bennfentes tudásukkal életre keltik a célpontokat.",
+          "features": [
+            "Kis csoportok maximum 12 utazóval",
+            "Szakértő, egyetemi végzettségű idegenvezetők",
+            "Rejtett gyöngyszemek és helyi élmények",
+            "Rugalmas és testreszabható útvonalak"
+          ]
+        },
+        {
+          "id": "multiCountry",
+          "title": "Többországos élmény",
+          "description": "Fedezzen fel zökkenőmentesen több európai országot egy utazás során, átélve Közép-Európa változatos kultúráit, konyháit és tájait.",
+          "features": [
+            "Gördülékeny határátkelések",
+            "Összefüggő többországos útvonalak",
+            "Helyi idegenvezetők minden helyszínen",
+            "Átfogó kulturális elmélyülés"
+          ]
+        },
+        {
+          "id": "boatExperiences",
+          "title": "Festői hajózási élmények",
+          "description": "Lássa a jellegzetes városokat történelmi vízi útvonalaikról exkluzív hajókázásainkon, amelyek egyedi perspektívákat nyújtanak a folyóparti kincsekre.",
+          "features": [
+            "Bensőséges kis csoportos hajókázások",
+            "Naplementés és esti világításos túrák",
+            "Történelmi kommentár",
+            "Gasztronómiai élmények"
+          ]
+        }
+      ]
+    },
+    "about": {
+      "title": "A BuVipTur-ról",
+      "subtitle": "Különleges utazási élmények alkotása, amelyek inspirálnak, összekötnek és átalakítanak",
+      "journey": {
+        "title": "Történetünk",
+        "description1": "A BuVipTur-t 2010-ben alapították azzal a vízióval, hogy újraértelmezze a közép-európai utazást, és egy kis, szenvedélyes kalandorokból álló csapatból az autentikus utazási élmények vezető szolgáltatójává nőtte ki magát.",
+        "description2": "Ami egyedivé tesz minket, az az elmélyült utazások létrehozására összpontosításunk, amelyek összekötik az utazókat a helyi kultúrákkal, hagyományokkal és emberekkel. Hiszünk abban, hogy a legemlékezetesebb élmények az autentikus kapcsolatokból és váratlan felfedezésekből származnak.",
+        "description3": "Speciális gyárlátogatásaink és ipari örökség élményeink bemutatják azt az innovációt és kézművességet, amely a régiót formálta, olyan perspektívát kínálva, amelyet kevés utazó láthat."
+      },
+      "values": {
+        "title": "Alapvető értékeink",
+        "subtitle": "Ezek az elvek irányítanak mindent, amit teszünk, attól kezdve, ahogyan túráinkat tervezzük, egészen addig, ahogyan az utazókkal és a helyi közösségekkel kapcsolatba lépünk.",
+        "authentic": {
+          "title": "Autentikus élmények",
+          "description": "Olyan utazásokat hozunk létre, amelyek túlmutatnak a tipikus turistaútvonalakon, összekötve az utazókat a valódi helyi kultúrával."
+        },
+        "sustainable": {
+          "title": "Fenntartható turizmus",
+          "description": "Túráinkat úgy alakítottuk ki, hogy a helyi közösségek javát szolgálják, miközben minimalizálják a környezeti hatást."
+        },
+        "respect": {
+          "title": "Kulturális tisztelet",
+          "description": "Minden interakcióban elősegítjük az értelmes kultúrák közötti megértést és tiszteletet."
+        },
+        "care": {
+          "title": "Személyre szabott gondoskodás",
+          "description": "Minden utazó egyéni figyelmet és egyedi igényeire szabott szolgáltatást kap."
+        },
+        "innovation": {
+          "title": "Innováció",
+          "description": "Folyamatosan fejlesztjük kínálatunkat, hogy új betekintéseket és lehetőségeket építsünk be az utazásba."
+        },
+        "community": {
+          "title": "Közösségi kapcsolat",
+          "description": "Tartós kapcsolatokat építünk az utazók és az általuk meglátogatott közösségek között."
+        }
+      },
+      "whyTravel": "Miért utazzon velünk?",
+      "testimonials": {
+        "title": "Mit mondanak utazóink"
+      },
+      "subscribe": {
+        "title": "Csatlakozzon utazói közösségünkhöz",
+        "description": "Iratkozzon fel, hogy exkluzív ajánlatokat, utazási tippeket és inspirációt kapjon következő kalandjához."
+      }
+    },
+    "contact": {
+      "title": "Személyre szabott ajánlat kérése",
+      "subtitle": "Alkossa meg álmai utazási élményét szakértő csapatunkkal",
+      "form": {
+        "title": "Meséljen nekünk álmai utazásáról",
+        "firstName": "Keresztnév",
+        "lastName": "Vezetéknév",
+        "email": "E-mail cím",
+        "phone": "Telefonszám",
+        "fromDate": "Időpont -tól",
+        "toDate": "Időpont -ig",
+        "ageGroups": "Résztvevők száma korcsoportonként",
+        "totalParticipants": "Résztvevők száma összesen",
+        "comments": "További megjegyzések vagy kérések",
+        "commentsPlaceholder": "Ossza meg velünk különleges igényeit, akadálymentességi szükségleteit vagy konkrét élményeket, amelyeket keres...",
+        "privacy": "Hozzájárulok, hogy e-mailes kommunikációt kapjak a túraigénylésemmel kapcsolatban, és megértettem, hogy adataimat az Adatvédelmi Szabályzatnak megfelelően kezelik.",
+        "submit": "Kérés beküldése",
+        "processing": "Feldolgozás...",
+        "required": "*"
+      },
+      "success": {
+        "title": "Kérés sikeresen beküldve!",
+        "description": "Köszönjük érdeklődését túráink iránt. Egyik utazási szakértőnk átnézi kérését, és 24 órán belül személyre szabott ajánlattal keresi Önt.",
+        "confirmation": "Egy megerősítést küldtünk e-mail címére. Kérjük, ellenőrizze beérkező leveleit (és a spam mappát is) további információkért.",
+        "exploreTours": "Túráink felfedezése"
+      },
+      "whatToExpect": {
+        "title": "Mire számíthat",
+        "subtitle": "A kérés beküldése után a következő történik:",
+        "confirmation": {
+          "title": "Megerősítés",
+          "description": "Azonnali e-mailt kap, amely megerősíti, hogy megkaptuk kérését."
+        },
+        "discussion": {
+          "title": "Kezdeti megbeszélés",
+          "description": "Egy utazási tanácsadó 24 órán belül felveszi Önnel a kapcsolatot, hogy részletesen megbeszéljék igényeit."
+        },
+        "proposal": {
+          "title": "Egyedi ajánlat",
+          "description": "Preferenciái alapján részletes útitervet készítünk."
+        },
+        "tuning": {
+          "title": "Finomhangolás",
+          "description": "Visszajelzései alapján finomítjuk az útitervet, amíg tökéletes nem lesz."
+        }
+      },
+      "faq": {
+        "title": "Gyakran Ismételt Kérdések",
+        "subtitle": "Kérdései vannak egyedi túra folyamatunkkal kapcsolatban? Az alábbiakban választ talál a gyakori kérdésekre.",
+        "question1": "Milyen gyorsan kapom meg a személyre szabott túraajánlatomat?",
+        "answer1": "Általában 24-48 órán belül válaszolunk egy kezdeti ajánlattal. Bonyolultabb, több országot érintő túrák esetén akár 72 órát is igénybe vehet egy részletes útiterv elkészítése.",
+        "question2": "Módosíthatom a túraajánlatot annak kézhezvétele után?",
+        "answer2": "Abszolút! A kezdeti ajánlatot kiindulási pontnak tekintjük a megbeszéléshez. Csapatunk Önnel együttműködve finomítja az útitervet, amíg az tökéletesen meg nem felel preferenciáinak.",
+        "question3": "Szükséges előleget fizetni a túraajánlat kérésekor?",
+        "answer3": "Nem, a személyre szabott túraajánlat kérése teljesen ingyenes és kötelezettségmentes. Előleg csak akkor szükséges, ha jóváhagyta a végleges útitervet és készen áll a foglalásra.",
+        "question4": "Mennyivel előre érdemes túrát igényelni?",
+        "answer4": "A legjobb elérhetőség érdekében, különösen a főszezonban (május-szeptember), javasoljuk, hogy legalább 2-3 hónappal előre igényelje túráját. Az utolsó pillanatban történő kérések lehetségesek, de korlátozott lehetőségekkel járhatnak.",
+        "stillQuestions": "További kérdései vannak?",
+        "contactDirect": "Lépjen kapcsolatba velünk közvetlenül"
+      }
+    },
+    "footer": {
+      "about": {
+        "title": "A BuVipTur-ról",
+        "description": "Megbízható partnere a felejthetetlen utazási élmények létrehozásában 2010 óta. Egyedi helyi túrákra specializálódtunk, amelyek minden úti cél autentikus oldalát mutatják be."
+      },
+      "quickLinks": {
+        "title": "Gyorslinkek",
+        "tours": "Túrák",
+        "about": "Rólunk",
+        "services": "Szolgáltatások",
+        "contact": "Kapcsolat"
+      },
+      "contactInfo": {
+        "title": "Elérhetőségek"
+      },
+      "privacy": "Adatvédelmi szabályzat",
+      "rights": "Minden jog fenntartva."
+    },
+    "common": {
+      "learnMore": "Tudjon meg többet",
+      "bookNow": "Foglaljon most",
+      "explore": "Felfedezés",
+      "viewMore": "Továbbiak megtekintése",
+      "getOffer": "Ajánlatkérés",
+      "subscribe": "Feliratkozás",
+      "backToTop": "Vissza a tetejére",
+      "loading": "Betöltés...",
+      "error": "Hiba",
+      "success": "Siker",
+      "close": "Bezárás",
+      "cancel": "Mégse",
+      "save": "Mentés",
+      "edit": "Szerkesztés",
+      "delete": "Törlés",
+      "confirm": "Megerősítés",
+      "yes": "Igen",
+      "no": "Nem"
+    }
+}

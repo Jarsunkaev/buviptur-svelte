@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { t } from 'svelte-i18n';
   import Header from '$lib/components/Header.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
@@ -62,98 +63,71 @@
     '/var.webp'
   ];
 
-  // Main services/products overview
-  const mainServices = [
-    {
-      title: "Guided Tours",
-      description: "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
-      icon: "fa-map-marked-alt",
-      image: "https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80",
-      features: [
-        "Small groups of max 12 travelers",
-        "Expert university-educated guides",
-        "Hidden gems and local experiences",
-        "Flexible and customizable itineraries"
-      ]
-    },
-    {
-      title: "Multi-Country Experience",
-      description: "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
-      icon: "fa-globe-europe",
-      image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80",
-      features: [
-        "Hassle-free border crossings",
-        "Cohesive multi-country itineraries",
-        "Local guides in each location",
-        "Comprehensive cultural immersion"
-      ]
-    },
-    {
-      title: "Scenic Boat Experiences",
-      description: "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
-      icon: "fa-ship",
-      image: "https://images.unsplash.com/photo-1588263823647-ce3546d42bfe?q=80",
-      features: [
-        "Intimate small-group cruises",
-        "Sunset and evening illumination tours",
-        "Historical commentary",
-        "Gourmet dining experiences"
-      ]
-    }
-  ];
+  // Main services/products overview - using the new services array from translations
+  $: mainServices = ($t('home.services')?.services || []).map(service => ({
+    ...service,
+    image: `https://images.unsplash.com/photo-${service.id === 'guidedTours' ? '1551867633-194f125bddfa' : 
+      service.id === 'multiCountry' ? '1543783207-ec64e4d95325' : '1588263823647-ce3546d42bfe'}?q=80`
+  }));
   
   // Support services that enhance the travel experience
-  const supportServices = [
+  $: supportServices = [
     {
-      title: "Tailored Accommodation",
-      description: "From boutique hotels to historic properties, we arrange accommodations that match your style, comfort needs, and budget.",
+      title: $t('home.supportServices.accommodation.title'),
+      description: $t('home.supportServices.accommodation.description'),
       icon: "fa-hotel",
       color: "#1a5f7a"
     },
     {
-      title: "Expert Visa Assistance",
-      description: "Navigate complex visa requirements with our specialized team providing guidance on documentation and application procedures.",
+      title: $t('home.supportServices.visa.title'),
+      description: $t('home.supportServices.visa.description'),
       icon: "fa-passport",
       color: "#228291"
     },
     {
-      title: "Premium Transportation",
-      description: "Travel in comfort with our modern vehicles and expert drivers while you enjoy the scenery between destinations.",
+      title: $t('home.supportServices.transportation.title'),
+      description: $t('home.supportServices.transportation.description'),
       icon: "fa-bus",
       color: "#2aa1b7"
     },
     {
-      title: "24/7 Support",
-      description: "Our dedicated team ensures your journey runs smoothly from start to finish.",
+      title: $t('home.supportServices.support.title'),
+      description: $t('home.supportServices.support.description'),
       icon: "fa-headset",
       color: "#113946"
     }
   ];
   
   // Tour categories
-  const tourCategories = [
+  $: tourCategories = [
     {
-      title: "Historical Tours",
-      description: "From medieval castles to WWII sites",
+      title: $t('home.tourCategories.historical.title'),
+      description: $t('home.tourCategories.historical.description'),
       icon: "fa-landmark",
       image: "https://images.unsplash.com/photo-1583091618471-bf133efb0a9c?q=80"
     },
     {
-      title: "Cultural Immersion",
-      description: "Experience local traditions and lifestyle",
+      title: $t('home.tourCategories.cultural.title'),
+      description: $t('home.tourCategories.cultural.description'),
       icon: "fa-theater-masks",
       image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80"
     },
     {
-      title: "Culinary Journeys",
-      description: "Taste authentic regional cuisines",
+      title: $t('home.tourCategories.culinary.title'),
+      description: $t('home.tourCategories.culinary.description'),
       icon: "fa-utensils",
       image: "https://images.unsplash.com/photo-1521017090404-1526ca339f53?q=80"
     },
     {
-      title: "Factory Tours",
-      description: "Behind-the-scenes industrial experiences",
+      title: $t('home.tourCategories.factory.title'),
+      description: $t('home.tourCategories.factory.description'),
       icon: "fa-industry",
+      image: "https://images.unsplash.com/photo-1543013309-0d1f4edeb868?q=80"
+    },
+    {
+      title: $t('home.tourCategories.riverCruises.title'),
+      description: $t('home.tourCategories.riverCruises.description'),
+      icon: "fa-water",
       image: "https://images.unsplash.com/photo-1543013309-0d1f4edeb868?q=80"
     }
   ];
@@ -237,8 +211,8 @@
 </script>
 
 <svelte:head>
-  <title>BuVipTur - Extraordinary Central European Travel Experiences</title>
-  <meta name="description" content="Discover Central Europe with BuVipTur's expert-guided tours, factory visits, river cruises, and seamless travel services. Unforgettable local experiences await." />
+  <title>{$t('meta.title')} - {$t('meta.tagline')}</title>
+  <meta name="description" content={$t('meta.description')} />
 </svelte:head>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -259,16 +233,16 @@
       
       <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-3xl mx-auto text-center">
-          <h2 class="text-3xl md:text-4xl font-bold mb-8 text-[#dcb660]">Your Journey, Our Expertise</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-8 text-[#dcb660]">{$t('home.journeyPromise.title')}</h2>
           <p class="text-xl leading-relaxed mb-10">
-            BuVipTur specializes in creating authentic travel experiences across Central Europe, with a focus on Hungary's cultural treasures and industrial heritage. Whether you're seeking immersive local experiences, factory tours, castle explorations, or river cruises, our expert team crafts each journey with attention to detail and insider knowledge.
+            {$t('home.journeyPromise.description')}
           </p>
           <div class="flex justify-center gap-6 flex-wrap">
             <a href="/tours" class="px-8 py-3 bg-[#dcb660] text-teal-900 font-bold rounded-full hover:bg-white transition-colors shadow-lg">
-              Explore Tours
+              {$t('home.journeyPromise.cta')}
             </a>
             <a href="/services" class="px-8 py-3 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-teal-900 transition-colors shadow-lg">
-              View Services
+              {$t('home.journeyPromise.cta2')}
             </a>
           </div>
         </div>
@@ -279,9 +253,9 @@
     <section id="services-showcase" class="py-20 bg-white animate-on-scroll">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">Distinctive Travel Experiences</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">{$t('home.services.title')}</h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            Immerse yourself in Central Europe with our signature experiences crafted to reveal the authentic heart of each destination.
+            {$t('home.services.description')}
           </p>
         </div>
         
@@ -321,7 +295,7 @@
                 </div>
                 
                 <a href="/services" class="inline-flex items-center text-[#dcb660] font-semibold hover:text-teal-800 transition-colors">
-                  <span>Learn more about our {service.title}</span>
+                  <span>{$t('home.services.learnMore')}</span>
                   <i class="fas fa-arrow-right ml-2"></i>
                 </a>
               </div>
@@ -344,13 +318,13 @@
         <!-- Section Heading -->
         <div class="text-center mb-12">
           <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/10 border border-[#dcb660]/30 mb-4">
-            <span class="text-[#dcb660] font-semibold">Full-Service Travel</span>
+            <span class="text-[#dcb660] font-semibold">{$t('home.supportServices.title')}</span>
           </div>
           <h2 class="text-3xl md:text-4xl font-bold text-[#113946] mb-4">
-            Comprehensive Travel Solutions
+            {$t('home.supportServices.title')}
           </h2>
           <p class="text-lg md:text-xl text-[#113946]/80 max-w-2xl mx-auto">
-            We handle all aspects of your journey so you can focus on creating memories.
+            {$t('home.supportServices.subtitle')}
           </p>
         </div>
         

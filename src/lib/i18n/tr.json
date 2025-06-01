@@ -1,0 +1,391 @@
+{
+    "nav": {
+      "home": "Ana Sayfa",
+      "tours": "Turlar",
+      "services": "Hizmetler",
+      "about": "Hakkımızda",
+      "contact": "Teklif Al"
+    },
+    "hero": {
+      "badge": "Orta Avrupa'yı Keşfedin",
+      "title": "Her yolculuk bir",
+      "titleHighlight": "Ayrıcalık",
+      "subtitle": "Yerel kaçışlardan Orta Avrupa'daki uzak maceralara kadar, uzmanlık ve ayrıntılara dikkatle hazırlanmış.",
+      "formTitle": "Yolculuğunuza Başlayın",
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "email": "E-posta Adresi",
+      "submitButton": "Kişiselleştirilmiş Teklifinizi Alın",
+      "highlights": {
+        "guides": "Uzman Yerel Rehberler",
+        "accommodation": "Konaklama",
+        "experiences": "Çok Ülkeli Deneyimler",
+        "cruises": "Manzaralı Tekne Turları"
+      }
+    },
+
+    "home": {
+      "journeyPromise": {
+        "title": "Sizin Yolculuğunuz, Bizim Uzmanlığımız",
+        "description": "BuVipTur, Macaristan'ın kültürel hazinelerine ve endüstriyel mirasına odaklanarak Orta Avrupa'da otantik seyahat deneyimleri yaratma konusunda uzmanlaşmıştır. İster derinlemesine yerel deneyimler, fabrika turları, kale keşifleri veya nehir seyahatları arıyor olun, uzman ekibimiz her yolculuğu ayrıntılara dikkat ve içeriden bilgiyle hazırlar.",
+        "cta": "Turlarımızı Keşfedin",
+        "cta2": "Hizmetlerimizi Görüntüleyin"
+      },
+      "services": {
+        "title": "Ayırt Edici Seyahat Deneyimleri",
+        "subtitle": "Her destinasyonun otantik kalbini ortaya çıkarmak için hazırlanmış imza deneyimlerimizle Orta Avrupa'ya dalın.",
+        "services": [
+          {
+            "id": "guidedTours",
+            "title": "Rehberli Turlar",
+            "description": "Destinasyonları içeriden bilgiyle canlandıran uzman yerel rehberlerimizle Orta Avrupa'nın zengin tarihini ve kültürünü deneyimleyin.",
+            "icon": "fa-map-marked-alt",
+            "features": [
+              "Maksimum 12 gezginli küçük gruplar",
+              "Uzman, üniversite mezunu rehberler",
+              "Gizli mücevherler ve yerel deneyimler",
+              "Esnek ve özelleştirilebilir güzergahlar"
+            ]
+          },
+          {
+            "id": "multiCountry",
+            "title": "Çok Ülkeli Deneyim",
+            "description": "Tek bir yolculukta birden fazla Avrupa ülkesini sorunsuzca keşfedin, Orta Avrupa'nın çeşitli kültürlerini, mutfaklarını ve manzaralarını deneyimleyin.",
+            "icon": "fa-globe-europe",
+            "features": [
+              "Sorunsuz sınır geçişleri",
+              "Uyumlu çok ülkeli güzergahlar",
+              "Her lokasyonda yerel rehberler",
+              "Kapsamlı kültürel daldırma"
+            ]
+          },
+          {
+            "id": "boatExperiences",
+            "title": "Pitoresk Tekne Deneyimleri",
+            "description": "Tarihi su yollarından ikonik şehirleri özel tekne turlarımız ve gezilerimizle keşfedin, nehir kıyısındaki hazirelere eşsiz bakış açıları sunuyoruz.",
+            "icon": "fa-ship",
+            "features": [
+              "Samimi küçük grup gezileri",
+              "Gün batımı ve akşam ışıklandırma turları",
+              "Tarihi anlatımlar",
+              "Gurme yemek deneyimleri",
+              "Hizmetlerimiz hakkında daha fazla bilgi edinin"
+            ]
+          }
+        ]
+      },
+      "supportServices": {
+        "title": "Kapsamlı Seyahat Çözümleri",
+        "subtitle": "Yolculuğunuzun tüm yönlerini biz hallederiz, böylece siz anılar yaratmaya odaklanabilirsiniz.",
+        "accommodation": {
+          "title": "Özelleştirilmiş Konaklama",
+          "description": "Butik otellerden tarihi mülklere kadar, tarzınıza, konfor ihtiyaçlarınıza ve bütçenize uygun konaklamalar düzenliyoruz."
+        },
+        "visa": {
+          "title": "Uzman Vize Yardımı",
+          "description": "Karmaşık vize gereksinimlerinde uzman ekibimizle belgelendirme ve prosedürler konusunda rehberlik sağlayarak kolayca gezinin."
+        },
+        "transportation": {
+          "title": "Premium Ulaşım",
+          "description": "Modern araçlarımız ve uzman şoförlerimizle konforla seyahat edin, destinasyonlar arası manzaranın tadını çıkarın."
+        },
+        "support": {
+          "title": "7/24 Destek",
+          "description": "Adanmış ekibimiz yolculuğunuzun baştan sona sorunsuz ilerlemesini sağlar."
+        }
+      },
+      "destinations": {
+        "title": "Hizmet Verdiğimiz Destinasyonlar",
+        "subtitle": "Uzman şekilde hazırlanmış deneyimlerimizle Orta Avrupa'nın kalbini keşfedin.",
+        "countries": {
+          "hungary": "Macaristan",
+          "austria": "Avusturya",
+          "czechRepublic": "Çek Cumhuriyeti",
+          "slovakia": "Slovakya"
+        },
+        "cities": {
+          "budapest": "Budapeşte",
+          "vienna": "Viyana",
+          "prague": "Prag",
+          "bratislava": "Bratislava",
+          "szentendre": "Szentendre",
+          "visegrad": "Visegrád",
+          "salzburg": "Salzburg",
+          "karlovyVary": "Karlovy Vary"
+        },
+        "highlights": {
+          "budapest": "Macaristan'ın Kültürel Kalbi",
+          "vienna": "Müzik ve Rüyalar Şehri",
+          "prague": "Altın Şehir",
+          "bratislava": "Küçük Büyük Şehir",
+          "szentendre": "Sanatsal Nehir Kıyısı Kasabası",
+          "visegrad": "Tuna Üzerindeki Kraliyet Kalesi",
+          "salzburg": "Mozart'ın Doğum Yeri",
+          "karlovyVary": "Tarihi Spa Kasabası"
+        },
+        "planJourney": "Yolculuğunuzu Planlayın"
+      },
+      "testimonials": {
+        "title": "Gezginlerimiz Ne Diyor",
+        "rating": "4.9",
+        "reviewCount": "1000+",
+        "certification": "Mükemmellik Sertifikası"
+      }
+    },
+    "tours": {
+      "title": "Turlarımız",
+      "subtitle": "Gezme isteğinize göre tasarlanmış olağanüstü yolculukları keşfedin",
+      "categories": {
+        "title": "Eşsiz Tur Deneyimlerimizi Keşfedin",
+        "subtitle": "Derin kültürel anlayışlar ve unutulmaz deneyimler sunan titizlikle hazırlanmış turlarımızla Orta Avrupa'nın kalbine dalın.",
+        "historical": {
+          "title": "Tarihi Turlar",
+          "description": "Orta Avrupa'nın zengin tarihine derinlemesine dalın. Uzman rehberlerimiz ortaçağ kalelerinden İkinci Dünya Savaşı alanlarına kadar yüzyılların hikayelerini canlandırır.",
+          "highlights": [
+            "Macaristan'da Ortaçağ Kale Turları",
+            "Habsburg İmparatorluğu Tarihi Rotaları",
+            "İkinci Dünya Savaşı Anıt Alanları",
+            "Antik Roma Arkeolojik Turları"
+          ],
+          "duration": "1-5 gün"
+        },
+        "cultural": {
+          "title": "Kültürel Daldırma Turları",
+          "description": "Orta Avrupa ülkelerindeki otantik yerel kültürü, gelenekleri ve günlük yaşamı deneyimleyin. Yerel topluluklarla bağlantı kurun ve eşsiz miraslarını anlayın.",
+          "highlights": [
+            "Geleneksel El Sanatları Atölyeleri",
+            "Yerel Mutfak ve Yemek Pişirme Dersleri",
+            "Halk Müziği ve Dans Deneyimleri",
+            "Toplum Etkileşim Programları"
+          ],
+          "duration": "1-3 gün"
+        },
+        "multiCountry": {
+          "title": "AB Çok Ülkeli Turları",
+          "description": "Kapsamlı bir yolculukta birden fazla Avrupa ülkesini keşfedin. Çok ülkeli turlarımız sınırlar boyunca kesintisiz seyahat deneyimi sunar, her ulusun farklı karakterini vurgular.",
+          "highlights": [
+            "Macaristan-Avusturya-Slovakya Döngüsü",
+            "Çek Cumhuriyeti-Almanya-Polonya Rotası",
+            "Balkan Kültürel Keşif Seferi",
+            "Batı Avrupa Başkentleri Turu"
+          ],
+          "duration": "7-14 gün"
+        }
+      },
+      "languages": {
+        "title": "Mevcut Tur Dilleri",
+        "subtitle": "Size en iyi deneyimi sağlamak için turları birden fazla dilde sunuyoruz.",
+        "available": "Mevcut"
+      },
+      "whyChoose": {
+        "title": "Neden Turlarımızı Seçmelisiniz",
+        "smallGroups": {
+          "title": "Küçük Grup Boyutları",
+          "description": "Tur başına maksimum 12 gezginle kişisel ilgi ve samimi deneyimin tadını çıkarın."
+        },
+        "hiddenGems": {
+          "title": "Gizli Mücevherlere Erişim",
+          "description": "Yerel bağlantılarımız sayesinde rehber kitaplarda bulamayacağınız yerlere ve deneyimlere erişebilirsiniz."
+        },
+        "flexibility": {
+          "title": "Esneklik ve Özelleştirme",
+          "description": "Her turu ilgi alanlarınıza, tempınıza ve tercihlerinize göre gerçekten kişiselleştirilmiş bir yolculuk için uyarlıyoruz."
+        }
+      },
+      "inquireAbout": "Hakkında Bilgi Al"
+    },
+    "services": {
+      "title": "Hizmetlerimiz",
+      "subtitle": "Uzmanlık ve özenle hazırlanmış kapsamlı seyahat çözümleri",
+      "learnMore": "Hizmetlerimiz hakkında daha fazla bilgi edinin",
+      "experienceTitle": "Farkı Deneyimleyin",
+      "experienceDescription": "BuVipTur'da, olağanüstü seyahat deneyimlerinin üstün hizmetlerle başladığına inanıyoruz. Yolculuğunuzun her öğesi konfor, otantiklik ve unutulmaz anları sağlamak için özenle seçilir. Orta Avrupa maceranızı yükseltmek için tasarlanmış kapsamlı hizmet yelpazemizi keşfedin.",
+
+      "process": {
+        "title": "Hizmet Sürecimiz",
+        "subtitle": "Yolculuğunuzun her detayının mükemmel şekilde yürütülmesini sağlamak için rafine bir süreç izliyoruz.",
+        "consultation": {
+          "title": "Danışmanlık",
+          "description": "Seyahat tercihlerinizi, ilgi alanlarınızı ve ihtiyaçlarınızı anlamak için detaylı bir danışmanlıkla başlıyoruz."
+        },
+        "planning": {
+          "title": "Özel Planlama",
+          "description": "Uzmanlarımız isteklerinize uygun özel seçilmiş hizmetlerle kişiselleştirilmiş seyahat planı tasarlar."
+        },
+        "tuning": {
+          "title": "İnce Ayar",
+          "description": "Vizyonunuza mükemmel şekilde uyana kadar geri bildirimlerinizle güzergahınızı rafine ederiz."
+        },
+        "execution": {
+          "title": "Sorunsuz Uygulama",
+          "description": "Varıştan ayrılışa kadar her adımda desteğimizle yolculuğunuzun tadını çıkarın."
+        }
+      },
+      "benefits": {
+        "support247": {
+          "title": "7/24 Müşteri Desteği",
+          "description": "Adanmış ekibimiz yolculuğunuz sırasında herhangi bir soru veya ihtiyaçta yardımcı olmak için gece gündüz hazırdır."
+        },
+        "bestPrice": {
+          "title": "En İyi Fiyat Garantisi",
+          "description": "Herhangi bir karşılaştırılabilir hizmet fiyatını eşleştiririz ve gizli ücret olmadan şeffaflık sunarız."
+        },
+        "protection": {
+          "title": "Seyahat Koruması",
+          "description": "Yolculuğunuz boyunca huzurun sağlanması için kapsamlı seyahat sigortası seçenekleri."
+        }
+      },
+      "cta": {
+        "title": "Yolculuğunuza Başlamaya Hazır mısınız?",
+        "description": "Tercihlerinize ve ilgi alanlarınıza uygun özelleştirilmiş seyahat deneyimi yaratmamıza izin verin.",
+        "getQuote": "Özel Teklif Alın",
+        "exploreTours": "Turları Keşfedin"
+      },
+      "destinationsTitle": "Hizmet Verdiğimiz Destinasyonlar"
+    },
+    "about": {
+      "title": "BuVipTur Hakkında",
+      "subtitle": "İlham veren, bağlayan ve dönüştüren olağanüstü seyahat deneyimleri yaratmak",
+      "journey": {
+        "title": "Yolculuğumuz",
+        "description1": "2010 yılında Orta Avrupa'da seyahati yeniden tanımlama vizyonuyla kurulan BuVipTur, tutkulu maceracıların küçük bir ekibinden otantik seyahat deneyimlerinin önde gelen sağlayıcısına dönüştü.",
+        "description2": "Bizi eşsiz kılan, gezginleri yerel kültürler, gelenekler ve insanlarla buluşturan sürükleyici yolculuklar yaratmaya odaklanmamızdır. En unutulmaz deneyimlerin otantik bağlantılar ve beklenmedik keşiflerden geldiğine inanıyoruz.",
+        "description3": "Uzman fabrika turlarımız ve endüstriyel miras deneyimlerimiz bölgeyi şekillendiren inovasyonu ve zanaatkarlığı sergiler, az sayıda gezginin görebileceği bir perspektif sunar."
+      },
+      "values": {
+        "title": "Temel Değerlerimiz",
+        "subtitle": "Bu ilkeler turlarımızı nasıl tasarladığımızdan gezginler ve yerel topluluklarla nasıl etkileşime girdiğimize kadar yaptığımız her şeye rehberlik eder.",
+        "authentic": {
+          "title": "Otantik Deneyimler",
+          "description": "Tipik turist yollarının ötesine geçen, gezginleri gerçek yerel kültürle buluşturan yolculuklar yaratırız."
+        },
+        "sustainable": {
+          "title": "Sürdürülebilir Turizm",
+          "description": "Turlarımız çevresel etkiyi minimize ederken yerel topluluklara fayda sağlayacak şekilde tasarlanır."
+        },
+        "respect": {
+          "title": "Kültürel Saygı",
+          "description": "Her etkileşimde anlamlı kültürlerarası anlayış ve saygıyı teşvik ederiz."
+        },
+        "care": {
+          "title": "Kişiselleştirilmiş Özen",
+          "description": "Her gezgin eşsiz ihtiyaçlarına uygun bireyselleştirilmiş ilgi ve hizmet alır."
+        },
+        "innovation": {
+          "title": "İnovasyon",
+          "description": "Seyahatte yeni içgörüler ve olasılıkları dahil etmek için tekliflerimizi sürekli geliştiririz."
+        },
+        "community": {
+          "title": "Toplum Bağlantısı",
+          "description": "Gezginler ve ziyaret ettikleri topluluklar arasında kalıcı ilişkiler kuruyoruz."
+        }
+      },
+      "whyTravel": "Neden Bizimle Seyahat Etmelisiniz",
+      "testimonials": {
+        "title": "Gezginlerimiz Ne Söylüyor"
+      },
+      "subscribe": {
+        "title": "Seyahat Topluluğumuza Katılın",
+        "description": "Bir sonraki maceranız için özel teklifler, seyahat ipuçları ve ilham almak üzere abone olun."
+      }
+    },
+    "contact": {
+      "title": "Kişiselleştirilmiş Teklifinizi Alın",
+      "subtitle": "Uzman ekibimizle hayalinizdeki seyahat deneyimini yaratın",
+      "form": {
+        "title": "Hayal Ettiğiniz Seyahat Hakkında Bize Anlatın",
+        "firstName": "Ad",
+        "lastName": "Soyad",
+        "email": "E-posta Adresi",
+        "phone": "Telefon Numarası",
+        "fromDate": "Başlangıç Tarihi",
+        "toDate": "Bitiş Tarihi",
+        "ageGroups": "Yaş Grubuna Göre Katılımcı Sayısı",
+        "totalParticipants": "Toplam katılımcı",
+        "comments": "Ek Yorumlar veya İstekler",
+        "commentsPlaceholder": "Özel gereksinimleriniz, erişilebilirlik ihtiyaçlarınız veya aradığınız belirli deneyimler hakkında bize anlatın...",
+        "privacy": "Tur talebimle ilgili e-posta iletişimi almayı kabul ediyorum ve verilerimin Gizlilik Politikası'na göre işleneceğini anlıyorum.",
+        "submit": "Talep Gönder",
+        "processing": "İşleniyor...",
+        "required": "*"
+      },
+      "success": {
+        "title": "Talep Başarıyla Gönderildi!",
+        "description": "Turlarımıza ilginiz için teşekkür ederiz. Seyahat uzmanlarımızdan biri talebinizi inceleyecek ve 24 saat içinde kişiselleştirilmiş teklifle size geri dönecek.",
+        "confirmation": "E-posta adresinize onay gönderildi. Daha fazla bilgi için lütfen gelen kutunuzu (ve spam klasörünüzü) kontrol edin.",
+        "exploreTours": "Turları Keşfet"
+      },
+      "whatToExpect": {
+        "title": "Ne Bekleyebilirsiniz",
+        "subtitle": "Talebinizi gönderdikten sonra şunlar olacak:",
+        "confirmation": {
+          "title": "Onay",
+          "description": "Talebinizi aldığımızı onaylayan anında bir e-posta alacaksınız."
+        },
+        "discussion": {
+          "title": "İlk Görüşme",
+          "description": "Bir seyahat danışmanı 24 saat içinde ihtiyaçlarınızı detaylı olarak görüşmek için sizinle iletişime geçecek."
+        },
+        "proposal": {
+          "title": "Özel Teklif",
+          "description": "Tercihlerinize dayalı detaylı güzergah oluşturacağız."
+        },
+        "tuning": {
+          "title": "İnce Ayar",
+          "description": "Mükemmel olana kadar geri bildirimlerinizle güzergahı rafine edeceğiz."
+        }
+      },
+      "faq": {
+        "title": "Sıkça Sorulan Sorular",
+        "subtitle": "Özel tur sürecimizle ilgili sorularınız mı var? Aşağıda yaygın sorulara yanıtlar bulun.",
+        "question1": "Kişiselleştirilmiş tur teklifimi ne kadar hızlı alacağım?",
+        "answer1": "Genellikle ilk teklifle 24-48 saat içinde yanıtlıyoruz. Daha karmaşık çok ülkeli turlar için detaylı güzergah oluşturmak 72 saate kadar sürebilir.",
+        "question2": "Tur teklifini aldıktan sonra değiştirebilir miyim?",
+        "answer2": "Kesinlikle! İlk teklifi tartışma için başlangıç noktası olarak görürüz. Ekibimiz tercihlerinize mükemmel şekilde uyana kadar güzergahı rafine etmek için sizinle çalışacak.",
+        "question3": "Tur teklifi talep ederken depozito gerekli mi?",
+        "answer3": "Hayır, kişiselleştirilmiş tur teklifi talep etmek tamamen ücretsiz ve yükümlülük gerektirmez. Depozito sadece final güzergahını onayladıktan ve rezervasyon yapmaya hazır olduktan sonra gereklidir.",
+        "question4": "Turu ne kadar önceden talep etmeliyim?",
+        "answer4": "En iyi müsaitlik için, özellikle yoğun sezonda (Mayıs-Eylül), turunuzu en az 2-3 ay önceden talep etmenizi öneririz. Son dakika talepleri mümkündür ancak sınırlı seçenekler olabilir.",
+        "stillQuestions": "Hala sorularınız var mı?",
+        "contactDirect": "Doğrudan İletişime Geçin"
+      }
+    },
+    "footer": {
+      "about": {
+        "title": "BuVipTur Hakkında",
+        "description": "2010'dan beri unutulmaz seyahat deneyimleri yaratmada güvenilir ortağınız. Her destinasyonun otantik yüzünü gösteren eşsiz yerel turlarda uzmanlaşmış durumdayız."
+      },
+      "quickLinks": {
+        "title": "Hızlı Bağlantılar",
+        "tours": "Turlar",
+        "about": "Hakkımızda",
+        "services": "Hizmetler",
+        "contact": "İletişim"
+      },
+      "contactInfo": {
+        "title": "İletişim Bilgileri"
+      },
+      "privacy": "Gizlilik Politikası",
+      "rights": "Tüm hakları saklıdır."
+    },
+    "common": {
+      "learnMore": "Daha Fazla Öğrenin",
+      "bookNow": "Şimdi Rezervasyon Yapın",
+      "explore": "Keşfedin",
+      "viewMore": "Daha Fazla Görüntüle",
+      "getOffer": "Teklif Alın",
+      "subscribe": "Abone Ol",
+      "backToTop": "Başa dön",
+      "loading": "Yükleniyor...",
+      "error": "Hata",
+      "success": "Başarı",
+      "close": "Kapat",
+      "cancel": "İptal",
+      "save": "Kaydet",
+      "edit": "Düzenle",
+      "delete": "Sil",
+      "confirm": "Onayla",
+      "yes": "Evet",
+      "no": "Hayır"
+    }
+  }

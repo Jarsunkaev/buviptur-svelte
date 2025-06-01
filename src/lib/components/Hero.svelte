@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
+  import { t } from 'svelte-i18n';
   
   // Props with default values - using local static images
   export let carouselImages = [
@@ -95,12 +96,12 @@
     };
   });
   
-  // Highlights for desktop view
-  const highlights = [
-    { icon: 'fa-map-marked-alt', title: 'Expert Local Guides' },
-    { icon: 'fa-building', title: 'Accommodation' },
-    { icon: 'fa-globe-europe', title: 'Multi-Country Experiences' },
-    { icon: 'fa-ship', title: 'Scenic Boat Cruises' }
+  // Highlights for desktop view - using translations
+  $: highlights = [
+    { icon: 'fa-map-marked-alt', title: $t('hero.highlights.guides') },
+    { icon: 'fa-building', title: $t('hero.highlights.accommodation') },
+    { icon: 'fa-globe-europe', title: $t('hero.highlights.experiences') },
+    { icon: 'fa-ship', title: $t('hero.highlights.cruises') }
   ];
 </script>
 
@@ -147,27 +148,27 @@
         class:opacity-0={!isVisible}
       >
         <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/20 backdrop-blur-sm border border-[#dcb660]/30 mb-6 mt-8 sm:mt-0">
-          <span class="text-[#dcb660] font-medium">Discover Central Europe</span>
+          <span class="text-[#dcb660] font-medium">{$t('hero.badge')}</span>
         </div>
         
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-          Every Journey Is A <span class="text-[#dcb660]">Privilege</span>
+          {$t('hero.title')} <span class="text-[#dcb660]">{$t('hero.titleHighlight')}</span>
         </h1>
         
         <p class="text-lg sm:text-xl text-white/90 mb-8 max-w-lg">
-          From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.
+          {$t('hero.subtitle')}
         </p>
         
         <!-- Form Container with improved mobile spacing -->
         <div class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 shadow-xl mb-12 md:mb-0">
-          <h3 class="text-xl font-semibold mb-4">Start Your Journey</h3>
+          <h3 class="text-xl font-semibold mb-4">{$t('hero.formTitle')}</h3>
           
           <div class="space-y-4" on:submit|preventDefault={handleGetOffer}>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <input
                   type="text"
-                  placeholder="First Name"
+                  placeholder={$t('hero.firstName')}
                   class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] transition-all"
                   bind:value={name}
                   required
@@ -176,7 +177,7 @@
               <div>
                 <input
                   type="text"
-                  placeholder="Last Name"
+                  placeholder={$t('hero.lastName')}
                   class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] transition-all"
                   bind:value={surname}
                   required
@@ -187,7 +188,7 @@
             <div>
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder={$t('hero.email')}
                 class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] transition-all"
                 bind:value={email}
                 required
@@ -199,7 +200,7 @@
               on:click={handleGetOffer}
               class="w-full bg-[#dcb660] text-[#113946] font-semibold py-3 px-6 rounded-lg hover:bg-[#dcb660]/90 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center"
             >
-              <span>Get Your Personalized Offer</span>
+              <span>{$t('hero.submitButton')}</span>
               <i class="fas fa-arrow-right ml-2"></i>
             </button>
           </div>

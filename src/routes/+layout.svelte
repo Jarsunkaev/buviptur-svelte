@@ -1,19 +1,30 @@
 <script>
-  import '../lib/i18n'; // Import the i18n configuration
   import { onMount } from 'svelte';
   import { browser } from '$app/environment';
-  import { locale, t } from 'svelte-i18n';
-  import '$lib/app.css';
+  import { locale, waitLocale } from 'svelte-i18n';
+  import '$lib/i18n'; // Import the i18n configuration
   import CookieConsent from '$lib/components/CookieConsent.svelte';
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import '../app.postcss';
+  import '$lib/app.css';
   
   // Detect if user prefers reduced motion
   let prefersReducedMotion = false;
+  let isLoading = true;
   
-  onMount(() => {
+  onMount(async () => {
     if (browser) {
+      // Wait for i18n to be loaded
+      await waitLocale();
+      
+      // Update HTML lang attribute when locale changes
+      const unsubscribe = locale.subscribe((lang) => {
+        if (lang) {
+          document.documentElement.setAttribute('lang', lang);
+        }
+      });
+      
       // Check for reduced motion preference
       prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
@@ -48,6 +59,9 @@
       // Better mobile scroll behavior
       document.body.style.overscrollBehavior = 'none';
       
+      // Show content after i18n is loaded
+      isLoading = false;
+      
       // Add class for fade-in animations on page load
       setTimeout(() => {
         document.body.classList.add('content-loaded');
@@ -60,6 +74,7 @@
           window.visualViewport.removeEventListener('resize', handleResize);
         }
         clearTimeout(resizeTimeout);
+        unsubscribe();
       };
     }
   });
@@ -72,18 +87,28 @@
   <meta name="theme-color" content="#113946">
 </svelte:head>
 
-<!-- Main content wrapper with proper stacking context -->
-<div class="site-wrapper min-h-screen flex flex-col opacity-0 transition-opacity duration-500 relative" 
-     class:opacity-100={browser}
-     style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; isolation: isolate; position: relative;">
-  <Header />
-  <main class="flex-grow flex flex-col relative">
-    <slot />
-  </main>
-  <Footer />
-</div>
+<!-- Loading screen while i18n initializes -->
+{#if isLoading}
+  <div class="fixed inset-0 bg-white flex items-center justify-center z-50">
+    <div class="text-center">
+      <img src="/logo.PNG" alt="BuVipTur" class="h-20 mx-auto mb-4 animate-pulse" />
+      <div class="w-8 h-8 border-4 border-[#dcb660] border-t-transparent rounded-full animate-spin mx-auto"></div>
+    </div>
+  </div>
+{:else}
+  <!-- Main content wrapper with proper stacking context -->
+  <div class="site-wrapper min-h-screen flex flex-col opacity-0 transition-opacity duration-500 relative" 
+       class:opacity-100={browser && !isLoading}
+       style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; isolation: isolate; position: relative;">
+    <Header />
+    <main class="flex-grow flex flex-col relative">
+      <slot />
+    </main>
+    <Footer />
+  </div>
 
-<CookieConsent />
+  <CookieConsent />
+{/if}
 
 <style global>
   :global(html) {
@@ -234,5 +259,23 @@
       height: 100vh;
       height: calc(var(--vh, 1vh) * 100);
     }
+  }
+  
+  /* Loading animation styles */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .animate-spin {
+    animation: spin 1s linear infinite;
   }
 </style>
