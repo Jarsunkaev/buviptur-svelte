@@ -5,9 +5,9 @@
   import { locale, t } from 'svelte-i18n';
   import '$lib/app.css';
   import CookieConsent from '$lib/components/CookieConsent.svelte';
-  import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import ScrollToTop from '$lib/components/ScrollToTop.svelte';
   import '../app.postcss';
   
   // Detect if user prefers reduced motion
@@ -66,7 +66,6 @@
   });
 </script>
 
-<!-- svelte-ignore css_unused_selector -->
 <svelte:head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -74,18 +73,20 @@
   <meta name="theme-color" content="#113946">
 </svelte:head>
 
-
-
-<div class="site-wrapper min-h-screen flex flex-col opacity-0 transition-opacity duration-500" 
+<!-- Main content wrapper with proper stacking context -->
+<div class="site-wrapper min-h-screen flex flex-col opacity-0 transition-opacity duration-500 relative" 
      class:opacity-100={browser}
-     style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;">
+     style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; isolation: isolate; position: relative;">
   <Header />
-  <main class="flex-grow flex flex-col">
+  <main class="flex-grow flex flex-col relative">
     <slot />
   </main>
   <Footer />
-  <ScrollToTopButton />
+  <!-- Scroll to top button -->
+  <ScrollToTop />
 </div>
+
+<CookieConsent />
 
 <style global>
   :global(html) {
@@ -237,6 +238,4 @@
       height: calc(var(--vh, 1vh) * 100);
     }
   }
-  </style>
-  
-  <CookieConsent />
+</style>

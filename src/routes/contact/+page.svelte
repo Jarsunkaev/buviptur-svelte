@@ -3,7 +3,6 @@
     import Header from '$lib/components/Header.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Button from '$lib/components/Button.svelte';
-    import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
     import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
     import SubscribeSection from '$lib/components/SubscribeSection.svelte';
     import DatePicker from '$lib/components/DatePicker.svelte';

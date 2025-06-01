@@ -3,7 +3,6 @@
   import Header from '$lib/components/Header.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
-  import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
   
   // For responsive design
   let windowWidth;
@@ -549,7 +548,6 @@
     />
   </main>
   
-  <ScrollToTopButton />
 </div>
 
 <style>

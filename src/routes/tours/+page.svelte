@@ -7,7 +7,6 @@
     import SubscribeSection from '$lib/components/SubscribeSection.svelte';
     import TourSection from '$lib/components/TourSection.svelte';
     import Button from '$lib/components/Button.svelte';
-    import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
     import { onMount } from 'svelte';
 
     // Tour categories with expanded details
