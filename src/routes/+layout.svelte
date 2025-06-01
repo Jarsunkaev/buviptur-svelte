@@ -7,7 +7,6 @@
   import CookieConsent from '$lib/components/CookieConsent.svelte';
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import ScrollToTop from '$lib/components/ScrollToTop.svelte';
   import '../app.postcss';
   
   // Detect if user prefers reduced motion
@@ -82,8 +81,6 @@
     <slot />
   </main>
   <Footer />
-  <!-- Scroll to top button -->
-  <ScrollToTop />
 </div>
 
 <CookieConsent />
