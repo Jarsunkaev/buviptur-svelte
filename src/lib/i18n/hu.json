@@ -23,17 +23,23 @@
         "cruises": "Festői hajókirándulások"
       }
     },
-
+    "meta": {
+      "title": "BuVipTur",
+      "tagline": "Prémium Közép-Európai Túrák",
+      "description": "Fedezze fel az autentikus Közép-Európát a BuVipTur-ral. Szakértő idegenvezetők, egyedülálló gyártúrák, kulturális élmények és többországos utazások Magyarországon, Ausztriában, Csehországban és még tovább."
+    },
     "home": {
       "journeyPromise": {
         "title": "Az Ön utazása, a mi szakértelmünk",
         "description": "A BuVipTur autentikus utazási élmények létrehozására specializálódott Közép-Európában, különös tekintettel Magyarország kulturális kincseire és ipari örökségére. Akár elmélyült helyi élményeket, gyártúrákat, várlátogatásokat vagy folyami hajózást keres, szakértő csapatunk minden utazást aprólékosan és bennfentes tudással készít el.",
         "cta": "Fedezze fel túráinkat",
-        "cta2": "Nézd meg szolgáltatásainkat"
+        "cta2": "Nézze meg szolgáltatásainkat"
       },
       "services": {
         "title": "Egyedülálló utazási élmények",
         "subtitle": "Merüljön el Közép-Európában az autentikus helyi szív felfedésére készített jellegzetes élményeinkkel.",
+        "description": "Merüljön el Közép-Európában jellegzetes élményeinkkel, amelyek minden célpont autentikus szívét feltárják.",
+        "learnMore": "Tudjon meg többet szolgáltatásainkról",
         "services": [
           {
             "id": "guidedTours",
@@ -68,13 +74,31 @@
               "Bensőséges kis csoportos hajókázások",
               "Naplementés és esti világításos túrák",
               "Történelmi kommentár",
-              "Gasztronómiai élmények",
-              "Tudjon meg többet szolgáltatásainkról"
+              "Gasztronómiai élmények"
             ]
           }
         ]
       },
-
+      "supportServices": {
+        "title": "Átfogó utazási megoldások",
+        "subtitle": "Utazásának minden aspektusát mi kezeljük, így Ön az emlékek gyűjtésére koncentrálhat.",
+        "accommodation": {
+          "title": "Testreszabott szállás",
+          "description": "Butik hotelektől a történelmi ingatlanokig, olyan szállásokat intézünk, amelyek megfelelnek stílusának, kényelmi igényeinek és költségvetésének."
+        },
+        "visa": {
+          "title": "Szakértő vízasegítség",
+          "description": "Navigáljon könnyedén az összetett vízakövetelményeken keresztül szakértő csapatunk dokumentációs és eljárási útmutatásával."
+        },
+        "transportation": {
+          "title": "Prémium szállítás",
+          "description": "Utazzon kényelmesen modern járműveinkkel és szakértő sofőrjeinkkel, élvezze a táj szépségét az úti célok között."
+        },
+        "support": {
+          "title": "24/7 támogatás",
+          "description": "Elkötelezett csapatunk biztosítja, hogy utazása zökkenőmentesen alakuljon az elejétől a végéig."
+        }
+      },
       "destinations": {
         "title": "Általunk kiszolgált célpontok",
         "subtitle": "Fedezze fel Közép-Európa szívét szakértően kidolgozott élményeinkkel.",
@@ -177,42 +201,51 @@
     },
     "services": {
       "title": "Szolgáltatásaink",
-      "subtitle": "Ismerje meg Közép-Európa legjobbjait aláírós utazási szolgáltatásainkkal",
-      "services": [
-        {
-          "id": "guidedTours",
-          "title": "Vezetett túrák",
-          "description": "Tapasztalja meg Közép-Európa gazdag történelmét és kultúráját szakértő helyi idegenvezetőinkkel, akik bennfentes tudásukkal életre keltik a célpontokat.",
-          "features": [
-            "Kis csoportok maximum 12 utazóval",
-            "Szakértő, egyetemi végzettségű idegenvezetők",
-            "Rejtett gyöngyszemek és helyi élmények",
-            "Rugalmas és testreszabható útvonalak"
-          ]
+      "subtitle": "Szakértelemmel és gondossággal készített átfogó utazási megoldások",
+      "learnMore": "Tudjon meg többet szolgáltatásainkról",
+      "experienceTitle": "Tapasztalja meg a különbséget",
+      "experienceDescription": "A BuVipTur-nál hiszünk abban, hogy a kivételes utazási élmények a kiváló szolgáltatásokkal kezdődnek. Utazásának minden elemét gondosan válogatjuk ki a kényelem, az autentikusság és a felejthetetlen pillanatok biztosítása érdekében. Fedezze fel átfogó szolgáltatásaink kínálatát, amelyek célja közép-európai kalandjának felemelése.",
+      "process": {
+        "title": "Szolgáltatási folyamatunk",
+        "subtitle": "Kifinomult folyamatot követünk, hogy utazásának minden részlete tökéletesen végrehajtásra kerüljön.",
+        "consultation": {
+          "title": "Konzultáció",
+          "description": "Részletes konzultációval kezdjük utazási preferenciáinak, érdeklődési körének és igényeinek megértését."
         },
-        {
-          "id": "multiCountry",
-          "title": "Többországos élmény",
-          "description": "Fedezzen fel zökkenőmentesen több európai országot egy utazás során, átélve Közép-Európa változatos kultúráit, konyháit és tájait.",
-          "features": [
-            "Gördülékeny határátkelések",
-            "Összefüggő többországos útvonalak",
-            "Helyi idegenvezetők minden helyszínen",
-            "Átfogó kulturális elmélyülés"
-          ]
+        "planning": {
+          "title": "Egyedi tervezés",
+          "description": "Szakértőink személyre szabott utazási tervet terveznek az Ön kívánságaihoz igazított, kézzel válogatott szolgáltatásokkal."
         },
-        {
-          "id": "boatExperiences",
-          "title": "Festői hajózási élmények",
-          "description": "Lássa a jellegzetes városokat történelmi vízi útvonalaikról exkluzív hajókázásainkon, amelyek egyedi perspektívákat nyújtanak a folyóparti kincsekre.",
-          "features": [
-            "Bensőséges kis csoportos hajókázások",
-            "Naplementés és esti világításos túrák",
-            "Történelmi kommentár",
-            "Gasztronómiai élmények"
-          ]
+        "tuning": {
+          "title": "Finomhangolás",
+          "description": "Visszajelzései alapján finomítjuk az útvonalat, amíg tökéletesen nem illeszkedik az Ön elképzeléseihez."
+        },
+        "execution": {
+          "title": "Zökkenőmentes végrehajtás",
+          "description": "Élvezze utazását támogatásunkkal minden lépésben, az érkezéstől az indulásig."
         }
-      ]
+      },
+      "benefits": {
+        "support247": {
+          "title": "24/7 ügyfélszolgálat",
+          "description": "Elkötelezett csapatunk az óra bármely szakában rendelkezésre áll, hogy segítsen bármilyen kérdésben vagy igényben utazása során."
+        },
+        "bestPrice": {
+          "title": "Legjobb ár garancia",
+          "description": "Bármely összehasonlítható szolgáltatás árát megadjuk, és átláthatóságot kínálunk rejtett díjak nélkül."
+        },
+        "protection": {
+          "title": "Utazási védelem",
+          "description": "Átfogó utazásbiztosítási lehetőségek a nyugalom biztosítása érdekében egész utazása során."
+        }
+      },
+      "cta": {
+        "title": "Készen áll utazása megkezdésére?",
+        "description": "Engedje, hogy személyre szabott utazási élményt teremtsünk, amely az Ön preferenciáihoz és érdeklődési köréhez igazodik.",
+        "getQuote": "Egyedi árajánlat kérése",
+        "exploreTours": "Túrák felfedezése"
+      },
+      "destinationsTitle": "Általunk kiszolgált célpontok"
     },
     "about": {
       "title": "A BuVipTur-ról",
@@ -336,8 +369,19 @@
       "contactInfo": {
         "title": "Elérhetőségek"
       },
+      "contact": {
+        "title": "Kapcsolati információk",
+        "address": "Budapest, Magyarország",
+        "phone": "+36 (70) 734-3444",
+        "email": "info@buviptur.com"
+      },
+      "social": {
+        "facebookAria": "Látogassa meg Facebook oldalunkat",
+        "instagramAria": "Látogassa meg Instagram oldalunkat"
+      },
       "privacy": "Adatvédelmi szabályzat",
-      "rights": "Minden jog fenntartva."
+      "copyright": "Minden jog fenntartva.",
+      "privacyPolicy": "Adatvédelmi szabályzat"
     },
     "common": {
       "learnMore": "Tudjon meg többet",
@@ -357,6 +401,7 @@
       "delete": "Törlés",
       "confirm": "Megerősítés",
       "yes": "Igen",
-      "no": "Nem"
+      "no": "Nem",
+      "viewAllServices": "Összes szolgáltatás megtekintése"
     }
-}
+  }

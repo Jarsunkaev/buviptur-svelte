@@ -23,7 +23,11 @@
       "cruises": "Scenic Boat Cruises"
     }
   },
-
+  "meta": {
+    "title": "BuVipTur",
+    "tagline": "Premium Central Europe Tours",
+    "description": "Discover authentic Central Europe with BuVipTur. Expert guides, unique factory tours, cultural experiences, and multi-country journeys across Hungary, Austria, Czech Republic, and beyond."
+  },
   "home": {
     "journeyPromise": {
       "title": "Your Journey, Our Expertise",
@@ -34,6 +38,8 @@
     "services": {
       "title": "Distinctive Travel Experiences",
       "subtitle": "Immerse yourself in Central Europe with our signature experiences crafted to reveal the authentic heart of each destination.",
+      "description": "Dive into Central Europe with our signature experiences designed to uncover the authentic heart of every destination.",
+      "learnMore": "Learn More About Our Services",
       "services": [
         {
           "id": "guidedTours",
@@ -68,19 +74,59 @@
             "Intimate small-group cruises",
             "Sunset and evening illumination tours",
             "Historical commentary",
-            "Gourmet dining experiences",
-            "Learn more about our services"
+            "Gourmet dining experiences"
           ]
         }
       ]
     },
-
+    "supportServices": {
+      "title": "Comprehensive Travel Solutions",
+      "subtitle": "We handle all aspects of your journey, so you can focus on creating memories.",
+      "accommodation": {
+        "title": "Customized Accommodation",
+        "description": "From boutique hotels to historic properties, we arrange accommodations that match your style, comfort needs, and budget."
+      },
+      "visa": {
+        "title": "Expert Visa Assistance", 
+        "description": "Navigate complex visa requirements with ease through our expert team's guidance on documentation and procedures."
+      },
+      "transportation": {
+        "title": "Premium Transportation",
+        "description": "Travel in comfort with our modern vehicles and expert drivers, enjoying the scenery between destinations."
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Our dedicated team ensures your journey runs smoothly from start to finish."
+      }
+    },
+    "tourCategories": {
+      "historical": {
+        "title": "Historical Tours",
+        "description": "Explore castles, monuments, and historical sites with expert guides who bring the past to life."
+      },
+      "cultural": {
+        "title": "Cultural Immersion",
+        "description": "Connect with local traditions, crafts, and customs for authentic cultural experiences."
+      },
+      "culinary": {
+        "title": "Culinary Adventures",
+        "description": "Taste authentic flavors and learn cooking techniques from local masters."
+      },
+      "factory": {
+        "title": "Industrial Heritage",
+        "description": "Unique factory tours showcasing traditional craftsmanship and modern innovation."
+      },
+      "riverCruises": {
+        "title": "River Cruises",
+        "description": "Scenic boat journeys along historic waterways with dining and entertainment."
+      }
+    },
     "destinations": {
       "title": "Destinations We Serve",
       "subtitle": "Explore the heart of Central Europe with our expertly crafted experiences.",
       "countries": {
         "hungary": "Hungary",
-        "austria": "Austria",
+        "austria": "Austria", 
         "czechRepublic": "Czech Republic",
         "slovakia": "Slovakia"
       },
@@ -97,7 +143,7 @@
       "highlights": {
         "budapest": "Cultural Heart of Hungary",
         "vienna": "City of Music & Dreams",
-        "prague": "The Golden City",
+        "prague": "The Golden City", 
         "bratislava": "The Little Big City",
         "szentendre": "Artistic Riverside Town",
         "visegrad": "Royal Castle on the Danube",
@@ -124,7 +170,7 @@
         "description": "Dive deep into the rich history of Central Europe. Our expert guides bring centuries of stories to life, from medieval castles to World War II sites.",
         "highlights": [
           "Medieval Castle Tours in Hungary",
-          "Habsburg Empire Historical Routes",
+          "Habsburg Empire Historical Routes", 
           "World War II Memorial Sites",
           "Ancient Roman Archaeological Tours"
         ],
@@ -136,7 +182,7 @@
         "highlights": [
           "Traditional Craft Workshops",
           "Local Cuisine and Cooking Classes",
-          "Folk Music and Dance Experiences",
+          "Folk Music and Dance Experiences", 
           "Community Interaction Programs"
         ],
         "duration": "1-3 days"
@@ -165,7 +211,7 @@
         "description": "With maximum 12 travelers per tour, you will enjoy personal attention and an intimate experience."
       },
       "hiddenGems": {
-        "title": "Hidden Gems Access",
+        "title": "Hidden Gems Access", 
         "description": "Our local connections give you access to places and experiences you will not find in guidebooks."
       },
       "flexibility": {
@@ -177,42 +223,10 @@
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "Experience the best of Central Europe with our signature travel services",
-    "services": [
-      {
-        "id": "guidedTours",
-        "title": "Guided Tours",
-        "description": "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
-        "features": [
-          "Small groups of max 12 travelers",
-          "Expert university-educated guides",
-          "Hidden gems and local experiences",
-          "Flexible and customizable itineraries"
-        ]
-      },
-      {
-        "id": "multiCountry",
-        "title": "Multi-Country Experience",
-        "description": "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
-        "features": [
-          "Hassle-free border crossings",
-          "Cohesive multi-country itineraries",
-          "Local guides in each location",
-          "Comprehensive cultural immersion"
-        ]
-      },
-      {
-        "id": "boatExperiences",
-        "title": "Scenic Boat Experiences",
-        "description": "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
-        "features": [
-          "Intimate small-group cruises",
-          "Sunset and evening illumination tours",
-          "Historical commentary",
-          "Gourmet dining experiences"
-        ]
-      }
-    ],
+    "subtitle": "Comprehensive travel solutions crafted with expertise and care",
+    "learnMore": "Learn more about our services",
+    "experienceTitle": "Experience the Difference",
+    "experienceDescription": "At BuVipTur, we believe that exceptional travel experiences begin with superior services. Every element of your journey is carefully curated to ensure comfort, authenticity, and unforgettable moments. Discover our comprehensive range of services designed to elevate your Central European adventure.",
     "process": {
       "title": "Our Service Process",
       "subtitle": "We follow a refined process to ensure every detail of your journey is perfectly executed.",
@@ -221,7 +235,7 @@
         "description": "We begin with a detailed consultation to understand your travel preferences, interests, and needs."
       },
       "planning": {
-        "title": "Custom Planning",
+        "title": "Custom Planning", 
         "description": "Our experts design a personalized travel plan with hand-selected services tailored to your wishes."
       },
       "tuning": {
@@ -256,7 +270,7 @@
     "destinationsTitle": "Destinations We Serve"
   },
   "about": {
-    "title": "About BuVipTur",
+    "title": "About BuVipTur", 
     "subtitle": "Crafting extraordinary travel experiences that inspire, connect, and transform",
     "journey": {
       "title": "Our Journey",
@@ -284,7 +298,7 @@
         "description": "Every traveler receives individualized attention and service tailored to their unique needs."
       },
       "innovation": {
-        "title": "Innovation",
+        "title": "Innovation", 
         "description": "We constantly evolve our offerings to incorporate new insights and possibilities in travel."
       },
       "community": {
@@ -307,11 +321,11 @@
     "form": {
       "title": "Tell Us About Your Dream Trip",
       "firstName": "First Name",
-      "lastName": "Last Name",
+      "lastName": "Last Name", 
       "email": "Email Address",
       "phone": "Phone Number",
       "fromDate": "From Date",
-      "toDate": "To Date",
+      "toDate": "To Date", 
       "ageGroups": "Number of Participants by Age Group",
       "totalParticipants": "Total participants",
       "comments": "Additional Comments or Requests",
@@ -327,7 +341,7 @@
       "confirmation": "A confirmation has been sent to your email. Please check your inbox (and spam folder) for more information.",
       "exploreTours": "Explore Our Tours"
     },
-    "whatToExpect": {
+    "whatToExpected": {
       "title": "What to Expect",
       "subtitle": "After submitting your request, here's what happens next:",
       "confirmation": {
@@ -370,20 +384,31 @@
     "quickLinks": {
       "title": "Quick Links",
       "tours": "Tours",
-      "about": "About Us",
+      "about": "About Us", 
       "services": "Services",
       "contact": "Contact"
     },
     "contactInfo": {
       "title": "Contact Info"
     },
+    "contact": {
+      "title": "Contact Information",
+      "address": "Budapest, Hungary",
+      "phone": "+36 (70) 734-3444",
+      "email": "info@buviptur.com"
+    },
+    "social": {
+      "facebookAria": "Visit our Facebook page",
+      "instagramAria": "Visit our Instagram page"
+    },
     "privacy": "Privacy Policy",
-    "rights": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "privacyPolicy": "Privacy Policy"
   },
   "common": {
     "learnMore": "Learn More",
     "bookNow": "Book Now",
-    "explore": "Explore",
+    "explore": "Explore", 
     "viewMore": "View More",
     "getOffer": "Get Offer",
     "subscribe": "Subscribe",
@@ -398,6 +423,7 @@
     "delete": "Delete",
     "confirm": "Confirm",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "viewAllServices": "View All Services"
   }
 }

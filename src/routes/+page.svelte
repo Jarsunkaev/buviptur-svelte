@@ -3,7 +3,9 @@
   import { t } from 'svelte-i18n';
   import Header from '$lib/components/Header.svelte';
   import Hero from '$lib/components/Hero.svelte';
-  import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
+  
+  // Lazy load heavy components
+  let TestimonialsSection;
   
   // For responsive design
   let windowWidth;
@@ -30,13 +32,11 @@
     if (!swiping) return;
     
     const swipeDistance = touchEndX - touchStartX;
-    const threshold = 50; // Minimum distance for a swipe to register
+    const threshold = 50;
     
     if (swipeDistance > threshold) {
-      // Swipe right - go to previous slide
       prevSlide();
     } else if (swipeDistance < -threshold) {
-      // Swipe left - go to next slide
       nextSlide();
     }
     
@@ -51,10 +51,10 @@
     currentSlide = (currentSlide - 1 + supportServices.length) % supportServices.length;
   }
   
-  // Local carousel images
+  // OPTIMIZED: Local carousel images (WebP format, optimized sizes)
   const carouselImages = [
     '/above.webp',
-    '/matyas.webp',
+    '/matyas.webp', 
     '/matyasii.webp',
     '/parlament.webp',
     '/prague.webp',
@@ -63,103 +63,132 @@
     '/var.webp'
   ];
 
-  // Main services/products overview - using the new services array from translations
-  $: mainServices = ($t('home.services')?.services || []).map(service => ({
-    ...service,
-    image: `https://images.unsplash.com/photo-${service.id === 'guidedTours' ? '1551867633-194f125bddfa' : 
-      service.id === 'multiCountry' ? '1543783207-ec64e4d95325' : '1588263823647-ce3546d42bfe'}?q=80`
-  }));
+  // OPTIMIZED: Smaller, WebP images for better performance
+  $: mainServices = [
+    {
+      id: "guidedTours",
+      title: $t('home.services.services.0.title') || "Guided Tours",
+      description: $t('home.services.services.0.description') || "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
+      icon: "fa-map-marked-alt",
+      // OPTIMIZED: Use WebP format and proper sizing
+      image: "https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80&w=800&h=600&fit=crop&fm=webp",
+      features: $t('home.services.services.0.features') || [
+        "Small groups of max 12 travelers",
+        "Expert university-educated guides", 
+        "Hidden gems and local experiences",
+        "Flexible and customizable itineraries"
+      ]
+    },
+    {
+      id: "multiCountry", 
+      title: $t('home.services.services.1.title') || "Multi-Country Experience",
+      description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
+      icon: "fa-globe-europe",
+      // OPTIMIZED: Use WebP format and proper sizing
+      image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=800&h=600&fit=crop&fm=webp",
+      features: $t('home.services.services.1.features') || [
+        "Hassle-free border crossings",
+        "Cohesive multi-country itineraries", 
+        "Local guides in each location",
+        "Comprehensive cultural immersion"
+      ]
+    },
+    {
+      id: "boatExperiences",
+      title: $t('home.services.services.2.title') || "Scenic Boat Experiences", 
+      description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
+      icon: "fa-ship",
+      // OPTIMIZED: Use WebP format and proper sizing
+      image: "https://images.unsplash.com/photo-1588263823647-ce3546d42bfe?q=80&w=800&h=600&fit=crop&fm=webp",
+      features: $t('home.services.services.2.features') || [
+        "Intimate small-group cruises",
+        "Sunset and evening illumination tours",
+        "Historical commentary", 
+        "Gourmet dining experiences"
+      ]
+    }
+  ];
   
-  // Support services that enhance the travel experience
+  // Support services that enhance the travel experience (SEPARATE from main services)
   $: supportServices = [
     {
-      title: $t('home.supportServices.accommodation.title'),
-      description: $t('home.supportServices.accommodation.description'),
+      title: $t('home.supportServices.accommodation.title') || "Customized Accommodation",
+      description: $t('home.supportServices.accommodation.description') || "From boutique hotels to historic properties, we arrange accommodations that match your style, comfort needs, and budget.",
       icon: "fa-hotel",
       color: "#1a5f7a"
     },
     {
-      title: $t('home.supportServices.visa.title'),
-      description: $t('home.supportServices.visa.description'),
+      title: $t('home.supportServices.visa.title') || "Expert Visa Assistance",
+      description: $t('home.supportServices.visa.description') || "Navigate complex visa requirements with ease through our expert team's guidance on documentation and procedures.",
       icon: "fa-passport",
       color: "#228291"
     },
     {
-      title: $t('home.supportServices.transportation.title'),
-      description: $t('home.supportServices.transportation.description'),
+      title: $t('home.supportServices.transportation.title') || "Premium Transportation",
+      description: $t('home.supportServices.transportation.description') || "Travel in comfort with our modern vehicles and expert drivers, enjoying the scenery between destinations.",
       icon: "fa-bus",
       color: "#2aa1b7"
     },
     {
-      title: $t('home.supportServices.support.title'),
-      description: $t('home.supportServices.support.description'),
+      title: $t('home.supportServices.support.title') || "24/7 Support",
+      description: $t('home.supportServices.support.description') || "Our dedicated team ensures your journey runs smoothly from start to finish.",
       icon: "fa-headset",
       color: "#113946"
     }
   ];
   
-  // Tour categories
-  $: tourCategories = [
+  // Destinations focus - make it reactive to translations
+  $: destinations = [
     {
-      title: $t('home.tourCategories.historical.title'),
-      description: $t('home.tourCategories.historical.description'),
-      icon: "fa-landmark",
-      image: "https://images.unsplash.com/photo-1583091618471-bf133efb0a9c?q=80"
-    },
-    {
-      title: $t('home.tourCategories.cultural.title'),
-      description: $t('home.tourCategories.cultural.description'),
-      icon: "fa-theater-masks",
-      image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80"
-    },
-    {
-      title: $t('home.tourCategories.culinary.title'),
-      description: $t('home.tourCategories.culinary.description'),
-      icon: "fa-utensils",
-      image: "https://images.unsplash.com/photo-1521017090404-1526ca339f53?q=80"
-    },
-    {
-      title: $t('home.tourCategories.factory.title'),
-      description: $t('home.tourCategories.factory.description'),
-      icon: "fa-industry",
-      image: "https://images.unsplash.com/photo-1543013309-0d1f4edeb868?q=80"
-    },
-    {
-      title: $t('home.tourCategories.riverCruises.title'),
-      description: $t('home.tourCategories.riverCruises.description'),
-      icon: "fa-water",
-      image: "https://images.unsplash.com/photo-1543013309-0d1f4edeb868?q=80"
-    }
-  ];
-  
-  // Destinations focus
-  const destinations = [
-    {
-      country: "Hungary",
+      country: $t('home.destinations.countries.hungary') || "Hungary",
       cities: [
-        { name: "Budapest", highlight: "Cultural Heart of Hungary" },
-        { name: "Szentendre", highlight: "Artistic Riverside Town" },
-        { name: "Visegrád", highlight: "Royal Castle on the Danube" }
+        { 
+          name: $t('home.destinations.cities.budapest') || "Budapest", 
+          highlight: $t('home.destinations.highlights.budapest') || "Cultural Heart of Hungary" 
+        },
+        { 
+          name: $t('home.destinations.cities.szentendre') || "Szentendre", 
+          highlight: $t('home.destinations.highlights.szentendre') || "Artistic Riverside Town" 
+        },
+        { 
+          name: $t('home.destinations.cities.visegrad') || "Visegrád", 
+          highlight: $t('home.destinations.highlights.visegrad') || "Royal Castle on the Danube" 
+        }
       ]
     },
     {
-      country: "Austria",
+      country: $t('home.destinations.countries.austria') || "Austria",
       cities: [
-        { name: "Vienna", highlight: "City of Music & Dreams" },
-        { name: "Salzburg", highlight: "Mozart's Birthplace" }
+        { 
+          name: $t('home.destinations.cities.vienna') || "Vienna", 
+          highlight: $t('home.destinations.highlights.vienna') || "City of Music & Dreams" 
+        },
+        { 
+          name: $t('home.destinations.cities.salzburg') || "Salzburg", 
+          highlight: $t('home.destinations.highlights.salzburg') || "Mozart's Birthplace" 
+        }
       ]
     },
     {
-      country: "Czech Republic",
+      country: $t('home.destinations.countries.czechRepublic') || "Czech Republic",
       cities: [
-        { name: "Prague", highlight: "The Golden City" },
-        { name: "Karlovy Vary", highlight: "Historic Spa Town" }
+        { 
+          name: $t('home.destinations.cities.prague') || "Prague", 
+          highlight: $t('home.destinations.highlights.prague') || "The Golden City" 
+        },
+        { 
+          name: $t('home.destinations.cities.karlovyVary') || "Karlovy Vary", 
+          highlight: $t('home.destinations.highlights.karlovyVary') || "Historic Spa Town" 
+        }
       ]
     },
     {
-      country: "Slovakia",
+      country: $t('home.destinations.countries.slovakia') || "Slovakia",
       cities: [
-        { name: "Bratislava", highlight: "The Little Big City" }
+        { 
+          name: $t('home.destinations.cities.bratislava') || "Bratislava", 
+          highlight: $t('home.destinations.highlights.bratislava') || "The Little Big City" 
+        }
       ]
     }
   ];
@@ -170,7 +199,7 @@
       content: "I think BuVipTur is the best tour company I've ever used. Amazing guides, easy to customize itineraries, and a quality experience from start to finish. The factory tour was incredible!",
       author: 'Sophie Anderson',
       position: 'Marketing Manager',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80',
+      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&h=150&fit=crop&fm=webp',
       rating: 5
     },
     {
@@ -178,13 +207,15 @@
       content: 'We had the most amazing time on our castle tour. The guide was knowledgeable and passionate, showing us hidden spots tourists normally miss. Can\'t wait to book our next adventure!',
       author: 'David Chen',
       position: 'Software Engineer',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&fit=crop&fm=webp',
       rating: 5
     }
   ];
   
-  // Fade-in animation for sections
+  // OPTIMIZED: Intersection Observer with better performance
   function setupIntersectionObserver() {
+    if (typeof window === 'undefined') return;
+    
     const sections = document.querySelectorAll('.animate-on-scroll');
     
     const observer = new IntersectionObserver((entries) => {
@@ -192,17 +223,28 @@
         if (entry.isIntersecting) {
           const sectionId = entry.target.id;
           isVisible[sectionId] = true;
+          // Stop observing once visible to improve performance
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { 
+      threshold: 0.1, // Lower threshold for faster triggering
+      rootMargin: '50px' // Trigger before element is fully visible
+    });
     
     sections.forEach(section => {
       observer.observe(section);
     });
+    
+    return observer;
   }
   
-  onMount(() => {
+  onMount(async () => {
+    // Set up intersection observer
     setupIntersectionObserver();
+    
+    // Lazy load TestimonialsSection
+    TestimonialsSection = (await import('$lib/components/TestimonialsSection.svelte')).default;
     
     // Optional: auto-rotate slides every 5 seconds
     const interval = setInterval(nextSlide, 5000);
@@ -211,8 +253,12 @@
 </script>
 
 <svelte:head>
-  <title>{$t('meta.title')} - {$t('meta.tagline')}</title>
-  <meta name="description" content={$t('meta.description')} />
+  <title>{$t('meta.title') || 'BuVipTur'} - {$t('meta.tagline') || 'Premium Central Europe Tours'}</title>
+  <meta name="description" content={$t('meta.description') || 'Discover authentic Central Europe with BuVipTur. Expert guides, unique factory tours, cultural experiences across Hungary, Austria, Czech Republic, and beyond.'} />
+  
+  <!-- OPTIMIZED: Preload critical resources -->
+  <link rel="preload" href="/above.webp" as="image">
+  <link rel="dns-prefetch" href="//images.unsplash.com">
 </svelte:head>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -249,13 +295,13 @@
       </div>
     </section>
     
-    <!-- Main Services Showcase - Alternating Layout -->
+    <!-- Main Services Showcase - Alternating Layout (ONLY 3 SERVICES) -->
     <section id="services-showcase" class="py-20 bg-white animate-on-scroll">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">{$t('home.services.title')}</h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            {$t('home.services.description')}
+            {$t('home.services.subtitle')}
           </p>
         </div>
         
@@ -265,9 +311,14 @@
               <!-- Image Section -->
               <div class="w-full lg:w-1/2 transform transition-all duration-700 translate-y-4" class:translate-y-0={isVisible['services-showcase']}  style="transition-delay: {i * 150}ms">
                 <div class="relative overflow-hidden rounded-2xl shadow-xl">
+                  <!-- OPTIMIZED: Lazy loading, WebP format, proper sizing -->
                   <img 
                     src={service.image} 
                     alt={service.title} 
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
                     class="w-full h-[400px] object-cover transform hover:scale-105 transition-transform duration-700" 
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-teal-900/70 to-transparent"></div>
@@ -295,7 +346,7 @@
                 </div>
                 
                 <a href="/services" class="inline-flex items-center text-[#dcb660] font-semibold hover:text-teal-800 transition-colors">
-                  <span>{$t('home.services.learnMore')}</span>
+                  <span>{$t('home.services.learnMore') || 'Learn More About Our Services'}</span>
                   <i class="fas fa-arrow-right ml-2"></i>
                 </a>
               </div>
@@ -305,10 +356,11 @@
       </div>
     </section>
     
-    <!-- Support Services Section - Swipeable on Mobile -->
+    <!-- Support Services Section - Swipeable on Mobile (SEPARATE 4 SERVICES) -->
     <section id="support-services" class="relative py-16 md:py-24 overflow-hidden animate-on-scroll">
       <!-- Map Background -->
       <div class="absolute inset-0 z-0">
+        <!-- OPTIMIZED: Use a smaller, optimized background image -->
         <div class="absolute inset-0 bg-[url('/map.webp')] bg-cover bg-center opacity-30"></div>
         <div class="absolute inset-0 bg-white/60"></div>
         <div class="absolute inset-0 bg-[#113946]/10"></div>
@@ -356,17 +408,6 @@
                   <p class="text-[#113946]/80 text-base leading-relaxed mb-4">
                     {service.description}
                   </p>
-                  
-                  {#if service.features && service.features.length > 0}
-                    <ul class="space-y-2 mt-4">
-                      {#each service.features as feature}
-                        <li class="flex items-start">
-                          <i class="fas fa-check text-[#dcb660] mt-1 mr-2 text-sm"></i>
-                          <span class="text-[#113946]/90 text-sm">{feature}</span>
-                        </li>
-                      {/each}
-                    </ul>
-                  {/if}
                 </div>
               </div>
             {/each}
@@ -417,7 +458,6 @@
               <button 
                 class="rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660]' : 'bg-[#113946]/30'}"
                 style="width: 6px; height: 6px; min-width: 6px; min-height: 6px; {i === currentSlide ? 'width: 16px; min-width: 16px;' : ''}"
-                style:sm="width: 8px; height: 8px; min-width: 8px; min-height: 8px; {i === currentSlide ? 'width: 24px; min-width: 24px;' : ''}"
                 on:click={() => currentSlide = i}
                 aria-label={`Go to service ${i + 1}`}
               ></button>
@@ -440,7 +480,7 @@
             href="/services" 
             class="inline-flex items-center px-8 py-3 bg-[#dcb660] text-[#113946] font-medium rounded-lg hover:bg-[#113946] hover:text-white transition-colors shadow-sm"
           >
-            <span>View All Services</span>
+            <span>{$t('common.viewAllServices') || 'View All Services'}</span>
             <i class="fas fa-arrow-right ml-2"></i>
           </a>
         </div>
@@ -462,9 +502,9 @@
       
       <div class="container mx-auto px-4 relative z-10">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">Destinations We Serve</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">{$t('home.destinations.title')}</h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore the heart of Central Europe with our expertly crafted experiences.
+            {$t('home.destinations.subtitle')}
           </p>
         </div>
         
@@ -505,33 +545,64 @@
             href="/contact" 
             class="inline-flex items-center px-8 py-3 bg-[#dcb660] text-white rounded-lg hover:bg-[#dcb660]/90 transition-colors shadow-md"
           >
-            <span>Plan Your Journey</span>
+            <span>{$t('home.destinations.planJourney')}</span>
             <i class="fas fa-paper-plane ml-2"></i>
           </a>
         </div>
       </div>
     </section>
     
-    <!-- Testimonials -->
-    <TestimonialsSection 
-      title="What Our Travelers Say" 
-      averageRating={4.9} 
-      reviewCount="1000+" 
-      certificationText="Certificate of Excellence" 
-      testimonials={testimonialsData} 
-    />
+    <!-- OPTIMIZED: Lazy loaded Testimonials -->
+    {#if TestimonialsSection}
+      <svelte:component 
+        this={TestimonialsSection}
+        title={$t('home.testimonials.title')} 
+        averageRating={parseFloat($t('home.testimonials.rating')) || 4.9} 
+        reviewCount={$t('home.testimonials.reviewCount')} 
+        certificationText={$t('home.testimonials.certification')} 
+        testimonials={testimonialsData} 
+      />
+    {:else}
+      <!-- Loading placeholder for testimonials -->
+      <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <div class="text-center">
+            <div class="animate-pulse bg-gray-300 h-8 w-64 mx-auto mb-8 rounded"></div>
+            <div class="animate-pulse bg-gray-200 h-32 w-full max-w-4xl mx-auto rounded"></div>
+          </div>
+        </div>
+      </section>
+    {/if}
   </main>
   
 </div>
 
 <style>
-  /* Custom animations */
+  /* OPTIMIZED: Use transform for better performance */
   .translate-y-4 {
     transform: translateY(1rem);
   }
   
   .translate-y-0 {
     transform: translateY(0);
+  }
+  
+  /* OPTIMIZED: Hardware acceleration for animations */
+  .transform {
+    will-change: transform;
+  }
+  
+  .transform:not(:hover) {
+    will-change: auto;
+  }
+  
+  /* OPTIMIZED: Reduce repaints during scroll */
+  .animate-on-scroll {
+    will-change: transform, opacity;
+  }
+  
+  .animate-on-scroll.visible {
+    will-change: auto;
   }
   
   /* Scrollbar styling for category horizontal scroll on mobile */
@@ -550,7 +621,7 @@
     }
   }
 
-  /* Add these styles to make the horizontal scroll animation smoother */
+  /* OPTIMIZED: Efficient animations */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -562,9 +633,15 @@
     }
   }
   
-  /* Ensure smooth transitions */
+  /* OPTIMIZED: Reduce animation overhead */
   .transition-all {
-    transition-property: all;
+    transition-property: transform, opacity;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* OPTIMIZED: Contain layout shifts */
+  img {
+    content-visibility: auto;
+    contain-intrinsic-size: 800px 600px;
   }
 </style>

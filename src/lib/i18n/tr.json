@@ -23,7 +23,11 @@
         "cruises": "Manzaralı Tekne Turları"
       }
     },
-
+    "meta": {
+      "title": "BuVipTur",
+      "tagline": "Premium Orta Avrupa Turları",
+      "description": "BuVipTur ile otantik Orta Avrupa'yı keşfedin. Uzman rehberler, eşsiz fabrika turları, kültürel deneyimler ve Macaristan, Avusturya, Çek Cumhuriyeti ve ötesinde çok ülkeli yolculuklar."
+    },
     "home": {
       "journeyPromise": {
         "title": "Sizin Yolculuğunuz, Bizim Uzmanlığımız",
@@ -34,6 +38,8 @@
       "services": {
         "title": "Ayırt Edici Seyahat Deneyimleri",
         "subtitle": "Her destinasyonun otantik kalbini ortaya çıkarmak için hazırlanmış imza deneyimlerimizle Orta Avrupa'ya dalın.",
+        "description": "Her destinasyonun otantik kalbini ortaya çıkaran imza deneyimlerimizle Orta Avrupa'ya dalın.",
+        "learnMore": "Hizmetlerimiz hakkında daha fazla bilgi edinin",
         "services": [
           {
             "id": "guidedTours",
@@ -68,8 +74,7 @@
               "Samimi küçük grup gezileri",
               "Gün batımı ve akşam ışıklandırma turları",
               "Tarihi anlatımlar",
-              "Gurme yemek deneyimleri",
-              "Hizmetlerimiz hakkında daha fazla bilgi edinin"
+              "Gurme yemek deneyimleri"
             ]
           }
         ]
@@ -200,7 +205,6 @@
       "learnMore": "Hizmetlerimiz hakkında daha fazla bilgi edinin",
       "experienceTitle": "Farkı Deneyimleyin",
       "experienceDescription": "BuVipTur'da, olağanüstü seyahat deneyimlerinin üstün hizmetlerle başladığına inanıyoruz. Yolculuğunuzun her öğesi konfor, otantiklik ve unutulmaz anları sağlamak için özenle seçilir. Orta Avrupa maceranızı yükseltmek için tasarlanmış kapsamlı hizmet yelpazemizi keşfedin.",
-
       "process": {
         "title": "Hizmet Sürecimiz",
         "subtitle": "Yolculuğunuzun her detayının mükemmel şekilde yürütülmesini sağlamak için rafine bir süreç izliyoruz.",
@@ -365,8 +369,19 @@
       "contactInfo": {
         "title": "İletişim Bilgileri"
       },
+      "contact": {
+        "title": "İletişim Bilgileri",
+        "address": "Budapeşte, Macaristan",
+        "phone": "+36 (70) 734-3444",
+        "email": "info@buviptur.com"
+      },
+      "social": {
+        "facebookAria": "Facebook sayfamızı ziyaret edin",
+        "instagramAria": "Instagram sayfamızı ziyaret edin"
+      },
       "privacy": "Gizlilik Politikası",
-      "rights": "Tüm hakları saklıdır."
+      "copyright": "Tüm hakları saklıdır.",
+      "privacyPolicy": "Gizlilik Politikası"
     },
     "common": {
       "learnMore": "Daha Fazla Öğrenin",
@@ -386,6 +401,7 @@
       "delete": "Sil",
       "confirm": "Onayla",
       "yes": "Evet",
-      "no": "Hayır"
+      "no": "Hayır",
+      "viewAllServices": "Tüm Hizmetlerimizi Keşfet"
     }
   }
