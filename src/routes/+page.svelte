@@ -3,6 +3,14 @@
   import { t } from 'svelte-i18n';
   import Header from '$lib/components/Header.svelte';
   import Hero from '$lib/components/Hero.svelte';
+  import OptimizedImage from '$lib/components/OptimizedImage.svelte';
+  
+  // Debug: Log the base URL for image paths
+  let baseUrl = '';
+  if (typeof window !== 'undefined') {
+    baseUrl = window.location.origin;
+    console.log('Base URL:', baseUrl);
+  }
   
   // Lazy load heavy components
   let TestimonialsSection;
@@ -63,15 +71,14 @@
     '/var.webp'
   ];
 
-  // OPTIMIZED: Smaller, WebP images for better performance
+  // Using local WebP images for better performance
   $: mainServices = [
     {
       id: "guidedTours",
       title: $t('home.services.services.0.title') || "Guided Tours",
       description: $t('home.services.services.0.description') || "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
       icon: "fa-map-marked-alt",
-      // OPTIMIZED: Use WebP format and proper sizing
-      image: "https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80&w=800&h=600&fit=crop&fm=webp",
+      imageSrc: "/guided.webp",
       features: $t('home.services.services.0.features') || [
         "Small groups of max 12 travelers",
         "Expert university-educated guides", 
@@ -84,8 +91,7 @@
       title: $t('home.services.services.1.title') || "Multi-Country Experience",
       description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
       icon: "fa-globe-europe",
-      // OPTIMIZED: Use WebP format and proper sizing
-      image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=800&h=600&fit=crop&fm=webp",
+      imageSrc: "/country.webp",
       features: $t('home.services.services.1.features') || [
         "Hassle-free border crossings",
         "Cohesive multi-country itineraries", 
@@ -98,8 +104,7 @@
       title: $t('home.services.services.2.title') || "Scenic Boat Experiences", 
       description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
       icon: "fa-ship",
-      // OPTIMIZED: Use WebP format and proper sizing
-      image: "https://images.unsplash.com/photo-1588263823647-ce3546d42bfe?q=80&w=800&h=600&fit=crop&fm=webp",
+      imageSrc: "/river.webp",
       features: $t('home.services.services.2.features') || [
         "Intimate small-group cruises",
         "Sunset and evening illumination tours",
@@ -193,13 +198,14 @@
     }
   ];
   
+  // OPTIMIZED: Smaller testimonial images
   const testimonialsData = [
     {
       title: 'Great Work',
       content: "I think BuVipTur is the best tour company I've ever used. Amazing guides, easy to customize itineraries, and a quality experience from start to finish. The factory tour was incredible!",
       author: 'Sophie Anderson',
       position: 'Marketing Manager',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&h=150&fit=crop&fm=webp',
+      imageId: '1580489944761-15a19d654956',
       rating: 5
     },
     {
@@ -207,7 +213,7 @@
       content: 'We had the most amazing time on our castle tour. The guide was knowledgeable and passionate, showing us hidden spots tourists normally miss. Can\'t wait to book our next adventure!',
       author: 'David Chen',
       position: 'Software Engineer',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&fit=crop&fm=webp',
+      imageId: '1507003211169-0a1dd7228f2d',
       rating: 5
     }
   ];
@@ -228,8 +234,8 @@
         }
       });
     }, { 
-      threshold: 0.1, // Lower threshold for faster triggering
-      rootMargin: '50px' // Trigger before element is fully visible
+      threshold: 0.05, // Lower threshold for faster triggering
+      rootMargin: '100px' // Trigger before element is fully visible
     });
     
     sections.forEach(section => {
@@ -244,7 +250,11 @@
     setupIntersectionObserver();
     
     // Lazy load TestimonialsSection
-    TestimonialsSection = (await import('$lib/components/TestimonialsSection.svelte')).default;
+    try {
+      TestimonialsSection = (await import('$lib/components/TestimonialsSection.svelte')).default;
+    } catch (error) {
+      console.warn('Failed to load TestimonialsSection:', error);
+    }
     
     // Optional: auto-rotate slides every 5 seconds
     const interval = setInterval(nextSlide, 5000);
@@ -259,6 +269,10 @@
   <!-- OPTIMIZED: Preload critical resources -->
   <link rel="preload" href="/above.webp" as="image">
   <link rel="dns-prefetch" href="//images.unsplash.com">
+  
+  <!-- OPTIMIZED: Reduced FontAwesome to only what we need -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css" as="style" on:load={(e) => { e.target.onload = null; e.target.rel = 'stylesheet'; }}>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css" as="style" on:load={(e) => { e.target.onload = null; e.target.rel = 'stylesheet'; }}>
 </svelte:head>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -295,7 +309,7 @@
       </div>
     </section>
     
-    <!-- Main Services Showcase - Alternating Layout (ONLY 3 SERVICES) -->
+    <!-- Main Services Showcase - Fixed Image Container Sizes -->
     <section id="services-showcase" class="py-20 bg-white animate-on-scroll">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
@@ -307,48 +321,69 @@
         
         <div class="space-y-24">
           {#each mainServices as service, i}
-            <div class="flex flex-col lg:flex-row {i % 2 === 1 ? 'lg:flex-row-reverse' : ''} gap-12 items-center">
-              <!-- Image Section -->
-              <div class="w-full lg:w-1/2 transform transition-all duration-700 translate-y-4" class:translate-y-0={isVisible['services-showcase']}  style="transition-delay: {i * 150}ms">
-                <div class="relative overflow-hidden rounded-2xl shadow-xl">
-                  <!-- OPTIMIZED: Lazy loading, WebP format, proper sizing -->
-                  <img 
-                    src={service.image} 
-                    alt={service.title} 
-                    loading="lazy"
-                    decoding="async"
-                    width="800"
-                    height="600"
-                    class="w-full h-[400px] object-cover transform hover:scale-105 transition-transform duration-700" 
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-teal-900/70 to-transparent"></div>
-                  <div class="absolute top-6 left-6 w-16 h-16 bg-[#dcb660] text-white rounded-full flex items-center justify-center shadow-lg">
+            <div class="service-container flex flex-col lg:flex-row {i % 2 === 1 ? 'lg:flex-row-reverse' : ''} gap-12 items-stretch">
+              <!-- Image Section with Fixed Container -->
+              <div class="service-image-wrapper w-full lg:w-1/2 transform transition-all duration-700 translate-y-4" 
+                   class:translate-y-0={isVisible['services-showcase']} 
+                   style="transition-delay: {i * 150}ms">
+                
+                <!-- Fixed height container to prevent layout shifts -->
+                <div class="image-container relative overflow-hidden rounded-2xl shadow-xl bg-gray-200">
+                  <!-- Placeholder background while image loads -->
+                  <div class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center z-1">
+                    <div class="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center">
+                      <i class="fas {service.icon} text-2xl text-gray-600"></i>
+                    </div>
+                  </div>
+                  
+                  <!-- Service image -->
+                  <div class="relative w-full h-64 md:h-96 bg-gray-200 overflow-hidden rounded-lg">
+                    <img
+                      src={service.imageSrc}
+                      alt={service.title}
+                      class="absolute inset-0 w-full h-full object-cover"
+                      loading="eager"
+                      width="800"
+                      height="600"
+                    />
+                  </div>
+                  
+                  <!-- Overlay gradients -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-teal-900/70 to-transparent z-10"></div>
+                  
+                  <!-- Icon overlay -->
+                  <div class="absolute top-6 left-6 w-16 h-16 bg-[#dcb660] text-white rounded-full flex items-center justify-center shadow-lg z-20">
                     <i class="fas {service.icon} text-2xl"></i>
                   </div>
                 </div>
               </div>
               
-              <!-- Content Section -->
-              <div class="w-full lg:w-1/2 transform transition-all duration-700 translate-y-4" class:translate-y-0={isVisible['services-showcase']} style="transition-delay: {(i * 150) + 100}ms">
-                <h3 class="text-3xl font-bold text-teal-900 mb-6 relative">
-                  {service.title}
-                  <span class="absolute -bottom-2 left-0 w-20 h-1 bg-[#dcb660]"></span>
-                </h3>
-                <p class="text-lg text-gray-600 mb-8">{service.description}</p>
+              <!-- Content Section with Equal Height -->
+              <div class="service-content-wrapper w-full lg:w-1/2 transform transition-all duration-700 translate-y-4 flex flex-col justify-center" 
+                   class:translate-y-0={isVisible['services-showcase']} 
+                   style="transition-delay: {(i * 150) + 100}ms">
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                  {#each service.features as feature}
-                    <div class="flex items-center bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow transition-shadow">
-                      <i class="fas fa-check-circle text-[#dcb660] mr-3"></i>
-                      <span class="text-gray-700">{feature}</span>
-                    </div>
-                  {/each}
+                <div class="content-inner flex flex-col justify-center h-full">
+                  <h3 class="text-3xl font-bold text-teal-900 mb-6 relative">
+                    {service.title}
+                    <span class="absolute -bottom-2 left-0 w-20 h-1 bg-[#dcb660]"></span>
+                  </h3>
+                  <p class="text-lg text-gray-600 mb-8 leading-relaxed">{service.description}</p>
+                  
+                  <div class="features-grid grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    {#each service.features as feature}
+                      <div class="feature-item flex items-center bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow transition-shadow duration-300">
+                        <i class="fas fa-check-circle text-[#dcb660] mr-3 flex-shrink-0"></i>
+                        <span class="text-gray-700 text-sm lg:text-base">{feature}</span>
+                      </div>
+                    {/each}
+                  </div>
+                  
+                  <a href="/services" class="learn-more-link inline-flex items-center text-[#dcb660] font-semibold hover:text-teal-800 transition-colors duration-300">
+                    <span>{$t('home.services.learnMore') || 'Learn More About Our Services'}</span>
+                    <i class="fas fa-arrow-right ml-2 transition-transform duration-300 hover:translate-x-1"></i>
+                  </a>
                 </div>
-                
-                <a href="/services" class="inline-flex items-center text-[#dcb660] font-semibold hover:text-teal-800 transition-colors">
-                  <span>{$t('home.services.learnMore') || 'Learn More About Our Services'}</span>
-                  <i class="fas fa-arrow-right ml-2"></i>
-                </a>
               </div>
             </div>
           {/each}
@@ -581,28 +616,22 @@
   /* OPTIMIZED: Use transform for better performance */
   .translate-y-4 {
     transform: translateY(1rem);
+    will-change: transform;
   }
   
   .translate-y-0 {
     transform: translateY(0);
-  }
-  
-  /* OPTIMIZED: Hardware acceleration for animations */
-  .transform {
-    will-change: transform;
-  }
-  
-  .transform:not(:hover) {
     will-change: auto;
   }
   
-  /* OPTIMIZED: Reduce repaints during scroll */
+  /* OPTIMIZED: Reduce animation overhead */
   .animate-on-scroll {
-    will-change: transform, opacity;
+    contain: layout style paint;
   }
   
-  .animate-on-scroll.visible {
-    will-change: auto;
+  /* OPTIMIZED: Hardware acceleration only when needed */
+  .transform {
+    transform: translateZ(0);
   }
   
   /* Scrollbar styling for category horizontal scroll on mobile */
@@ -622,26 +651,32 @@
   }
 
   /* OPTIMIZED: Efficient animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* OPTIMIZED: Reduce animation overhead */
   .transition-all {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity, box-shadow;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  /* OPTIMIZED: Contain layout shifts */
-  img {
+  /* OPTIMIZED: Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .transition-all,
+    .animate-pulse {
+      transition: none !important;
+      animation: none !important;
+    }
+    
+    .transform {
+      transform: none !important;
+    }
+  }
+  
+  /* OPTIMIZED: Improve rendering performance */
+  .container {
+    contain: layout style;
+  }
+  
+  /* OPTIMIZED: Better image loading */
+  .image-content {
     content-visibility: auto;
-    contain-intrinsic-size: 800px 600px;
+    contain-intrinsic-size: 400px 300px;
   }
 </style>

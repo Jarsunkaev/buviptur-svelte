@@ -125,8 +125,8 @@
           loading={i === 0 ? "eager" : "lazy"}
         />
         <!-- Multiple gradient overlays for better text readability -->
-        <div class="absolute inset-0 bg-gradient-to-r from-[#113946]/70 to-transparent"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-[#113946]/60 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#113946]/50 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#113946]/40 to-transparent"></div>
       </div>
     {/each}
     
