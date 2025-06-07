@@ -1,48 +1,77 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { goto } from '$app/navigation';
   import { t } from 'svelte-i18n';
   
-  // Props with default values - using local static images
-  export let carouselImages = [
+  // Static carousel images - loaded once
+  const carouselImages = [
     '/above.webp',
+    '/margaret.webp',
     '/matyas.webp',
-    '/matyasii.webp',
     '/parlament.webp',
-    '/prague.webp',
-    '/stefan.webp', 
-    '/vajda.webp',
+    '/stefan.webp',
     '/var.webp'
   ];
+  
+  // Component state
+  let currentSlide = 0;
+  let isVisible = false;
+  let autoPlay = true;
+  let carouselInterval;
+  let preloadTimeout;
+  const loadedImages = new Set();
+  const totalSlides = carouselImages.length;
+  
+  // Simple slide navigation with forced reflow
+  function nextSlide() {
+    document.querySelector('.carousel-slide')?.offsetHeight; // Force reflow
+    currentSlide = (currentSlide + 1) % totalSlides;
+  }
+  
+  function prevSlide() {
+    document.querySelector('.carousel-slide')?.offsetHeight; // Force reflow
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  }
+  
+  // Preload all images when component mounts
+  onMount(() => {
+    // Preload all images immediately
+    carouselImages.forEach((src, index) => {
+      if (!loadedImages.has(src)) {
+        const img = new Image();
+        img.src = src;
+        img.loading = 'eager';
+        loadedImages.add(src);
+      }
+    });
+    
+    // Set up carousel auto-play
+    if (autoPlay && typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      carouselInterval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    }
+    
+    // Mark component as visible
+    isVisible = true;
+    
+    // Cleanup
+    return () => {
+      if (carouselInterval) clearInterval(carouselInterval);
+      if (preloadTimeout) clearTimeout(preloadTimeout);
+    };
+  });
+  
+
   
   // Form data
   let name = '';
   let surname = '';
   let email = '';
   
-  // Current carousel slide index
-  let currentSlide = 0;
-  const totalSlides = carouselImages.length;
-  
-  // Animation control
-  let isVisible = false;
-  
   // Touch tracking for mobile swipe
   let touchStartX = 0;
   let touchEndX = 0;
-  
-  // Auto carousel with smoother transitions
-  function nextSlide() {
-    // Force reflow before updating the slide
-    document.querySelector('.carousel-slide')?.offsetHeight;
-    currentSlide = (currentSlide + 1) % totalSlides;
-  }
-  
-  function prevSlide() {
-    // Force reflow before updating the slide
-    document.querySelector('.carousel-slide')?.offsetHeight;
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-  }
   
   function handleGetOffer() {
     const searchParams = new URLSearchParams({
@@ -79,14 +108,21 @@
       isVisible = true;
     }, 100);
     
-    // Carousel interval with check for reduced motion preference
-    let carouselInterval;
-    
-    const setupCarousel = () => {
-      if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        carouselInterval = setInterval(nextSlide, 6000); // Slightly longer interval for better UX
+    // Set up carousel when component mounts (memoized)
+    onMount(() => {
+      if (memo.has('carousel_setup')) return;
+      memo.set('carousel_setup', true);
+      
+      if (autoPlay) {
+        carouselInterval = setupCarouselInterval();
       }
-    };
+      
+      return () => {
+        if (carouselInterval) clearInterval(carouselInterval);
+        if (preloadTimeout) clearTimeout(preloadTimeout);
+        memo.delete('carousel_setup');
+      };
+    });
     
     setupCarousel();
     
@@ -115,14 +151,16 @@
   <div class="absolute inset-0 z-0">
     {#each carouselImages as image, i}
       <div 
-        class="carousel-slide absolute inset-0 transition-all duration-1000 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform-gpu"
-        style="opacity: {i === currentSlide ? '1' : '0'}; transform: scale({i === currentSlide ? '1' : '1.03'}); will-change: transform, opacity;"
+        class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out"
+        style="opacity: {i === currentSlide ? '1' : '0'}; pointer-events: none;"
       >
         <img 
           src={image} 
-          alt={`Budapest and Central Europe scenic view ${i+1}`} 
+          alt=""
           class="w-full h-full object-cover"
-          loading={i === 0 ? "eager" : "lazy"}
+          loading="eager"
+          decoding="async"
+          style="width: 100%; height: 100%;"
         />
         <!-- Multiple gradient overlays for better text readability -->
         <div class="absolute inset-0 bg-gradient-to-r from-[#113946]/50 to-transparent"></div>
