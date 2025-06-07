@@ -9,8 +9,11 @@
     '/margaret.webp',
     '/matyas.webp',
     '/parlament.webp',
+    '/prague.webp',
     '/stefan.webp',
-    '/var.webp'
+    '/var.webp',
+    '/vajda.webp',
+    '/matyasii.webp'
   ];
   
   // Component state
