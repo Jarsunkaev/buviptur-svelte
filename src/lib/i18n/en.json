@@ -162,9 +162,15 @@
   "tours": {
     "title": "Our Tours",
     "subtitle": "Discover extraordinary journeys tailored to your wanderlust",
+    "meta": {
+      "description": "Explore Central Europe with BuVipTur's expertly guided tours. Historical, cultural, and multi-country experiences across Hungary, Austria, Czech Republic and beyond."
+    },
+    "duration": "Duration",
+    "inquireAbout": "Inquire About",
     "categories": {
       "title": "Explore Our Unique Tour Experiences",
       "subtitle": "Immerse yourself in the heart of Central Europe with our meticulously crafted tours, offering deep cultural insights and unforgettable experiences.",
+      "highlights": "Tour Highlights",
       "historical": {
         "title": "Historical Tours",
         "description": "Dive deep into the rich history of Central Europe. Our expert guides bring centuries of stories to life, from medieval castles to World War II sites.",
@@ -202,7 +208,22 @@
     "languages": {
       "title": "Available Tour Languages",
       "subtitle": "We offer tours in multiple languages to ensure you have the best possible experience.",
-      "available": "Available"
+      "available": "Available",
+      "english": {
+        "name": "English",
+        "flag": "🇬🇧",
+        "icon": "fa-flag-usa"
+      },
+      "hungarian": {
+        "name": "Hungarian",
+        "flag": "🇭🇺", 
+        "icon": "fa-flag"
+      },
+      "turkish": {
+        "name": "Turkish",
+        "flag": "🇹🇷",
+        "icon": "fa-flag"
+      }
     },
     "whyChoose": {
       "title": "Why Choose Our Tours",
@@ -217,9 +238,52 @@
       "flexibility": {
         "title": "Flexibility & Customization",
         "description": "We tailor each tour to match your interests, pace, and preferences for a truly personalized journey."
+      },
+      "stats": {
+        "uniqueTours": "Unique Tours",
+        "maxGroup": "Max Group Size",
+        "localGuides": "Local Guides",
+        "satisfaction": "Satisfaction Rating"
       }
     },
-    "inquireAbout": "Inquire About"
+    "featured": {
+      "badges": {
+        "bestseller": "Bestseller",
+        "new": "New",
+        "popular": "Popular",
+        "featured": "Featured"
+      },
+      "budapestCastle": {
+        "title": "Budapest Castle District Walking Tour",
+        "location": "Budapest, Hungary",
+        "duration": "4 hours"
+      },
+      "factoryHeritage": {
+        "title": "Hungarian Factory Heritage Experience",
+        "location": "Central Hungary",
+        "duration": "6 hours"
+      },
+      "culinaryJourney": {
+        "title": "Traditional Hungarian Culinary Journey",
+        "location": "Budapest & Surroundings",
+        "duration": "5 hours"
+      },
+      "viennaDayTrip": {
+        "title": "Vienna Day Trip from Budapest",
+        "location": "Vienna, Austria",
+        "duration": "12 hours"
+      }
+    },
+    "testimonials": {
+      "incredible": {
+        "title": "Incredible Historical Insights",
+        "content": "The depth of historical knowledge our guide shared was remarkable. Every castle and monument came alive with fascinating stories. The small group size made it feel very personal and engaging."
+      },
+      "factory": {
+        "title": "Unique Factory Experience",
+        "content": "I never expected a factory tour to be so captivating! Learning about traditional Hungarian craftsmanship and seeing the artisans at work was truly eye-opening. A hidden gem of an experience."
+      }
+    }
   },
   "services": {
     "title": "Our Services",

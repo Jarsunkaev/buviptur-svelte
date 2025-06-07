@@ -279,9 +279,4 @@
             </div>
         </div>
     </section>
-
-    <DestinationsSection 
-        title="Destinations We Serve" 
-        destinations={destinations} 
-    />
 </main>

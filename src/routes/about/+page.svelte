@@ -176,17 +176,6 @@
                         Our specialized factory tours and industrial heritage experiences showcase the innovation and craftsmanship that have shaped the region, offering a perspective few travelers get to see.
                     </p>
                 </div>
-                <div class="order-1 md:order-2 relative">
-                    <img 
-                        src="https://images.unsplash.com/photo-1516737490857-847e4f1c5e8e?q=80" 
-                        alt="BuVipTur Team" 
-                        class="rounded-lg shadow-xl object-cover h-[500px] w-full transform hover:scale-[1.02] transition-transform duration-500"
-                    />
-                    <div class="absolute -bottom-8 -right-8 bg-[#dcb660] p-6 rounded-lg shadow-lg hidden md:block">
-                        <p class="text-2xl font-bold text-white">14+ Years</p>
-                        <p class="text-white">Creating Memories</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -214,26 +203,4 @@
             </div>
         </div>
     </section>
-
-   
-
-    <WhyChooseUs 
-        title="Why Travel With Us" 
-        benefits={benefits} 
-        stats={stats}
-        image={whyImage}
-    />
-    
-    <TestimonialsSection 
-        title="What Our Travelers Are Saying" 
-        averageRating={4.9} 
-        reviewCount="1000+" 
-        certificationText="Certificate of Excellence" 
-        testimonials={testimonials} 
-    />
-
-    <SubscribeSection
-        title="Join Our Travel Community"
-        description="Subscribe to receive exclusive offers, travel tips, and inspiration for your next adventure."
-    />
 </main>

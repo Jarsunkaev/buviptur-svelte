@@ -1,7 +1,6 @@
 <script>
   export let title;
   export let benefits = [];
-  export let stats = [];
   export let image;
 </script>
 
@@ -15,16 +14,7 @@
           alt="Why Choose Us"
           class="w-full h-[600px] object-cover rounded-2xl"
         />
-        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl">
-          <div class="grid grid-cols-2 gap-6">
-            {#each stats as stat}
-              <div class="text-center">
-                <p class="text-3xl font-bold text-[#dcb660] mb-1">{stat.value}</p>
-                <p class="text-gray-600 text-sm">{stat.label}</p>
-              </div>
-            {/each}
-          </div>
-        </div>
+        
       </div>
       
       <!-- Right Column - Content -->

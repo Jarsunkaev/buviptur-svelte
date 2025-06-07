@@ -425,12 +425,4 @@
             </div>
         </div>
     </section>
-
-    <TestimonialsSection 
-        title="What Our Travelers Say" 
-        averageRating={4.9} 
-        reviewCount="1000+" 
-        certificationText="Certificate of Excellence" 
-        testimonials={testimonials} 
-    />
 </main>
