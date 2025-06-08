@@ -5,173 +5,136 @@
     import DestinationsSection from '$lib/components/DestinationsSection.svelte';
     import TestimonialsSection from '$lib/components/TestimonialsSection.svelte';
     import Button from '$lib/components/Button.svelte';
+    import { t } from 'svelte-i18n';
 
-    // Enhanced services data with more details and features
-    const services = [
+    // Enhanced services data with translations - using fallback arrays to prevent translation issues
+    $: services = [
         {
-            title: 'Accommodation', // Changed from 'Luxury Accommodation'
-            description: 'We arrange and customize accommodation to perfectly suit your needs and preferences. From charming boutique hotels to unique historic stays, our team ensures every option offers quality, comfort, and authentic local character. Let us find the ideal place for your stay.', // Updated description
+            title: $t('services.accommodation.title') || 'Accommodation',
+            description: $t('services.accommodation.description') || 'We arrange and customize accommodation to perfectly suit your needs and preferences. From charming boutique hotels to unique historic stays, our team ensures every option offers quality, comfort, and authentic local character. Let us find the ideal place for your stay.',
             icon: 'fa-hotel',
             image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80',
-            features: [ // Updated features
-                'Personalized accommodation planning',
-                'Wide range of vetted properties',
-                'Customizable to your budget and style',
-                'Focus on quality, comfort, and character',
-                'Arrangements for boutique hotels, historic stays, and more',
-                'Flexible options tailored to your itinerary'
+            features: [
+                $t('services.accommodation.features.0') || 'Personalized accommodation planning',
+                $t('services.accommodation.features.1') || 'Wide range of vetted properties', 
+                $t('services.accommodation.features.2') || 'Customizable to your budget and style',
+                $t('services.accommodation.features.3') || 'Focus on quality, comfort, and character',
+                $t('services.accommodation.features.4') || 'Arrangements for boutique hotels, historic stays, and more',
+                $t('services.accommodation.features.5') || 'Flexible options tailored to your itinerary'
             ],
-            cta: 'View Accommodations'
+            cta: $t('services.accommodation.cta') || 'View Accommodations'
         },
         {
-            title: 'Expert Visa Assistance',
-            description: 'Navigate complex visa requirements with ease. Our specialized visa team provides comprehensive support to ensure a smooth application process, with expert guidance on documentation and application procedures tailored to your nationality and destination.',
+            title: $t('services.visa.title') || 'Expert Visa Assistance',
+            description: $t('services.visa.description') || 'Navigate complex visa requirements with ease. Our specialized visa team provides comprehensive support to ensure a smooth application process, with expert guidance on documentation and application procedures tailored to your nationality and destination.',
             icon: 'fa-passport',
             image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80',
             features: [
-                'Personalized visa consultation',
-                'Document preparation guidance',
-                'Application review services',
-                'Embassy appointment scheduling',
-                'Translation services when needed',
-                '24/7 support during application process'
+                $t('services.visa.features.0') || 'Personalized visa consultation',
+                $t('services.visa.features.1') || 'Document preparation guidance',
+                $t('services.visa.features.2') || 'Application review services',
+                $t('services.visa.features.3') || 'Embassy appointment scheduling',
+                $t('services.visa.features.4') || 'Translation services when needed',
+                $t('services.visa.features.5') || '24/7 support during application process'
             ],
-            cta: 'Learn About Visa Services'
+            cta: $t('services.visa.cta') || 'Learn About Visa Services'
         },
         {
-            title: 'Premium Transportation',
-            description: 'Travel in comfort and style with our fleet of modern vehicles and expert drivers. From airport transfers to multi-city journeys, we ensure punctual, comfortable transportation that allows you to enjoy the scenery while we handle the logistics.',
+            title: $t('services.transportation.title') || 'Premium Transportation',
+            description: $t('services.transportation.description') || 'Travel in comfort and style with our fleet of modern vehicles and expert drivers. From airport transfers to multi-city journeys, we ensure punctual, comfortable transportation that allows you to enjoy the scenery while we handle the logistics.',
             icon: 'fa-bus',
-            image: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80',
+            image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80',
             features: [
-                'Latest model luxury vehicles',
-                'Professional, multilingual drivers',
-                'Door-to-door service',
-                'Flexible scheduling',
-                'Child safety seats available',
-                'WiFi-equipped transportation'
+                $t('services.transportation.features.0') || 'Modern, comfortable vehicles',
+                $t('services.transportation.features.1') || 'Professional licensed drivers',
+                $t('services.transportation.features.2') || 'Airport transfers and multi-city routes',
+                $t('services.transportation.features.3') || 'Scenic route planning',
+                $t('services.transportation.features.4') || 'Flexible scheduling options',
+                $t('services.transportation.features.5') || 'Safety and reliability guaranteed'
             ],
-            cta: 'Explore Transportation Options'
+            cta: $t('services.transportation.cta') || 'Learn About Transportation'
         },
         {
-            title: 'Expert Local Guides',
-            description: 'Our guides are passionate storytellers and local experts who bring destinations to life with insider knowledge and personal connections. Each guide undergoes rigorous training and is selected for their expertise, language fluency, and ability to create memorable experiences.',
-            icon: 'fa-user-tie',
-            image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80',
+            title: $t('services.historical.title') || 'Historical Tours',
+            description: $t('services.historical.description') || 'Step back in time with our expert-guided historical tours. From medieval castles to World War II memorial sites, our university-educated guides bring centuries of history to life with compelling narratives and insider access.',
+            icon: 'fa-landmark',
+            image: 'https://images.unsplash.com/photo-1583091618471-bf133efb0a9c?q=80',
             features: [
-                'University-educated in history or culture',
-                'Multilingual capabilities',
-                'Specialized knowledge in art, history, food, etc.',
-                'Local connections for unique experiences',
-                'Emergency response training',
-                'Personalized attention to interests'
+                $t('services.historical.features.0') || 'University-educated historian guides',
+                $t('services.historical.features.1') || 'Medieval castle explorations',
+                $t('services.historical.features.2') || 'World War II memorial sites',
+                $t('services.historical.features.3') || 'Habsburg Empire historical routes',
+                $t('services.historical.features.4') || 'Archaeological site access',
+                $t('services.historical.features.5') || 'Interactive storytelling approach'
             ],
-            cta: 'Meet Our Guides'
-        },
-        {
-            title: 'Scenic Boat Experiences',
-            description: 'Discover Central Europe from its historic waterways with our exclusive boat tours and cruises. From romantic dinner cruises to full-day explorations, our water-based experiences offer unique perspectives on iconic cities and hidden treasures along the riverbanks.',
-            icon: 'fa-ship',
-            image: 'https://images.unsplash.com/photo-1588263823647-ce3546d42bfe?q=80',
-            features: [
-                'Intimate small-group cruises',
-                'Private charter options',
-                'Gourmet dining experiences',
-                'Sunset and evening illumination tours',
-                'Historical commentary during journeys',
-                'All-weather comfortable vessels'
-            ],
-            cta: 'View Boat Tours'
-        },
-        {
-            title: 'Industrial Heritage Tours',
-            description: 'Explore the fascinating industrial past and present of Central Europe with our specialized factory and industrial heritage tours. Get exclusive access to working factories, historic industrial sites, and meet the craftspeople keeping traditional industries alive.',
-            icon: 'fa-industry',
-            image: 'https://images.unsplash.com/photo-1543013309-0d1f4edeb868?q=80',
-            features: [
-                'Exclusive access to working factories',
-                'Hands-on craft demonstrations',
-                'Meet master craftspeople',
-                'Historical industrial site exploration',
-                'Behind-the-scenes production insights',
-                'Small group sizes for optimal experience'
-            ],
-            cta: 'Discover Factory Tours'
+            cta: $t('services.historical.cta') || 'Discover Historical Tours'
         }
     ];
 
-    // Customer benefits
-    const benefits = [
+    // Customer benefits with translations
+    $: benefits = [
         {
             icon: 'fa-clock',
-            title: '24/7 Customer Support',
-            description: 'Our dedicated team is available around the clock to assist with any questions or needs during your journey.'
+            title: $t('services.benefits.support247.title') || '24/7 Customer Support',
+            description: $t('services.benefits.support247.description') || 'Our dedicated team is available around the clock to assist with any questions or needs during your journey.'
         },
         {
             icon: 'fa-thumbs-up',
-            title: 'Best Price Guarantee',
-            description: 'We match any comparable service price and offer transparency with no hidden fees.'
-        },
-        {
-            icon: 'fa-shield-alt',
-            title: 'Travel Protection',
-            description: 'Comprehensive travel insurance options to ensure peace of mind throughout your journey.'
+            title: $t('services.benefits.bestPrice.title') || 'Best Price Guarantee',
+            description: $t('services.benefits.bestPrice.description') || 'We match any comparable service price and offer transparency with no hidden fees.'
         }
     ];
 
-    // Customized destinations for services page
-    const destinations = [
-        { name: 'Budapest', tours: 124, image: 'https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80' },
-        { name: 'Vienna', tours: 93, image: 'https://images.unsplash.com/photo-1516550893232-fe054840d3c2?q=80' },
-        { name: 'Prague', tours: 165, image: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?q=80' }
-    ];
 
-    // Process steps
-    const processSteps = [
+    // Process steps with translations
+    $: processSteps = [
         {
             number: '01',
-            title: 'Consultation',
-            description: 'We begin with a detailed consultation to understand your travel preferences, interests, and needs.'
+            title: $t('services.process.consultation.title') || 'Consultation',
+            description: $t('services.process.consultation.description') || 'We begin with a detailed consultation to understand your travel preferences, interests, and needs.'
         },
         {
             number: '02',
-            title: 'Custom Planning',
-            description: 'Our experts design a personalized travel plan with hand-selected services tailored to your wishes.'
+            title: $t('services.process.planning.title') || 'Custom Planning',
+            description: $t('services.process.planning.description') || 'Our experts design a personalized travel plan with hand-selected services tailored to your wishes.'
         },
         {
             number: '03',
-            title: 'Fine-Tuning',
-            description: 'We refine your itinerary with your feedback until it perfectly matches your vision.'
+            title: $t('services.process.tuning.title') || 'Fine-Tuning',
+            description: $t('services.process.tuning.description') || 'We refine your itinerary with your feedback until it perfectly matches your vision.'
         },
         {
             number: '04',
-            title: 'Seamless Execution',
-            description: 'Enjoy your journey with our support at every step, from arrival to departure.'
+            title: $t('services.process.execution.title') || 'Seamless Execution',
+            description: $t('services.process.execution.description') || 'Enjoy your journey with our support at every step, from arrival to departure.'
         }
     ];
 </script>
 
 <Header />
 <main class="bg-white">
+    <!-- Hero Section -->
     <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center"
         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80')">
         <div class="text-center max-w-4xl px-4">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#dcb660]">Our Services</h1>
-            <p class="text-xl md:text-2xl mb-8">Comprehensive travel solutions crafted with expertise and care</p>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#dcb660]">{$t('services.title') || 'Our Services'}</h1>
+            <p class="text-xl md:text-2xl mb-8">{$t('services.subtitle') || 'Comprehensive travel solutions crafted with expertise and care'}</p>
         </div>
     </section>
 
+    <!-- Experience Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Experience the Difference</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{$t('services.experienceTitle') || 'Experience the Difference'}</h2>
                 <p class="text-lg text-gray-600">
-                    At BuVipTur, we believe that exceptional travel experiences begin with superior services. Every element of your journey is carefully curated to ensure comfort, authenticity, and unforgettable moments. Discover our comprehensive range of services designed to elevate your Central European adventure.
+                    {$t('services.experienceDescription') || 'At BuVipTur, we believe that exceptional travel experiences begin with superior services. Every element of your journey is carefully curated to ensure comfort, authenticity, and unforgettable moments. Discover our comprehensive range of services designed to elevate your Central European adventure.'}
                 </p>
             </div>
         </div>
     </section>
 
+    <!-- Services Section -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="space-y-24">
@@ -195,7 +158,7 @@
                             <p class="text-lg text-gray-600 mb-6">{service.description}</p>
                             
                             <div class="mb-8">
-                                <h4 class="text-xl font-semibold text-gray-900 mb-4">Service Highlights:</h4>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-4">{$t('services.serviceHighlights') || 'Service Highlights:'}</h4>
                                 <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3">
                                     {#each service.features as feature}
                                         <li class="flex items-start">
@@ -212,40 +175,22 @@
         </div>
     </section>
 
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Service Process</h2>
-                <p class="text-lg text-gray-600">
-                    We follow a refined process to ensure every detail of your journey is perfectly executed.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {#each processSteps as step}
-                    <div class="bg-white rounded-lg p-8 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 relative overflow-hidden">
-                        <span class="text-[120px] font-bold text-[#dcb660]/10 absolute -bottom-6 -right-6 leading-none">{step.number}</span>
-                        <div class="relative z-10">
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">
-                                <span class="text-[#dcb660] mr-2">{step.number}</span>{step.title}
-                            </h3>
-                            <p class="text-gray-600">{step.description}</p>
-                        </div>
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </section>
-
+    <!-- Benefits Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{$t('services.benefitsTitle') || 'Why Choose Our Services'}</h2>
+                <p class="text-lg text-gray-600">
+                    {$t('services.benefitsSubtitle') || 'We go beyond expectations to ensure your travel experience is seamless and memorable.'}
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {#each benefits as benefit}
-                    <div class="p-8 bg-gray-50 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-                        <div class="w-16 h-16 bg-[#dcb660] rounded-full flex items-center justify-center text-white mb-6">
+                    <div class="text-center p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-shadow">
+                        <div class="w-16 h-16 bg-[#dcb660] text-white rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas {benefit.icon} text-2xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">{benefit.title}</h3>
                         <p class="text-gray-600">{benefit.description}</p>
                     </div>
                 {/each}
@@ -253,30 +198,24 @@
         </div>
     </section>
 
-    <section class="py-20 bg-teal-900 text-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Journey?</h2>
-                <p class="text-lg opacity-90 mb-8">
-                    Let us create a customized travel experience tailored to your preferences and interests.
+    <!-- CTA Section -->
+    <section class="py-16 bg-[#dcb660]">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">{$t('services.cta.title') || 'Ready to Start Your Journey?'}</h2>
+                <p class="text-xl text-white mb-8">
+                    {$t('services.cta.description') || 'Let us create a customized travel experience tailored to your preferences and interests.'}
                 </p>
-                <div class="flex justify-center gap-4 flex-wrap">
-                    <Button 
-                        variant="primary" 
-                        size="lg" 
-                        href="/contact"
-                    >
-                        Get a Custom Quote
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button href="/contact" variant="secondary" size="lg">
+                        {$t('services.cta.getQuote') || 'Get a Custom Quote'}
                     </Button>
-                    <Button 
-                        variant="outline" 
-                        size="lg" 
-                        href="/tours"
-                    >
-                        Explore Our Tours
+                    <Button href="/tours" variant="secondary" size="lg">
+                        {$t('services.cta.exploreTours') || 'Explore Our Tours'}
                     </Button>
                 </div>
             </div>
         </div>
     </section>
+
 </main>

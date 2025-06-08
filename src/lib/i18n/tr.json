@@ -291,34 +291,120 @@
     "learnMore": "Hizmetlerimiz hakkında daha fazla bilgi edinin",
     "experienceTitle": "Farkı Deneyimleyin",
     "experienceDescription": "BuVipTur'da olağanüstü seyahat deneyimlerinin üstün hizmetlerle başladığına inanıyoruz. Yolculuğunuzun her unsuru konfor, otantiklik ve unutulmaz anları sağlamak için özenle seçilir. Orta Avrupa maceranızı yükseltmek için tasarlanmış kapsamlı hizmet yelpazemizi keşfedin.",
+    "serviceHighlights": "Hizmet Öne Çıkanları:",
+    "benefitsTitle": "Neden Hizmetlerimizi Seçmelisiniz",
+    "benefitsSubtitle": "Seyahat deneyiminizin kusursuz ve unutulmaz olmasını sağlamak için beklentilerin ötesine geçiyoruz.",
+    "accommodation": {
+      "title": "Konaklama",
+      "description": "İhtiyaçlarınıza ve tercihlerinize mükemmel şekilde uyacak konaklama düzenler ve kişiselleştiririz. Büyüleyici butik otellerden eşsiz tarihi konaklamalara kadar, ekibimiz her seçeneğin kalite, konfor ve otantik yerel karakter sunmasını sağlar. Konaklamanız için ideal yeri bulmamıza izin verin.",
+      "features": [
+        "Kişiselleştirilmiş konaklama planlaması",
+        "Geniş yelpazede onaylanmış mülkler",
+        "Bütçenize ve tarzınıza göre özelleştirilebilir",
+        "Kalite, konfor ve karaktere odaklanma",
+        "Butik oteller, tarihi konaklamalar ve daha fazlası için düzenlemeler",
+        "Programınıza uyarlanmış esnek seçenekler"
+      ],
+      "cta": "Konaklamaları Görüntüle"
+    },
+    "visa": {
+      "title": "Uzman Vize Yardımı",
+      "description": "Karmaşık vize gereksinimlerinde kolaylıkla yön bulun. Uzman vize ekibimiz, uyruğunuza ve hedefinize göre uyarlanmış belgeleme ve başvuru prosedürleri konusunda uzman rehberlik ile sorunsuz bir başvuru süreci sağlamak için kapsamlı destek sağlar.",
+      "features": [
+        "Kişiselleştirilmiş vize danışmanlığı",
+        "Belge hazırlama rehberliği",
+        "Başvuru inceleme hizmetleri",
+        "Büyükelçilik randevu planlama",
+        "Gerektiğinde çeviri hizmetleri",
+        "Başvuru süreci boyunca 7/24 destek"
+      ],
+      "cta": "Vize Hizmetleri Hakkında Bilgi Edinin"
+    },
+    "transportation": {
+      "title": "Premium Ulaşım",
+      "description": "Modern araç filomuz ve uzman şoförlerimizle konfor ve stil içinde seyahat edin. Havaalanı transferlerinden çok şehirli yolculuklara kadar, lojistiği biz hallederken manzaranın tadını çıkarmanıza olanak tanıyan dakik, konforlu ulaşım sağlıyoruz.",
+      "features": [
+        "Modern, konforlu araçlar",
+        "Profesyonel lisanslı şoförler",
+        "Havaalanı transferleri ve çok şehirli rotalar",
+        "Manzaralı rota planlama",
+        "Esnek zamanlama seçenekleri",
+        "Güvenlik ve güvenilirlik garantili"
+      ],
+      "cta": "Ulaşım Hakkında Bilgi Edinin"
+    },
+    "cultural": {
+      "title": "Kültürel Dalış Turları",
+      "description": "Kültürel dalış deneyimlerimiz aracılığıyla Orta Avrupa'nın otantik kalbiyle bağlantı kurun. Geleneksel el sanatları atölyelerinden yerel mutfak karşılaşmalarına kadar, gezginler ve yerel topluluklar arasında anlamlı bağlantılar yaratıyoruz.",
+      "features": [
+        "Geleneksel el sanatları atölyeleri",
+        "Yerel yemek pişirme dersleri",
+        "Topluluk etkileşim programları",
+        "Halk müziği ve dans deneyimleri",
+        "Sanatçı atölye ziyaretleri",
+        "Kültürel görgü kuralları rehberliği"
+      ],
+      "cta": "Kültürel Turları Keşfedin"
+    },
+    "historical": {
+      "title": "Tarihi Turlar",
+      "description": "Uzman rehberli tarihi turlarımızla zamanda geriye adım atın. Ortaçağ kalelerinden İkinci Dünya Savaşı anıt yerlerine kadar, üniversite mezunu rehberlerimiz yüzyıllık tarihi etkileyici anlatılar ve içeriden erişimle hayata geçirir.",
+      "features": [
+        "Üniversite mezunu tarihçi rehberler",
+        "Ortaçağ kalesi keşifleri",
+        "İkinci Dünya Savaşı anıt yerleri",
+        "Habsburg İmparatorluğu tarihi rotaları",
+        "Arkeolojik alan erişimi",
+        "Etkileşimli hikaye anlatımı yaklaşımı"
+      ],
+      "cta": "Tarihi Turları Keşfedin"
+    },
+    "factory": {
+      "title": "Endüstriyel Miras Turları",
+      "description": "Özel fabrika turları ve zanaatkar karşılaşmaları aracılığıyla Macaristan'ın endüstriyel inovasyonunu deneyimleyin. Çalışan fabrikalara, tarihi endüstriyel alanlara özel erişim elde edin ve geleneksel endüstrileri canlı tutan zanaatkarlarla tanışın.",
+      "features": [
+        "Çalışan fabrikalara özel erişim",
+        "Uygulamalı zanaat gösterileri",
+        "Usta zanaatkarlarla tanışma",
+        "Tarihi endüstriyel alan keşfi",
+        "Perde arkası üretim içgörüleri",
+        "Optimal deneyim için küçük grup boyutları"
+      ],
+      "cta": "Fabrika Turlarını Keşfedin"
+    },
+    "destinations": {
+      "budapest": "Budapeşte",
+      "vienna": "Viyana",
+      "prague": "Prag"
+    },
     "process": {
       "title": "Hizmet Sürecimiz",
-      "subtitle": "Yolculuğunuzun her detayının mükemmel şekilde gerçekleştirilmesi için rafine bir süreç izliyoruz.",
+      "subtitle": "Yolculuğunuzun her detayının mükemmel şekilde yürütülmesini sağlamak için gelişmiş bir süreç izliyoruz.",
       "consultation": {
         "title": "Danışmanlık",
         "description": "Seyahat tercihlerinizi, ilgi alanlarınızı ve ihtiyaçlarınızı anlamak için detaylı bir danışmanlıkla başlıyoruz."
       },
       "planning": {
-        "title": "Özel Planlama", 
-        "description": "Uzmanlarımız isteklerinize uygun şekilde el ile seçilmiş hizmetlerle kişiselleştirilmiş bir seyahat planı tasarlar."
+        "title": "Özel Planlama",
+        "description": "Uzmanlarımız dileklerinize göre uyarlanmış elle seçilmiş hizmetlerle kişiselleştirilmiş bir seyahat planı tasarlar."
       },
       "tuning": {
         "title": "İnce Ayar",
-        "description": "Geri bildirimlerinizle güzergahınızı vizyonunuza mükemmel şekilde uyuncaya kadar rafine ederiz."
+        "description": "Geri bildiriminizle programınızı vizyonunuzla mükemmel şekilde eşleşene kadar geliştiririz."
       },
       "execution": {
-        "title": "Sorunsuz Uygulama",
+        "title": "Kusursuz Uygulama",
         "description": "Varıştan kalkışa kadar her adımda desteğimizle yolculuğunuzun tadını çıkarın."
       }
     },
     "benefits": {
       "support247": {
-        "title": "24/7 Müşteri Desteği",
-        "description": "Özel ekibimiz yolculuğunuz sırasında herhangi bir soru veya ihtiyaçla ilgili yardım için günün her saatinde kullanılabilir."
+        "title": "7/24 Müşteri Desteği",
+        "description": "Özel ekibimiz yolculuğunuz sırasında herhangi bir soru veya ihtiyaç için günün her saati mevcut."
       },
       "bestPrice": {
         "title": "En İyi Fiyat Garantisi",
-        "description": "Herhangi bir karşılaştırılabilir hizmet fiyatını eşliyoruz ve gizli ücret olmaksızın şeffaflık sunuyoruz."
+        "description": "Herhangi bir karşılaştırılabilir hizmet fiyatını eşler ve gizli ücret olmadan şeffaflık sunarız."
       },
       "protection": {
         "title": "Seyahat Koruması",
@@ -327,7 +413,7 @@
     },
     "cta": {
       "title": "Yolculuğunuza Başlamaya Hazır mısınız?",
-      "description": "Tercihlerinize ve ilgi alanlarınıza uygun özelleştirilmiş bir seyahat deneyimi yaratmamıza izin verin.",
+      "description": "Tercihlerinize ve ilgi alanlarınıza göre uyarlanmış özelleştirilmiş bir seyahat deneyimi oluşturmamıza izin verin.",
       "getQuote": "Özel Teklif Alın",
       "exploreTours": "Turlarımızı Keşfedin"
     },

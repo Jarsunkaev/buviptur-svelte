@@ -291,6 +291,92 @@
     "learnMore": "Learn more about our services",
     "experienceTitle": "Experience the Difference",
     "experienceDescription": "At BuVipTur, we believe that exceptional travel experiences begin with superior services. Every element of your journey is carefully curated to ensure comfort, authenticity, and unforgettable moments. Discover our comprehensive range of services designed to elevate your Central European adventure.",
+    "serviceHighlights": "Service Highlights:",
+    "benefitsTitle": "Why Choose Our Services",
+    "benefitsSubtitle": "We go beyond expectations to ensure your travel experience is seamless and memorable.",
+    "accommodation": {
+      "title": "Accommodation",
+      "description": "We arrange and customize accommodation to perfectly suit your needs and preferences. From charming boutique hotels to unique historic stays, our team ensures every option offers quality, comfort, and authentic local character. Let us find the ideal place for your stay.",
+      "features": [
+        "Personalized accommodation planning",
+        "Wide range of vetted properties",
+        "Customizable to your budget and style",
+        "Focus on quality, comfort, and character",
+        "Arrangements for boutique hotels, historic stays, and more",
+        "Flexible options tailored to your itinerary"
+      ],
+      "cta": "View Accommodations"
+    },
+    "visa": {
+      "title": "Expert Visa Assistance",
+      "description": "Navigate complex visa requirements with ease. Our specialized visa team provides comprehensive support to ensure a smooth application process, with expert guidance on documentation and application procedures tailored to your nationality and destination.",
+      "features": [
+        "Personalized visa consultation",
+        "Document preparation guidance",
+        "Application review services",
+        "Embassy appointment scheduling",
+        "Translation services when needed",
+        "24/7 support during application process"
+      ],
+      "cta": "Learn About Visa Services"
+    },
+    "transportation": {
+      "title": "Premium Transportation",
+      "description": "Travel in comfort and style with our fleet of modern vehicles and expert drivers. From airport transfers to multi-city journeys, we ensure punctual, comfortable transportation that allows you to enjoy the scenery while we handle the logistics.",
+      "features": [
+        "Modern, comfortable vehicles",
+        "Professional licensed drivers",
+        "Airport transfers and multi-city routes",
+        "Scenic route planning",
+        "Flexible scheduling options",
+        "Safety and reliability guaranteed"
+      ],
+      "cta": "Learn About Transportation"
+    },
+    "cultural": {
+      "title": "Cultural Immersion Tours",
+      "description": "Connect with the authentic heart of Central Europe through our cultural immersion experiences. From traditional craft workshops to local cuisine encounters, we create meaningful connections between travelers and local communities.",
+      "features": [
+        "Traditional craft workshops",
+        "Local cooking classes",
+        "Community interaction programs",
+        "Folk music and dance experiences",
+        "Artisan studio visits",
+        "Cultural etiquette guidance"
+      ],
+      "cta": "Explore Cultural Tours"
+    },
+    "historical": {
+      "title": "Historical Tours",
+      "description": "Step back in time with our expert-guided historical tours. From medieval castles to World War II memorial sites, our university-educated guides bring centuries of history to life with compelling narratives and insider access.",
+      "features": [
+        "University-educated historian guides",
+        "Medieval castle explorations",
+        "World War II memorial sites",
+        "Habsburg Empire historical routes",
+        "Archaeological site access",
+        "Interactive storytelling approach"
+      ],
+      "cta": "Discover Historical Tours"
+    },
+    "factory": {
+      "title": "Industrial Heritage Tours",
+      "description": "Experience Hungary's industrial innovation through exclusive factory tours and craftspeople encounters. Get exclusive access to working factories, historic industrial sites, and meet the craftspeople keeping traditional industries alive.",
+      "features": [
+        "Exclusive access to working factories",
+        "Hands-on craft demonstrations",
+        "Meet master craftspeople",
+        "Historical industrial site exploration",
+        "Behind-the-scenes production insights",
+        "Small group sizes for optimal experience"
+      ],
+      "cta": "Discover Factory Tours"
+    },
+    "destinations": {
+      "budapest": "Budapest",
+      "vienna": "Vienna",
+      "prague": "Prague"
+    },
     "process": {
       "title": "Our Service Process",
       "subtitle": "We follow a refined process to ensure every detail of your journey is perfectly executed.",
@@ -299,7 +385,7 @@
         "description": "We begin with a detailed consultation to understand your travel preferences, interests, and needs."
       },
       "planning": {
-        "title": "Custom Planning", 
+        "title": "Custom Planning",
         "description": "Our experts design a personalized travel plan with hand-selected services tailored to your wishes."
       },
       "tuning": {
