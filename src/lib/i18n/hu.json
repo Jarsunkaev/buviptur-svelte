@@ -247,6 +247,9 @@
       }
     },
     "featured": {
+      "title": "Kiemelt Túraélmény",
+      "subtitle": "Legnépszerűbb és legátfogóbb túraélményünk",
+      "explore": "Fedezze Fel Túráinkat",
       "badges": {
         "bestseller": "Bestseller",
         "new": "Új",
@@ -274,6 +277,52 @@
         "duration": "12 óra"
       }
     },
+    "package": {
+      "featured": "Kiemelt Túracsomag",
+      "itinerary": "Az Ön 3 Napos Kalandja",
+      "cta": {
+        "subtitle": "Készen áll erre a csodálatos utazásra?",
+        "button": "Foglalja Le Ezt a Csomagot"
+      }
+    },
+    "detailed": {
+      "about": "A Túráról",
+      "itinerary": {
+        "title": "Túra Útvonal"
+      },
+      "budapest": {
+        "title": "Magyar Örökség és Dunakanyar Felfedezés",
+        "subtitle": "Budapest - Esztergom - Visegrád - Szentendre",
+        "description": "Induljon el egy lenyűgöző utazásra Magyarország legbecsesebb történelmi helyszínein. A fenséges Budai Várnegyedtől a bájos dunakanyari városokig tapasztalja meg a gazdag örökséget, amely alakította Közép-Európát.",
+        "duration": "2 Éjszaka, 3 Nap",
+        "day1": {
+          "title": "1. Nap",
+          "activities": {
+            "arrival": "Érkezés Budapestre",
+            "castle": "Budai Vár és Halászbástya",
+            "parliament": "Magyar Országház és Szent István Bazilika felfedezése",
+            "shopping": "Váci utca és Nagycsarnok",
+            "cruise": "Dunai hajóút"
+          }
+        },
+        "day2": {
+          "title": "2. Nap",
+          "activities": {
+            "dayTrip": "Magyar Örökség egynapos kirándulás",
+            "destinations": "Esztergomi Bazilika látogatása",
+            "szentendre": "Visegrádi Vár felfedezése",
+            "return": "Visszatérés Budapestre"
+          }
+        },
+        "day3": {
+          "title": "3. Nap",
+          "activities": {
+            "heroes": "Hősök tere vezetett túrával",
+            "margaret": "Relaxáló séta a Margitszigeten"
+          }
+        }
+      }
+    },
     "testimonials": {
       "incredible": {
         "title": "Hihetetlen történelmi betekintések",
@@ -291,6 +340,92 @@
     "learnMore": "Tudjon meg többet szolgáltatásainkról",
     "experienceTitle": "Tapasztalja meg a különbséget",
     "experienceDescription": "A BuVipTur-nál hiszünk abban, hogy a kivételes utazási élmények kiváló szolgáltatásokkal kezdődnek. Utazása minden elemét gondosan válogatjuk össze a kényelem, autenticitás és felejthetetlen pillanatok biztosítása érdekében. Fedezze fel átfogó szolgáltatásaink skáláját, amelyek célja közép-európai kalandjának felemelése.",
+    "serviceHighlights": "Szolgáltatás Kiemelések:",
+    "benefitsTitle": "Miért válassza szolgáltatásainkat",
+    "benefitsSubtitle": "Túllépünk az elvárásaikon, hogy utazási élménye zökkenőmentes és emlékezetes legyen.",
+    "accommodation": {
+      "title": "Szállás",
+      "description": "Olyan szállásokat szervezünk és testre szabunk, amelyek tökéletesen megfelelnek igényeinek és preferenciáinak. A bájos butik hotelektől az egyedi történelmi szállásokig csapatunk biztosítja, hogy minden opció minőséget, kényelmet és autentikus helyi karaktert kínáljon. Hagyja, hogy megtaláljuk az ideális helyet tartózkodására.",
+      "features": [
+        "Személyre szabott szállástervezés",
+        "Ellenőrzött ingatlanok széles skálája",
+        "Testre szabható a költségvetéshez és stílushoz",
+        "Fókusz a minőségre, kényelemre és karakterre",
+        "Intézkedések butik hotelekhez, történelmi szállásokhoz és még többhöz",
+        "Rugalmas lehetőségek az útvonalához igazítva"
+      ],
+      "cta": "Szállások Megtekintése"
+    },
+    "visa": {
+      "title": "Szakértő Vízumsegítség",
+      "description": "Könnyedén navigáljon az összetett vízumkövetelmények között. Specializált vízumcsapatunk átfogó támogatást nyújt a zökkenőmentes ügyintézési folyamat biztosítása érdekében, szakértő útmutatással a dokumentációban és az alkalmazási eljárásokban, amelyek az Ön nemzetiségéhez és célpontjához igazodnak.",
+      "features": [
+        "Személyre szabott vízumkonzultáció",
+        "Dokumentum-előkészítési útmutatás",
+        "Alkalmazás-felülvizsgálati szolgáltatások",
+        "Nagykövetségi időpont-egyeztetés",
+        "Fordítási szolgáltatások szükség esetén",
+        "24/7 támogatás az alkalmazási folyamat során"
+      ],
+      "cta": "Vízumszolgáltatások Megismerése"
+    },
+    "transportation": {
+      "title": "Prémium Közlekedés",
+      "description": "Utazzon kényelmesen és stílusosan modern járműveink flottájával és szakértő sofőreinkkel. A repülőtéri transzfertől a többvárosú utazásokig pontosan, kényelmes közlekedést biztosítunk, amely lehetővé teszi a táj élvezését, miközben mi intézzük a logisztikát.",
+      "features": [
+        "Modern, kényelmes járművek",
+        "Professzionális, engedéllyel rendelkező sofőrök",
+        "Repülőtéri transzferek és többvárosú útvonalak",
+        "Festői útvonaltervezés",
+        "Rugalmas ütemezési lehetőségek",
+        "Garantált biztonság és megbízhatóság"
+      ],
+      "cta": "Közlekedés Megismerése"
+    },
+    "cultural": {
+      "title": "Kulturális Elmélyülő Túrák",
+      "description": "Kapcsolódjon Közép-Európa autentikus szívéhez kulturális elmélyülő élményeink révén. A hagyományos kézműves műhelyektől a helyi gasztronómiai találkozásokig jelentős kapcsolatokat teremtünk az utazók és a helyi közösségek között.",
+      "features": [
+        "Hagyományos kézműves műhelyek",
+        "Helyi főzőtanfolyamok",
+        "Közösségi interakciós programok",
+        "Népzene és táncélmények",
+        "Kézműves stúdió látogatások",
+        "Kulturális etikett útmutatás"
+      ],
+      "cta": "Kulturális Túrák Felfedezése"
+    },
+    "historical": {
+      "title": "Történelmi Túrák",
+      "description": "Lépjen vissza az időben szakértően vezetett történelmi túráinkkal. A középkori váraktól a második világháborús emlékhelyekig egyetemi végzettségű idegenvezetőink évszázadok történelmét keltik életre meggyőző narratívákkal és bennfentes hozzáféréssel.",
+      "features": [
+        "Egyetemi végzettségű történész idegenvezetők",
+        "Középkori várak felfedezése",
+        "Második világháborús emlékhelyek",
+        "Habsburg Birodalom történelmi útvonalai",
+        "Régészeti lelőhelyek hozzáférése",
+        "Interaktív történetmesélési megközelítés"
+      ],
+      "cta": "Történelmi Túrák Felfedezése"
+    },
+    "factory": {
+      "title": "Ipari Örökség Túrák",
+      "description": "Tapasztalja meg Magyarország ipari innovációját exkluzív gyártúrák és kézműves találkozások révén. Szerezzen exkluzív hozzáférést működő gyárakhoz, történelmi ipari helyszínekhez, és ismerje meg azokat a kézműveseket, akik életben tartják a hagyományos iparágakat.",
+      "features": [
+        "Exkluzív hozzáférés működő gyárakhoz",
+        "Gyakorlati kézműves bemutatók",
+        "Mester kézművesek megismerése",
+        "Történelmi ipari helyszínek felfedezése",
+        "Kulisszák mögötti termelési betekintések",
+        "Kis csoportméretek az optimális élményért"
+      ],
+      "cta": "Gyártúrák Felfedezése"
+    },
+    "destinations": {
+      "budapest": "Budapest",
+      "vienna": "Bécs",
+      "prague": "Prága"
+    },
     "process": {
       "title": "Szolgáltatási folyamatunk",
       "subtitle": "Kifinomult folyamatot követünk, hogy utazásának minden részlete tökéletesen legyen végrehajtva.",

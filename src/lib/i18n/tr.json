@@ -247,6 +247,9 @@
       }
     },
     "featured": {
+      "title": "Öne Çıkan Tur Deneyimi",
+      "subtitle": "En popüler ve kapsamlı tur deneyimimiz",
+      "explore": "Turlarımızı Keşfedin",
       "badges": {
         "bestseller": "En Çok Satan",
         "new": "Yeni",
@@ -272,6 +275,52 @@
         "title": "Budapeşte'den Viyana Günübirlik Gezisi",
         "location": "Viyana, Avusturya",
         "duration": "12 saat"
+      }
+    },
+    "package": {
+      "featured": "Öne Çıkan Tur Paketi",
+      "itinerary": "3 Günlük Maceranız",
+      "cta": {
+        "subtitle": "Bu muhteşem yolculuğu deneyimlemeye hazır mısınız?",
+        "button": "Bu Paketi Rezerve Edin"
+      }
+    },
+    "detailed": {
+      "about": "Bu Tur Hakkında",
+      "itinerary": {
+        "title": "Tur Güzergahı"
+      },
+      "budapest": {
+        "title": "Macar Mirası ve Tuna Kıvrımı Keşfi",
+        "subtitle": "Budapeşte - Esztergom - Visegrád - Szentendre",
+        "description": "Macaristan'ın en değerli tarihi alanlarında büyüleyici bir yolculuğa çıkın. Görkemli Buda Kalesi'nden büyüleyici Tuna kıvrımı kasabalarına kadar, Orta Avrupa'yı şekillendiren zengin mirası deneyimleyin.",
+        "duration": "2 Gece, 3 Gün",
+        "day1": {
+          "title": "1. Gün",
+          "activities": {
+            "arrival": "Budapeşte'ye varış",
+            "castle": "Buda Kalesi ve Balıkçı Tabyası",
+            "parliament": "Macar Parlamentosu ve St. Stephen Bazilikası'nı keşfedin",
+            "shopping": "Vaci Caddesi ve Büyük Pazar Salonu",
+            "cruise": "Tuna Nehri Gezisi"
+          }
+        },
+        "day2": {
+          "title": "2. Gün",
+          "activities": {
+            "dayTrip": "Macar Mirası günübirlik gezisi",
+            "destinations": "Esztergom Bazilikası ziyareti",
+            "szentendre": "Visegrád Kalesi'ni keşfedin",
+            "return": "Budapeşte'ye dönüş"
+          }
+        },
+        "day3": {
+          "title": "3. Gün",
+          "activities": {
+            "heroes": "Kahramanlar Meydanı rehberli turu",
+            "margaret": "Margaret Adası'nda rahatlatıcı yürüyüş"
+          }
+        }
       }
     },
     "testimonials": {

@@ -247,6 +247,9 @@
       }
     },
     "featured": {
+      "title": "Featured Tour Experience",
+      "subtitle": "Our most popular and comprehensive tour experience",
+      "explore": "Explore Our Tours",
       "badges": {
         "bestseller": "Bestseller",
         "new": "New",
@@ -272,6 +275,52 @@
         "title": "Vienna Day Trip from Budapest",
         "location": "Vienna, Austria",
         "duration": "12 hours"
+      }
+    },
+    "package": {
+      "featured": "Featured Tour Package",
+      "itinerary": "Your 3-Day Adventure",
+      "cta": {
+        "subtitle": "Ready to experience this amazing journey?",
+        "button": "Book This Package"
+      }
+    },
+    "detailed": {
+      "about": "About This Tour",
+      "itinerary": {
+        "title": "Tour Itinerary"
+      },
+      "budapest": {
+        "title": "Hungarian Heritage & Danube Bend Discovery",
+        "subtitle": "Budapest - Esztergom - Visegrád - Szentendre",
+        "description": "Embark on a captivating journey through Hungary's most treasured historical sites. From the majestic Buda Castle to the charming Danube Bend towns, experience the rich heritage that shaped Central Europe.",
+        "duration": "2 Nights, 3 Days",
+        "day1": {
+          "title": "Day 1",
+          "activities": {
+            "arrival": "Arrival in Budapest",
+            "castle": "Buda Castle and Fisherman's Bastion",
+            "parliament": "Explore Hungarian Parliament and St. Stephen's Basilica",
+            "shopping": "Vaci Street and Great Market Hall",
+            "cruise": "Danube River Cruise"
+          }
+        },
+        "day2": {
+          "title": "Day 2",
+          "activities": {
+            "dayTrip": "Hungarian Heritage Day Trip",
+            "destinations": "Visit Esztergom Basilica",
+            "szentendre": "Explore Visegrád Castle",
+            "return": "Return to Budapest"
+          }
+        },
+        "day3": {
+          "title": "Day 3",
+          "activities": {
+            "heroes": "Heroes' Square guided tour",
+            "margaret": "Relaxing walk through Margaret Island"
+          }
+        }
       }
     },
     "testimonials": {

@@ -144,7 +144,7 @@
 
 <Header />
 
-<main class="bg-white">
+<main class="bg-white" id="top">
     <!-- Hero Section -->
     <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center"
         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80')">
