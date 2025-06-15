@@ -12,18 +12,24 @@
     console.log('Base URL:', baseUrl);
   }
   
-  // Lazy load heavy components
+  // Lazy load heavy components - prevent re-rendering
   let TestimonialsSection;
+  let testimonialsLoaded = false;
   
   // For responsive design
   let windowWidth;
   let isVisible = {};
+  let observerSetup = false;
   
   // Touch tracking variables for mobile swipe
   let currentSlide = 0;
   let touchStartX = 0;
   let touchEndX = 0;
   let swiping = false;
+  
+  // Prevent carousel re-rendering
+  let carouselInitialized = false;
+  let autoRotateInterval;
   
   // Handle touch events for swiping
   function handleTouchStart(e) {
@@ -59,7 +65,7 @@
     currentSlide = (currentSlide - 1 + supportServices.length) % supportServices.length;
   }
   
-  // OPTIMIZED: Local carousel images (WebP format, optimized sizes)
+  // STATIC: Carousel images - no reactivity to prevent re-rendering
   const carouselImages = [
     '/above.webp',
     '/matyas.webp', 
@@ -71,134 +77,143 @@
     '/var.webp'
   ];
 
-  // Using local WebP images for better performance
-  $: mainServices = [
-    {
-      id: "guidedTours",
-      title: $t('home.services.services.0.title') || "Guided Tours",
-      description: $t('home.services.services.0.description') || "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
-      icon: "fa-map-marked-alt",
-      imageSrc: "/guided.webp",
-      features: $t('home.services.services.0.features') || [
-        "Small groups of max 12 travelers",
-        "Expert university-educated guides", 
-        "Hidden gems and local experiences",
-        "Flexible and customizable itineraries"
-      ]
-    },
-    {
-      id: "multiCountry", 
-      title: $t('home.services.services.1.title') || "Multi-Country Experience",
-      description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
-      icon: "fa-globe-europe",
-      imageSrc: "/country.webp",
-      features: $t('home.services.services.1.features') || [
-        "Hassle-free border crossings",
-        "Cohesive multi-country itineraries", 
-        "Local guides in each location",
-        "Comprehensive cultural immersion"
-      ]
-    },
-    {
-      id: "boatExperiences",
-      title: $t('home.services.services.2.title') || "Scenic Boat Experiences", 
-      description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
-      icon: "fa-ship",
-      imageSrc: "/river.webp",
-      features: $t('home.services.services.2.features') || [
-        "Intimate small-group cruises",
-        "Sunset and evening illumination tours",
-        "Historical commentary", 
-        "Gourmet dining experiences"
-      ]
-    }
-  ];
+  // STATIC: Main services - prevent re-rendering by avoiding reactivity unless necessary
+  let mainServices = [];
   
-  // Support services that enhance the travel experience (SEPARATE from main services)
-  $: supportServices = [
-    {
-      title: $t('home.supportServices.accommodation.title') || "Customized Accommodation",
-      description: $t('home.supportServices.accommodation.description') || "From boutique hotels to historic properties, we arrange accommodations that match your style, comfort needs, and budget.",
-      icon: "fa-hotel",
-      color: "#1a5f7a"
-    },
-    {
-      title: $t('home.supportServices.visa.title') || "Expert Visa Assistance",
-      description: $t('home.supportServices.visa.description') || "Navigate complex visa requirements with ease through our expert team's guidance on documentation and procedures.",
-      icon: "fa-passport",
-      color: "#228291"
-    },
-    {
-      title: $t('home.supportServices.transportation.title') || "Premium Transportation",
-      description: $t('home.supportServices.transportation.description') || "Travel in comfort with our modern vehicles and expert drivers, enjoying the scenery between destinations.",
-      icon: "fa-bus",
-      color: "#2aa1b7"
-    },
-    {
-      title: $t('home.supportServices.support.title') || "24/7 Support",
-      description: $t('home.supportServices.support.description') || "Our dedicated team ensures your journey runs smoothly from start to finish.",
-      icon: "fa-headset",
-      color: "#113946"
-    }
-  ];
+  // STATIC: Support services - prevent re-rendering
+  let supportServices = [];
   
-  // Destinations focus - make it reactive to translations
-  $: destinations = [
-    {
-      country: $t('home.destinations.countries.hungary') || "Hungary",
-      cities: [
-        { 
-          name: $t('home.destinations.cities.budapest') || "Budapest", 
-          highlight: $t('home.destinations.highlights.budapest') || "Cultural Heart of Hungary" 
-        },
-        { 
-          name: $t('home.destinations.cities.szentendre') || "Szentendre", 
-          highlight: $t('home.destinations.highlights.szentendre') || "Artistic Riverside Town" 
-        },
-        { 
-          name: $t('home.destinations.cities.visegrad') || "Visegrád", 
-          highlight: $t('home.destinations.highlights.visegrad') || "Royal Castle on the Danube" 
-        }
-      ]
-    },
-    {
-      country: $t('home.destinations.countries.austria') || "Austria",
-      cities: [
-        { 
-          name: $t('home.destinations.cities.vienna') || "Vienna", 
-          highlight: $t('home.destinations.highlights.vienna') || "City of Music & Dreams" 
-        },
-        { 
-          name: $t('home.destinations.cities.salzburg') || "Salzburg", 
-          highlight: $t('home.destinations.highlights.salzburg') || "Mozart's Birthplace" 
-        }
-      ]
-    },
-    {
-      country: $t('home.destinations.countries.czechRepublic') || "Czech Republic",
-      cities: [
-        { 
-          name: $t('home.destinations.cities.prague') || "Prague", 
-          highlight: $t('home.destinations.highlights.prague') || "The Golden City" 
-        },
-        { 
-          name: $t('home.destinations.cities.karlovyVary') || "Karlovy Vary", 
-          highlight: $t('home.destinations.highlights.karlovyVary') || "Historic Spa Town" 
-        }
-      ]
-    },
-    {
-      country: $t('home.destinations.countries.slovakia') || "Slovakia",
-      cities: [
-        { 
-          name: $t('home.destinations.cities.bratislava') || "Bratislava", 
-          highlight: $t('home.destinations.highlights.bratislava') || "The Little Big City" 
-        }
-      ]
-    }
-  ];
+  // STATIC: Destinations - prevent re-rendering
+  let destinations = [];
   
-  // OPTIMIZED: Smaller testimonial images
+  // Initialize static data once
+  function initializeStaticData() {
+    mainServices = [
+      {
+        id: "guidedTours",
+        title: $t('home.services.services.0.title') || "Guided Tours",
+        description: $t('home.services.services.0.description') || "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
+        icon: "fa-map-marked-alt",
+        imageSrc: "/guided.webp",
+        features: $t('home.services.services.0.features') || [
+          "Small groups of max 12 travelers",
+          "Expert university-educated guides", 
+          "Hidden gems and local experiences",
+          "Flexible and customizable itineraries"
+        ]
+      },
+      {
+        id: "multiCountry", 
+        title: $t('home.services.services.1.title') || "Multi-Country Experience",
+        description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
+        icon: "fa-globe-europe",
+        imageSrc: "/country.webp",
+        features: $t('home.services.services.1.features') || [
+          "Hassle-free border crossings",
+          "Cohesive multi-country itineraries", 
+          "Local guides in each location",
+          "Comprehensive cultural immersion"
+        ]
+      },
+      {
+        id: "boatExperiences",
+        title: $t('home.services.services.2.title') || "Scenic Boat Experiences", 
+        description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
+        icon: "fa-ship",
+        imageSrc: "/river.webp",
+        features: $t('home.services.services.2.features') || [
+          "Intimate small-group cruises",
+          "Sunset and evening illumination tours",
+          "Historical commentary", 
+          "Gourmet dining experiences"
+        ]
+      }
+    ];
+    
+    supportServices = [
+      {
+        title: $t('home.supportServices.accommodation.title') || "Customized Accommodation",
+        description: $t('home.supportServices.accommodation.description') || "From boutique hotels to historic properties, we arrange accommodations that match your style, comfort needs, and budget.",
+        icon: "fa-hotel",
+        color: "#1a5f7a"
+      },
+      {
+        title: $t('home.supportServices.visa.title') || "Expert Visa Assistance",
+        description: $t('home.supportServices.visa.description') || "Navigate complex visa requirements with ease through our expert team's guidance on documentation and procedures.",
+        icon: "fa-passport",
+        color: "#228291"
+      },
+      {
+        title: $t('home.supportServices.transportation.title') || "Premium Transportation",
+        description: $t('home.supportServices.transportation.description') || "Travel in comfort with our modern vehicles and expert drivers, enjoying the scenery between destinations.",
+        icon: "fa-bus",
+        color: "#2aa1b7"
+      },
+      {
+        title: $t('home.supportServices.support.title') || "24/7 Support",
+        description: $t('home.supportServices.support.description') || "Our dedicated team ensures your journey runs smoothly from start to finish.",
+        icon: "fa-headset",
+        color: "#113946"
+      }
+    ];
+    
+    destinations = [
+      {
+        country: $t('home.destinations.countries.hungary') || "Hungary",
+        cities: [
+          { 
+            name: $t('home.destinations.cities.budapest') || "Budapest", 
+            highlight: $t('home.destinations.highlights.budapest') || "Cultural Heart of Hungary" 
+          },
+          { 
+            name: $t('home.destinations.cities.szentendre') || "Szentendre", 
+            highlight: $t('home.destinations.highlights.szentendre') || "Artistic Riverside Town" 
+          },
+          { 
+            name: $t('home.destinations.cities.visegrad') || "Visegrád", 
+            highlight: $t('home.destinations.highlights.visegrad') || "Royal Castle on the Danube" 
+          }
+        ]
+      },
+      {
+        country: $t('home.destinations.countries.austria') || "Austria",
+        cities: [
+          { 
+            name: $t('home.destinations.cities.vienna') || "Vienna", 
+            highlight: $t('home.destinations.highlights.vienna') || "City of Music & Dreams" 
+          },
+          { 
+            name: $t('home.destinations.cities.salzburg') || "Salzburg", 
+            highlight: $t('home.destinations.highlights.salzburg') || "Mozart's Birthplace" 
+          }
+        ]
+      },
+      {
+        country: $t('home.destinations.countries.czechRepublic') || "Czech Republic",
+        cities: [
+          { 
+            name: $t('home.destinations.cities.prague') || "Prague", 
+            highlight: $t('home.destinations.highlights.prague') || "The Golden City" 
+          },
+          { 
+            name: $t('home.destinations.cities.karlovyVary') || "Karlovy Vary", 
+            highlight: $t('home.destinations.highlights.karlovyVary') || "Historic Spa Town" 
+          }
+        ]
+      },
+      {
+        country: $t('home.destinations.countries.slovakia') || "Slovakia",
+        cities: [
+          { 
+            name: $t('home.destinations.cities.bratislava') || "Bratislava", 
+            highlight: $t('home.destinations.highlights.bratislava') || "The Little Big City" 
+          }
+        ]
+      }
+    ];
+  }
+  
+  // STATIC: Testimonials data - prevent re-rendering
   const testimonialsData = [
     {
       title: 'Great Work',
@@ -218,9 +233,9 @@
     }
   ];
   
-  // OPTIMIZED: Intersection Observer with better performance
+  // OPTIMIZED: Intersection Observer with better performance - setup once
   function setupIntersectionObserver() {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || observerSetup) return;
     
     const sections = document.querySelectorAll('.animate-on-scroll');
     
@@ -234,31 +249,46 @@
         }
       });
     }, { 
-      threshold: 0.05, // Lower threshold for faster triggering
-      rootMargin: '100px' // Trigger before element is fully visible
+      threshold: 0.05,
+      rootMargin: '100px'
     });
     
     sections.forEach(section => {
       observer.observe(section);
     });
     
+    observerSetup = true;
     return observer;
   }
   
   onMount(async () => {
-    // Set up intersection observer
+    // Initialize static data once
+    initializeStaticData();
+    
+    // Set up intersection observer once
     setupIntersectionObserver();
     
-    // Lazy load TestimonialsSection
-    try {
-      TestimonialsSection = (await import('$lib/components/TestimonialsSection.svelte')).default;
-    } catch (error) {
-      console.warn('Failed to load TestimonialsSection:', error);
+    // Lazy load TestimonialsSection once
+    if (!testimonialsLoaded) {
+      try {
+        TestimonialsSection = (await import('$lib/components/TestimonialsSection.svelte')).default;
+        testimonialsLoaded = true;
+      } catch (error) {
+        console.warn('Failed to load TestimonialsSection:', error);
+      }
     }
     
-    // Optional: auto-rotate slides every 5 seconds
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
+    // Setup carousel auto-rotate once
+    if (!carouselInitialized) {
+      autoRotateInterval = setInterval(nextSlide, 5000);
+      carouselInitialized = true;
+    }
+    
+    return () => {
+      if (autoRotateInterval) {
+        clearInterval(autoRotateInterval);
+      }
+    };
   });
 </script>
 
@@ -336,15 +366,17 @@
                     </div>
                   </div>
                   
-                  <!-- Service image -->
+                  <!-- Service image - prevent re-rendering with static src -->
                   <div class="relative w-full h-64 md:h-96 bg-gray-200 overflow-hidden rounded-lg">
                     <img
                       src={service.imageSrc}
                       alt={service.title}
                       class="absolute inset-0 w-full h-full object-cover"
-                      loading="eager"
+                      loading="lazy"
+                      decoding="async"
                       width="800"
                       height="600"
+                      style="will-change: auto;"
                     />
                   </div>
                   
@@ -391,11 +423,10 @@
       </div>
     </section>
     
-    <!-- Support Services Section - Swipeable on Mobile (SEPARATE 4 SERVICES) -->
+    <!-- Support Services Section - Swipeable on Mobile -->
     <section id="support-services" class="relative py-16 md:py-24 overflow-hidden animate-on-scroll">
       <!-- Map Background -->
       <div class="absolute inset-0 z-0">
-        <!-- OPTIMIZED: Use a smaller, optimized background image -->
         <div class="absolute inset-0 bg-[url('/map.webp')] bg-cover bg-center opacity-30"></div>
         <div class="absolute inset-0 bg-white/60"></div>
         <div class="absolute inset-0 bg-[#113946]/10"></div>
@@ -547,8 +578,8 @@
           </p>
         </div>
         
-        <!-- Destinations Grid -->
-        <div class="destinations-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
+        <!-- Destinations Grid - Updated with centered content and no flags -->
+        <div class="destinations-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto px-4">
           {#each destinations as destination, i}
             <div 
               class="destination-card transform transition-all duration-700 translate-y-4 relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 shadow-lg hover:shadow-xl hover:-translate-y-2 hover:bg-white/30" 
@@ -561,29 +592,26 @@
               <!-- Glass effect border -->
               <div class="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/20"></div>
               
-              <div class="relative z-10 p-4 sm:p-6 lg:p-8 h-full flex flex-col min-h-[280px] sm:min-h-[320px]">
-                <!-- Country Header -->
-                <div class="flex items-center mb-4 sm:mb-6">
-                  <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-teal-900/80 to-teal-800/80 backdrop-blur-sm rounded-full flex items-center justify-center mr-3 flex-shrink-0 border border-white/20">
-                    <i class="fas fa-flag text-white text-sm sm:text-base"></i>
-                  </div>
-                  <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-teal-900 leading-tight">
+              <div class="relative z-10 p-6 sm:p-8 h-full flex flex-col justify-center text-center min-h-[300px] sm:min-h-[320px]">
+                <!-- Country Header - Centered -->
+                <div class="mb-6 sm:mb-8">
+                  <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-teal-900 leading-tight">
                     {destination.country}
                   </h3>
                 </div>
                 
-                <!-- Cities List -->
-                <div class="space-y-2 sm:space-y-3 lg:space-y-4 flex-grow">
+                <!-- Cities List - Centered -->
+                <div class="space-y-4 sm:space-y-5 flex-grow flex flex-col justify-center">
                   {#each destination.cities as city, j}
-                    <div class="flex items-start group">
-                      <i class="fas fa-map-marker-alt text-[#dcb660] mr-3 flex-shrink-0 mt-1 text-xs sm:text-sm"></i>
-                      <div class="city-info flex-1 min-w-0">
-                        <div class="text-sm sm:text-base lg:text-lg font-semibold text-teal-900 leading-tight break-words">
+                    <div class="city-item">
+                      <div class="flex items-center justify-center mb-2">
+                        <i class="fas fa-map-marker-alt text-[#dcb660] mr-2 text-sm sm:text-base"></i>
+                        <div class="text-base sm:text-lg lg:text-xl font-semibold text-teal-900 leading-tight">
                           {city.name}
                         </div>
-                        <div class="text-xs sm:text-sm lg:text-base text-teal-700/80 mt-1 leading-tight break-words">
-                          {city.highlight}
-                        </div>
+                      </div>
+                      <div class="text-sm sm:text-base text-teal-700/80 leading-relaxed px-2">
+                        {city.highlight}
                       </div>
                     </div>
                   {/each}
@@ -603,8 +631,8 @@
       </div>
     </section>
     
-    <!-- OPTIMIZED: Lazy loaded Testimonials -->
-    {#if TestimonialsSection}
+    <!-- OPTIMIZED: Lazy loaded Testimonials - render once -->
+    {#if testimonialsLoaded && TestimonialsSection}
       <svelte:component 
         this={TestimonialsSection}
         title={$t('home.testimonials.title')} 
@@ -678,83 +706,53 @@
   }
   
   /* Better text wrapping for all languages */
-  .city-info {
+  .city-item {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
   }
   
-  /* Responsive grid adjustments */
-  .destinations-grid {
-    display: grid;
-    gap: 1rem;
+  /* Mobile-specific styles */
+  @media (max-width: 640px) {
+    .destinations-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+    
+    .destination-card {
+      min-height: 280px;
+    }
+    
+    .destination-card .relative {
+      padding: 1.5rem;
+    }
+    
+    .city-item {
+      margin-bottom: 1rem;
+    }
+    
+    .city-item:last-child {
+      margin-bottom: 0;
+    }
   }
   
-  @media (min-width: 640px) {
+  @media (min-width: 641px) and (max-width: 1023px) {
     .destinations-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
   }
   
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .destinations-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (min-width: 1280px) {
     .destinations-grid {
       grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
-  }
-  
-  /* Mobile text scaling */
-  @media (max-width: 640px) {
-    .destination-card h3 {
-      font-size: 1.125rem;
-      line-height: 1.3;
-      color: #0f4c5c;
-    }
-    
-    .city-info > div:first-child {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #0f4c5c;
-    }
-    
-    .city-info > div:last-child {
-      font-size: 0.75rem;
-      line-height: 1.2;
-      color: rgba(15, 76, 92, 0.8);
-    }
-    
-    /* Adjust for very small screens */
-    @media (max-width: 360px) {
-      .destination-card h3 {
-        font-size: 1rem;
-      }
-      
-      .city-info > div:first-child {
-        font-size: 0.8125rem;
-      }
-      
-      .city-info > div:last-child {
-        font-size: 0.6875rem;
-      }
-    }
-  }
-  
-  /* Tablet optimizations */
-  @media (min-width: 641px) and (max-width: 1023px) {
-    .destination-card h3 {
-      font-size: 1.25rem;
-      color: #0f4c5c;
-    }
-    
-    .city-info > div:first-child {
-      font-size: 1rem;
-      color: #0f4c5c;
-    }
-    
-    .city-info > div:last-child {
-      font-size: 0.875rem;
-      color: rgba(15, 76, 92, 0.8);
     }
   }
   
@@ -764,22 +762,6 @@
   .destination-card:nth-child(3) { animation-delay: 300ms; }
   .destination-card:nth-child(4) { animation-delay: 450ms; }
   
-  /* Scrollbar styling for category horizontal scroll on mobile */
-  @media (max-width: 1024px) {
-    ::-webkit-scrollbar {
-      height: 6px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: #dcb660;
-      border-radius: 3px;
-    }
-  }
-
   /* OPTIMIZED: Efficient animations */
   .transition-all {
     transition-property: transform, opacity, box-shadow;
@@ -804,9 +786,24 @@
     contain: layout style;
   }
   
-  /* OPTIMIZED: Better image loading */
-  .image-content {
+  /* OPTIMIZED: Better image loading - prevent re-rendering */
+  img {
     content-visibility: auto;
-    contain-intrinsic-size: 400px 300px;
+    contain-intrinsic-size: 800px 600px;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  
+  /* Prevent carousel and component re-rendering */
+  .service-image-wrapper,
+  .service-content-wrapper {
+    contain: layout style paint;
+  }
+  
+  /* Mobile touch improvements */
+  @media (hover: none) and (pointer: coarse) {
+    .destination-card:hover {
+      transform: none;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
   }
 </style>
