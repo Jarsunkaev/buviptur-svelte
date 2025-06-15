@@ -522,8 +522,9 @@
       </div>
     </section>
     
-    <!-- Destinations Highlight - Map-inspired Design -->
-    <section id="destinations" class="py-20 bg-gray-50 animate-on-scroll relative overflow-hidden">
+    <!-- IMPROVED Destinations Section -->
+    <section id="destinations" class="py-12 sm:py-16 lg:py-20 bg-gray-50 animate-on-scroll relative overflow-hidden">
+      <!-- Background Pattern -->
       <div class="absolute inset-0 opacity-5">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
           <defs>
@@ -535,53 +536,68 @@
         </svg>
       </div>
       
-      <div class="container mx-auto px-4 relative z-10">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">{$t('home.destinations.title')}</h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            {$t('home.destinations.subtitle')}
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-teal-900 mb-4 sm:mb-6">
+            {$t('home.destinations.title') || 'Destinations We Serve'}
+          </h2>
+          <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            {$t('home.destinations.subtitle') || 'Explore the heart of Central Europe with our expertly crafted experiences'}
           </p>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
+        <!-- Destinations Grid -->
+        <div class="destinations-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
           {#each destinations as destination, i}
             <div 
-              class="transform transition-all duration-700 translate-y-4" 
+              class="destination-card transform transition-all duration-700 translate-y-4 relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 shadow-lg hover:shadow-xl hover:-translate-y-2 hover:bg-white/30" 
               class:translate-y-0={isVisible['destinations']}
               style="transition-delay: {i * 150}ms"
             >
-              <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-teal-900 to-teal-800 p-6 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 h-full">
-                <!-- Decorative elements -->
-                <div class="absolute top-0 left-0 w-full h-full opacity-10">
-                  <div class="absolute inset-0 bg-[#dcb660] rounded-full blur-3xl transform scale-75 translate-x-1/4 -translate-y-1/4"></div>
+              <!-- Subtle decorative gradient -->
+              <div class="absolute inset-0 bg-gradient-to-br from-teal-100/20 to-[#dcb660]/10 opacity-60"></div>
+              
+              <!-- Glass effect border -->
+              <div class="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/20"></div>
+              
+              <div class="relative z-10 p-4 sm:p-6 lg:p-8 h-full flex flex-col min-h-[280px] sm:min-h-[320px]">
+                <!-- Country Header -->
+                <div class="flex items-center mb-4 sm:mb-6">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-teal-900/80 to-teal-800/80 backdrop-blur-sm rounded-full flex items-center justify-center mr-3 flex-shrink-0 border border-white/20">
+                    <i class="fas fa-flag text-white text-sm sm:text-base"></i>
+                  </div>
+                  <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-teal-900 leading-tight">
+                    {destination.country}
+                  </h3>
                 </div>
                 
-                <div class="relative z-10">
-                  <h3 class="text-2xl font-bold text-white mb-4">{destination.country}</h3>
-                  <div class="space-y-3">
-                    {#each destination.cities as city, j}
-                      <div class="flex items-start group">
-                        <i class="fas fa-map-marker-alt text-[#dcb660] mt-1 mr-3 text-sm"></i>
-                        <div>
-                          <h4 class="font-medium text-white">{city.name}</h4>
-                          <p class="text-sm text-teal-100 italic">{city.highlight}</p>
+                <!-- Cities List -->
+                <div class="space-y-2 sm:space-y-3 lg:space-y-4 flex-grow">
+                  {#each destination.cities as city, j}
+                    <div class="flex items-start group">
+                      <i class="fas fa-map-marker-alt text-[#dcb660] mr-3 flex-shrink-0 mt-1 text-xs sm:text-sm"></i>
+                      <div class="city-info flex-1 min-w-0">
+                        <div class="text-sm sm:text-base lg:text-lg font-semibold text-teal-900 leading-tight break-words">
+                          {city.name}
+                        </div>
+                        <div class="text-xs sm:text-sm lg:text-base text-teal-700/80 mt-1 leading-tight break-words">
+                          {city.highlight}
                         </div>
                       </div>
-                    {/each}
-                  </div>
+                    </div>
+                  {/each}
                 </div>
               </div>
             </div>
           {/each}
         </div>
         
-        <div class="mt-16 text-center">
-          <a 
-            href="/contact" 
-            class="inline-flex items-center px-8 py-3 bg-[#dcb660] text-white rounded-lg hover:bg-[#dcb660]/90 transition-colors shadow-md"
-          >
-            <span>{$t('home.destinations.planJourney')}</span>
-            <i class="fas fa-paper-plane ml-2"></i>
+        <!-- Call to Action -->
+        <div class="text-center mt-12 sm:mt-16">
+          <a href="/contact" class="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-[#dcb660] text-white font-semibold rounded-xl hover:bg-[#dcb660]/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <span class="text-base sm:text-lg">{$t('home.destinations.planJourney') || 'Plan Your Journey'}</span>
+            <i class="fas fa-paper-plane ml-2 sm:ml-3"></i>
           </a>
         </div>
       </div>
@@ -633,6 +649,120 @@
   .transform {
     transform: translateZ(0);
   }
+  
+  /* Improved hover effects for destination cards */
+  .destination-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .destination-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.35);
+  }
+  
+  /* Glass morphism effect */
+  .destination-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  /* Better text wrapping for all languages */
+  .city-info {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Responsive grid adjustments */
+  .destinations-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .destinations-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .destinations-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+  }
+  
+  /* Mobile text scaling */
+  @media (max-width: 640px) {
+    .destination-card h3 {
+      font-size: 1.125rem;
+      line-height: 1.3;
+      color: #0f4c5c;
+    }
+    
+    .city-info > div:first-child {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #0f4c5c;
+    }
+    
+    .city-info > div:last-child {
+      font-size: 0.75rem;
+      line-height: 1.2;
+      color: rgba(15, 76, 92, 0.8);
+    }
+    
+    /* Adjust for very small screens */
+    @media (max-width: 360px) {
+      .destination-card h3 {
+        font-size: 1rem;
+      }
+      
+      .city-info > div:first-child {
+        font-size: 0.8125rem;
+      }
+      
+      .city-info > div:last-child {
+        font-size: 0.6875rem;
+      }
+    }
+  }
+  
+  /* Tablet optimizations */
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .destination-card h3 {
+      font-size: 1.25rem;
+      color: #0f4c5c;
+    }
+    
+    .city-info > div:first-child {
+      font-size: 1rem;
+      color: #0f4c5c;
+    }
+    
+    .city-info > div:last-child {
+      font-size: 0.875rem;
+      color: rgba(15, 76, 92, 0.8);
+    }
+  }
+  
+  /* Animation delays for staggered entrance */
+  .destination-card:nth-child(1) { animation-delay: 0ms; }
+  .destination-card:nth-child(2) { animation-delay: 150ms; }
+  .destination-card:nth-child(3) { animation-delay: 300ms; }
+  .destination-card:nth-child(4) { animation-delay: 450ms; }
   
   /* Scrollbar styling for category horizontal scroll on mobile */
   @media (max-width: 1024px) {
