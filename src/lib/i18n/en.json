@@ -12,6 +12,7 @@
     "titleHighlight": "Privilege",
     "subtitle": "From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.",
     "formTitle": "Start Your Journey",
+    "formSubtitle": "From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.",
     "firstName": "First Name",
     "lastName": "Last Name",
     "email": "Email Address",
@@ -138,7 +139,8 @@
         "szentendre": "Szentendre",
         "visegrad": "Visegrád",
         "salzburg": "Salzburg",
-        "karlovyVary": "Karlovy Vary"
+        "karlovyVary": "Karlovy Vary",
+        "esztergom": "Esztergom"
       },
       "highlights": {
         "budapest": "Cultural Heart of Hungary",
@@ -148,7 +150,8 @@
         "szentendre": "Artistic Riverside Town",
         "visegrad": "Royal Castle on the Danube",
         "salzburg": "Mozart's Birthplace",
-        "karlovyVary": "Historic Spa Town"
+        "karlovyVary": "Historic Spa Town",
+        "esztergom": "Hungary's Spiritual Capital"
       },
       "planJourney": "Plan Your Journey"
     },
@@ -161,6 +164,11 @@
   },
   "tours": {
     "title": "Our Tours",
+    "hero": {
+      "title": "Discover Our Tours",
+      "subtitle": "Experience the best of Hungary with our carefully curated tours",
+      "seePackages": "See Tour Packages"
+    },
     "subtitle": "Discover extraordinary journeys tailored to your wanderlust",
     "meta": {
       "description": "Explore Central Europe with BuVipTur's expertly guided tours. Historical, cultural, and multi-country experiences across Hungary, Austria, Czech Republic and beyond."
@@ -601,13 +609,13 @@
       "instagramAria": "Visit our Instagram page"
     },
     "privacy": "Privacy Policy",
-    "copyright": "All rights reserved.",
+    "copyright": "All rights reserved",
     "privacyPolicy": "Privacy Policy"
   },
   "common": {
     "learnMore": "Learn More",
     "bookNow": "Book Now",
-    "explore": "Explore", 
+    "explore": "Explore",
     "viewMore": "View More",
     "getOffer": "Get Offer",
     "subscribe": "Subscribe",

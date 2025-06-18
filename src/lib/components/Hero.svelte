@@ -3,7 +3,7 @@
   import { goto } from '$app/navigation';
   import { t } from 'svelte-i18n';
   
-  // Static carousel images - loaded once
+  // Static carousel images - loaded once and memoized
   const carouselImages = [
     '/above.webp',
     '/margaret.webp',
@@ -15,23 +15,20 @@
     '/matyasii.webp'
   ];
   
-  // Component state
-  let currentSlide = 0;
+  // Component state - using let for reactivity only where needed
+  export let currentSlide = 0;
   let isVisible = false;
   let autoPlay = true;
   let carouselInterval;
-  let preloadTimeout;
   const loadedImages = new Set();
   const totalSlides = carouselImages.length;
   
-  // Simple slide navigation with forced reflow
-  function nextSlide() {
-    document.querySelector('.carousel-slide')?.offsetHeight; // Force reflow
+  // Memoize slide navigation to prevent recreation
+  const nextSlide = () => {
     currentSlide = (currentSlide + 1) % totalSlides;
-  }
+  };
   
-  function prevSlide() {
-    document.querySelector('.carousel-slide')?.offsetHeight; // Force reflow
+  const prevSlide = () => {
     currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
   }
   
@@ -50,7 +47,8 @@
       surname,
       email
     }).toString();
-    goto(`/contact?${searchParams}`);
+    // Force a full page reload to ensure contact page reloads with form data
+    window.location.href = `/contact?${searchParams}`;
   }
   
   // Touch handlers for swipe functionality
@@ -75,27 +73,56 @@
   
   // Preload all images when component mounts
   onMount(() => {
-    // Preload all images immediately
-    carouselImages.forEach((src, index) => {
-      if (!loadedImages.has(src)) {
-        const img = new Image();
-        img.src = src;
-        img.loading = 'eager';
-        loadedImages.add(src);
-      }
-    });
+    // Preload all images immediately with eager loading
+    const preloadImages = () => {
+      carouselImages.forEach((src) => {
+        if (!loadedImages.has(src)) {
+          const img = new Image();
+          img.src = src;
+          img.loading = 'eager';
+          img.decoding = 'async';
+          img.fetchPriority = 'high';
+          loadedImages.add(src);
+        }
+      });
+    };
+    
+    // Start preloading
+    preloadImages();
     
     // Set up carousel auto-play with 5-second intervals
-    if (autoPlay && typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      carouselInterval = setInterval(() => {
-        nextSlide();
-      }, 5000); // Changed back to 5 seconds
-    }
+    // Only start auto-play if user hasn't interacted with the carousel
+    let userInteracted = false;
+    
+    const startAutoPlay = () => {
+      if (!userInteracted && autoPlay && typeof window !== 'undefined' && 
+          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        carouselInterval = setInterval(nextSlide, 5000);
+      }
+    };
     
     // Mark component as visible
-    setTimeout(() => {
-      isVisible = true;
-    }, 100);
+    isVisible = true;
+    
+    // Start autoplay after a short delay
+    const autoplayTimeout = setTimeout(startAutoPlay, 3000);
+    
+    // Handle user interaction
+    const handleInteraction = () => {
+      if (!userInteracted) {
+        userInteracted = true;
+        if (carouselInterval) {
+          clearInterval(carouselInterval);
+        }
+      }
+    };
+    
+    // Add event listeners for user interaction
+    const carousel = document.querySelector('.carousel-container');
+    if (carousel) {
+      carousel.addEventListener('mouseenter', handleInteraction);
+      carousel.addEventListener('touchstart', handleInteraction, { passive: true });
+    }
     
     // Cleanup
     return () => {
@@ -120,18 +147,19 @@
   on:touchend={handleTouchEnd}
 >
   <!-- Full Background Carousel -->
-  <div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 z-0 carousel-container">
     {#each carouselImages as image, i}
       <div 
-        class="carousel-slide absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
-        style="opacity: {i === currentSlide ? '1' : '0'}; pointer-events: none;"
+        class="absolute inset-0 transition-opacity duration-1000 ease-in-out {i === currentSlide ? 'opacity-100' : 'opacity-0'}"
+        style="background-image: url('{image}'); background-size: cover; background-position: center; will-change: opacity;"
       >
         <img 
           src={image} 
-          alt=""
+          alt="" 
           class="w-full h-full object-cover"
           loading="eager"
           decoding="async"
+          fetchpriority="high"
           style="width: 100%; height: 100%;"
         />
         <!-- Lighter gradient overlays for better image visibility -->
@@ -140,10 +168,7 @@
       </div>
     {/each}
     
-    <!-- Lighter pattern overlay -->
-    <div class="absolute inset-0 bg-black/10 z-10" 
-         style="background-image: url('data:image/svg+xml,%3Csvg width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.02%22 fill-rule=%22evenodd%22%3E%3Ccircle cx=%223%22 cy=%223%22 r=%223%22/%3E%3Ccircle cx=%2213%22 cy=%2213%22 r=%223%22/%3E%3C/g%3E%3C/svg%3E');">
-    </div>
+    <!-- Pattern overlay removed -->
   </div>
   
   <!-- Content Container - Mobile First Design -->
@@ -160,13 +185,9 @@
       >
         <!-- Remove pill on mobile -->
         
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 leading-tight drop-shadow-lg px-2 text-center">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-6 leading-tight drop-shadow-lg px-2 text-center">
           {$t('hero.title') || 'Discover Authentic'} <span class="text-[#dcb660]">{$t('hero.titleHighlight') || 'Central Europe'}</span>
         </h1>
-        
-        <p class="text-sm sm:text-base text-white/95 mb-4 max-w-xl mx-auto leading-relaxed drop-shadow-md px-6 text-center">
-          {$t('hero.subtitle') || 'Experience the rich history, vibrant culture, and stunning architecture of Central Europe with our expert local guides.'}
-        </p>
       </div>
       
       <!-- Form Container - Compact for mobile, above the fold -->
@@ -179,7 +200,8 @@
         style="transition-delay: 200ms"
       >
         <div class="bg-white/15 backdrop-blur-md rounded-xl border border-white/30 p-4 shadow-2xl w-full max-w-xs mx-4">
-          <h3 class="text-base font-semibold mb-3 text-center text-white">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
+          <h3 class="text-base font-semibold mb-2 text-center text-white">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
+          <p class="text-sm sm:text-base text-white/90 mb-4 text-center leading-relaxed max-w-md mx-auto">{$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}</p>
           
           <form class="space-y-2.5" on:submit|preventDefault={handleGetOffer}>
             <div>
@@ -238,17 +260,14 @@
           <span class="text-[#dcb660] font-medium">{$t('hero.badge') || 'Premium Central Europe Tours'}</span>
         </div>
         
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
           {$t('hero.title') || 'Discover Authentic'} <span class="text-[#dcb660]">{$t('hero.titleHighlight') || 'Central Europe'}</span>
         </h1>
         
-        <p class="text-lg sm:text-xl text-white/90 mb-8 max-w-lg">
-          {$t('hero.subtitle') || 'Experience the rich history, vibrant culture, and stunning architecture of Central Europe with our expert local guides.'}
-        </p>
-        
         <!-- Desktop Form Container -->
         <div class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 shadow-xl">
-          <h3 class="text-xl font-semibold mb-4">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
+          <h3 class="text-xl font-semibold mb-2">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
+          <p class="text-base text-white/90 mb-5 leading-relaxed">{$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}</p>
           
           <form class="space-y-4" on:submit|preventDefault={handleGetOffer}>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

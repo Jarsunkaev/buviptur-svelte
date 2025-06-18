@@ -55,34 +55,29 @@
         ]
     };
 
-    // Fixed language mapping
-    $: tourLanguages = [
+    // Language data with direct emoji flags
+    const tourLanguages = [
         { 
             key: 'english',
-            name: $t('tours.languages.english.name'), 
-            flag: $t('tours.languages.english.flag'), 
-            available: true 
+            name: 'English',
+            flag: '🇬🇧',
+            available: true
         },
         { 
             key: 'hungarian',
-            name: $t('tours.languages.hungarian.name'), 
-            flag: $t('tours.languages.hungarian.flag'), 
-            available: true 
+            name: 'Magyar',
+            flag: '🇭🇺',
+            available: true
         },
         { 
             key: 'turkish',
-            name: $t('tours.languages.turkish.name'), 
-            flag: $t('tours.languages.turkish.flag'), 
-            available: true 
+            name: 'Türkçe',
+            flag: '🇹🇷',
+            available: true
         }
     ];
-
-    // Language mapping for tour categories
-    const languageMapping = {
-        'English': 'english',
-        'Hungarian': 'hungarian', 
-        'Turkish': 'turkish'
-    };
+    
+    // Language mapping is no longer needed since we're using direct values
 
     // Why Choose Us content with translations
     $: benefits = [
@@ -105,8 +100,23 @@
 
     // Helper function to get language data
     function getLanguageForTour(langName) {
-        const langKey = languageMapping[langName];
-        return tourLanguages.find(l => l.key === langKey) || { name: langName, flag: '🏳️' };
+        // Get the language data directly from the translation system
+        const langKey = Object.entries(languageMapping).find(([_, value]) => value === langName.toLowerCase())?.[0];
+        if (langKey) {
+            const langData = $t(`tours.languages.${langKey}`, {}, { returnObjects: true });
+            if (langData && typeof langData === 'object') {
+                return {
+                    name: langData.name || langName,
+                    flag: langData.flag || '🏳️',
+                    icon: langData.icon || 'fa-flag'
+                };
+            }
+        }
+        return { 
+            name: langName, 
+            flag: '🏳️',
+            icon: 'fa-flag'
+        };
     }
 
     onMount(() => {
@@ -259,21 +269,18 @@
 <Header />
 <main class="bg-white">
     <!-- Hero Section -->
-    <section class="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" 
-             style="background-image: url('https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80&w=2000');">
-        </div>
-        <div class="absolute inset-0 hero-overlay"></div>
-        
-        <div class="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 fade-up drop-shadow-lg">{$t('tours.title')}</h1>
-            <p class="text-xl sm:text-2xl md:text-2xl mb-6 sm:mb-8 fade-up opacity-90 drop-shadow-md">{$t('tours.subtitle')}</p>
-            <div class="fade-up">
-                <a href="#featured-tour" class="inline-flex items-center px-6 sm:px-8 py-3 bg-white/90 backdrop-blur-sm text-[#113946] rounded-full font-semibold hover:bg-white transition-all mobile-text">
-                    {$t('tours.featured.explore') || 'Explore Our Tours'}
-                    <i class="fas fa-arrow-down ml-2"></i>
-                </a>
-            </div>
+    <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center"
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80')">
+        <div class="text-center max-w-4xl px-4">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                {$t('tours.hero.title') || 'Discover Our Exclusive Tours'}
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                {$t('tours.hero.subtitle') || 'Experience the best of Hungary with our carefully curated tours'}
+            </p>
+            <a href="#featured-tour" class="bg-[#dcb660] hover:bg-[#c9a34e] text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 inline-block">
+                {$t('tours.hero.seePackages') || 'See Tour Packages'}
+            </a>
         </div>
     </section>
 
@@ -298,11 +305,10 @@
                             <span class="font-semibold">{detailedTour.duration}</span>
                         </div>
                         <div class="flex flex-wrap gap-2 sm:gap-3 justify-center">
-                            {#each detailedTour.languages as lang}
-                                {@const langData = getLanguageForTour(lang)}
+                            {#each tourLanguages as lang}
                                 <span class="language-chip px-3 py-1 rounded-full flex items-center text-sm mobile-text">
-                                    <span class="mr-2">{langData.flag}</span>
-                                    <span>{langData.name}</span>
+                                    <span class="mr-2 text-lg">{lang.flag}</span>
+                                    <span>{lang.name}</span>
                                 </span>
                             {/each}
                         </div>
@@ -316,31 +322,31 @@
                     </h3>
 
                     {#each detailedTour.itinerary as day, index}
-                        <div class="day-section bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+                        <div class="day-section bg-white/30 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border border-amber-100/50 relative overflow-hidden">
+                                <!-- Frosted glass overlay -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-amber-50/30 to-amber-100/10 backdrop-blur-sm z-0"></div>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center {index % 2 === 1 ? 'lg:grid-cols-2' : ''}">
                                 <!-- Content Side -->
                                 <div class="{index % 2 === 1 ? 'lg:order-2' : ''} p-4 sm:p-6">
                                     <!-- Day Header -->
                                     <div class="flex items-center mb-4 sm:mb-6">
-                                        <div class="day-badge w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg mr-3 sm:mr-4 flex-shrink-0">
-                                            {day.day}
-                                        </div>
-                                        <h4 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#113946]">{day.title}</h4>
+                                        <!-- Day number removed as requested -->
+                                        <h4 class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-900 relative z-10">{day.title}</h4>
                                     </div>
                                     
                                     <!-- Activities List with Bullet Points -->
-                                    <div class="space-y-2 sm:space-y-3">
+                                    <div class="space-y-3 sm:space-y-4 pl-2">
                                         {#each day.activities as activity}
-                                            <div class="activity-bullet activity-text text-gray-700 text-base sm:text-lg leading-relaxed">
-                                                {activity}
-                                            </div>
+                                            <div class="activity-bullet activity-text text-amber-900/90 text-base sm:text-lg leading-relaxed relative z-10 pl-5 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-amber-500 before:rounded-full">
+                                                    {activity}
+                                                </div>
                                         {/each}
                                     </div>
                                 </div>
                                 
                                 <!-- Image Side -->
                                 <div class="{index % 2 === 1 ? 'lg:order-1' : ''} order-first lg:order-none">
-                                    <div class="relative overflow-hidden rounded-xl sm:rounded-2xl">
+                                    <div class="relative overflow-hidden rounded-xl sm:rounded-2xl border-2 border-amber-100/50">
                                         <img 
                                             src={day.image} 
                                             alt="{day.title} activities" 

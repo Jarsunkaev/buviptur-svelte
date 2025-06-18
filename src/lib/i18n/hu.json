@@ -12,6 +12,7 @@
     "titleHighlight": "Kiváltság",
     "subtitle": "A helyi kirándulóktól a távoli kalandokig Közép-Európában, szakértelemmel és aprólékos figyelemmel megalkotva.",
     "formTitle": "Kezdje el utazását",
+    "formSubtitle": "A helyi kirándulóktól a távoli kalandokig Közép-Európában, szakértelemmel és aprólékos figyelemmel megalkotva.",
     "firstName": "Keresztnév",
     "lastName": "Vezetéknév",
     "email": "E-mail cím",
@@ -138,7 +139,8 @@
         "szentendre": "Szentendre",
         "visegrad": "Visegrád",
         "salzburg": "Salzburg",
-        "karlovyVary": "Karlovy Vary"
+        "karlovyVary": "Karlovy Vary",
+        "esztergom": "Esztergom"
       },
       "highlights": {
         "budapest": "Magyarország kulturális szíve",
@@ -146,9 +148,10 @@
         "prague": "Az arany város", 
         "bratislava": "A kis nagy város",
         "szentendre": "Művészeti folyóparti város",
-        "visegrad": "Királyi vár a Dunánál",
+        "visegrad": "Királyi vár a Dunán",
         "salzburg": "Mozart szülővárosa",
-        "karlovyVary": "Történelmi fürdőváros"
+        "karlovyVary": "Történelmi gyógyváros",
+        "esztergom": "Magyarország szellemi fővárosa"
       },
       "planJourney": "Tervezze meg utazását"
     },
@@ -161,6 +164,11 @@
   },
   "tours": {
     "title": "Túráink",
+    "hero": {
+      "title": "Fedezze Fel Túráinkat",
+      "subtitle": "Élvezze Magyarország legjobbjait gondosan összeállított túráinkkal",
+      "seePackages": "Túracsomagok Megtekintése"
+    },
     "subtitle": "Fedezzen fel rendkívüli utazásokat, amelyek az Ön vándorlásvágyához igazodnak",
     "meta": {
       "description": "Fedezze fel Közép-Európát a BuVipTur szakértően vezetett túráival. Történelmi, kulturális és többországos élmények Magyarországon, Ausztriában, Csehországban és még tovább."

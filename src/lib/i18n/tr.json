@@ -12,6 +12,7 @@
     "titleHighlight": "Ayrıcalık",
     "subtitle": "Yerel kaçışlardan Orta Avrupa'daki uzak maceralara kadar, uzmanlık ve ayrıntılara dikkatle hazırlanmış.",
     "formTitle": "Yolculuğunuza Başlayın",
+    "formSubtitle": "Yerel kaçışlardan Orta Avrupa'daki uzak maceralara kadar, uzmanlık ve ayrıntılara dikkatle hazırlanmıştır.",
     "firstName": "Ad",
     "lastName": "Soyad",
     "email": "E-posta Adresi",
@@ -138,7 +139,8 @@
         "szentendre": "Szentendre",
         "visegrad": "Visegrád",
         "salzburg": "Salzburg",
-        "karlovyVary": "Karlovy Vary"
+        "karlovyVary": "Karlovy Vary",
+        "esztergom": "Esztergom"
       },
       "highlights": {
         "budapest": "Macaristan'ın Kültürel Kalbi",
@@ -146,9 +148,10 @@
         "prague": "Altın Şehir", 
         "bratislava": "Küçük Büyük Şehir",
         "szentendre": "Sanatsal Nehir Kıyısı Kasabası",
-        "visegrad": "Tuna'daki Kraliyet Kalesi",
+        "visegrad": "Tuna Nehri'nde Kraliyet Kalesi",
         "salzburg": "Mozart'ın Doğum Yeri",
-        "karlovyVary": "Tarihi Kaplıca Kasabası"
+        "karlovyVary": "Tarihi Kaplıca Şehri",
+        "esztergom": "Macaristan'ın Manevi Başkenti"
       },
       "planJourney": "Yolculuğunuzu Planlayın"
     },
@@ -161,6 +164,11 @@
   },
   "tours": {
     "title": "Turlarımız",
+    "hero": {
+      "title": "Turlarımızı Keşfedin",
+      "subtitle": "Özenle hazırlanmış turlarımızla Macaristan'ın en iyilerini deneyimleyin",
+      "seePackages": "Tur Paketlerini Görüntüle"
+    },
     "subtitle": "Gezme arzunuza göre uyarlanmış olağanüstü yolculukları keşfedin",
     "meta": {
       "description": "BuVipTur'un uzman rehberli turlarıyla Orta Avrupa'yı keşfedin. Macaristan, Avusturya, Çek Cumhuriyeti ve ötesinde tarihi, kültürel ve çok ülkeli deneyimler."

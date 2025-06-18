@@ -10,7 +10,6 @@
   let isMenuOpen = false;
   let isScrolled = false;
   let isHeaderVisible = true;
-  const scrollThreshold = 50;
   let currentScrollY = 0;
   let lastScrollY = 0;
 
@@ -25,22 +24,22 @@
   // Toggle mobile menu function with improved body scroll lock
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
-    
+
     if (isMenuOpen) {
       // Store current scroll position
       currentScrollY = window.scrollY;
-      
+
       // Apply scroll lock styles
       document.documentElement.classList.add('menu-open');
       document.body.classList.add('menu-open');
       document.body.style.top = `-${currentScrollY}px`;
-      
+
     } else {
       // Remove scroll lock
       document.documentElement.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
       document.body.style.top = '';
-      
+
       // Restore scroll position
       window.scrollTo(0, currentScrollY);
     }
@@ -50,12 +49,12 @@
   function closeMenu() {
     if (isMenuOpen) {
       isMenuOpen = false;
-      
+
       // Remove scroll lock
       document.documentElement.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
       document.body.style.top = '';
-      
+
       // Restore scroll position
       window.scrollTo(0, currentScrollY);
     }
@@ -68,66 +67,73 @@
     }
   }
 
-  onMount(() => {
-    // Optimized scroll handler with sticky header logic
-    let ticking = false;
+  // Simple scroll handler
+  function handleScroll() {
+    // Get scroll position from multiple sources for compatibility
+    const scrollY = Math.max(
+      window.pageYOffset,
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    );
     
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          
-          // Only update if scroll changed significantly
-          if (Math.abs(scrollY - lastScrollY) > 5) {
-            // Update scrolled state
-            isScrolled = scrollY > scrollThreshold;
-            
-            // Sticky header logic - hide when scrolling down, show when scrolling up
-            if (scrollY > lastScrollY && scrollY > 100) {
-              // Scrolling down - hide header
-              isHeaderVisible = false;
-            } else if (scrollY < lastScrollY || scrollY <= scrollThreshold) {
-              // Scrolling up or near top - show header
-              isHeaderVisible = true;
-            }
-            
-            lastScrollY = scrollY;
-          }
-          
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+      // Removed debug scroll position display
+    
+    // Update scrolled state - always show header, just change style
+    const newIsScrolled = scrollY > 50;
+    if (newIsScrolled !== isScrolled) {
+      isScrolled = newIsScrolled;
+      console.log('Scroll state changed:', { scrollY, isScrolled });
+    }
+    
+    // Always keep header visible
+    isHeaderVisible = true;
+    
+    lastScrollY = scrollY <= 0 ? 0 : scrollY; // Prevent negative scroll values
+  }
 
-    // Use passive event listener for better performance
+  onMount(() => {
+    if (!browser) return;
+    
+    console.log('Header mounted - adding scroll listeners');
+    
+    // Initial scroll state
+    handleScroll();
+    
+    // Add scroll listener with passive: true for better performance
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Handle visual viewport changes for mobile
-    if (browser && 'visualViewport' in window) {
+    
+    // Add wheel and touchmove listeners as fallbacks
+    window.addEventListener('wheel', handleScroll, { passive: true });
+    window.addEventListener('touchmove', handleScroll, { passive: true });
+    
+    // Handle mobile viewport changes
+    if ('visualViewport' in window) {
       window.visualViewport.addEventListener('resize', handleViewportChange, { passive: true });
     }
-
-    // Close menu on navigation with header show
+    
+    // Handle page navigation
     const unsubscribe = page.subscribe(() => {
       closeMenu();
-      // Always show header on page navigation
       isHeaderVisible = true;
+      // Small delay to ensure DOM is updated
+      setTimeout(handleScroll, 50);
     });
-
-    // Initialize header state
-    handleScroll();
-
-    // Cleanup function
+    
+    // Debug info
+    console.log('Scroll event listeners added');
+    
+    // Cleanup
     return () => {
+      console.log('Header unmounting - removing listeners');
       window.removeEventListener('scroll', handleScroll);
-      unsubscribe();
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
       
-      if (window.visualViewport) {
+      if ('visualViewport' in window) {
         window.visualViewport.removeEventListener('resize', handleViewportChange);
       }
       
-      // Reset styles on unmount
+      unsubscribe();
       document.documentElement.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
       document.body.style.top = '';
@@ -160,22 +166,25 @@
 </svelte:head>
 
 <header
-  class="fixed top-0 left-0 right-0 z-30 transition-all duration-300 ease-out flex items-start pt-2 lg:pt-3 h-auto min-h-[72px] lg:min-h-[88px]"
-  class:bg-white={isScrolled}
-  class:shadow-md={isScrolled}
-  class:-translate-y-full={!isHeaderVisible && !isMenuOpen}
-  style="background-color: {isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'}; backdrop-filter: {isScrolled ? 'blur(8px)' : 'none'}; transform: translate3d(0, {!isHeaderVisible && !isMenuOpen ? '-100%' : '0'}, 0);"
+  class="fixed top-0 left-0 right-0 z-30 transition-all duration-300 ease-out"
+  class:scrolled={isScrolled}
+  aria-label="Main navigation"
+  style="background-color: {isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'}; 
+         backdrop-filter: {isScrolled ? 'blur(12px)' : 'none'}; 
+         border-bottom: {isScrolled ? '1px solid rgba(0, 0, 0, 0.08)' : 'none'};
+         transform: {!isHeaderVisible ? 'translateY(-100%)' : 'translateY(0)'};"
+  data-scrolled={isScrolled}
+  data-visible={isHeaderVisible}
+  class:hidden={!isMenuOpen}
 >
-  <div class="container mx-auto px-4 sm:px-6 h-full flex items-center py-1">
+  <div class="container mx-auto px-4 sm:px-6 h-full flex items-center">
     <nav class="flex items-center justify-between w-full h-full">
-      <a href="/" class="flex items-center z-50" aria-label="BuVipTur Home">
+      <a href="/" class="flex items-center z-50 transition-all duration-300 ease-out" aria-label="BuVipTur Home">
         <div class="relative">
           <img
             src="/logo.PNG"
             alt="BuVipTur Logo"
-            class="rounded-lg transition-all duration-300 ease-out h-16 sm:h-16 lg:h-20 object-contain"
-            class:scale-110={!isScrolled}
-            class:lg:scale-110={!isScrolled}
+            class="logo-img rounded-lg transition-all duration-300 ease-out object-contain"
           />
         </div>
       </a>
@@ -190,12 +199,12 @@
             <span class="nav-link-text">{item.label}</span>
           </a>
         {/each}
-        
+
         <div class="flex items-center space-x-2 ml-4">
           {#each languages as lang}
             <button
               on:click={() => switchLanguage(lang.code)}
-              class="w-8 h-8 flex items-center justify-center rounded-md overflow-hidden transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dcb660] {currentLang === lang.code ? 'ring-2 ring-[#dcb660] scale-110' : ''}"
+              class="language-btn w-8 h-8 flex items-center justify-center rounded-md overflow-hidden transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dcb660] {currentLang === lang.code ? 'ring-2 ring-[#dcb660] scale-110' : ''}"
               aria-label={`Switch to ${lang.name}`}
               title={lang.name}
             >
@@ -206,7 +215,7 @@
       </div>
 
       <button
-        class="lg:hidden z-50 p-2 -mr-2 transition-colors duration-300 {isScrolled ? 'text-gray-800' : 'text-white'}"
+        class="mobile-menu-btn lg:hidden z-50 p-2 -mr-2 transition-colors duration-300"
         on:click={toggleMenu}
         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isMenuOpen}
@@ -240,7 +249,7 @@
               </a>
             </div>
           {/each}
-          
+
           <div class="flex justify-center space-x-6 pt-4">
             {#each languages as lang, index}
               <button
@@ -264,46 +273,123 @@
 </header>
 
 <style>
-  /* Navigation link styles */
+  /* Header base styles */
+  header {
+    padding: 1.5rem 0;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-out;
+    will-change: transform, background-color, backdrop-filter, border-bottom;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Scrolled state - light background */
+  header.scrolled {
+    padding: 1rem 0;
+    height: 70px;
+  }
+
+  /* Hidden state */
+  header.hidden {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  /* Logo sizing */
+  .logo-img {
+    height: 70px;
+    transition: height 0.3s ease-out;
+  }
+
+  header.scrolled .logo-img {
+    height: 50px;
+  }
+
+  /* Navigation link styles - white by default */
   .nav-link {
     position: relative;
-    padding: 1rem 1.25rem;
+    padding: 0.75rem 1rem;
+    color: white; /* Default text color over transparent/dark background */
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.9;
     display: inline-block;
     text-decoration: none;
   }
-  
+
+  /* Scrolled state - dark text */
+  header.scrolled .nav-link {
+    color: #113946; /* Changed to dark color for contrast on white background */
+    text-shadow: none;
+  }
+
+  .nav-link.active {
+    color: #dcb660;
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  .nav-link.active::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
   .nav-link-text {
-    color: white !important;
     font-size: 1.25rem;
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
     z-index: 1;
   }
-  
+
   .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0.75rem;
-    left: 1.25rem;
-    right: 1.25rem;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 24px;
     height: 2px;
     background-color: #dcb660;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    border-radius: 2px;
   }
-  
+
   .nav-link:hover .nav-link-text,
   .nav-link.active .nav-link-text {
-    color: #dcb660 !important;
+    color: #dcb660;
   }
-  
+
   .nav-link:hover::after,
   .nav-link.active::after {
-    transform: scaleX(1);
+    transform: translateX(-50%) scaleX(1);
+    opacity: 1;
   }
-  
+
+  /* Mobile menu button - white by default */
+  .mobile-menu-btn {
+    color: white; /* Default icon color over transparent/dark background */
+  }
+
+  /* Scrolled state - dark color */
+  header.scrolled .mobile-menu-btn {
+    color: #113946; /* Changed to dark color for contrast on white background */
+  }
+
+  /* Language buttons - white by default */
+  .language-btn {
+    color: white; /* Default icon color over transparent/dark background */
+  }
+
+  /* Scrolled state - dark color */
+  header.scrolled .language-btn {
+    color: #113946; /* Changed to dark color for contrast on white background */
+  }
+
   /* Smooth scrolling for the whole app */
   :global(html) {
     scroll-behavior: smooth;
@@ -318,15 +404,6 @@
     width: 100% !important;
     height: 100% !important;
     -webkit-overflow-scrolling: auto !important;
-  }
-
-  /* Improve performance with hardware acceleration */
-  header {
-    will-change: transform, background-color;
-    backface-visibility: hidden;
-    perspective: 1000px;
-    /* Ensure smooth sticky behavior */
-    transform: translate3d(0, 0, 0);
   }
 
   /* Mobile menu improvements */
@@ -364,11 +441,11 @@
   button[aria-label*="Switch"] {
     position: relative;
   }
-  
+
   button[aria-label*="Switch"]:hover {
     transform: scale(1.1);
   }
-  
+
   button[aria-label*="Switch"]:active {
     transform: scale(0.95);
   }
