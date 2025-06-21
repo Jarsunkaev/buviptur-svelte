@@ -157,22 +157,24 @@
   on:touchmove={handleTouchMove}
   on:touchend={handleTouchEnd}
 >
-  <!-- Full Background Carousel -->
+  <!-- Full Background Carousel with persistent rendering -->
   <div class="absolute inset-0 z-0 carousel-container">
     {#each carouselImages as image, i}
       <div 
         class="absolute inset-0 transition-opacity duration-1000 ease-in-out {i === currentSlide ? 'opacity-100' : 'opacity-0'}"
         style="background-image: url('{image}'); background-size: cover; background-position: center; will-change: opacity;"
       >
-        <img 
-          src={image} 
-          alt="" 
-          class="w-full h-full object-cover"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          style="width: 100%; height: 100%;"
-        />
+        {#if loadedImages.has(image)}
+          <img 
+            src={image} 
+            alt="" 
+            class="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            style="width: 100%; height: 100%;"
+          />
+        {/if}
         <!-- Lighter gradient overlays for better image visibility -->
         <div class="absolute inset-0 bg-gradient-to-r from-[#113946]/40 via-[#113946]/25 to-[#113946]/15"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#113946]/35 via-transparent to-[#113946]/20"></div>
@@ -185,18 +187,12 @@
   <!-- Content Container - Mobile First Design -->
   <div class="container mx-auto px-4 sm:px-6 relative z-10 w-full">
     <!-- Mobile Layout: Stacked vertically, form above the fold -->
-    <div class="lg:hidden flex flex-col justify-center items-center min-h-screen py-12 space-y-4">
+    <div class="lg:hidden flex flex-col justify-center items-center min-h-screen py-12 w-full px-4">
       <!-- Content Area -->
       <div 
-        class="text-white text-center transform transition-all duration-1000 w-full"
-        class:translate-y-0={isVisible}
-        class:opacity-100={isVisible}
-        class:translate-y-8={!isVisible}
-        class:opacity-0={!isVisible}
+        class="text-white text-center w-full"
       >
-        <!-- Remove pill on mobile -->
-        
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-6 leading-tight drop-shadow-lg px-2 text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 leading-tight drop-shadow-lg text-center">
           {$t('hero.title') || 'Discover Authentic'} <span class="text-[#dcb660]">{$t('hero.titleHighlight') || 'Central Europe'}</span>
         </h1>
       </div>
@@ -210,16 +206,16 @@
         class:opacity-0={!isVisible}
         style="transition-delay: 200ms"
       >
-        <div class="bg-white/15 backdrop-blur-md rounded-xl border border-white/30 p-4 shadow-2xl w-full max-w-xs mx-4">
+        <div class="bg-white/15 backdrop-blur-md rounded-xl border border-white/30 p-6 shadow-2xl w-full max-w-md mx-2">
           <h3 class="text-base font-semibold mb-2 text-center text-white">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
           <p class="text-sm sm:text-base text-white/90 mb-4 text-center leading-relaxed max-w-md mx-auto">{$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}</p>
           
-          <form class="space-y-2.5" on:submit|preventDefault={handleGetOffer}>
+          <form class="space-y-3.5" on:submit|preventDefault={handleGetOffer}>
             <div>
               <input
                 type="text"
                 placeholder={$t('hero.firstName') || 'First Name'}
-                class="w-full px-3 py-2.5 text-sm rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
+                class="w-full px-4 py-3 text-sm sm:text-base rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
                 bind:value={name}
                 required
               />
@@ -229,7 +225,7 @@
               <input
                 type="text"
                 placeholder={$t('hero.lastName') || 'Last Name'}
-                class="w-full px-3 py-2.5 text-sm rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
+                class="w-full px-4 py-3 text-sm sm:text-base rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
                 bind:value={surname}
                 required
               />
@@ -239,7 +235,7 @@
               <input
                 type="email"
                 placeholder={$t('hero.email') || 'Email Address'}
-                class="w-full px-3 py-2.5 text-sm rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
+                class="w-full px-4 py-3 text-sm sm:text-base rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
                 bind:value={email}
                 required
               />
@@ -359,6 +355,24 @@
 </section>
 
 <style>
+  /* Form width and spacing adjustments */
+  @media (max-width: 1024px) {
+    .hero-form {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    /* Increase spacing between form elements on mobile */
+    form > div {
+      margin-bottom: 1rem;
+    }
+    
+    form > div:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   /* Enhanced glass effect */
   .backdrop-blur-md {
     backdrop-filter: blur(16px);
