@@ -587,24 +587,24 @@
     },
     "whatToExpected": {
       "title": "What to Expect",
-      "subtitle": "After submitting your request, here's what happens next:",
+      "subtitle": "Our simple 4-step process to create your perfect trip",
       "confirmation": {
         "title": "Confirmation",
-        "description": "You'll receive an immediate email confirming we've received your request."
+        "description": "You'll receive an email confirming we've received your request"
       },
       "discussion": {
-        "title": "Initial Discussion",
-        "description": "A travel consultant will contact you within 24 hours to discuss your needs in detail."
+        "title": "Discussion",
+        "description": "We'll contact you to discuss your preferences and requirements"
       },
       "proposal": {
-        "title": "Custom Proposal",
-        "description": "We'll create a detailed itinerary based on your preferences."
+        "title": "Tailored Proposal",
+        "description": "You'll receive a personalized itinerary designed just for you"
       },
       "ready": {
         "title": "Ready to Go",
         "description": "Once confirmed, we'll handle all the details for your perfect trip."
       },
-      "tuning": {
+      "fineTuning": {
         "title": "Fine-Tuning",
         "description": "We'll refine the itinerary with your feedback until it's perfect."
       }

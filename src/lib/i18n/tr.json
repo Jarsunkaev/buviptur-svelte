@@ -593,6 +593,10 @@
         "title": "Özel Teklif",
         "description": "Tercihlerinize dayalı detaylı bir güzergah oluşturacağız."
       },
+      "ready": {
+        "title": "Hazırız",
+        "description": "Onayladıktan sonra, mükemmel yolculuğunuz için tüm detayları biz halledeceğiz."
+      },
       "tuning": {
         "title": "İnce Ayar",
         "description": "Mükemmel olana kadar geri bildirimlerinizle güzergahı rafine edeceğiz."

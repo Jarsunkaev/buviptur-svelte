@@ -593,6 +593,10 @@
         "title": "Egyedi javaslat",
         "description": "Részletes útvonalat készítünk preferenciái alapján."
       },
+      "ready": {
+        "title": "Készen Áll",
+        "description": "Miután megerősítette, mi intézzük a tökéletes utazásához szükséges összes részletet."
+      },
       "tuning": {
         "title": "Finomhangolás",
         "description": "Visszajelzéseivel finomítjuk az útvonalat, amíg tökéletes nem lesz."

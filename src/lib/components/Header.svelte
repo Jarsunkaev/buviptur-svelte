@@ -333,7 +333,7 @@
   }
 
   .nav-link.active::after {
-    transform: scaleX(1);
+    transform: translateX(-50%) scaleX(1);
     opacity: 1;
   }
 
@@ -370,14 +370,20 @@
     opacity: 1;
   }
 
-  /* Mobile menu button - white by default */
+  /* Mobile menu button - always white on mobile */
   .mobile-menu-btn {
-    color: white; /* Default icon color over transparent/dark background */
+    color: white;
+    transition: all 0.3s ease;
   }
 
-  /* Scrolled state - dark color */
-  header.scrolled .mobile-menu-btn {
-    color: #113946; /* Changed to dark color for contrast on white background */
+  @media (max-width: 1023px) {
+    .mobile-menu-btn {
+      color: white !important;
+    }
+  }
+
+  .mobile-menu-btn:hover {
+    color: #dcb660;
   }
 
   /* Language buttons - white by default */
@@ -435,6 +441,12 @@
     text-align: center;
     padding: 0.75rem 0;
     -webkit-tap-highlight-color: transparent;
+    color: white !important; /* Ensure white text in mobile menu */
+  }
+  
+  /* Ensure active state is visible on mobile */
+  #mobile-menu-overlay .active-link {
+    color: #dcb660 !important;
   }
 
   /* Language switcher visual feedback */
