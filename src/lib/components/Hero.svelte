@@ -76,27 +76,19 @@
     // Preload all images immediately with eager loading
     const preloadImages = () => {
       carouselImages.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-        img.loading = 'eager';
-        img.decoding = 'async';
-        img.fetchPriority = 'high';
-        img.onload = () => {
+        if (!loadedImages.has(src)) {
+          const img = new Image();
+          img.src = src;
+          img.loading = 'eager';
+          img.decoding = 'async';
+          img.fetchPriority = 'high';
           loadedImages.add(src);
-          // Force re-render to show the loaded image
-          if (typeof document !== 'undefined') {
-            const event = new CustomEvent('imageLoaded');
-            document.dispatchEvent(event);
-          }
-        };
+        }
       });
     };
     
     // Start preloading
     preloadImages();
-    
-    // Mark component as visible immediately
-    isVisible = true;
     
     // Set up carousel auto-play with 4-second intervals
     const startAutoPlay = () => {
@@ -106,7 +98,8 @@
       }
     };
     
-
+    // Mark component as visible
+    isVisible = true;
     
     // Start autoplay after a short delay
     const autoplayTimeout = setTimeout(startAutoPlay, 1000);
@@ -165,7 +158,7 @@
   on:touchend={handleTouchEnd}
 >
   <!-- Full Background Carousel with persistent rendering -->
-  <div class="fixed inset-0 z-0 carousel-container" style="backface-visibility: hidden;">
+  <div class="absolute inset-0 z-0 carousel-container">
     {#each carouselImages as image, i}
       <div 
         class="absolute inset-0 transition-opacity duration-1000 ease-in-out {i === currentSlide ? 'opacity-100' : 'opacity-0'}"
@@ -192,9 +185,9 @@
   </div>
   
   <!-- Content Container - Mobile First Design -->
-  <div class="container mx-auto px-4 sm:px-6 relative z-10 w-full pt-24 md:pt-32">
+  <div class="container mx-auto px-4 sm:px-6 relative z-10 w-full">
     <!-- Mobile Layout: Stacked vertically, form above the fold -->
-    <div class="lg:hidden flex flex-col justify-center items-center min-h-[calc(100vh-6rem)] w-full px-4">
+    <div class="lg:hidden flex flex-col justify-center items-center min-h-screen py-12 w-full px-4">
       <!-- Content Area -->
       <div 
         class="text-white text-center w-full"
@@ -261,7 +254,7 @@
     </div>
     
     <!-- Desktop Layout: Side by side (original layout) -->
-    <div class="hidden lg:grid grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-6rem)]">
+    <div class="hidden lg:grid grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen">
       <!-- Left Content Area -->
       <div 
         class="text-white max-w-xl mx-auto lg:mx-0 transform transition-all duration-1000"
