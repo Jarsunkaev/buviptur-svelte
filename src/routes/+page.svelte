@@ -713,7 +713,6 @@
         this={TestimonialsSection}
         title={$t('home.testimonials.title')}
         averageRating={parseFloat($t('home.testimonials.rating')) || 4.9}
-        reviewCount={$t('home.testimonials.reviewCount')}
         certificationText={$t('home.testimonials.certification')}
         testimonials={testimonialsData}
       />

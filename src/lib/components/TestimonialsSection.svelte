@@ -33,37 +33,26 @@
           <i class="fas fa-star text-[#dcb660]"></i>
           <span class="ml-1 font-semibold">{averageRating}</span>
         </div>
-        <span class="text-gray-600">|</span>
-        <span class="text-gray-600">{reviewCount} reviews</span>
-        <span class="text-gray-600">|</span>
-        <span class="text-[#dcb660] font-semibold">{certificationText}</span>
       </div>
     </div>
     
-    <div class="relative max-w-4xl mx-auto">
+    <div class="relative max-w-3xl mx-auto">
       <!-- Testimonial Cards -->
-      <div class="relative h-[400px]">
+      <div class="relative h-[280px]">
         {#each testimonials as testimonial, i}
           <div 
-            class="absolute inset-0 transition-opacity duration-500 ease-in-out bg-white rounded-2xl shadow-lg hover:shadow-xl"
+            class="absolute inset-0 transition-opacity duration-500 ease-in-out bg-white rounded-xl shadow-md hover:shadow-lg"
             style="opacity: {i === currentSlide ? '1' : '0'}; z-index: {i === currentSlide ? '1' : '0'}"
           >
-            <div class="p-8 h-full flex flex-col">
-              <div class="flex items-center mb-6">
-                <img 
-                  src={testimonial.image} 
-                  alt={testimonial.author}
-                  class="w-16 h-16 rounded-full object-cover border-2 border-[#dcb660]"
-                />
-                <div class="ml-4">
-                  <h3 class="text-xl font-bold text-gray-900">{testimonial.author}</h3>
-                  <p class="text-gray-600">{testimonial.position}</p>
-                </div>
+            <div class="p-6 h-full flex flex-col">
+              <div class="mb-4">
+                <h3 class="text-lg font-bold text-gray-900">{testimonial.author}</h3>
+                <p class="text-sm text-gray-600 mb-2">{testimonial.position}</p>
               </div>
               
-              <div class="flex items-center mb-4">
+              <div class="flex items-center mb-3">
                 {#each Array(testimonial.rating) as _}
-                  <i class="fas fa-star text-[#dcb660]"></i>
+                  <i class="fas fa-star text-[#dcb660] text-sm"></i>
                 {/each}
               </div>
               

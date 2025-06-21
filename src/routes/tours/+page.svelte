@@ -21,7 +21,7 @@
             {
                 day: 1,
                 title: $t('tours.detailed.budapest.day1.title') || 'Day 1',
-                image: 'https://images.unsplash.com/photo-1583091618471-bf133efb0a9c?q=80&w=800',
+                image: 'maty.webp',
                 activities: [
                     $t('tours.detailed.budapest.day1.activities.arrival') || 'Arrival in Budapest',
                     $t('tours.detailed.budapest.day1.activities.castle') || 'Buda Castle and Fisherman\'s Bastion',
@@ -33,7 +33,7 @@
             {
                 day: 2,
                 title: $t('tours.detailed.budapest.day2.title') || 'Day 2',
-                image: 'https://images.unsplash.com/photo-1516550893232-fe054840d3c2?q=80&w=800',
+                image: 'eszti.webp',
                 activities: [
                     $t('tours.detailed.budapest.day2.activities.dayTrip') || 'Hungarian Heritage Day Trip',
                     $t('tours.detailed.budapest.day2.activities.esztergom') || 'Visit Esztergom Basilica',
@@ -45,7 +45,7 @@
             {
                 day: 3,
                 title: $t('tours.detailed.budapest.day3.title') || 'Day 3',
-                image: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?q=80&w=800',
+                image: 'margit.webp',
                 activities: [
                     $t('tours.detailed.budapest.day3.activities.heroes') || 'Heroes\' Square guided tour',
                     $t('tours.detailed.budapest.day3.activities.margaret') || 'Relaxing walk through Margaret Island'
