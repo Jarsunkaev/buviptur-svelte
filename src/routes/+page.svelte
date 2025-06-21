@@ -84,6 +84,9 @@
     '/var.webp'
   ];
   
+  // Keep hero mounted in memory
+  let heroMounted = false;
+  
   $: mainServices = [
     {
       id: "guidedTours",
@@ -316,7 +319,9 @@
     }
   }
   
-  onMount(() => {
+  onMount(async () => {
+    // Keep hero mounted in memory
+    heroMounted = true;
     // Lazy load testimonials
     import('$lib/components/TestimonialsSection.svelte')
       .then(module => {
@@ -354,6 +359,14 @@
       }
     };
   });
+  
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', handleResize);
+    }
+    // Cleanup hero when component is destroyed
+    heroMounted = false;
+  });
 </script>
 
 <svelte:head>
@@ -374,9 +387,12 @@
 <div class="min-h-screen flex flex-col">
   <Header />
   
-  <main class="flex-grow">
-    <!-- Hero Section -->
+  <!-- Hero Section (outside main to prevent unmounting) -->
+  {#if heroMounted}
     <Hero {carouselImages} />
+  {/if}
+  
+  <main class="flex-grow">
     
     <!-- Journey Promise Section -->
     <section class="py-16 bg-gradient-to-b from-teal-900 to-teal-800 text-white relative overflow-hidden">
