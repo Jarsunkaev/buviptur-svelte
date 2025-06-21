@@ -3,8 +3,6 @@
   
   export let title;
   export let averageRating;
-  export let reviewCount;
-  export let certificationText;
   export let testimonials = [];
   
   let currentSlide = 0;

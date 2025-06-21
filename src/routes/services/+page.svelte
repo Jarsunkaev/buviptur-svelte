@@ -11,63 +11,32 @@
     $: services = [
         {
             title: $t('services.accommodation.title') || 'Accommodation',
-            description: $t('services.accommodation.description') || 'We arrange and customize accommodation to perfectly suit your needs and preferences. From charming boutique hotels to unique historic stays, our team ensures every option offers quality, comfort, and authentic local character. Let us find the ideal place for your stay.',
+            description: $t('services.accommodation.description') || 'We arrange and customize accommodation to perfectly suit your needs and preferences. From charming boutique hotels to unique historic stays, our team ensures every option offers quality, comfort, and authentic local character.',
             icon: 'fa-hotel',
-            image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80',
-            features: [
-                $t('services.accommodation.features.0') || 'Personalized accommodation planning',
-                $t('services.accommodation.features.1') || 'Wide range of vetted properties', 
-                $t('services.accommodation.features.2') || 'Customizable to your budget and style',
-                $t('services.accommodation.features.3') || 'Focus on quality, comfort, and character',
-                $t('services.accommodation.features.4') || 'Arrangements for boutique hotels, historic stays, and more',
-                $t('services.accommodation.features.5') || 'Flexible options tailored to your itinerary'
-            ],
+            image: 'accomodation.webp',
             cta: $t('services.accommodation.cta') || 'View Accommodations'
         },
         {
-            title: $t('services.visa.title') || 'Expert Visa Assistance',
+            title: $t('services.visa.title') || 'Visa Assistance',
             description: $t('services.visa.description') || 'Navigate complex visa requirements with ease. Our specialized visa team provides comprehensive support to ensure a smooth application process, with expert guidance on documentation and application procedures tailored to your nationality and destination.',
             icon: 'fa-passport',
-            image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80',
-            features: [
-                $t('services.visa.features.0') || 'Personalized visa consultation',
-                $t('services.visa.features.1') || 'Document preparation guidance',
-                $t('services.visa.features.2') || 'Application review services',
-                $t('services.visa.features.3') || 'Embassy appointment scheduling',
-                $t('services.visa.features.4') || 'Translation services when needed',
-                $t('services.visa.features.5') || '24/7 support during application process'
-            ],
+            image: 'visa.webp',
             cta: $t('services.visa.cta') || 'Learn About Visa Services'
         },
         {
-            title: $t('services.transportation.title') || 'Premium Transportation',
+            title: $t('services.transportation.title') || 'Transportation',
             description: $t('services.transportation.description') || 'Travel in comfort and style with our fleet of modern vehicles and expert drivers. From airport transfers to multi-city journeys, we ensure punctual, comfortable transportation that allows you to enjoy the scenery while we handle the logistics.',
             icon: 'fa-bus',
-            image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80',
-            features: [
-                $t('services.transportation.features.0') || 'Modern, comfortable vehicles',
-                $t('services.transportation.features.1') || 'Professional licensed drivers',
-                $t('services.transportation.features.2') || 'Airport transfers and multi-city routes',
-                $t('services.transportation.features.3') || 'Scenic route planning',
-                $t('services.transportation.features.4') || 'Flexible scheduling options',
-                $t('services.transportation.features.5') || 'Safety and reliability guaranteed'
-            ],
+            image: 'bus.webp',
             cta: $t('services.transportation.cta') || 'Learn About Transportation'
         },
         {
-            title: $t('services.historical.title') || 'Historical Tours',
-            description: $t('services.historical.description') || 'Step back in time with our expert-guided historical tours. From medieval castles to World War II memorial sites, our university-educated guides bring centuries of history to life with compelling narratives and insider access.',
-            icon: 'fa-landmark',
-            image: 'https://images.unsplash.com/photo-1583091618471-bf133efb0a9c?q=80',
-            features: [
-                $t('services.historical.features.0') || 'University-educated historian guides',
-                $t('services.historical.features.1') || 'Medieval castle explorations',
-                $t('services.historical.features.2') || 'World War II memorial sites',
-                $t('services.historical.features.3') || 'Habsburg Empire historical routes',
-                $t('services.historical.features.4') || 'Archaeological site access',
-                $t('services.historical.features.5') || 'Interactive storytelling approach'
-            ],
-            cta: $t('services.historical.cta') || 'Discover Historical Tours'
+            title: $t('services.tourPackages.title') || 'Tour Packages',
+            description: $t('services.tourPackages.description') || 'Discover the heart of Central Europe with our carefully curated tour packages. Experience the rich culture, stunning architecture, and breathtaking landscapes of Hungary, Austria, Czech Republic, and Slovakia. Our expert guides will take you on an unforgettable journey through these magnificent destinations.',
+            icon: 'fa-suitcase-rolling',
+            image: 'villi.webp',
+            cta: $t('services.tourPackages.cta') || 'Explore Tour Packages',
+            destinations: $t('services.tourPackages.destinations')
         }
     ];
 
@@ -157,17 +126,19 @@
                             <h3 class="text-3xl font-bold text-gray-900 mb-4">{service.title}</h3>
                             <p class="text-lg text-gray-600 mb-6">{service.description}</p>
                             
-                            <div class="mb-8">
-                                <h4 class="text-xl font-semibold text-gray-900 mb-4">{$t('services.serviceHighlights') || 'Service Highlights:'}</h4>
-                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3">
-                                    {#each service.features as feature}
-                                        <li class="flex items-start">
-                                            <i class="fas fa-check-circle text-[#dcb660] mt-1 mr-2"></i>
-                                            <span class="text-gray-700">{feature}</span>
-                                        </li>
-                                    {/each}
-                                </ul>
-                            </div>
+                            {#if service.destinations}
+                                <div class="mb-8">
+                                    <h4 class="text-xl font-semibold text-gray-900 mb-4">{$t('services.featuredDestinations')}:</h4>
+                                    <ul class="space-y-2">
+                                        {#each service.destinations as destination}
+                                            <li class="flex items-start">
+                                                <i class="fas fa-map-marker-alt text-[#dcb660] mt-1 mr-2"></i>
+                                                <span class="text-gray-700">{destination}</span>
+                                            </li>
+                                        {/each}
+                                    </ul>
+                                </div>
+                            {/if}
                         </div>
                     </div>
                 {/each}

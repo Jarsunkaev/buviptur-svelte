@@ -92,7 +92,7 @@
         "description": "Navigate complex visa requirements with ease through our expert team's guidance on documentation and procedures."
       },
       "transportation": {
-        "title": "Premium Transportation",
+        "title": "Transportation",
         "description": "Travel in comfort with our modern vehicles and expert drivers, enjoying the scenery between destinations."
       },
       "support": {
@@ -366,8 +366,9 @@
       ],
       "cta": "View Accommodations"
     },
+    "featuredDestinations": "Featured Destinations",
     "visa": {
-      "title": "Expert Visa Assistance",
+      "title": "Visa Assistance",
       "description": "Navigate complex visa requirements with ease. Our specialized visa team provides comprehensive support to ensure a smooth application process, with expert guidance on documentation and application procedures tailored to your nationality and destination.",
       "features": [
         "Personalized visa consultation",
@@ -375,12 +376,30 @@
         "Application review services",
         "Embassy appointment scheduling",
         "Translation services when needed",
-        "24/7 support during application process"
+        "24/7 support throughout the application process"
       ],
       "cta": "Learn About Visa Services"
     },
+    "tourPackages": {
+      "title": "Tour Packages",
+      "description": "Discover the heart of Central Europe with our carefully curated tour packages. Experience the rich culture, stunning architecture, and breathtaking landscapes of Hungary, Austria, Czech Republic, and Slovakia. Our expert guides will take you on an unforgettable journey through these magnificent destinations.",
+      "destinations": [
+        "Hungary - Explore Budapest, the Pearl of the Danube",
+        "Austria - Discover Vienna and the Alps",
+        "Czech Republic - Wander through Prague's fairytale streets",
+        "Slovakia - Experience the beauty of Bratislava and the Tatra Mountains"
+      ],
+      "features": [
+        "Handpicked destinations and activities",
+        "Expert guides and local insights",
+        "Small group sizes for personalized attention",
+        "Flexibility to customize your package",
+        "Comprehensive support from our travel team"
+      ],
+      "cta": "Explore Tour Packages"
+    },
     "transportation": {
-      "title": "Premium Transportation",
+      "title": "Transportation",
       "description": "Travel in comfort and style with our fleet of modern vehicles and expert drivers. From airport transfers to multi-city journeys, we ensure punctual, comfortable transportation that allows you to enjoy the scenery while we handle the logistics.",
       "features": [
         "Modern, comfortable vehicles",

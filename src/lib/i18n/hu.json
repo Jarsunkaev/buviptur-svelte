@@ -88,11 +88,11 @@
         "description": "Butik hotelektől történelmi tulajdonokig, olyan szállásokat szervezünk, amelyek megfelelnek stílusának, komfortszükségletének és költségvetésének."
       },
       "visa": {
-        "title": "Szakértő vízumsegítség", 
+        "title": "Vízumsegítség", 
         "description": "Könnyedén navigáljon az összetett vízumkövetelmények között szakértő csapatunk dokumentációs és eljárási útmutatásával."
       },
       "transportation": {
-        "title": "Prémium közlekedés",
+        "title": "Közlekedés",
         "description": "Utazzon kényelmesen modern járműveinkkel és szakértő sofőreinkkel, élvezve a tájat a célpontok között."
       },
       "support": {
@@ -367,7 +367,7 @@
       "cta": "Szállások Megtekintése"
     },
     "visa": {
-      "title": "Szakértő Vízumsegítség",
+      "title": "Vízumsegítség",
       "description": "Könnyedén navigáljon az összetett vízumkövetelmények között. Specializált vízumcsapatunk átfogó támogatást nyújt a zökkenőmentes ügyintézési folyamat biztosítása érdekében, szakértő útmutatással a dokumentációban és az alkalmazási eljárásokban, amelyek az Ön nemzetiségéhez és célpontjához igazodnak.",
       "features": [
         "Személyre szabott vízumkonzultáció",
@@ -380,7 +380,7 @@
       "cta": "Vízumszolgáltatások Megismerése"
     },
     "transportation": {
-      "title": "Prémium Közlekedés",
+      "title": "Transzfer",
       "description": "Utazzon kényelmesen és stílusosan modern járműveink flottájával és szakértő sofőreinkkel. A repülőtéri transzfertől a többvárosú utazásokig pontosan, kényelmes közlekedést biztosítunk, amely lehetővé teszi a táj élvezését, miközben mi intézzük a logisztikát.",
       "features": [
         "Modern, kényelmes járművek",
@@ -435,6 +435,18 @@
       "budapest": "Budapest",
       "vienna": "Bécs",
       "prague": "Prága"
+    },
+    "featuredDestinations": "Kiemelt Úti Célok",
+    "tourPackages": {
+      "title": "Túracsomagok",
+      "description": "Fedezze fel Közép-Európa szívét gondosan összeállított túracsomagjainkkal. Élvezze a gazdag kultúrát, lenyűgöző építészetet és lélegzetelállító tájakat Magyarországon, Ausztriában, Csehországban és Szlovákiában. Szakértő idegenvezetőink felejthetetlen utazásra viszik Önt ezen gyönyörű célpontokon.",
+      "cta": "Fedezze Fel Túracsomagjainkat",
+      "destinations": [
+        "Magyarország - Fedezze fel Budapestet, a Duna gyöngyszemét",
+        "Ausztria - Ismerje meg Bécset és az Alpok csodáit",
+        "Csehország - Sétáljon végig Prága tündérmeses utcáin",
+        "Szlovákia - Élvezze Pozsony és a Magas-Tátra szépségeit"
+      ]
     },
     "process": {
       "title": "Szolgáltatási folyamatunk",

@@ -92,7 +92,7 @@
         "description": "Uzman ekibimizin dokümantasyon ve prosedürler konusundaki rehberliğiyle karmaşık vize gereksinimlerinde kolayca gezinin."
       },
       "transportation": {
-        "title": "Premium Ulaşım",
+        "title": "Ulaşım",
         "description": "Modern araçlarımız ve uzman şoförlerimizle konforlu seyahat edin, destinasyonlar arasında manzaranın tadını çıkarın."
       },
       "support": {
@@ -367,7 +367,7 @@
       "cta": "Konaklamaları Görüntüle"
     },
     "visa": {
-      "title": "Uzman Vize Yardımı",
+      "title": "Vize Yardımı",
       "description": "Karmaşık vize gereksinimlerinde kolaylıkla yön bulun. Uzman vize ekibimiz, uyruğunuza ve hedefinize göre uyarlanmış belgeleme ve başvuru prosedürleri konusunda uzman rehberlik ile sorunsuz bir başvuru süreci sağlamak için kapsamlı destek sağlar.",
       "features": [
         "Kişiselleştirilmiş vize danışmanlığı",
@@ -380,7 +380,7 @@
       "cta": "Vize Hizmetleri Hakkında Bilgi Edinin"
     },
     "transportation": {
-      "title": "Premium Ulaşım",
+      "title": "Transfer",
       "description": "Modern araç filomuz ve uzman şoförlerimizle konfor ve stil içinde seyahat edin. Havaalanı transferlerinden çok şehirli yolculuklara kadar, lojistiği biz hallederken manzaranın tadını çıkarmanıza olanak tanıyan dakik, konforlu ulaşım sağlıyoruz.",
       "features": [
         "Modern, konforlu araçlar",
@@ -435,6 +435,18 @@
       "budapest": "Budapeşte",
       "vienna": "Viyana",
       "prague": "Prag"
+    },
+    "featuredDestinations": "Öne Çıkan Rotalar",
+    "tourPackages": {
+      "title": "Tur Paketleri",
+      "description": "Özenle hazırlanmış tur paketlerimizle Orta Avrupa'nın kalbini keşfedin. Macaristan, Avusturya, Çek Cumhuriyeti ve Slovakya'nın zengin kültürünü, etkileyici mimarisini ve nefes kesen manzaralarını deneyimleyin. Uzman rehberlerimiz sizi bu muhteşem destinasyonlarda unutulmaz bir yolculuğa çıkaracak.",
+      "cta": "Tur Paketlerini Keşfedin",
+      "destinations": [
+        "Macaristan - Tuna'nın İncisi Budapeşte'yi keşfedin",
+        "Avusturya - Viyana ve Alpler'in büyüsünü keşfedin",
+        "Çek Cumhuriyeti - Prag'ın masalsı sokaklarında gezinin",
+        "Slovakya - Bratislava ve Tatra Dağları'nın güzelliğini yaşayın"
+      ]
     },
     "process": {
       "title": "Hizmet Sürecimiz",
