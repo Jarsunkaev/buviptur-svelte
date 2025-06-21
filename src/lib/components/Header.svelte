@@ -370,16 +370,14 @@
     opacity: 1;
   }
 
-  /* Mobile menu button - always white on mobile */
+  /* Mobile menu button - changes color when header is scrolled */
   .mobile-menu-btn {
     color: white;
     transition: all 0.3s ease;
   }
 
-  @media (max-width: 1023px) {
-    .mobile-menu-btn {
-      color: white !important;
-    }
+  header.scrolled .mobile-menu-btn {
+    color: #113946 !important; /* Dark teal when scrolled */
   }
 
   .mobile-menu-btn:hover {
