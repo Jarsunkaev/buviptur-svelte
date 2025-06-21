@@ -75,7 +75,7 @@
   // OPTIMIZED: Local carousel images (WebP format, optimized sizes)
   const carouselImages = [
     '/above.webp',
-    '/matyas.webp', 
+    '/matyas.webp',
     '/matyasii.webp',
     '/parlament.webp',
     '/prague.webp',
@@ -83,8 +83,7 @@
     '/vajda.webp',
     '/var.webp'
   ];
-
-  // Using local WebP images for better performance
+  
   $: mainServices = [
     {
       id: "guidedTours",
@@ -94,34 +93,34 @@
       imageSrc: "/guided.webp",
       features: $t('home.services.services.0.features') || [
         "Small groups of max 12 travelers",
-        "Expert university-educated guides", 
+        "Expert university-educated guides",
         "Hidden gems and local experiences",
         "Flexible and customizable itineraries"
       ]
     },
     {
-      id: "multiCountry", 
+      id: "multiCountry",
       title: $t('home.services.services.1.title') || "Multi-Country Experience",
       description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
       icon: "fa-globe-europe",
       imageSrc: "/country.webp",
       features: $t('home.services.services.1.features') || [
         "Hassle-free border crossings",
-        "Cohesive multi-country itineraries", 
+        "Cohesive multi-country itineraries",
         "Local guides in each location",
         "Comprehensive cultural immersion"
       ]
     },
     {
       id: "boatExperiences",
-      title: $t('home.services.services.2.title') || "Scenic Boat Experiences", 
+      title: $t('home.services.services.2.title') || "Scenic Boat Experiences",
       description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
       icon: "fa-ship",
       imageSrc: "/river.webp",
       features: $t('home.services.services.2.features') || [
         "Intimate small-group cruises",
         "Sunset and evening illumination tours",
-        "Historical commentary", 
+        "Historical commentary",
         "Gourmet dining experiences"
       ]
     }
@@ -156,28 +155,29 @@
   ];
   
   // Destinations focus - make it reactive to translations with enhanced data
+  // Use your updated local WebP images for each country
   $: destinations = [
     {
       country: $t('home.destinations.countries.hungary') || "Hungary",
-      image: "https://images.unsplash.com/photo-1541849546-216549ae216d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/magyar.webp",
       cities: [
-        { 
-          name: $t('home.destinations.cities.budapest') || "Budapest", 
+        {
+          name: $t('home.destinations.cities.budapest') || "Budapest",
           highlight: $t('home.destinations.highlights.budapest') || "Cultural Heart",
           icon: "fa-heart"
         },
-        { 
-          name: $t('home.destinations.cities.szentendre') || "Szentendre", 
+        {
+          name: $t('home.destinations.cities.szentendre') || "Szentendre",
           highlight: $t('home.destinations.highlights.szentendre') || "Artistic Town",
           icon: "fa-palette"
         },
-        { 
-          name: $t('home.destinations.cities.visegrad') || "Visegrád", 
+        {
+          name: $t('home.destinations.cities.visegrad') || "Visegrád",
           highlight: $t('home.destinations.highlights.visegrad') || "Royal Castle",
           icon: "fa-crown"
         },
-        { 
-          name: $t('home.destinations.cities.esztergom') || "Esztergom", 
+        {
+          name: $t('home.destinations.cities.esztergom') || "Esztergom",
           highlight: $t('home.destinations.highlights.esztergom') || "Basilica City",
           icon: "fa-church"
         }
@@ -185,15 +185,15 @@
     },
     {
       country: $t('home.destinations.countries.austria') || "Austria",
-      image: "https://images.unsplash.com/photo-1516550893923-42d4e16a01f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/ausztria.webp",
       cities: [
-        { 
-          name: $t('home.destinations.cities.vienna') || "Vienna", 
+        {
+          name: $t('home.destinations.cities.vienna') || "Vienna",
           highlight: $t('home.destinations.highlights.vienna') || "City of Music",
           icon: "fa-music"
         },
-        { 
-          name: $t('home.destinations.cities.salzburg') || "Salzburg", 
+        {
+          name: $t('home.destinations.cities.salzburg') || "Salzburg",
           highlight: $t('home.destinations.highlights.salzburg') || "Mozart's Birth",
           icon: "fa-star"
         }
@@ -201,15 +201,15 @@
     },
     {
       country: $t('home.destinations.countries.czechRepublic') || "Czech Republic",
-      image: "https://images.unsplash.com/photo-1541849546-216549ae216d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/cseh.webp",
       cities: [
-        { 
-          name: $t('home.destinations.cities.prague') || "Prague", 
+        {
+          name: $t('home.destinations.cities.prague') || "Prague",
           highlight: $t('home.destinations.highlights.prague') || "The Golden City",
           icon: "fa-gem"
         },
-        { 
-          name: $t('home.destinations.cities.karlovyVary') || "Karlovy Vary", 
+        {
+          name: $t('home.destinations.cities.karlovyVary') || "Karlovy Vary",
           highlight: $t('home.destinations.highlights.karlovyVary') || "Historic Spa",
           icon: "fa-hot-tub"
         }
@@ -217,10 +217,10 @@
     },
     {
       country: $t('home.destinations.countries.slovakia') || "Slovakia",
-      image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/pozsony.webp",
       cities: [
-        { 
-          name: $t('home.destinations.cities.bratislava') || "Bratislava", 
+        {
+          name: $t('home.destinations.cities.bratislava') || "Bratislava",
           highlight: $t('home.destinations.highlights.bratislava') || "Little Big City",
           icon: "fa-city"
         }
@@ -229,7 +229,7 @@
   ];
   
   // Calculate active destination slide for mobile
-  $: activeDestinationSlide = destinationScrollWidth > 0 
+  $: activeDestinationSlide = destinationScrollWidth > 0
     ? Math.round((destinationScrollLeft / destinationScrollWidth) * (destinations.length - 1))
     : 0;
   
@@ -268,7 +268,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { 
+    }, {
       threshold: 0.05, // Lower threshold for faster triggering
       rootMargin: '100px' // Trigger before element is fully visible
     });
@@ -283,7 +283,6 @@
   // Parallax effect for images
   function handleMouseMove(e) {
     if (typeof window === 'undefined' || window.innerWidth < 768) return;
-    
     const cards = document.querySelectorAll('.destination-card');
     cards.forEach(card => {
       const rect = card.getBoundingClientRect();
@@ -418,26 +417,27 @@
           {#each mainServices as service, i}
             <div class="service-container flex flex-col lg:flex-row {i % 2 === 1 ? 'lg:flex-row-reverse' : ''} gap-12 items-stretch">
               <!-- Image Section with Fixed Container -->
-              <div class="service-image-wrapper w-full lg:w-1/2 transform transition-all duration-700 translate-y-4" 
-                   class:translate-y-0={isVisible['services-showcase']} 
+              <div class="service-image-wrapper w-full lg:w-1/2 transform transition-all duration-700 translate-y-4"
+                   class:translate-y-0={isVisible['services-showcase']}
                    style="transition-delay: {i * 150}ms">
                 
                 <!-- Fixed height container to prevent layout shifts -->
                 <div class="image-container relative overflow-hidden rounded-2xl shadow-xl bg-gray-200">
                   <!-- Placeholder background while image loads -->
                   <div class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center z-1">
-                    <div class="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center">
+                    <div class="w-16 h-16 bg-gray-4 rounded-full flex items-center justify-center">
                       <i class="fas {service.icon} text-2xl text-gray-600"></i>
                     </div>
                   </div>
                   
                   <!-- Service image -->
                   <div class="relative w-full h-64 md:h-96 bg-gray-200 overflow-hidden rounded-lg">
+                    <!-- Only first image is loaded eagerly, others are lazy loaded -->
                     <img
                       src={service.imageSrc}
                       alt={service.title}
                       class="absolute inset-0 w-full h-full object-cover"
-                      loading="eager"
+                      loading={i === 0 ? 'eager' : 'lazy'}
                       width="800"
                       height="600"
                     />
@@ -454,8 +454,8 @@
               </div>
               
               <!-- Content Section with Equal Height -->
-              <div class="service-content-wrapper w-full lg:w-1/2 transform transition-all duration-700 translate-y-4 flex flex-col justify-center" 
-                   class:translate-y-0={isVisible['services-showcase']} 
+              <div class="service-content-wrapper w-full lg:w-1/2 transform transition-all duration-700 translate-y-4 flex flex-col justify-center"
+                   class:translate-y-0={isVisible['services-showcase']}
                    style="transition-delay: {(i * 150) + 100}ms">
                 
                 <div class="content-inner flex flex-col justify-center h-full">
@@ -463,7 +463,7 @@
                     {service.title}
                     <span class="absolute -bottom-2 left-0 w-20 h-1 bg-[#dcb660]"></span>
                   </h3>
-                  <p class="text-lg text-gray-600 mb-8 leading-relaxed">{service.description}</p>
+                  <p class="text-lg text-gray-6 mb-8 leading-relaxed">{service.description}</p>
                   
                   <div class="features-grid grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                     {#each service.features as feature}
@@ -474,9 +474,9 @@
                     {/each}
                   </div>
                   
-                  <a href="/services" class="learn-more-link inline-flex items-center text-[#dcb660] font-semibold hover:text-teal-800 transition-colors duration-300">
-                    <span>{$t('home.services.learnMore') || 'Learn More About Our Services'}</span>
-                    <i class="fas fa-arrow-right ml-2 transition-transform duration-300 hover:translate-x-1"></i>
+                  <a href="/services" class="learn-more-link inline-flex items-center justify-center min-w-[280px] px-6 py-3 bg-[#dcb660] text-teal-900 font-semibold rounded-lg hover:bg-teal-800 hover:text-white transition-colors duration-300">
+                    <span class="whitespace-nowrap">{$t('home.services.learnMore') || 'Learn More About Our Services'}</span>
+                    <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
                   </a>
                 </div>
               </div>
@@ -498,10 +498,7 @@
       
       <div class="container mx-auto px-4 relative z-10">
         <!-- Section Heading -->
-        <div class="text-center mb-12">
-          <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/10 border border-[#dcb660]/30 mb-4">
-            <span class="text-[#dcb660] font-semibold">{$t('home.supportServices.title')}</span>
-          </div>
+        <div class="text-center mb-12 px-4">
           <h2 class="text-3xl md:text-4xl font-bold text-[#113946] mb-4">
             {$t('home.supportServices.title')}
           </h2>
@@ -514,7 +511,7 @@
         <div class="max-w-4xl mx-auto hidden md:block">
           <div class="grid grid-cols-2 gap-6">
             {#each supportServices as service, i}
-              <div 
+              <div
                 class="transform transition-all duration-700 translate-y-4"
                 class:translate-y-0={isVisible['support-services']}
                 style="transition-delay: {i * 100}ms"
@@ -545,35 +542,34 @@
         </div>
         
         <!-- Mobile: Swipeable Carousel -->
-        <div 
-          class="max-w-sm mx-auto md:hidden relative"
+        <div class="w-full mx-auto md:hidden relative pb-16"
           on:touchstart={handleTouchStart}
           on:touchmove={handleTouchMove}
           on:touchend={handleTouchEnd}
         >
-          <div class="overflow-hidden">
-            <div 
+          <div class="overflow-visible px-2">
+            <div
               class="flex transition-transform duration-300 ease-out"
               style="transform: translateX(-{currentSlide * 100}%);"
             >
               {#each supportServices as service, i}
                 <div class="w-full flex-shrink-0 px-2">
-                  <div 
-                    class="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#113946]/10 transform transition-all duration-700 translate-y-4"
+                  <div
+                    class="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#113946]/10 h-full flex flex-col min-h-[260px] text-center items-center"
                     class:translate-y-0={isVisible['support-services']}
-                    style="transition-delay: {i * 100}ms"
+                    style="transition-delay: {i * 100}ms;"
                   >
                     <!-- Icon Header -->
-                    <div class="flex items-center mb-4">
-                      <div class="w-12 h-12 bg-[#113946] rounded-full flex items-center justify-center text-white mr-4">
-                        <i class="fas {service.icon} text-xl"></i>
+                    <div class="flex flex-col items-center mb-4 w-full">
+                      <div class="w-12 h-12 bg-gradient-to-br from-[#113946] to-[#1e4b5a] rounded-full flex-shrink-0 flex items-center justify-center text-white mb-3">
+                        <i class="fas {service.icon} text-lg"></i>
                       </div>
-                      <h3 class="text-lg font-bold text-[#113946]">{service.title}</h3>
+                      <h3 class="text-lg font-bold text-[#113946] leading-tight">{service.title}</h3>
                     </div>
                     
-                    <div class="w-12 h-0.5 bg-[#dcb660] mb-4"></div>
+                    <div class="w-12 h-0.5 bg-[#dcb660] mb-4 mx-auto"></div>
                     
-                    <p class="text-[#113946]/80">
+                    <p class="text-sm sm:text-base text-[#113946]/80 flex-grow px-2">
                       {service.description}
                     </p>
                   </div>
@@ -583,11 +579,11 @@
           </div>
           
           <!-- Mobile Pagination Indicator -->
-          <div class="flex justify-center mt-6 space-x-1.5" style="font-size: 0;">
+          <div class="flex justify-center mt-8 space-x-2" style="font-size: 0;">
             {#each supportServices as _, i}
-              <button 
+              <button
                 class="rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660]' : 'bg-[#113946]/30'}"
-                style="width: 6px; height: 6px; min-width: 6px; min-height: 6px; {i === currentSlide ? 'width: 16px; min-width: 16px;' : ''}"
+                style="width: 8px; height: 8px; min-width: 8px; min-height: 8px; {i === currentSlide ? 'width: 20px; min-width: 20px;' : ''}"
                 on:click={() => currentSlide = i}
                 aria-label={`Go to service ${i + 1}`}
               ></button>
@@ -595,23 +591,23 @@
           </div>
           
           <!-- Mobile Swipe Hint -->
-          <div class="text-center mt-4 text-sm text-[#113946]/60 italic">
-            <span>Swipe to see more</span>
-            <div class="flex justify-center mt-1">
-              <i class="fas fa-arrow-left text-xs mr-3"></i>
-              <i class="fas fa-arrow-right text-xs"></i>
+          <div class="text-center mt-4 text-sm text=[#113946]/60">
+            <span class="inline-block bg-white/50 px-3 py-1 rounded-full">Swipe to see more</span>
+            <div class="flex justify-center mt-2">
+              <i class="fas fa-arrow-left text-xs text-[#113946]/60 mr-3"></i>
+              <i class="fas fa-arrow-right text-xs text-[#113946]/60"></i>
             </div>
           </div>
         </div>
         
         <!-- CTA Button -->
-        <div class="mt-10 text-center">
-          <a 
-            href="/services" 
-            class="inline-flex items-center px-8 py-3 bg-[#dcb660] text-[#113946] font-medium rounded-lg hover:bg-[#113946] hover:text-white transition-colors shadow-sm"
+        <div class="mt-20 text-center">
+          <a
+            href="/services"
+            class="inline-flex items-center justify-center min-w-[220px] px-8 py-3.5 bg-[#dcb660] text-[#113946] font-semibold rounded-lg hover:bg-[#113946] hover:text-white transition-colors duration-300 shadow-sm hover:shadow-md"
           >
-            <span>{$t('common.viewAllServices') || 'View All Services'}</span>
-            <i class="fas fa-arrow-right ml-2"></i>
+            <span class="whitespace-nowrap">{$t('common.viewAllServices') || 'View All Services'}</span>
+            <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
           </a>
         </div>
       </div>
@@ -619,7 +615,7 @@
     
     <!-- Destinations Word Cloud -->
     <section id="destinations" class="py-16 bg-gradient-to-b from-white to-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px=8">
         <div class="text-center mb-12">
           <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             {$t('home.destinations.title') || 'Destinations We Serve'}
@@ -629,51 +625,83 @@
           </p>
         </div>
         
-        <!-- Country Images Grid -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12 px-4 max-w-4xl mx-auto">
-          {#each destinations as dest}
-            <div class="w-[45%] sm:w-[30%] md:w-[22%] lg:w-[18%] relative overflow-hidden rounded-xl aspect-[4/3] shadow-md hover:shadow-xl transition-shadow duration-300">
-              <img 
-                src={dest.image} 
-                alt={dest.country}
-                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-3">
-                <h3 class="text-white font-medium text-sm sm:text-base text-center w-full">{dest.country}</h3>
-              </div>
-            </div>
-          {/each}
-        </div>
-        
-        <!-- Word Cloud Tags -->
-        <div class="relative max-w-6xl mx-auto py-8">
-          <div class="word-cloud-container flex flex-wrap justify-center gap-2 sm:gap-3 px-2">
-            {#each destinations.flatMap((d, i) => d.cities.map(city => ({ ...city, country: d.country, index: i }))) as city, i}
-              <div 
-                class="word-cloud-tag px-3 py-1.5 sm:px-4 sm:py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md border border-white/60 
-                       text-teal-900 font-medium hover:bg-teal-50 transition-all duration-300
-                       hover:scale-110 hover:shadow-lg hover:z-10 hover:border-teal-100"
-                style={`
-                  font-size: ${0.9 + (Math.random() * 0.2)}rem;
-                  margin: 0.25rem 0.5rem;
-                  animation: float ${4 + Math.random() * 4}s ease-in-out infinite alternate-reverse;
-                  animation-delay: ${i * 0.1}s;
-                `}
-              >
-                <div class="flex items-center gap-1.5">
-                  <span class="font-medium">{city.name}</span>
-                  <span class="text-xs text-teal-600/80 hidden sm:inline">• {city.highlight}</span>
+        <!-- Country Images Grid - 2x2 on mobile, single row on desktop -->
+        <div class="w-full max-w-7xl mx-auto px-4 mb-12">
+          <div class="grid grid-cols-2 md:flex md:flex-nowrap md:justify-center gap-4 md:gap-6">
+            {#each destinations as dest}
+              <div class="w-full md:w-56 lg:w-64 flex-shrink-0 relative overflow-hidden rounded-xl aspect-[3/4] shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                <img
+                  src={dest.image}
+                  alt={dest.country}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  width="256"
+                  height="341"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center p-3 md:p-4">
+                  <h3 class="text-white font-bold text-base md:text-lg text-center">{dest.country}</h3>
                 </div>
               </div>
             {/each}
           </div>
         </div>
         
+        <!-- Enhanced City Pills with Word Cloud Effect -->
+        <div class="relative max-w-6xl mx-auto py-8 px-4">
+          <div class="word-cloud-container flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-2">
+            {#each destinations.flatMap((d, i) => d.cities.map(city => ({ ...city, country: d.country, index: i }))) as city, i}
+              <div
+                class="word-cloud-tag group relative overflow-hidden
+                       bg-white rounded-full px-5 py-2.5 sm:px-6 sm:py-3 shadow-sm
+                       hover:shadow transition-all duration-300 border border-gray-100
+                       hover:border-teal-100 transform hover:-translate-y-0.5
+                       will-change-transform inline-flex flex-col items-center
+                       m-1.5 sm:m-2 cursor-default select-none"
+                style={`
+                  --delay: ${i * 50}ms;
+                  --rotate: ${(Math.random() * 8) - 4}deg;
+                  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both;
+                  transform: rotate(var(--rotate));
+                `}
+              >
+                <div class="flex flex-col items-center justify-center text-center">
+                  <span class="text-lg sm:text-xl font-medium text-teal-900 group-hover:text-teal-700 transition-colors leading-tight">
+                    {city.name}
+                  </span>
+                  <span class="text-sm sm:text-base text-teal-600/90 mt=0.5 sm:mt-1 leading-tight">
+                    {city.highlight}
+                  </span>
+                </div>
+              </div>
+            {/each}
+          </div>
+        </div>
+        
+        <style>
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          .word-cloud-tag {
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            user-select: none;
+            pointer-events: none;
+          }
+        </style>
+        
         <!-- CTA Button -->
-        <div class="text-center mt-12">
-          <a href="/contact" class="inline-block bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-medium py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            {$t('home.destinations.cta') || 'Plan Your Journey'}
+        <div class="text-center mt-8">
+          <a href="/contact" class="inline-flex items-center justify-center min-w-[260px] text-lg bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-semibold py-3.5 px-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <span>{$t('home.destinations.cta') || 'Plan Your Journey'}</span>
+            <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-1"></i>
           </a>
         </div>
       </div>
@@ -681,13 +709,13 @@
     
     <!-- OPTIMIZED: Lazy loaded Testimonials -->
     {#if TestimonialsSection}
-      <svelte:component 
+      <svelte:component
         this={TestimonialsSection}
-        title={$t('home.testimonials.title')} 
-        averageRating={parseFloat($t('home.testimonials.rating')) || 4.9} 
-        reviewCount={$t('home.testimonials.reviewCount')} 
-        certificationText={$t('home.testimonials.certification')} 
-        testimonials={testimonialsData} 
+        title={$t('home.testimonials.title')}
+        averageRating={parseFloat($t('home.testimonials.rating')) || 4.9}
+        reviewCount={$t('home.testimonials.reviewCount')}
+        certificationText={$t('home.testimonials.certification')}
+        testimonials={testimonialsData}
       />
     {:else}
       <!-- Loading placeholder for testimonials -->
@@ -701,16 +729,15 @@
       </section>
     {/if}
   </main>
-  
 </div>
 
 <style>
   /* Journey path styling */
   .journey-path {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      #dcb660 10%, 
-      #dcb660 90%, 
+    background: linear-gradient(90deg,
+      transparent 0%,
+      #dcb660 10%,
+      #dcb660 90%,
       transparent 100%);
     height: 3px;
     position: relative;
@@ -723,10 +750,10 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(220, 182, 96, 0.3) 20%, 
-      rgba(220, 182, 96, 0.3) 80%, 
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(220, 182, 96, 0.3) 20%,
+      rgba(220, 182, 96, 0.3) 80%,
       transparent 100%);
     transform: translateY(-50%);
   }
@@ -740,8 +767,6 @@
   .destination-stop:hover {
     transform: translateY(-8px) scale(1.02);
   }
-  
-  /* Image styles are now inline with the elements */
   
   /* Word Cloud Tag Styles */
   .word-cloud-container {
@@ -760,7 +785,7 @@
     white-space: nowrap;
     cursor: pointer;
     will-change: transform;
-    transform: none !important; /* Override any transform from inline styles */
+    transform: none !important;
   }
   
   .word-cloud-tag:hover {
@@ -801,12 +826,7 @@
     .destination-card {
       min-height: 260px;
     }
-    
-    
   }
-  
-  /* AOS animations - optimized for performance */
-  
   
   /* Scrollbar styling for category horizontal scroll on mobile */
   @media (max-width: 1024px) {

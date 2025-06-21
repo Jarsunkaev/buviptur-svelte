@@ -237,7 +237,7 @@
                                 <DatePicker
                                     bind:value={fromDate}
                                     placeholder="Select start date"
-                                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                                    className="w-full"
                                     required
                                 />
                             </div>
@@ -245,8 +245,8 @@
                                 <label for="toDate" class="block text-sm font-medium text-gray-700 mb-2">To Date *</label>
                                 <DatePicker
                                     bind:value={toDate}
-                                    placeholder="Select date"
-                                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all"
+                                    placeholder="Select end date"
+                                    className="w-full"
                                     required
                                 />
                             </div>

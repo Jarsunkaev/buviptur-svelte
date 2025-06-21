@@ -90,14 +90,11 @@
     // Start preloading
     preloadImages();
     
-    // Set up carousel auto-play with 5-second intervals
-    // Only start auto-play if user hasn't interacted with the carousel
-    let userInteracted = false;
-    
+    // Set up carousel auto-play with 4-second intervals
     const startAutoPlay = () => {
-      if (!userInteracted && autoPlay && typeof window !== 'undefined' && 
+      if (autoPlay && typeof window !== 'undefined' && 
           !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        carouselInterval = setInterval(nextSlide, 5000);
+        carouselInterval = setInterval(nextSlide, 4000);
       }
     };
     
@@ -105,29 +102,43 @@
     isVisible = true;
     
     // Start autoplay after a short delay
-    const autoplayTimeout = setTimeout(startAutoPlay, 3000);
+    const autoplayTimeout = setTimeout(startAutoPlay, 1000);
     
-    // Handle user interaction
+    // Pause on interaction, resume after delay
+    let pauseTimeout;
     const handleInteraction = () => {
-      if (!userInteracted) {
-        userInteracted = true;
-        if (carouselInterval) {
-          clearInterval(carouselInterval);
-        }
+      if (carouselInterval) {
+        clearInterval(carouselInterval);
       }
+      
+      // Clear any existing pause timeout
+      if (pauseTimeout) clearTimeout(pauseTimeout);
+      
+      // Resume autoplay after 10 seconds of inactivity
+      pauseTimeout = setTimeout(() => {
+        startAutoPlay();
+      }, 10000);
     };
     
     // Add event listeners for user interaction
     const carousel = document.querySelector('.carousel-container');
     if (carousel) {
-      carousel.addEventListener('mouseenter', handleInteraction);
-      carousel.addEventListener('touchstart', handleInteraction, { passive: true });
+      carousel.addEventListener('mouseenter', () => {
+        if (carouselInterval) clearInterval(carouselInterval);
+      });
+      carousel.addEventListener('mouseleave', () => {
+        handleInteraction();
+      });
+      carousel.addEventListener('touchstart', () => {
+        if (carouselInterval) clearInterval(carouselInterval);
+      }, { passive: true });
     }
     
     // Cleanup
     return () => {
       if (carouselInterval) clearInterval(carouselInterval);
-      if (preloadTimeout) clearTimeout(preloadTimeout);
+      if (autoplayTimeout) clearTimeout(autoplayTimeout);
+      if (pauseTimeout) clearTimeout(pauseTimeout);
     };
   });
   

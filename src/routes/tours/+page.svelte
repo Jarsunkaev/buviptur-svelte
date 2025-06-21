@@ -36,9 +36,9 @@
                 image: 'https://images.unsplash.com/photo-1516550893232-fe054840d3c2?q=80&w=800',
                 activities: [
                     $t('tours.detailed.budapest.day2.activities.dayTrip') || 'Hungarian Heritage Day Trip',
-                    $t('tours.detailed.budapest.day2.activities.destinations') || 'Visit Esztergom Basilica',
-                    $t('tours.detailed.budapest.day2.activities.szentendre') || 'Explore Visegrád Castle',
-                    'Discover charming Szentendre town',
+                    $t('tours.detailed.budapest.day2.activities.esztergom') || 'Visit Esztergom Basilica',
+                    $t('tours.detailed.budapest.day2.activities.visegrad') || 'Explore Visegrád Castle',
+                    $t('tours.detailed.budapest.day2.activities.szentendre') || 'Discover charming Szentendre town',
                     $t('tours.detailed.budapest.day2.activities.return') || 'Return to Budapest'
                 ]
             },
@@ -48,8 +48,7 @@
                 image: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?q=80&w=800',
                 activities: [
                     $t('tours.detailed.budapest.day3.activities.heroes') || 'Heroes\' Square guided tour',
-                    $t('tours.detailed.budapest.day3.activities.margaret') || 'Relaxing walk through Margaret Island',
-                    'Final exploration and departure'
+                    $t('tours.detailed.budapest.day3.activities.margaret') || 'Relaxing walk through Margaret Island'
                 ]
             }
         ]
@@ -135,12 +134,24 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-up').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(el);
-        });
+        // Get all fade-up elements
+        const fadeElements = document.querySelectorAll('.fade-up');
+        
+        // Immediately show the first element (featured tour)
+        if (fadeElements[0]) {
+            fadeElements[0].style.opacity = '1';
+            fadeElements[0].style.transform = 'translateY(0)';
+            fadeElements[0].style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(fadeElements[0]);
+        }
+        
+        // Apply fade-up animation to remaining elements
+        for (let i = 1; i < fadeElements.length; i++) {
+            fadeElements[i].style.opacity = '0';
+            fadeElements[i].style.transform = 'translateY(30px)';
+            fadeElements[i].style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(fadeElements[i]);
+        }
 
         return () => observer.disconnect();
     });
@@ -378,14 +389,5 @@
             </div>
         </div>
     </section>
-    
-   
-
-    <!-- Why Choose Us Section -->
-    <WhyChooseUs 
-        title={$t('tours.whyChoose.title')} 
-        {benefits} 
-        image="https://images.unsplash.com/photo-1522083165195-3424ed129620?q=80"
-    />
 
 </main>

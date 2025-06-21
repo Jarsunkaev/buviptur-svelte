@@ -48,7 +48,7 @@
           "description": "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
           "icon": "fa-map-marked-alt",
           "features": [
-            "Small groups of max 12 travelers",
+            "Small groups",
             "Expert university-educated guides",
             "Hidden gems and local experiences",
             "Flexible and customizable itineraries"
@@ -125,6 +125,7 @@
     "destinations": {
       "title": "Destinations We Serve",
       "subtitle": "Explore the heart of Central Europe with our expertly crafted experiences.",
+      "cta": "Explore All Destinations",
       "countries": {
         "hungary": "Hungary",
         "austria": "Austria", 
@@ -317,8 +318,9 @@
           "title": "Day 2",
           "activities": {
             "dayTrip": "Hungarian Heritage Day Trip",
-            "destinations": "Visit Esztergom Basilica",
-            "szentendre": "Explore Visegrád Castle",
+            "esztergom": "Visit Esztergom Basilica",
+            "visegrad": "Explore Visegrád Castle",
+            "szentendre": "Discover charming Szentendre town",
             "return": "Return to Budapest"
           }
         },

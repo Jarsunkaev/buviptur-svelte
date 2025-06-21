@@ -48,7 +48,7 @@
           "description": "Tapasztalja meg Közép-Európa gazdag történelmét és kultúráját szakértő helyi idegenvezetőinkkel, akik bennfentes tudásukkal életre keltik a célpontokat.",
           "icon": "fa-map-marked-alt",
           "features": [
-            "Kis csoportok maximum 12 utazóval",
+            "Kis csoportok",
             "Szakértő, egyetemi végzettségű idegenvezetők",
             "Rejtett gyöngyszemek és helyi élmények",
             "Rugalmas és testreszabható útvonalak"
@@ -125,6 +125,7 @@
     "destinations": {
       "title": "Célpontjaink",
       "subtitle": "Fedezze fel Közép-Európa szívét szakértően kialakított élményeinkkel.",
+      "cta": "Fedezze Fel Az Összes Célpontot",
       "countries": {
         "hungary": "Magyarország",
         "austria": "Ausztria", 
@@ -317,8 +318,9 @@
           "title": "2. Nap",
           "activities": {
             "dayTrip": "Magyar Örökség egynapos kirándulás",
-            "destinations": "Esztergomi Bazilika látogatása",
-            "szentendre": "Visegrádi Vár felfedezése",
+            "esztergom": "Esztergomi Bazilika látogatása",
+            "visegrad": "Visegrádi Vár felfedezése",
+            "szentendre": "Bájos Szentendre város felfedezése",
             "return": "Visszatérés Budapestre"
           }
         },

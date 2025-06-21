@@ -1,9 +1,53 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
   import { t } from 'svelte-i18n';
   
+  let showBackToTop = false;
+  let scrollPosition = 0;
+  let scrollTimeout;
+  
+  // Throttle scroll event
+  function handleScroll() {
+    if (!browser) return;
+    
+    // Clear any existing timeout
+    if (scrollTimeout) {
+      window.cancelAnimationFrame(scrollTimeout);
+    }
+    
+    // Use requestAnimationFrame for performance
+    scrollTimeout = window.requestAnimationFrame(() => {
+      const currentPosition = window.scrollY || document.documentElement.scrollTop;
+      
+      // Only update if scroll position changed significantly (more than 5px)
+      if (Math.abs(currentPosition - scrollPosition) > 5) {
+        scrollPosition = currentPosition;
+        
+        // Show button when scrolled down more than 300px
+        showBackToTop = scrollPosition > 300;
+      }
+    });
+  }
+  
   const currentYear = new Date().getFullYear();
+  
+  // Add scroll event listener
+  onMount(() => {
+    if (browser) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      // Initial check in case page loads scrolled
+      handleScroll();
+    }
+    return () => {
+      if (browser) {
+        window.removeEventListener('scroll', handleScroll);
+        if (scrollTimeout) {
+          window.cancelAnimationFrame(scrollTimeout);
+        }
+      }
+    };
+  });
   
   function scrollToTop() {
     if (!browser) return;
@@ -47,12 +91,12 @@
 <footer class="bg-teal-900 text-white pt-12 pb-6 w-full mt-auto relative">
   <div class="container mx-auto px-6 relative">
     <!-- Scroll to top button positioned on the right -->
-    <div class="absolute -top-6 right-6 z-10">
+    <div class="fixed bottom-8 right-8 z-50 transition-opacity duration-300 ease-in-out {showBackToTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}">
       <button 
         on:click={forceScrollToTop}
-        class="w-12 h-12 bg-[#dcb660] hover:bg-[#c9a64f] text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dcb660] cursor-pointer"
-        aria-label="Back to top"
-        title="Back to top"
+        class="w-14 h-14 bg-[#dcb660] hover:bg-[#c9a64f] text-white rounded-full flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dcb660] cursor-pointer transform hover:-translate-y-1"
+        aria-label={$t('common.backToTop') || 'Back to top'}
+        title={$t('common.backToTop') || 'Back to top'}
         type="button"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

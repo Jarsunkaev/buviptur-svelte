@@ -73,24 +73,9 @@
             description: $t('about.values.authentic.description') || 'We create journeys that go beyond typical tourist paths, connecting travelers with real local culture.'
         },
         {
-            icon: 'fa-leaf',
-            title: $t('about.values.sustainable.title') || 'Sustainable Tourism',
-            description: $t('about.values.sustainable.description') || 'Our tours are designed to benefit local communities while minimizing environmental impact.'
-        },
-        {
             icon: 'fa-handshake',
             title: $t('about.values.respect.title') || 'Cultural Respect',
             description: $t('about.values.respect.description') || 'We foster meaningful cross-cultural understanding and respect in every interaction.'
-        },
-        {
-            icon: 'fa-heart',
-            title: $t('about.values.care.title') || 'Personalized Care',
-            description: $t('about.values.care.description') || 'Every traveler receives individualized attention and service tailored to their unique needs.'
-        },
-        {
-            icon: 'fa-lightbulb',
-            title: $t('about.values.innovation.title') || 'Innovation',
-            description: $t('about.values.innovation.description') || 'We constantly evolve our offerings to incorporate new insights and possibilities in travel.'
         },
         {
             icon: 'fa-users',
@@ -229,13 +214,4 @@
             </div>
         </div>
     </section>
-
-    <!-- Why Choose Us Section -->
-    <WhyChooseUs 
-        title={$t('about.whyTravel') || 'Why Travel With Us'} 
-        {benefits} 
-        {stats} 
-        image={whyImage} 
-    />
-    
 </main>

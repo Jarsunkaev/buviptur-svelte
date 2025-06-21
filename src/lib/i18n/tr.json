@@ -48,7 +48,7 @@
           "description": "Destinasyonları içeriden bilgiyle canlandıran uzman yerel rehberlerimizle Orta Avrupa'nın zengin tarihini ve kültürünü deneyimleyin.",
           "icon": "fa-map-marked-alt",
           "features": [
-            "Maksimum 12 gezginli küçük gruplar",
+            "Küçük gruplar",
             "Uzman, üniversite mezunu rehberler",
             "Gizli mücevherler ve yerel deneyimler",
             "Esnek ve özelleştirilebilir güzergahlar"
@@ -125,6 +125,7 @@
     "destinations": {
       "title": "Hizmet Verdiğimiz Destinasyonlar",
       "subtitle": "Uzman şekilde hazırlanmış deneyimlerimizle Orta Avrupa'nın kalbini keşfedin.",
+      "cta": "Tüm Rotaları Keşfedin",
       "countries": {
         "hungary": "Macaristan",
         "austria": "Avusturya", 
@@ -317,8 +318,9 @@
           "title": "2. Gün",
           "activities": {
             "dayTrip": "Macar Mirası günübirlik gezisi",
-            "destinations": "Esztergom Bazilikası ziyareti",
-            "szentendre": "Visegrád Kalesi'ni keşfedin",
+            "esztergom": "Esztergom Bazilikası ziyareti",
+            "visegrad": "Visegrád Kalesi'ni keşfedin",
+            "szentendre": "Büyüleyici Szentendre kasabasını keşfedin",
             "return": "Budapeşte'ye dönüş"
           }
         },
