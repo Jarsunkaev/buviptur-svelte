@@ -537,21 +537,37 @@
     }
   },
   "contact": {
-    "title": "Kişiselleştirilmiş Teklifinizi Alın",
-    "subtitle": "Uzman ekibimizle rüya seyahat deneyiminizi oluşturun",
+    "title": "Bize Ulaşın",
+    "subtitle": "Seyahat deneyiminizi oluşturun",
     "form": {
-      "title": "Rüya Geziniz Hakkında Bize Anlatın",
+      "title": "İletişime Geçin",
       "firstName": "Ad",
-      "lastName": "Soyad", 
+      "firstNamePlaceholder": "Adınız",
+      "lastName": "Soyad",
+      "lastNamePlaceholder": "Soyadınız",
       "email": "E-posta Adresi",
+      "emailPlaceholder": "ornek@email.com",
       "phone": "Telefon Numarası",
+      "phonePlaceholder": "+90 (555) 123-4567",
       "fromDate": "Başlangıç Tarihi",
-      "toDate": "Bitiş Tarihi", 
+      "fromDatePlaceholder": "Başlangıç tarihini seçin",
+      "toDate": "Bitiş Tarihi",
+      "toDatePlaceholder": "Bitiş tarihini seçin",
       "ageGroups": "Yaş Gruplarına Göre Katılımcı Sayısı",
+      "ageGroup1": "0-12 yaş",
+      "ageGroup2": "13-18 yaş",
+      "ageGroup3": "19+ yaş",
       "totalParticipants": "Toplam katılımcı",
       "comments": "Ek Yorumlar veya İstekler",
       "commentsPlaceholder": "Özel gereksinimler, erişilebilirlik ihtiyaçları veya aradığınız belirli deneyimler hakkında bize anlatın...",
-      "privacy": "Tur talebim hakkında e-posta iletişimi almayı kabul ediyorum ve verilerimin Gizlilik Politikası'na göre işleneceğini anlıyorum.",
+      "privacyPolicy1": "Tur talebim hakkında e-posta iletişimi almayı kabul ediyorum ve verilerimin ",
+      "privacyPolicyLink": "Gizlilik Politikası",
+      "privacyPolicy2": "'na göre işleneceğini anlıyorum.",
+      "requiredFields": "Zorunlu alanlar",
+      "validation": {
+        "required": "Lütfen tüm zorunlu alanları doldurun",
+        "email": "Lütfen geçerli bir e-posta adresi girin"
+      },
       "submit": "Talebi Gönder",
       "processing": "İşleniyor...",
       "required": "*"
@@ -582,6 +598,20 @@
         "description": "Mükemmel olana kadar geri bildirimlerinizle güzergahı rafine edeceğiz."
       }
     },
+    "testimonials": {
+      "emily": {
+        "title": "Sorunsuz Rezervasyon Süreci",
+        "content": "Kişiselleştirilmiş bir tur düzenlemenin ne kadar kolay olduğu beni çok etkiledi. İsteğimi gönderdikten sadece 24 saat sonra, tam olarak aradığım şeye uygun detaylı bir seyahat planı aldım. Ekip çok ilgiliydi ve tüm sorularıma yardımcı oldular.",
+        "author": "Emily Johnson",
+        "position": "Toronto, Kanada"
+      },
+      "michael": {
+        "title": "Mükemmel Kişiselleştirilmiş Deneyim",
+        "content": "Aldığım özel tur tüm beklentilerimin ötesindeydi. Tüm tercihlerimizi dikkate alarak, tarihe olan ilgimizle yerel mutfağa olan sevgimiz arasında mükemmel bir denge kuran bir seyahat planı oluşturdular. Her detay özenle düşünülmüştü.",
+        "author": "Michael Chen",
+        "position": "Sidney, Avustralya"
+      }
+    },
     "faq": {
       "title": "Sıkça Sorulan Sorular",
       "subtitle": "Özel tur sürecimiz hakkında sorularınız mı var? Aşağıda yaygın sorulara cevaplar bulun.",
@@ -593,6 +623,10 @@
       "answer3": "Hayır, kişiselleştirilmiş tur teklifi talep etmek tamamen ücretsiz ve yükümlülük gerektirmeyen. Depozito sadece nihai güzergahı onayladıktan ve rezervasyon yapmaya hazır olduktan sonra gereklidir.",
       "question4": "Ne kadar önceden tur talep etmeliyim?",
       "answer4": "En iyi kullanılabilirlik için, özellikle yoğun sezonda (Mayıs-Eylül), turunuzu en az 2-3 ay önceden talep etmenizi öneriyoruz. Son dakika talepleri mümkün ancak sınırlı seçeneklerle olabilir.",
+      "question5": "İptal politikası nedir?",
+      "answer5": "İptal politikamız, seçilen tura ve hizmetlere göre değişiklik göstermektedir. Lütfen detaylar için seyahat danışmanımıza danışın.",
+      "question6": "Büyük bir grup için tur rezervasyonu yapabilir miyim?",
+      "answer6": "Evet, büyük grupları ağırlayabiliriz. Özel fiyat teklifi ve grubunuzun ihtiyaçlarını görüşmek için lütfen bizimle iletişime geçin.",
       "stillQuestions": "Hala sorularınız var mı?",
       "contactDirect": "Doğrudan Bizimle İletişime Geçin"
     }

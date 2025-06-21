@@ -537,21 +537,37 @@
     }
   },
   "contact": {
-    "title": "Személyre szabott ajánlat kérése",
-    "subtitle": "Alkossa meg álmai utazási élményét szakértő csapatunkkal",
+    "title": "Lépjen kapcsolatba velünk",
+    "subtitle": "Alkossa meg utazási élményét",
     "form": {
-      "title": "Meséljen álmai utazásáról",
+      "title": "Lépjen kapcsolatba velünk",
       "firstName": "Keresztnév",
+      "firstNamePlaceholder": "Keresztneve",
       "lastName": "Vezetéknév", 
+      "lastNamePlaceholder": "Vezetékneve",
       "email": "E-mail cím",
+      "emailPlaceholder": "az.on.email@pelda.hu",
       "phone": "Telefonszám",
+      "phonePlaceholder": "+36 (20) 123-4567",
       "fromDate": "Kezdő dátum",
-      "toDate": "Befejező dátum", 
+      "fromDatePlaceholder": "Válasszon kezdő dátumot",
+      "toDate": "Befejező dátum",
+      "toDatePlaceholder": "Válasszon befejező dátumot",
       "ageGroups": "Résztvevők száma korcsoportok szerint",
+      "ageGroup1": "0-12 évesek",
+      "ageGroup2": "13-18 évesek",
+      "ageGroup3": "19+ évesek",
       "totalParticipants": "Összes résztvevő",
       "comments": "További megjegyzések vagy kérések",
       "commentsPlaceholder": "Mondja el nekünk különleges követelményeit, akadálymentesítési igényeit vagy konkrét élményeket, amelyeket keres...",
-      "privacy": "Hozzájárulok, hogy e-mail kommunikációt kapjak túrakérésemről és megértem, hogy adataimat az Adatvédelmi Irányelvek szerint dolgozzák fel.",
+      "privacyPolicy1": "Hozzájárulok, hogy e-mail kommunikációt kapjak túrakérésemről és megértem, hogy adataimat az ",
+      "privacyPolicyLink": "Adatvédelmi Irányelv",
+      "privacyPolicy2": " szerint dolgozzák fel.",
+      "requiredFields": "Kötelező mezők",
+      "validation": {
+        "required": "Kérjük, töltse ki az összes kötelező mezőt",
+        "email": "Kérjük, érvényes e-mail címet adjon meg"
+      },
       "submit": "Kérés beküldése",
       "processing": "Feldolgozás...",
       "required": "*"
@@ -582,18 +598,36 @@
         "description": "Visszajelzéseivel finomítjuk az útvonalat, amíg tökéletes nem lesz."
       }
     },
+    "testimonials": {
+      "emily": {
+        "title": "Zökkenőmentes Folyamat",
+        "content": "Lenyűgözött, milyen egyszerű volt egy személyre szabott túrát szervezni. 24 órán belül a kérésem beküldése után megkaptam a részletes útvonaltervet, amely tökéletesen megfelelt az elvárásaimnak. A csapat gyorsan reagált, és minden kérdésemre kielégítő választ kaptam.",
+        "author": "Emily Johnson",
+        "position": "Toronto, Kanada"
+      },
+      "michael": {
+        "title": "Tökéletesen Személyre Szabott Élmény",
+        "content": "A kapott egyedi túra minden várakozásomat felülmúlta. Figyelembe vették minden igényünket, és olyan útvonaltervet készítettek, amely tökéletes egyensúlyt teremtett a történelem iránti érdeklődésünk és a helyi konyha szeretete között. Minden részlet gondosan meg volt tervezve.",
+        "author": "Michael Chen",
+        "position": "Sydney, Ausztrália"
+      }
+    },
     "faq": {
-      "title": "Gyakran ismételt kérdések",
-      "subtitle": "Kérdései vannak egyedi túra folyamatunkról? Itt talál válaszokat gyakori kérdésekre.",
-      "question1": "Milyen gyorsan kapom meg személyre szabott túra ajánlatomat?",
-      "answer1": "Általában 24-48 órán belül válaszolunk kezdeti javaslattal. Összetettebb többországos túrák esetén akár 72 órába is telhet a részletes útvonal elkészítése.",
-      "question2": "Módosíthatom a túra ajánlatot annak megkapása után?",
-      "answer2": "Természetesen! A kezdeti javaslatot a megbeszélés kiindulópontjának tekintjük. Csapatunk Önnel együtt dolgozik az útvonal finomításán, amíg tökéletesen nem illeszkedik preferenciáihoz.",
-      "question3": "Szükséges foglaló túra ajánlat kérésekor?",
-      "answer3": "Nem, a személyre szabott túra ajánlat kérése teljesen ingyenes és kötelezettségek nélküli. Foglaló csak akkor szükséges, miután jóváhagyta a végleges útvonalat és készen áll a foglalásra.",
-      "question4": "Mennyivel előre kell túrát kérnem?",
-      "answer4": "A legjobb elérhetőségért, különösen csúcsidőben (május-szeptember), legalább 2-3 hónappal előre ajánljuk túra kérését. Utolsó pillanatos kérések lehetségesek, de korlátozott lehetőségekkel.",
-      "stillQuestions": "Még mindig vannak kérdései?",
+      "title": "Gyakran Ismételt Kérdések",
+      "subtitle": "Kérdése van egyedi utazási folyamatunkkal kapcsolatban? Válaszokat talál a gyakori kérdésekre alább.",
+      "question1": "Mennyi idő alatt kapom meg a személyre szabott ajánlatot?",
+      "answer1": "Általában 24-48 órán belül válaszolunk egy kezdeti ajánlattal. Az összetettebb, több országot érintő utak esetén akár 72 óráig is eltarthat a részletes útvonalterv elkészítése.",
+      "question2": "Módosíthatom az utazási ajánlatot az átvétele után?",
+      "answer2": "Természetesen! A kezdeti ajánlatot csak kiindulási pontnak tekintjük. Csapatunk Önnel együtt finomítja az útvonaltervet, amíg az tökéletesen nem felel meg igényeinek.",
+      "question3": "Kötőpénzt kell fizetni az ajánlatkéréskor?",
+      "answer3": "Nem, a személyre szabott ajánlatkérés teljesen ingyenes és nem kötelező. A foglalási díjat csak a végleges útvonalterv jóváhagyása és a foglalás megerősítése után kell befizetni.",
+      "question4": "Milyen előre jelezzem a túrát?",
+      "answer4": "A legjobb elérhetőség érdekében, különösen a főszezonban (május-szeptember), javasoljuk, hogy legalább 2-3 hónappal a tervezett időpont előtt jelezze útiszándékát. Az utolsó pillanatban történő kérések is lehetségesek, de korlátozott lehetőségekkel.",
+      "question5": "Mi a lemondási feltételek?",
+      "answer5": "A lemondási feltételek a kiválasztott túrától és szolgáltatásoktól függően változnak. Kérjük, érdeklődjön utazási tanácsadónknál a részletekről.",
+      "question6": "Foglalhatok túrát nagy csoport számára?",
+      "answer6": "Igen, nagyobb csoportokat is tudunk fogadni. Kérjük, lépjen kapcsolatba velünk egyedi árajánlatért és a csoport igényeinek megbeszéléséért.",
+      "stillQuestions": "Még mindig van kérdése?",
       "contactDirect": "Lépjen kapcsolatba velünk közvetlenül"
     }
   },

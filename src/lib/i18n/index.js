@@ -1,6 +1,6 @@
 // src/lib/i18n/index.js - Simple client-side i18n
 import { browser } from '$app/environment';
-import { init, register, locale, getLocaleFromNavigator } from 'svelte-i18n';
+import { init, register, locale, getLocaleFromNavigator, _ } from 'svelte-i18n';
 
 // Register translation files
 register('en', () => import('./en.json'));
@@ -83,4 +83,17 @@ export function getCurrentLanguage() {
   return currentLang;
 }
 
-export { locale };
+// Export the store for direct subscription
+export { locale, _ as t };
+
+// Helper function to get translation with fallback
+export function translate(key, options) {
+  if (!browser) return key; // Return key during SSR
+  return _(key, options) || key;
+}
+
+// For convenience, you can use $t in your Svelte components like this:
+// <script>
+//   import { t } from '$lib/i18n';
+//   $: console.log($t('some.key'));
+// </script>

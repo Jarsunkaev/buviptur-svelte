@@ -544,24 +544,40 @@
     }
   },
   "contact": {
-    "title": "Get Your Personalized Offer",
-    "subtitle": "Craft your dream travel experience with our expert team",
+    "title": "Contact Us",
+    "subtitle": "Craft your travel experience",
     "form": {
-      "title": "Tell Us About Your Dream Trip",
+      "title": "Get In Touch",
       "firstName": "First Name",
-      "lastName": "Last Name", 
+      "firstNamePlaceholder": "Your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Your last name",
       "email": "Email Address",
+      "emailPlaceholder": "your.email@example.com",
       "phone": "Phone Number",
+      "phonePlaceholder": "+36 (234) 567-8901",
       "fromDate": "From Date",
-      "toDate": "To Date", 
+      "fromDatePlaceholder": "Select start date",
+      "toDate": "To Date",
+      "toDatePlaceholder": "Select end date",
       "ageGroups": "Number of Participants by Age Group",
+      "ageGroup1": "0-12 years",
+      "ageGroup2": "13-18 years",
+      "ageGroup3": "19+ years",
       "totalParticipants": "Total participants",
       "comments": "Additional Comments or Requests",
       "commentsPlaceholder": "Tell us about any special requirements, accessibility needs, or specific experiences you're looking for...",
-      "privacy": "I agree to receive email communications about my tour request and understand that my data will be processed according to the Privacy Policy.",
+      "privacyPolicy1": "I agree to receive email communications about my tour request and understand that my data will be processed according to the ",
+      "privacyPolicyLink": "Privacy Policy",
+      "privacyPolicy2": ".",
       "submit": "Submit Request",
       "processing": "Processing...",
-      "required": "*"
+      "required": "*",
+      "requiredFields": "* Required fields",
+      "validation": {
+        "required": "Please fill in all required fields",
+        "email": "Please enter a valid email address"
+      }
     },
     "success": {
       "title": "Request Submitted Successfully!",
@@ -584,9 +600,27 @@
         "title": "Custom Proposal",
         "description": "We'll create a detailed itinerary based on your preferences."
       },
+      "ready": {
+        "title": "Ready to Go",
+        "description": "Once confirmed, we'll handle all the details for your perfect trip."
+      },
       "tuning": {
         "title": "Fine-Tuning",
         "description": "We'll refine the itinerary with your feedback until it's perfect."
+      }
+    },
+    "testimonials": {
+      "emily": {
+        "title": "Seamless Booking Process",
+        "content": "I was impressed by how easy it was to get a customized tour. Within 24 hours of submitting my request, I received a detailed itinerary that perfectly matched what I was looking for. The team was responsive and accommodating to all my questions.",
+        "author": "Emily Johnson",
+        "position": "Toronto, Canada"
+      },
+      "michael": {
+        "title": "Perfectly Tailored Experience",
+        "content": "The custom tour I received was beyond expectations. They took all our preferences into account and created an itinerary that balanced our interest in history with our love for local cuisine. Every detail was thoughtfully planned.",
+        "author": "Michael Chen",
+        "position": "Sydney, Australia"
       }
     },
     "faq": {
@@ -600,6 +634,10 @@
       "answer3": "No, requesting a personalized tour offer is completely free and without obligation. A deposit is only required after you have approved the final itinerary and are ready to book.",
       "question4": "How far in advance should I request a tour?",
       "answer4": "For the best availability, especially during peak season (May-September), we recommend requesting your tour at least 2-3 months in advance. Last-minute requests are possible but may have limited options.",
+      "question5": "What is the cancellation policy?",
+      "answer5": "Our cancellation policy varies depending on the tour and services booked. Please ask your travel consultant for specific details.",
+      "question6": "Can I book a tour for a large group?",
+      "answer6": "Yes, we can accommodate large groups. Please contact us for a custom quote and to discuss the details of your group's needs.",
       "stillQuestions": "Still have questions?",
       "contactDirect": "Contact Us Directly"
     }
