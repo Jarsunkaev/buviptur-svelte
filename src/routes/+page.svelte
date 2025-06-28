@@ -94,38 +94,47 @@
       description: $t('home.services.services.0.description') || "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
       icon: "fa-map-marked-alt",
       imageSrc: "/guided.webp",
-      features: $t('home.services.services.0.features') || [
-        "Small groups of max 12 travelers",
-        "Expert university-educated guides",
-        "Hidden gems and local experiences",
-        "Flexible and customizable itineraries"
-      ]
+      features: (() => {
+        const features = $t('home.services.services.0.features');
+        return Array.isArray(features) ? features : [
+          "Small groups of max 12 travelers",
+          "Expert university-educated guides",
+          "Hidden gems and local experiences",
+          "Flexible and customizable itineraries"
+        ];
+      })()
     },
     {
       id: "multiCountry",
-      title: $t('home.services.services.1.title') || "Multi-Country Experience",
+      title: $t('home.services.services.1.title') || "Multi-Country Tours",
       description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
       icon: "fa-globe-europe",
       imageSrc: "/country.webp",
-      features: $t('home.services.services.1.features') || [
-        "Hassle-free border crossings",
-        "Cohesive multi-country itineraries",
-        "Local guides in each location",
-        "Comprehensive cultural immersion"
-      ]
+      features: (() => {
+        const features = $t('home.services.services.1.features');
+        return Array.isArray(features) ? features : [
+          "Hassle-free border crossings",
+          "Cohesive multi-country itineraries",
+          "Local guides in each location",
+          "Comprehensive cultural immersion"
+        ];
+      })()
     },
     {
-      id: "boatExperiences",
-      title: $t('home.services.services.2.title') || "Scenic Boat Experiences",
+      id: "riverCruises",
+      title: $t('home.services.services.2.title') || "River Cruises",
       description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
       icon: "fa-ship",
       imageSrc: "/river.webp",
-      features: $t('home.services.services.2.features') || [
-        "Intimate small-group cruises",
-        "Sunset and evening illumination tours",
-        "Historical commentary",
-        "Gourmet dining experiences"
-      ]
+      features: (() => {
+        const features = $t('home.services.services.2.features');
+        return Array.isArray(features) ? features : [
+          "Intimate small-group cruises",
+          "Sunset and evening illumination tours",
+          "Historical commentary",
+          "Gourmet dining experiences"
+        ];
+      })()
     }
   ];
   
@@ -361,9 +370,6 @@
   });
   
   onDestroy(() => {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', handleResize);
-    }
     // Cleanup hero when component is destroyed
     heroMounted = false;
   });

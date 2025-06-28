@@ -1,89 +1,50 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
-  import { goto } from '$app/navigation';
+  // If you need to programmatically navigate, use SvelteKit's goto.
+  // For standard <a> tags, SvelteKit handles client-side navigation automatically.
+  // import { goto } from '$app/navigation';
+
+  // Import locale and waitLocale for i18n initialization
   import { locale, waitLocale } from 'svelte-i18n';
+
   import CookieConsent from '$lib/components/CookieConsent.svelte';
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import '../app.postcss';
-  import '$lib/app.css';
-  
-  let isLoading = true;
-  
-  // Simple navigation handler
-  if (browser) {
-    document.addEventListener('click', (event) => {
-      const anchor = event.target.closest('a');
-      if (anchor && anchor.href && !anchor.target && !anchor.download) {
-        const url = new URL(anchor.href);
-        if (url.origin === window.location.origin) {
-          event.preventDefault();
-          window.location.href = url.href;
-        }
-      }
-    });
-    
-    // Override SvelteKit's goto
-    window.$goto = (url, options) => {
-      if (options?.external) {
-        return goto(url, options);
-      }
-      window.location.href = url;
-      return new Promise(() => {});
-    };
-  }
-  
+
+  // Import your global CSS files
+  import '../app.postcss'; // Tailwind CSS or your main postcss file
+  import '$lib/app.css'; // Your custom global CSS
+
+  let isLoading = true; // For initial page loader (splash screen)
+
   onMount(async () => {
+    // Only run client-side specific code in the browser
     if (!browser) return;
-    
-    // Initialize i18n
+
+    // --- Svelte-i18n Initialization ---
+    // Wait for the locale to be set from the browser's language or a user preference
     await waitLocale();
-    
-    // Set language
-    const unsubscribe = locale.subscribe((lang) => {
-      if (lang) document.documentElement.lang = lang;
+
+    // Subscribe to locale changes to update the HTML lang attribute
+    const unsubscribeLocale = locale.subscribe((lang) => {
+      if (lang) {
+        document.documentElement.lang = lang;
+      }
     });
-    
-    // Set viewport height for mobile
-    const setVH = () => {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-    };
-    setVH();
-    
-    // Handle resize
-    let resizeTimeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(setVH, 100);
-    };
-    
-    window.addEventListener('resize', handleResize, { passive: true });
-    
-    // Initialize AOS
-    try {
-      const { default: AOS } = await import('aos');
-      await import('aos/dist/aos.css');
-      AOS.init({
-        duration: 300,
-        once: true,
-        mirror: false,
-        disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      });
-    } catch (e) {
-      console.warn('AOS initialization failed:', e);
-    }
-    
-    // Mark as loaded
+
+    // --- Page Loading Animation Cleanup ---
+    // Remove the loading state after all initial setup is complete
     isLoading = false;
+    // Add a class to the body to potentially trigger a fade-in animation for content
     document.body.classList.add('content-loaded');
-    
-    // Cleanup
+
+    // --- Cleanup function for onDestroy ---
     return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimeout);
-      unsubscribe();
-      delete window.$goto;
+      // Unsubscribe from the locale store to prevent memory leaks
+      unsubscribeLocale();
+      // No other global event listeners (like 'resize') or global variables (like window.$goto)
+      // are managed by this layout, so no further cleanup is needed here.
     };
   });
 </script>
@@ -93,7 +54,8 @@
   <meta name="description" content="Discover authentic Central Europe with BuVipTur. Expert guides, unique factory tours, cultural experiences across Hungary, Austria, Czech Republic, and beyond." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
   <meta name="theme-color" content="#113946" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </svelte:head>
 
 {#if isLoading}
@@ -107,37 +69,39 @@
   <div class="min-h-screen flex flex-col">
     <Header />
     <main class="flex-grow">
-      <slot />
-    </main>
+      <slot /> </main>
     <Footer />
     <CookieConsent />
   </div>
 {/if}
 
 <style>
+  /* Global styles applied to the html and body elements */
   :global(html) {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
   }
-  
+
   :global(body) {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    min-height: 100dvh;
-    background-color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /* Removed overflow-x: hidden to ensure proper scroll detection */
+    /* Use modern viewport units for height to ensure full page coverage */
+    min-height: 100vh; /* Fallback for older browsers */
+    min-height: 100dvh; /* Dynamic Viewport Height - preferred for mobile browsers with dynamic toolbars */
+    background-color: white; /* Default background color */
+    -webkit-font-smoothing: antialiased; /* Better font rendering on macOS/iOS */
+    -moz-osx-font-smoothing: grayscale; /* Better font rendering on Firefox/Linux */
   }
-  
+
+  /* Class for fading in content after initial load */
   :global(.content-loaded) {
     opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for content reveal */
   }
-  
+
+  /* Responsive font size for smaller screens */
   @media (max-width: 768px) {
     :global(html) {
-      font-size: 15px;
+      font-size: 15px; /* Adjust base font size for better mobile readability */
     }
   }
 </style>
