@@ -44,12 +44,24 @@
       allowInput: true,
       clickOpens: true,
       locale: currentLang,
+      // Disable the default calendar icon
+      disableMobile: 'true',
+      // Position the calendar below the input
+      position: 'auto',
+      // Add custom class to the calendar container
+      appendTo: inputElement.parentNode,
       onChange: ([selectedDate]) => {
         if (selectedDate) {
           value = selectedDate.toISOString().split('T')[0];
         }
       }
     });
+    
+    // Hide the default calendar icon
+    const calendarIcon = inputElement.nextElementSibling?.querySelector('.flatpickr-calendar-icon');
+    if (calendarIcon) {
+      calendarIcon.style.display = 'none';
+    }
   };
   
   onMount(async () => {
@@ -83,12 +95,8 @@
     bind:this={inputElement}
     {placeholder}
     {required}
-    class={`w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660] ${className}`}
+    class={`w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660] pr-12 ${className}`}
     readonly
+    data-input
   />
-  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-    </svg>
-  </div>
 </div>

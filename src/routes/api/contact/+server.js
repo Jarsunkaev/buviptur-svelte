@@ -1,9 +1,10 @@
 // src/routes/api/contact/+server.js
-
 import nodemailer from 'nodemailer';
+
 // Import private environment variables using SvelteKit's $env module
-const EMAIL_USER = import.meta.env.VITE_EMAIL_USER || process.env.EMAIL_USER;
-const EMAIL_PASS = import.meta.env.VITE_EMAIL_PASS || process.env.EMAIL_PASS;
+const EMAIL_USER = import.meta.env.VITE_EMAIL_USER;
+const EMAIL_PASS = import.meta.env.VITE_EMAIL_PASS;
+const ADMIN_EMAIL = 'info@buviptur.com';
 
 /**
  * @type {import('./$types').RequestHandler}
@@ -64,63 +65,132 @@ export async function POST({ request }) {
         );
     }
 
+    // Check if environment variables are loaded
+    if (!EMAIL_USER || !EMAIL_PASS) {
+        console.error('CRITICAL: EMAIL_USER or EMAIL_PASS environment variables are not set');
+        return new Response(
+            JSON.stringify({
+                error: 'Server configuration error: Email service credentials missing. Please contact support.'
+            }),
+            {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            }
+        );
+    }
+
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 465, // Or 587 for TLS
-        secure: true, // Use SSL
+        port: 587, // Using TLS port
+        secure: false, // true for 465, false for other ports
         auth: {
-            user: EMAIL_USER, // Your Google Workspace email address (info@buviptur.com) from env
-            pass: EMAIL_PASS  // Your Google Workspace password OR an App Password
+            user: EMAIL_USER,
+            pass: EMAIL_PASS
+        },
+        tls: {
+            rejectUnauthorized: false // Only for development, remove in production with valid certificates
         }
     });
 
-    const mailOptions = {
-        from: `"BuVipTur Tour Request" <${EMAIL_USER}>`, // Using your EMAIL_USER here is fine for Gmail
-        replyTo: data.email, // Set the submitter's email as the reply-to address
-        to: 'info@buviptur.com',   // Your business email address
-        subject: `New Tour Request from ${data.name} ${data.surname} (${data.fromDate} to ${data.toDate})`,
-        text: `You have received a new tour request:
-
-Name: ${data.name} ${data.surname}
-Email: ${data.email}
-Phone: ${data.phone}
-
-Tour Dates:
-From: ${data.fromDate}
-To: ${data.toDate}
-
-Number of Participants: ${data.participants}
-Age Group: ${data.ageGroup}
-
-Additional Comments/Requests:
-${data.comments || 'N/A'}
-        `,
+    // Email template for admin
+    const adminMailOptions = {
+        from: `"BuVipTur Website" <${EMAIL_USER}>`,
+        replyTo: data.email,
+        to: ADMIN_EMAIL,
+        subject: `New Tour Request from ${data.name} ${data.surname}`,
         html: `
-<p>You have received a new tour request:</p>
-<ul>
-    <li><strong>Name:</strong> ${data.name} ${data.surname}</li>
-    <li><strong>Email:</strong> ${data.email}</li>
-    <li><strong>Phone:</strong> ${data.phone}</li>
-    <li><strong>From Date:</strong> ${data.fromDate}</li>
-    <li><strong>To Date:</strong> ${data.toDate}</li>
-    <li><strong>Number of Participants:</strong> ${data.participants}</li>
-    <li><strong>Age Group:</strong> ${data.ageGroup}</li>
-</ul>
-<p><strong>Additional Comments/Requests:</strong></p>
-<p>${data.comments ? data.comments.replace(/\n/g, '<br>') : 'N/A'}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+            <div style="background-color: #1a365d; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                <h1 style="margin: 0; font-size: 24px;">New Tour Request</h1>
+            </div>
+            <div style="padding: 20px; background-color: #f9f9f9;">
+                <p>You have received a new tour request with the following details:</p>
+                <div style="background: white; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                    <h3 style="color: #2d3748; margin-top: 0;">Contact Information</h3>
+                    <p><strong>Name:</strong> ${data.name} ${data.surname}</p>
+                    <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+                    <p><strong>Phone:</strong> ${data.phone || 'Not provided'}</p>
+                    
+                    <h3 style="color: #2d3748; margin-top: 20px;">Tour Details</h3>
+                    <p><strong>From:</strong> ${data.fromDate}</p>
+                    <p><strong>To:</strong> ${data.toDate}</p>
+                    <p><strong>Total Participants:</strong> ${data.participants}</p>
+                    <p><strong>Age Groups:</strong> ${data.ageGroup}</p>
+                    
+                    ${data.comments ? `
+                    <h3 style="color: #2d3748; margin-top: 20px;">Additional Comments</h3>
+                    <p>${data.comments}</p>
+                    ` : ''}
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="mailto:${data.email}" style="display: inline-block; background-color: #4299e1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Reply to ${data.name}</a>
+                </div>
+            </div>
+            <div style="text-align: center; padding: 15px; font-size: 12px; color: #718096; border-top: 1px solid #e2e8f0;">
+                <p>This email was sent from your website's contact form.</p>
+            </div>
+        </div>
+        `
+    };
+
+    // Email template for user confirmation
+    const userMailOptions = {
+        from: `"BuVipTur" <${EMAIL_USER}>`,
+        to: data.email,
+        subject: `Thank you for your tour request, ${data.name}!`,
+        html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+            <div style="background-color: #1a365d; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                <h1 style="margin: 0; font-size: 24px;">Thank You for Your Interest!</h1>
+            </div>
+            <div style="padding: 20px; background-color: #f9f9f9;">
+                <p>Dear ${data.name},</p>
+                <p>Thank you for contacting BuVipTur. We have received your tour request and will get back to you within 24 hours.</p>
+                
+                <div style="background: white; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                    <h3 style="color: #2d3748; margin-top: 0;">Your Request Summary</h3>
+                    <p><strong>Tour Dates:</strong> ${data.fromDate} to ${data.toDate}</p>
+                    <p><strong>Number of Participants:</strong> ${data.participants}</p>
+                    <p><strong>Age Groups:</strong> ${data.ageGroup}</p>
+                    ${data.comments ? `<p><strong>Your Message:</strong> ${data.comments}</p>` : ''}
+                </div>
+                
+                <p>Our team is reviewing your request and will contact you shortly to discuss the details and provide you with the best possible options for your tour.</p>
+                
+                <div style="margin: 25px 0; text-align: center;">
+                    <a href="https://buviptur.com" style="display: inline-block; background-color: #4299e1; color: white; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: bold;">Visit Our Website</a>
+                </div>
+                
+                <p>If you have any urgent inquiries, feel free to contact us directly at <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> or by phone at +36 30 123 4567.</p>
+                
+                <p>Best regards,<br>The BuVipTur Team</p>
+            </div>
+            <div style="text-align: center; padding: 15px; font-size: 12px; color: #718096; border-top: 1px solid #e2e8f0;">
+                <p>BuVipTur - Your Premium Tour Experience in Budapest</p>
+                <p>${new Date().getFullYear()} © BuVipTur. All rights reserved.</p>
+            </div>
+        </div>
         `
     };
 
     try {
-        // Optional: Verify transporter configuration.
-        // Useful for debugging during development, but can be removed in production
-        // await transporter.verify();
-        // console.log('Nodemailer transporter verified successfully.');
+        // Send both emails
+        const [adminInfo, userInfo] = await Promise.all([
+            transporter.sendMail({
+                ...adminMailOptions,
+                from: `"BuVipTur Website" <${EMAIL_USER}>`,
+                to: ADMIN_EMAIL,
+                replyTo: data.email
+            }),
+            transporter.sendMail({
+                ...userMailOptions,
+                from: `"BuVipTur" <${EMAIL_USER}>`,
+                to: data.email
+            })
+        ]);
 
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully: ' + info.response);
-        console.log('Message ID: ' + info.messageId);
-        console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info)); // Only for ethereal accounts
+        console.log('Admin email sent:', adminInfo.messageId);
+        console.log('User confirmation email sent:', userInfo.messageId);
 
         return new Response(
             JSON.stringify({

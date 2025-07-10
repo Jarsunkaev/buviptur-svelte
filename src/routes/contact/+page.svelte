@@ -91,12 +91,19 @@
 
     async function handleSubmit() {
     // Basic validation
-    if (!name || !surname || !email || !fromDate || !toDate || !ageGroup || !privacyAccepted) {
-        alert('Please fill in all required fields');
+    const totalParticipants = ageGroups.reduce((sum, group) => sum + (group.participants || 0), 0);
+    if (!name || !surname || !email || !fromDate || !toDate || totalParticipants === 0 || !privacyAccepted) {
+        alert('Please fill in all required fields and select at least one participant');
         return;
     }
 
     isSubmitting = true;
+
+    const participants = ageGroups.reduce((sum, group) => sum + (group.participants || 0), 0);
+    const ageGroup = ageGroups
+        .filter(group => group.participants > 0)
+        .map(group => `${group.value}: ${group.participants}`)
+        .join(', ');
 
     const formData = {
         name,
@@ -105,8 +112,8 @@
         phone,
         fromDate,
         toDate,
-        ageGroups: ageGroups.filter(group => group.participants > 0),
-        totalParticipants: ageGroups.reduce((sum, group) => sum + (group.participants || 0), 0),
+        participants,
+        ageGroup,
         comments
     };
 
