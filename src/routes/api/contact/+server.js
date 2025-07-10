@@ -1,9 +1,9 @@
 // src/routes/api/contact/+server.js
 import nodemailer from 'nodemailer';
 
-// Import private environment variables using SvelteKit's $env module
-const EMAIL_USER = import.meta.env.VITE_EMAIL_USER;
-const EMAIL_PASS = import.meta.env.VITE_EMAIL_PASS;
+// Import private environment variables
+const EMAIL_USER = import.meta.env.VITE_EMAIL_USER || process.env.VITE_EMAIL_USER;
+const EMAIL_PASS = import.meta.env.VITE_EMAIL_PASS || process.env.VITE_EMAIL_PASS;
 const ADMIN_EMAIL = 'info@buviptur.com';
 
 /**
@@ -68,6 +68,9 @@ export async function POST({ request }) {
     // Check if environment variables are loaded
     if (!EMAIL_USER || !EMAIL_PASS) {
         console.error('CRITICAL: EMAIL_USER or EMAIL_PASS environment variables are not set');
+        console.error('Environment:', process.env.NODE_ENV);
+        console.error('Available env vars:', Object.keys(process.env).join(', '));
+        
         return new Response(
             JSON.stringify({
                 error: 'Server configuration error: Email service credentials missing. Please contact support.'
