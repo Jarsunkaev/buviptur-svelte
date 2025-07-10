@@ -2,8 +2,8 @@
 import nodemailer from 'nodemailer';
 
 // Import private environment variables
-const EMAIL_USER = import.meta.env.VITE_EMAIL_USER || process.env.VITE_EMAIL_USER;
-const EMAIL_PASS = import.meta.env.VITE_EMAIL_PASS || process.env.VITE_EMAIL_PASS;
+const EMAIL_USER = process.env.VITE_EMAIL_USER || import.meta.env.VITE_EMAIL_USER;
+const EMAIL_PASS = process.env.VITE_EMAIL_PASS || import.meta.env.VITE_EMAIL_PASS;
 const ADMIN_EMAIL = 'info@buviptur.com';
 
 /**
@@ -70,6 +70,8 @@ export async function POST({ request }) {
         console.error('CRITICAL: EMAIL_USER or EMAIL_PASS environment variables are not set');
         console.error('Environment:', process.env.NODE_ENV);
         console.error('Available env vars:', Object.keys(process.env).join(', '));
+        console.error('VITE_EMAIL_USER:', process.env.VITE_EMAIL_USER ? 'set' : 'not set');
+        console.error('VITE_EMAIL_PASS:', process.env.VITE_EMAIL_PASS ? 'set' : 'not set');
         
         return new Response(
             JSON.stringify({
