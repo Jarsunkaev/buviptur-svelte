@@ -161,7 +161,9 @@ export async function POST({ request }) {
                     <a href="https://buviptur.com" style="display: inline-block; background-color: #4299e1; color: white; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: bold;">Visit Our Website</a>
                 </div>
                 
-                <p>If you have any urgent inquiries, feel free to contact us directly at <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> or by phone at +36 30 123 4567.</p>
+                <p>If you have any urgent inquiries, feel free to contact us directly at <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> or by phone at +36 (70) 734-3444
+info@buviptur.com
+.</p>
                 
                 <p>Best regards,<br>The BuVipTur Team</p>
             </div>
