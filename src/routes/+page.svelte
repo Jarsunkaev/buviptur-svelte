@@ -76,7 +76,7 @@
   const carouselImages = [
     '/above.webp',
     '/matyas.webp',
-    '/matyasii.webp',
+    '/budapest.webp',
     '/parlament.webp',
     '/prague.webp',
     '/stefan.webp',

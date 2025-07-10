@@ -299,12 +299,21 @@
 
   /* Logo sizing */
   .logo-img {
-    height: 70px;
+    height: 100px;
     transition: height 0.3s ease-out;
   }
 
   header.scrolled .logo-img {
-    height: 50px;
+    height: 75px;
+  }
+  
+  /* Adjust header height to accommodate larger logo */
+  header {
+    height: 120px;
+  }
+  
+  header.scrolled {
+    height: 95px;
   }
 
   /* Navigation link styles - white by default */

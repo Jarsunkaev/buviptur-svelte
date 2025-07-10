@@ -12,7 +12,7 @@
     '/prague.webp',
     '/stefan.webp',
     '/var.webp',
-    '/matyasii.webp'
+    '/budapest.webp'
   ];
 
   export let currentSlide = 0;
