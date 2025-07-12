@@ -240,9 +240,7 @@
         class:translate-y-8={!isVisible}
         class:opacity-0={!isVisible}
       >
-        <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#dcb660]/20 backdrop-blur-sm border border-[#dcb660]/30 mb-6">
-          <span class="text-[#dcb660] font-medium">{$t('hero.badge') || 'Premium Central Europe Tours'}</span>
-        </div>
+       
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
           {$t('hero.title') || 'Discover Authentic'} <span class="text-[#dcb660]">{$t('hero.titleHighlight') || 'Central Europe'}</span>
         </h1>
