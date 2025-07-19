@@ -67,7 +67,7 @@
     }
   }
 
-  // Simple scroll handler
+  // Handle scroll to make header thinner when scrolling down
   function handleScroll() {
     // Get scroll position from multiple sources for compatibility
     const scrollY = Math.max(
@@ -76,13 +76,19 @@
       document.body.scrollTop
     );
     
-      // Removed debug scroll position display
-    
-    // Update scrolled state - always show header, just change style
+    // Toggle scrolled class based on scroll position
     const newIsScrolled = scrollY > 50;
     if (newIsScrolled !== isScrolled) {
       isScrolled = newIsScrolled;
-      console.log('Scroll state changed:', { scrollY, isScrolled });
+      // Update header class
+      const header = document.querySelector('header');
+      if (header) {
+        if (isScrolled) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
     }
     
     // Always keep header visible
@@ -286,10 +292,12 @@
     transform: translate3d(0, 0, 0);
   }
 
-  /* Scrolled state - light background */
+  /* Scrolled state - more compact header */
   header.scrolled {
     padding: 1rem 0;
     height: 70px;
+    margin-top: 0; /* Remove top margin when scrolled */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   /* Hidden state */
@@ -300,20 +308,22 @@
   /* Logo sizing */
   .logo-img {
     height: 100px;
-    transition: height 0.3s ease-out;
+    transition: all 0.3s ease-out;
   }
 
   header.scrolled .logo-img {
-    height: 75px;
+    height: 50px;
   }
   
-  /* Adjust header height to accommodate larger logo */
+  /* Header height and spacing */
   header {
-    height: 120px;
+    height: 100px;
+    padding-top: 1rem;
+    margin-top: 1.5rem; /* Add space above the header when not scrolled */
   }
   
   header.scrolled {
-    height: 95px;
+    height: 70px;
   }
 
   /* Navigation link styles - white by default */

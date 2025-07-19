@@ -1,43 +1,62 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { goto } from '$app/navigation';
   import { t } from 'svelte-i18n';
   
-  // Static carousel images - loaded once and memoized
-  export let carouselImages = [
-    '/above.webp',
-    '/margaret.webp',
-    '/matyas.webp',
-    '/parlament.webp',
-    '/prague.webp',
-    '/stefan.webp',
-    '/var.webp',
-    '/budapest.webp'
-  ];
-
-  export let currentSlide = 0;
-  let isVisible = false;
-  let autoPlay = true;
-  let carouselInterval;
-  const loadedImages = new Set();
-  const totalSlides = carouselImages.length;
-
-  const nextSlide = () => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-  };
-
-  const prevSlide = () => {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  // Image paths with base URL
+  let baseUrl = '';
+  if (typeof window !== 'undefined') {
+    baseUrl = window.location.origin;
   }
 
-  // Form data
-  let name = '';
-  let surname = '';
-  let email = '';
+  const imageNames = [
+    'above.webp',
+    'margaret.webp',
+    'matyas.webp',
+    'parlament.webp',
+    'prague.webp',
+    'stefan.webp',
+    'var.webp',
+    'budapest.webp'
+  ];
+  
+  const imagePaths = imageNames.map(name => `${baseUrl}/${name}`);
 
-  // Touch tracking for mobile swipe
+  // Track loaded state for each image
+  let loadedImages = $state(Array(imagePaths.length).fill(false));
+  let currentSlide = $state(0);
+  let isMobile = $state(false);
+  let isMounted = $state(false);
+  let isVisible = $state(true); // Add missing isVisible state
+  let carouselInterval = null;
+  const totalSlides = imagePaths.length;
+
+  // Simple slide navigation
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    preloadAdjacentImages();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    preloadAdjacentImages();
+  }
+
+  function goToSlide(index) {
+    if (index >= 0 && index < imagePaths.length) {
+      currentSlide = index;
+      preloadAdjacentImages();
+    }
+  }
+
+  // Form data - using reactive state
+  let name = $state('');
+  let surname = $state('');
+  let email = $state('');
+
+  // Touch handling
   let touchStartX = 0;
   let touchEndX = 0;
+  const SWIPE_THRESHOLD = 50;
 
   function handleGetOffer() {
     const searchParams = new URLSearchParams({
@@ -46,95 +65,118 @@
       email
     }).toString();
     window.location.href = `/contact?${searchParams}`;
+    return false;
   }
 
   function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
+    touchStartTime = Date.now();
+    // Pause autoplay on touch
+    if (carouselInterval) {
+      clearInterval(carouselInterval);
+      carouselInterval = null;
+    }
   }
 
   function handleTouchMove(e) {
+    if (!touchStartX) return;
     touchEndX = e.touches[0].clientX;
+    
+    // Prevent scrolling if swiping horizontally
+    if (Math.abs(touchEndX - touchStartX) > 10) {
+      e.preventDefault();
+    }
   }
 
   function handleTouchEnd() {
+    if (!touchStartX) return;
+    
     const swipeDistance = touchEndX - touchStartX;
-    const threshold = 75;
-    if (swipeDistance > threshold) prevSlide();
-    else if (swipeDistance < -threshold) nextSlide();
+    const swipeTime = Date.now() - touchStartTime;
+    
+    // Only process swipe if it was quick and significant enough
+    if (swipeTime < SWIPE_TIME_THRESHOLD && Math.abs(swipeDistance) > SWIPE_THRESHOLD) {
+      if (swipeDistance > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    }
+    
+    // Reset touch tracking
+    touchStartX = 0;
+    touchEndX = 0;
   }
 
-  // Preload all images when component mounts
-  onMount(() => {
-    // Preload all images immediately with eager loading
-    const preloadImages = () => {
-      carouselImages.forEach((src) => {
-        if (!loadedImages.has(src)) {
-          const img = new Image();
-          img.src = src;
-          img.loading = 'eager';
-          img.decoding = 'async';
-          img.fetchPriority = 'high';
-          loadedImages.add(src);
-        }
-      });
-    };
-    preloadImages();
-
-    // Anchor image hack for iOS
-    const anchorImg = document.createElement('img');
-    anchorImg.src = '/above.webp';
-    anchorImg.style.width = '1px';
-    anchorImg.style.height = '1px';
-    anchorImg.style.opacity = '0';
-    anchorImg.style.position = 'absolute';
-    anchorImg.loading = 'eager';
-    anchorImg.fetchPriority = 'high';
-    anchorImg.alt = '';
-    document.querySelector('.carousel-container')?.appendChild(anchorImg);
-
-    // Start carousel auto-play
-    const startAutoPlay = () => {
-      if (autoPlay && typeof window !== 'undefined' && 
-          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        carouselInterval = setInterval(nextSlide, 4000);
-      }
-    };
-    isVisible = true;
-    const autoplayTimeout = setTimeout(startAutoPlay, 1000);
-
-    // Pause on interaction, resume after delay
-    let pauseTimeout;
-    const handleInteraction = () => {
-      if (carouselInterval) clearInterval(carouselInterval);
-      if (pauseTimeout) clearTimeout(pauseTimeout);
-      pauseTimeout = setTimeout(() => {
-        startAutoPlay();
-      }, 10000);
-    };
-
-    const carousel = document.querySelector('.carousel-container');
-    if (carousel) {
-      carousel.addEventListener('mouseenter', () => {
-        if (carouselInterval) clearInterval(carouselInterval);
-      });
-      carousel.addEventListener('mouseleave', () => {
-        handleInteraction();
-      });
-      carousel.addEventListener('touchstart', () => {
-        if (carouselInterval) clearInterval(carouselInterval);
-      }, { passive: true });
+  // Image loading with better error handling
+  function loadImage(index) {
+    if (index < 0 || index >= imagePaths.length || loadedImages[index]) {
+      return;
     }
 
+    const img = new Image();
+    const imagePath = imagePaths[index];
+    
+    img.onload = () => {
+      loadedImages = loadedImages.map((loaded, i) => i === index ? true : loaded);
+      console.log('Image loaded:', imagePath);
+    };
+    
+    img.onerror = (e) => {
+      console.error('Failed to load image at path:', imagePath);
+      console.error('Error details:', e);
+    };
+    
+    img.src = imagePath;
+    console.log('Loading image:', imagePath);
+  }
+
+  // Preload adjacent images
+  function preloadAdjacentImages() {
+    if (!imagePaths.length) return;
+    
+    // Preload next and previous images
+    const nextIndex = (currentSlide + 1) % totalSlides;
+    const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+    
+    loadImage(nextIndex);
+    loadImage(prevIndex);
+  }
+
+  // Initialize component
+  onMount(() => {
+    isMounted = true;
+    isMobile = window.innerWidth < 1024;
+    isVisible = true; // Ensure isVisible is set to true on mount
+    
+    // Load first few images
+    preloadAdjacentImages();
+    
+    // Start auto-play if not reduced motion
+    if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      carouselInterval = setInterval(nextSlide, 5000);
+    }
+    
+    // Setup touch events
+    const carousel = document.querySelector('.carousel-container');
+    if (carousel) {
+      carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
+      carousel.addEventListener('touchmove', handleTouchMove, { passive: false });
+      carousel.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+    
     return () => {
       if (carouselInterval) clearInterval(carouselInterval);
-      if (autoplayTimeout) clearTimeout(autoplayTimeout);
-      if (pauseTimeout) clearTimeout(pauseTimeout);
-      if (anchorImg.parentNode) anchorImg.parentNode.removeChild(anchorImg);
+      if (carousel) {
+        carousel.removeEventListener('touchstart', handleTouchStart);
+        carousel.removeEventListener('touchmove', handleTouchMove);
+        carousel.removeEventListener('touchend', handleTouchEnd);
+      }
     };
   });
 
   // Highlights for desktop view
-  $: highlights = [
+  const highlights = [
     { icon: 'fa-map-marked-alt', title: $t('hero.highlights.guides') || 'Expert Guides' },
     { icon: 'fa-building', title: $t('hero.highlights.accommodation') || 'Quality Accommodation' },
     { icon: 'fa-globe-europe', title: $t('hero.highlights.experiences') || 'Unique Experiences' },
@@ -144,27 +186,30 @@
 
 <section 
   class="hero-section relative min-h-screen flex items-center overflow-hidden"
-  on:touchstart={handleTouchStart}
-  on:touchmove={handleTouchMove}
-  on:touchend={handleTouchEnd}
+  ontouchstart={handleTouchStart}
+  ontouchmove={handleTouchMove}
+  ontouchend={handleTouchEnd}
 >
-  <!-- Full Background Carousel with persistent rendering -->
-  <div class="absolute inset-0 z-0 carousel-container">
-    {#each carouselImages as image, i}
+  <!-- Simple Carousel -->
+  <div class="absolute inset-0 z-0 carousel-container overflow-hidden">
+    {#each imagePaths as image, i}
       <div 
-        class="absolute inset-0 transition-opacity duration-1000 ease-in-out {i === currentSlide ? 'opacity-100' : 'opacity-0'}"
-        style="background-image: url('{image}'); background-size: cover; background-position: center; will-change: opacity;"
+        class="carousel-item absolute inset-0 transition-opacity duration-1000 ease-in-out {i === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'}"
+        style="will-change: transform, opacity;"
+        data-index={i}
       >
-        {#if loadedImages.has(image)}
-          <img 
-            src={image} 
-            alt="" 
-            class="w-full h-full object-cover"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
-        {/if}
+        <img 
+          src={image}
+          alt="" 
+          class="w-full h-full object-cover"
+          loading={i <= 2 ? 'eager' : 'lazy'}
+          decoding="async"
+          style="transform: translateZ(0); backface-visibility: hidden;"
+          onload={() => {
+            loadedImages[i] = true;
+            loadedImages = [...loadedImages]; // Trigger reactivity
+          }}
+        />
         <div class="absolute inset-0 bg-gradient-to-r from-[#113946]/40 via-[#113946]/25 to-[#113946]/15"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#113946]/35 via-transparent to-[#113946]/20"></div>
       </div>
@@ -191,7 +236,7 @@
         <div class="bg-white/15 backdrop-blur-md rounded-xl border border-white/30 p-6 shadow-2xl w-full max-w-md mx-2">
           <h3 class="text-base font-semibold mb-2 text-center text-white">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
           <p class="text-sm sm:text-base text-white/90 mb-4 text-center leading-relaxed max-w-md mx-auto">{$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}</p>
-          <form class="space-y-3.5" on:submit|preventDefault={handleGetOffer}>
+          <form class="space-y-3.5" onsubmit={handleGetOffer}>
             <div>
               <input
                 type="text"
@@ -247,7 +292,7 @@
         <div class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 shadow-xl">
           <h3 class="text-xl font-semibold mb-2">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
           <p class="text-base text-white/90 mb-5 leading-relaxed">{$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}</p>
-          <form class="space-y-4" on:submit|preventDefault={handleGetOffer}>
+          <form class="space-y-4" onsubmit={handleGetOffer}>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <input
@@ -311,10 +356,10 @@
   
   <!-- Carousel Navigation Dots -->
   <div class="hidden sm:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 space-x-2 z-20">
-    {#each carouselImages as _, i}
+    {#each imagePaths as _, i}
       <button
         class="w-3 h-3 rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660] scale-125' : 'bg-white/40 hover:bg-white/60'}"
-        on:click={() => currentSlide = i}
+        onclick={() => goToSlide(i)}
         aria-label={`Go to slide ${i + 1}`}
       ></button>
     {/each}
@@ -341,10 +386,6 @@
     p {
       text-shadow: 0 2px 4px rgba(0,0,0,0.6);
       font-weight: 500;
-    }
-    .bg-white\/15 {
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.4);
     }
     input, button {
       min-height: 48px;

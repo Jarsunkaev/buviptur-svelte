@@ -165,6 +165,18 @@
   },
   "tours": {
     "title": "Turlarımız",
+    "available": {
+      "title": "Mevcut Turlar",
+      "subtitle": "Özenle seçilmiş unutulmaz deneyimlerimizi keşfedin"
+    },
+    "card": {
+      "viewPackage": "Detayları Görüntüle"
+    },
+    "highlights": "Turun Öne Çıkanları",
+    "itinerary": "Tur Programı",
+    "readyToBook": "Maceranızı rezerve etmeye hazır mısınız?",
+    "contactUs": "Uygunluk ve fiyat bilgisi için bizimle iletişime geçin",
+    "bookNow": "Hemen Rezervasyon Yap",
     "hero": {
       "title": "Turlarımızı Keşfedin",
       "subtitle": "Özenle hazırlanmış turlarımızla Macaristan'ın en iyilerini deneyimleyin",
@@ -303,6 +315,8 @@
         "title": "Macar Mirası ve Tuna Kıvrımı Keşfi",
         "subtitle": "Budapeşte - Esztergom - Visegrád - Szentendre",
         "description": "Macaristan'ın en değerli tarihi alanlarında büyüleyici bir yolculuğa çıkın. Görkemli Buda Kalesi'nden büyüleyici Tuna kıvrımı kasabalarına kadar, Orta Avrupa'yı şekillendiren zengin mirası deneyimleyin.",
+        "destinations": "Budapeşte - Esztergom - Visegrád - Szentendre",
+        "summary": "Macaristan'ın en değerli tarihi alanlarında büyüleyici bir yolculuğa çıkın. Görkemli Buda Kalesi'nden büyüleyici Tuna kıvrımı kasabalarına kadar, Orta Avrupa'yı şekillendiren zengin mirası deneyimleyin.",
         "duration": "2 Gece, 3 Gün",
         "day1": {
           "title": "1. Gün",

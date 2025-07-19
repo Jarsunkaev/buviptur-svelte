@@ -165,6 +165,18 @@
   },
   "tours": {
     "title": "Our Tours",
+    "available": {
+      "title": "Available Tours",
+      "subtitle": "Explore our handpicked selection of unforgettable experiences"
+    },
+    "card": {
+      "viewPackage": "View Details"
+    },
+    "highlights": "Tour Highlights",
+    "itinerary": "Tour Itinerary",
+    "readyToBook": "Ready to book your adventure?",
+    "contactUs": "Contact us for availability and pricing",
+    "bookNow": "Book Now",
     "hero": {
       "title": "Discover Our Tours",
       "subtitle": "Experience the best of Hungary with our carefully curated tours",
@@ -303,6 +315,8 @@
         "title": "Hungarian Heritage & Danube Bend Discovery",
         "subtitle": "Budapest - Esztergom - Visegrád - Szentendre",
         "description": "Embark on a captivating journey through Hungary's most treasured historical sites. From the majestic Buda Castle to the charming Danube Bend towns, experience the rich heritage that shaped Central Europe.",
+        "destinations": "Budapest - Esztergom - Visegrád - Szentendre",
+        "summary": "Embark on a captivating journey through Hungary's most treasured historical sites. From the majestic Buda Castle to the charming Danube Bend towns, experience the rich heritage that shaped Central Europe.",
         "duration": "2 Nights, 3 Days",
         "day1": {
           "title": "Day 1",
