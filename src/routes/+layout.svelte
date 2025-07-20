@@ -1,6 +1,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
+  import { beforeNavigate, afterNavigate } from '$app/navigation';
   // If you need to programmatically navigate, use SvelteKit's goto.
   // For standard <a> tags, SvelteKit handles client-side navigation automatically.
   // import { goto } from '$app/navigation';
@@ -17,6 +18,56 @@
   import '$lib/app.css'; // Your custom global CSS
 
   let isLoading = true; // For initial page loader (splash screen)
+
+  // Handle scroll to top on navigation
+  const scrollToTop = () => {
+    if (!browser) return;
+    // Use document.documentElement for better cross-browser support
+    const html = document.documentElement;
+    const body = document.body;
+    
+    // Scroll to top immediately
+    html.scrollTop = 0;
+    body.scrollTop = 0;
+    
+    // Add a small delay and scroll again to ensure it works
+    requestAnimationFrame(() => {
+      html.scrollTop = 0;
+      body.scrollTop = 0;
+      
+      // One more time for good measure
+      setTimeout(() => {
+        html.scrollTop = 0;
+        body.scrollTop = 0;
+      }, 100);
+    });
+  };
+
+  // Handle navigation events
+  const handleNavigation = ({ to }) => {
+    if (!browser || !to) return;
+    
+    // Only scroll to top if this is a navigation to a different route
+    if (window.location.pathname !== to.url.pathname) {
+      scrollToTop();
+    }
+  };
+
+  // Subscribe to navigation events
+  const unsubscribeBefore = beforeNavigate(handleNavigation);
+  const unsubscribeAfter = afterNavigate(handleNavigation);
+  
+  // Handle initial page load
+  onMount(() => {
+    if (browser) {
+      // Add a small delay to ensure the page is fully loaded
+      const timer = setTimeout(() => {
+        scrollToTop();
+      }, 100);
+      
+      return () => clearTimeout(timer);
+    }
+  });
 
   onMount(async () => {
     // Only run client-side specific code in the browser
@@ -41,8 +92,11 @@
 
     // --- Cleanup function for onDestroy ---
     return () => {
-      // Unsubscribe from the locale store to prevent memory leaks
-      unsubscribeLocale();
+      onDestroy(() => {
+        if (unsubscribeLocale) unsubscribeLocale();
+        if (unsubscribeBefore) unsubscribeBefore();
+        if (unsubscribeAfter) unsubscribeAfter();
+      });
       // No other global event listeners (like 'resize') or global variables (like window.$goto)
       // are managed by this layout, so no further cleanup is needed here.
     };

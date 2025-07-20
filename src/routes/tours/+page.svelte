@@ -549,7 +549,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <!-- Daily Itinerary -->
-                    <div class="p-0 space-y-6">
+                    <div class="p-0 pt-6 space-y-6">
                         <h3 class="text-xl font-bold text-[#113946] text-center mb-6">
                             {$t('tours.package.itinerary') || 'Your 3-Day Adventure'}
                         </h3>

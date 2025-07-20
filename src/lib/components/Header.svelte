@@ -3,6 +3,7 @@
   import { fade, fly } from 'svelte/transition';
   import { page } from '$app/stores';
   import { browser } from '$app/environment';
+  import { goto } from '$app/navigation';
   import { locale, t } from 'svelte-i18n';
   import { languages, setLanguage } from '$lib/i18n/index.js';
 
@@ -154,6 +155,19 @@
     { href: '/about', label: $t('nav.about') },
     { href: '/contact', label: $t('nav.contact') }
   ];
+  
+  // Handle navigation with scroll to top
+  function navigate(href) {
+    if (browser) {
+      // Close mobile menu if open
+      if (isMenuOpen) {
+        closeMenu();
+      }
+      // Use SvelteKit's goto for programmatic navigation
+      // The scroll behavior is now handled by the layout
+      goto(href, { noScroll: true });
+    }
+  }
 
   // Helper function to check if current path matches nav item
   function isActivePath(href) {
@@ -197,13 +211,15 @@
 
       <div class="hidden lg:flex items-center space-x-10">
         {#each navItems as item}
-          <a
-            href={item.href}
+          <button
             class="nav-link"
             class:active={isActivePath(item.href)}
+            on:click|preventDefault|stopPropagation={() => navigate(item.href)}
+            on:keydown|preventDefault|stopPropagation={(e) => e.key === 'Enter' && navigate(item.href)}
+            aria-current={isActivePath(item.href) ? 'page' : undefined}
           >
             <span class="nav-link-text">{item.label}</span>
-          </a>
+          </button>
         {/each}
 
         <div class="flex items-center space-x-2 ml-4">
@@ -244,15 +260,15 @@
         <nav class="flex flex-col items-center space-y-8 w-full max-w-md mx-auto px-4">
           {#each navItems as item, index}
             <div class="relative w-full text-center">
-              <a
-                href={item.href}
-                in:fly={{ y: 20, delay: index * 75, duration: 200 }}
-                class="nav-link text-2xl font-medium text-white hover:text-[#dcb660] transition-colors duration-300 inline-block py-3 px-4
-                       {isActivePath(item.href) ? 'active-link' : ''}"
-                on:click={closeMenu}
+              <button
+                class="nav-link bg-transparent border-none text-current p-0 cursor-pointer"
+                class:active={isActivePath(item.href)}
+                on:click|preventDefault|stopPropagation={() => navigate(item.href)}
+                on:keydown|preventDefault|stopPropagation={(e) => e.key === 'Enter' && navigate(item.href)}
+                aria-current={isActivePath(item.href) ? 'page' : undefined}
               >
                 {item.label}
-              </a>
+              </button>
             </div>
           {/each}
 
@@ -318,8 +334,7 @@
   /* Header height and spacing */
   header {
     height: 100px;
-    padding-top: 1rem;
-    margin-top: 1.5rem; /* Add space above the header when not scrolled */
+    padding-top: 3rem;/* Add space above the header when not scrolled */
   }
   
   header.scrolled {
@@ -462,9 +477,7 @@
   }
   
   /* Ensure active state is visible on mobile */
-  #mobile-menu-overlay .active-link {
-    color: #dcb660 !important;
-  }
+ 
 
   /* Language switcher visual feedback */
   button[aria-label*="Switch"] {
