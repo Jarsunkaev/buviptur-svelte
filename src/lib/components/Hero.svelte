@@ -26,7 +26,7 @@
   let currentSlide = $state(0);
   let isMobile = $state(false);
   let isMounted = $state(false);
-  let isVisible = $state(true); // Add missing isVisible state
+  let isVisible = $state(true);
   let carouselInterval = null;
   const totalSlides = imagePaths.length;
 
@@ -48,25 +48,10 @@
     }
   }
 
-  // Form data - using reactive state
-  let name = $state('');
-  let surname = $state('');
-  let email = $state('');
-
   // Touch handling
   let touchStartX = 0;
   let touchEndX = 0;
   const SWIPE_THRESHOLD = 50;
-
-  function handleGetOffer() {
-    const searchParams = new URLSearchParams({
-      name,
-      surname,
-      email
-    }).toString();
-    window.location.href = `/contact?${searchParams}`;
-    return false;
-  }
 
   function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
@@ -147,7 +132,7 @@
   onMount(() => {
     isMounted = true;
     isMobile = window.innerWidth < 1024;
-    isVisible = true; // Ensure isVisible is set to true on mount
+    isVisible = true;
     
     // Load first few images
     preloadAdjacentImages();
@@ -175,13 +160,13 @@
     };
   });
 
-  // Highlights for desktop view
-  const highlights = [
+  // Highlights for desktop view - made reactive
+  const highlights = $derived([
     { icon: 'fa-map-marked-alt', title: $t('hero.highlights.guides') || 'Expert Guides' },
     { icon: 'fa-building', title: $t('hero.highlights.accommodation') || 'Quality Accommodation' },
     { icon: 'fa-globe-europe', title: $t('hero.highlights.experiences') || 'Unique Experiences' },
     { icon: 'fa-ship', title: $t('hero.highlights.cruises') || 'River Cruises' }
-  ];
+  ]);
 </script>
 
 <section 
@@ -219,59 +204,50 @@
   <!-- Content Container -->
   <div class="container mx-auto px-4 sm:px-6 relative z-10 w-full">
     <!-- Mobile Layout -->
-    <div class="lg:hidden flex flex-col justify-center items-center min-h-screen pt-32 pb-12 w-full px-4">
-      <div class="text-white text-center w-full">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 leading-tight drop-shadow-lg text-center mt-12">
-          {$t('hero.title') || 'Discover Authentic'} <span class="text-[#dcb660]">{$t('hero.titleHighlight') || 'Central Europe'}</span>
-        </h1>
-      </div>
+    <div class="lg:hidden flex flex-col justify-center min-h-screen pb-8 w-full">
       <div 
-        class="transform transition-all duration-1000 w-full flex justify-center"
+        class="text-white text-center w-full transform transition-all duration-1000 px-4"
         class:translate-y-0={isVisible}
         class:opacity-100={isVisible}
         class:translate-y-8={!isVisible}
         class:opacity-0={!isVisible}
-        style="transition-delay: 200ms"
       >
-        <div class="bg-white/15 backdrop-blur-md rounded-xl border border-white/30 p-6 shadow-2xl w-full max-w-md mx-2">
-          <h3 class="text-base font-semibold mb-2 text-center text-white">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
-          <p class="text-sm sm:text-base text-white/90 mb-4 text-center leading-relaxed max-w-md mx-auto">{$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}</p>
-          <form class="space-y-3.5" onsubmit={handleGetOffer}>
-            <div>
-              <input
-                type="text"
-                placeholder={$t('hero.firstName') || 'First Name'}
-                class="w-full px-4 py-3 text-sm sm:text-base rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
-                bind:value={name}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder={$t('hero.lastName') || 'Last Name'}
-                class="w-full px-4 py-3 text-sm sm:text-base rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
-                bind:value={surname}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                placeholder={$t('hero.email') || 'Email Address'}
-                class="w-full px-4 py-3 text-sm sm:text-base rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] focus:bg-white/30 transition-all"
-                bind:value={email}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              class="w-full bg-[#dcb660] text-[#113946] font-semibold py-3 px-4 rounded-lg hover:bg-[#dcb660]/90 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center text-sm mt-3"
+        <!-- Main Title -->
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4 leading-tight drop-shadow-lg">
+          {$t('hero.title') || 'Discover Authentic'} 
+          <span class="text-[#dcb660] block mt-1">{$t('hero.titleHighlight') || 'Central Europe'}</span>
+        </h1>
+        
+        <!-- Subtitle -->
+        <p class="text-base sm:text-lg text-white/95 mb-6 leading-relaxed max-w-sm mx-auto font-medium">
+          {$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}
+        </p>
+        
+        <!-- CTA Button -->
+        <div class="flex justify-center mb-4">
+          <a href="/contact" class="bg-[#dcb660] text-[#113946] font-semibold py-3 px-6 rounded-full hover:bg-[#dcb660]/90 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center text-sm">
+            <span>{$t('hero.submitButton') || 'Get My Free Quote'}</span>
+            <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+        
+        <!-- Mobile Highlights -->
+        <div class="grid grid-cols-2 gap-3 mt-6">
+          {#each highlights.slice(0, 4) as highlight, i}
+            <div 
+              class="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-3 flex items-center space-x-2 transform transition-all duration-1000"
+              class:translate-y-0={isVisible}
+              class:opacity-100={isVisible}
+              class:translate-y-8={!isVisible}
+              class:opacity-0={!isVisible}
+              style="transition-delay: {400 + (i * 100)}ms"
             >
-              <span>{$t('hero.submitButton') || 'Get My Free Quote'}</span>
-              <i class="fas fa-arrow-right ml-2"></i>
-            </button>
-          </form>
+              <div class="w-8 h-8 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] flex-shrink-0">
+                <i class="fas {highlight.icon} text-xs"></i>
+              </div>
+              <span class="text-white text-xs font-medium leading-tight">{highlight.title}</span>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
@@ -285,51 +261,17 @@
         class:translate-y-8={!isVisible}
         class:opacity-0={!isVisible}
       >
-       
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+        <h1 class="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
           {$t('hero.title') || 'Discover Authentic'} <span class="text-[#dcb660]">{$t('hero.titleHighlight') || 'Central Europe'}</span>
         </h1>
-        <div class="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 shadow-xl">
-          <h3 class="text-xl font-semibold mb-2">{$t('hero.formTitle') || 'Get Your Free Quote'}</h3>
-          <p class="text-base text-white/90 mb-5 leading-relaxed">{$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}</p>
-          <form class="space-y-4" onsubmit={handleGetOffer}>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <input
-                  type="text"
-                  placeholder={$t('hero.firstName') || 'First Name'}
-                  class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] transition-all"
-                  bind:value={name}
-                  required
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder={$t('hero.lastName') || 'Last Name'}
-                  class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#dcb660] transition-all"
-                  bind:value={surname}
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <input
-                type="email"
-                placeholder={$t('hero.email') || 'Email Address'}
-                class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-[#113946] transition-all"
-                bind:value={email}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              class="w-full bg-[#dcb660] text-[#113946] font-semibold py-3 px-6 rounded-lg hover:bg-[#dcb660]/90 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center"
-            >
-              <span>{$t('hero.submitButton') || 'Get My Free Quote'}</span>
-              <i class="fas fa-arrow-right ml-2"></i>
-            </button>
-          </form>
+        <p class="text-xl text-white/90 mb-8 leading-relaxed">
+          {$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}
+        </p>
+        <div class="flex">
+          <a href="/contact" class="bg-[#dcb660] text-[#113946] font-semibold py-4 px-8 rounded-lg hover:bg-[#dcb660]/90 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center text-lg">
+            <span>{$t('hero.submitButton') || 'Get My Free Quote'}</span>
+            <i class="fas fa-arrow-right ml-3"></i>
+          </a>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -387,7 +329,7 @@
       text-shadow: 0 2px 4px rgba(0,0,0,0.6);
       font-weight: 500;
     }
-    input, button {
+    button {
       min-height: 48px;
       touch-action: manipulation;
     }

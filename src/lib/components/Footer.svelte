@@ -110,10 +110,10 @@
         <h3 class="text-2xl font-bold mb-6 text-[#dcb660]">{$t('footer.about.title')}</h3>
         <p class="text-gray-300 leading-relaxed">{$t('footer.about.description')}</p>
         <div class="flex space-x-4 mt-6">
-          <a href="https://facebook.com" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors" aria-label={$t('footer.social.facebookAria')}>
+          <a href="https://www.facebook.com/share/1ELzg9gYcQ/?mibextid=wwXIfr" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors" aria-label={$t('footer.social.facebookAria')}>
             <i class="fab fa-facebook-f"></i>
           </a>
-          <a href="https://instagram.com" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors" aria-label={$t('footer.social.instagramAria')}>
+          <a href="https://www.instagram.com/buviptur_travel?igsh=eG9tMWt2eTk0Mm8w&utm_source=qr" class="w-10 h-10 bg-[#dcb660]/20 rounded-full flex items-center justify-center text-[#dcb660] hover:bg-[#dcb660] hover:text-white transition-colors" aria-label={$t('footer.social.instagramAria')}>
             <i class="fab fa-instagram"></i>
           </a>
         </div>
