@@ -8,38 +8,30 @@
 
   // Import locale and waitLocale for i18n initialization
   import { locale, waitLocale } from 'svelte-i18n';
+  import { initPerformanceMonitoring } from '$lib/utils/performance.js';
 
   import CookieConsent from '$lib/components/CookieConsent.svelte';
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import ScrollToTop from '$lib/components/ScrollToTop.svelte';
 
   // Import your global CSS files
   import '../app.postcss'; // Tailwind CSS or your main postcss file
   import '$lib/app.css'; // Your custom global CSS
 
   let isLoading = true; // For initial page loader (splash screen)
+  let performanceMonitor = null;
 
-  // Handle scroll to top on navigation
+  // Optimized scroll to top on navigation
   const scrollToTop = () => {
     if (!browser) return;
-    // Use document.documentElement for better cross-browser support
-    const html = document.documentElement;
-    const body = document.body;
     
-    // Scroll to top immediately
-    html.scrollTop = 0;
-    body.scrollTop = 0;
-    
-    // Add a small delay and scroll again to ensure it works
+    // Use requestAnimationFrame for smoother scrolling
     requestAnimationFrame(() => {
-      html.scrollTop = 0;
-      body.scrollTop = 0;
-      
-      // One more time for good measure
-      setTimeout(() => {
-        html.scrollTop = 0;
-        body.scrollTop = 0;
-      }, 100);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
   };
 
@@ -65,7 +57,15 @@
         scrollToTop();
       }, 100);
       
-      return () => clearTimeout(timer);
+      // Initialize performance monitoring
+      performanceMonitor = initPerformanceMonitoring();
+      
+      return () => {
+        clearTimeout(timer);
+        if (performanceMonitor) {
+          performanceMonitor.cleanup();
+        }
+      };
     }
   });
 
@@ -96,6 +96,7 @@
         if (unsubscribeLocale) unsubscribeLocale();
         if (unsubscribeBefore) unsubscribeBefore();
         if (unsubscribeAfter) unsubscribeAfter();
+        if (performanceMonitor) performanceMonitor.cleanup();
       });
       // No other global event listeners (like 'resize') or global variables (like window.$goto)
       // are managed by this layout, so no further cleanup is needed here.
@@ -126,6 +127,7 @@
       <slot /> </main>
     <Footer />
     <CookieConsent />
+    <ScrollToTop />
   </div>
 {/if}
 

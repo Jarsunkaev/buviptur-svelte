@@ -2,12 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { t } from 'svelte-i18n';
   
-  // Image paths with base URL
-  let baseUrl = '';
-  if (typeof window !== 'undefined') {
-    baseUrl = window.location.origin;
-  }
-
+  // Optimized image paths - only load what we need
   const imageNames = [
     'above.webp',
     'margaret.webp',
@@ -19,43 +14,47 @@
     'budapest.webp'
   ];
   
-  const imagePaths = imageNames.map(name => `${baseUrl}/${name}`);
-
-  // Track loaded state for each image
-  let loadedImages = $state(Array(imagePaths.length).fill(false));
+  // State management with better performance
   let currentSlide = $state(0);
   let isMobile = $state(false);
   let isMounted = $state(false);
   let isVisible = $state(true);
   let carouselInterval = null;
-  const totalSlides = imagePaths.length;
+  const totalSlides = imageNames.length;
 
-  // Simple slide navigation
+  // Simple slide navigation with debouncing
+  let slideTimeout;
   function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    preloadAdjacentImages();
+    if (slideTimeout) clearTimeout(slideTimeout);
+    slideTimeout = setTimeout(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+    }, 50);
   }
 
   function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    preloadAdjacentImages();
+    if (slideTimeout) clearTimeout(slideTimeout);
+    slideTimeout = setTimeout(() => {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    }, 50);
   }
 
   function goToSlide(index) {
-    if (index >= 0 && index < imagePaths.length) {
-      currentSlide = index;
-      preloadAdjacentImages();
+    if (index >= 0 && index < imageNames.length) {
+      if (slideTimeout) clearTimeout(slideTimeout);
+      slideTimeout = setTimeout(() => {
+        currentSlide = index;
+      }, 50);
     }
   }
 
-  // Touch handling
+  // Optimized touch handling with passive listeners
   let touchStartX = 0;
   let touchEndX = 0;
   const SWIPE_THRESHOLD = 50;
+  const SWIPE_TIME_THRESHOLD = 300;
 
   function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
-    touchStartTime = Date.now();
     // Pause autoplay on touch
     if (carouselInterval) {
       clearInterval(carouselInterval);
@@ -77,7 +76,7 @@
     if (!touchStartX) return;
     
     const swipeDistance = touchEndX - touchStartX;
-    const swipeTime = Date.now() - touchStartTime;
+    const swipeTime = Date.now() - (touchStartTime || Date.now());
     
     // Only process swipe if it was quick and significant enough
     if (swipeTime < SWIPE_TIME_THRESHOLD && Math.abs(swipeDistance) > SWIPE_THRESHOLD) {
@@ -93,56 +92,18 @@
     touchEndX = 0;
   }
 
-  // Image loading with better error handling
-  function loadImage(index) {
-    if (index < 0 || index >= imagePaths.length || loadedImages[index]) {
-      return;
-    }
-
-    const img = new Image();
-    const imagePath = imagePaths[index];
-    
-    img.onload = () => {
-      loadedImages = loadedImages.map((loaded, i) => i === index ? true : loaded);
-      console.log('Image loaded:', imagePath);
-    };
-    
-    img.onerror = (e) => {
-      console.error('Failed to load image at path:', imagePath);
-      console.error('Error details:', e);
-    };
-    
-    img.src = imagePath;
-    console.log('Loading image:', imagePath);
-  }
-
-  // Preload adjacent images
-  function preloadAdjacentImages() {
-    if (!imagePaths.length) return;
-    
-    // Preload next and previous images
-    const nextIndex = (currentSlide + 1) % totalSlides;
-    const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
-    
-    loadImage(nextIndex);
-    loadImage(prevIndex);
-  }
-
-  // Initialize component
+  // Initialize component with better performance
   onMount(() => {
     isMounted = true;
     isMobile = window.innerWidth < 1024;
     isVisible = true;
-    
-    // Load first few images
-    preloadAdjacentImages();
     
     // Start auto-play if not reduced motion
     if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       carouselInterval = setInterval(nextSlide, 5000);
     }
     
-    // Setup touch events
+    // Setup touch events with passive listeners
     const carousel = document.querySelector('.carousel-container');
     if (carousel) {
       carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -152,6 +113,7 @@
     
     return () => {
       if (carouselInterval) clearInterval(carouselInterval);
+      if (slideTimeout) clearTimeout(slideTimeout);
       if (carousel) {
         carousel.removeEventListener('touchstart', handleTouchStart);
         carousel.removeEventListener('touchmove', handleTouchMove);
@@ -175,9 +137,9 @@
   ontouchmove={handleTouchMove}
   ontouchend={handleTouchEnd}
 >
-  <!-- Simple Carousel -->
+  <!-- Optimized Carousel with better performance -->
   <div class="absolute inset-0 z-0 carousel-container overflow-hidden">
-    {#each imagePaths as image, i}
+    {#each imageNames as image, i}
       <div 
         class="carousel-item absolute inset-0 transition-opacity duration-1000 ease-in-out {i === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'}"
         style="will-change: transform, opacity;"
@@ -190,10 +152,6 @@
           loading={i <= 2 ? 'eager' : 'lazy'}
           decoding="async"
           style="transform: translateZ(0); backface-visibility: hidden;"
-          onload={() => {
-            loadedImages[i] = true;
-            loadedImages = [...loadedImages]; // Trigger reactivity
-          }}
         />
         <div class="absolute inset-0 bg-gradient-to-r from-[#113946]/40 via-[#113946]/25 to-[#113946]/15"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#113946]/35 via-transparent to-[#113946]/20"></div>
@@ -298,7 +256,7 @@
   
   <!-- Carousel Navigation Dots -->
   <div class="hidden sm:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 space-x-2 z-20">
-    {#each imagePaths as _, i}
+    {#each imageNames as _, i}
       <button
         class="w-3 h-3 rounded-full transition-all duration-300 {i === currentSlide ? 'bg-[#dcb660] scale-125' : 'bg-white/40 hover:bg-white/60'}"
         onclick={() => goToSlide(i)}

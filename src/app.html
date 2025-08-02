@@ -30,13 +30,14 @@
                 -webkit-tap-highlight-color: transparent;
                 /* Prevent bounce scrolling on iOS - keep if desired, but can feel "weird" */
                 overscroll-behavior: none; 
-                /* Fix for mobile viewport issues - rely on dvh/svh/lvh */
-                height: 100%; /* Fallback for older browsers */
-                height: 100dvh; /* Dynamic viewport height, handles mobile UI changes */
+                /* Allow content to expand beyond viewport */
+                min-height: 100%; /* Fallback for older browsers */
+                min-height: 100dvh; /* Dynamic viewport height, handles mobile UI changes */
             }
 
             body {
                 overflow-x: hidden; /* Prevent horizontal scrollbar */
+                overflow-y: auto; /* Allow vertical scroll */
                 width: 100%;
                 position: relative;
                 -webkit-font-smoothing: antialiased;
@@ -136,7 +137,7 @@
                 }
                 
                 html, body {
-                    height: 100dvh;
+                    min-height: 100dvh;
                 }
             }
             

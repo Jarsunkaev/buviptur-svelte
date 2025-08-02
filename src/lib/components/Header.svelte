@@ -7,12 +7,10 @@
   import { locale, t } from 'svelte-i18n';
   import { languages, setLanguage } from '$lib/i18n/index.js';
 
-  // State for header
+  // Simplified state for header
   let isMenuOpen = false;
   let isScrolled = false;
-  let isHeaderVisible = true;
   let currentScrollY = 0;
-  let lastScrollY = 0;
 
   // Get current language
   $: currentLang = $locale || 'en';
@@ -22,25 +20,28 @@
     setLanguage(newLang);
   }
 
-  // Toggle mobile menu function with improved body scroll lock
+  // Optimized mobile menu toggle with better scroll lock
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
 
     if (isMenuOpen) {
       // Store current scroll position
       currentScrollY = window.scrollY;
-
-      // Apply scroll lock styles
-      document.documentElement.classList.add('menu-open');
-      document.body.classList.add('menu-open');
+      
+      // Apply scroll lock
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
       document.body.style.top = `-${currentScrollY}px`;
-
+      document.body.style.width = '100%';
     } else {
       // Remove scroll lock
-      document.documentElement.classList.remove('menu-open');
-      document.body.classList.remove('menu-open');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
       document.body.style.top = '';
-
+      document.body.style.width = '';
+      
       // Restore scroll position
       window.scrollTo(0, currentScrollY);
     }
@@ -50,100 +51,75 @@
   function closeMenu() {
     if (isMenuOpen) {
       isMenuOpen = false;
-
+      
       // Remove scroll lock
-      document.documentElement.classList.remove('menu-open');
-      document.body.classList.remove('menu-open');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
       document.body.style.top = '';
-
+      document.body.style.width = '';
+      
       // Restore scroll position
       window.scrollTo(0, currentScrollY);
     }
   }
 
-  // Handle visual viewport changes for mobile
-  function handleViewportChange() {
-    if (window.visualViewport && window.visualViewport.height < window.innerHeight * 0.75) {
-      closeMenu();
-    }
-  }
-
-  // Handle scroll to make header thinner when scrolling down
+  // Simple and reliable scroll handler
   function handleScroll() {
-    // Get scroll position from multiple sources for compatibility
-    const scrollY = Math.max(
-      window.pageYOffset,
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const newIsScrolled = scrollY > 10; // Lower threshold for more responsive behavior
     
-    // Toggle scrolled class based on scroll position
-    const newIsScrolled = scrollY > 50;
+    console.log('Header scroll event:', { 
+      scrollY, 
+      newIsScrolled, 
+      currentIsScrolled: isScrolled,
+      windowPageYOffset: window.pageYOffset,
+      documentElementScrollTop: document.documentElement.scrollTop,
+      documentBodyScrollTop: document.body.scrollTop,
+      windowScrollY: window.scrollY
+    });
+    
     if (newIsScrolled !== isScrolled) {
       isScrolled = newIsScrolled;
-      // Update header class
-      const header = document.querySelector('header');
-      if (header) {
-        if (isScrolled) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-      }
+      console.log('Header state changed to:', isScrolled);
     }
-    
-    // Always keep header visible
-    isHeaderVisible = true;
-    
-    lastScrollY = scrollY <= 0 ? 0 : scrollY; // Prevent negative scroll values
   }
 
   onMount(() => {
     if (!browser) return;
     
-    console.log('Header mounted - adding scroll listeners');
+    // Test if page is scrollable
+    console.log('Document height:', document.documentElement.scrollHeight);
+    console.log('Window height:', window.innerHeight);
+    console.log('Is scrollable?', document.documentElement.scrollHeight > window.innerHeight);
+    console.log('Initial scroll position:', window.pageYOffset);
+    
+
     
     // Initial scroll state
     handleScroll();
     
-    // Add scroll listener with passive: true for better performance
+    // Add scroll listener - simple and reliable
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Add wheel and touchmove listeners as fallbacks
-    window.addEventListener('wheel', handleScroll, { passive: true });
-    window.addEventListener('touchmove', handleScroll, { passive: true });
-    
-    // Handle mobile viewport changes
-    if ('visualViewport' in window) {
-      window.visualViewport.addEventListener('resize', handleViewportChange, { passive: true });
-    }
     
     // Handle page navigation
     const unsubscribe = page.subscribe(() => {
       closeMenu();
-      isHeaderVisible = true;
       // Small delay to ensure DOM is updated
       setTimeout(handleScroll, 50);
     });
     
-    // Debug info
-    console.log('Scroll event listeners added');
-    
     // Cleanup
     return () => {
-      console.log('Header unmounting - removing listeners');
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('wheel', handleScroll);
-      window.removeEventListener('touchmove', handleScroll);
-      
-      if ('visualViewport' in window) {
-        window.visualViewport.removeEventListener('resize', handleViewportChange);
-      }
-      
       unsubscribe();
-      document.documentElement.classList.remove('menu-open');
-      document.body.classList.remove('menu-open');
+      
+      // Clean up any remaining scroll lock
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
       document.body.style.top = '';
+      document.body.style.width = '';
     };
   });
 
@@ -164,8 +140,7 @@
         closeMenu();
       }
       // Use SvelteKit's goto for programmatic navigation
-      // The scroll behavior is now handled by the layout
-      goto(href, { noScroll: true });
+      goto(href);
     }
   }
 
@@ -179,6 +154,8 @@
     // For other pages, check if current path starts with the href
     return currentPath.startsWith(href);
   }
+  
+
 </script>
 
 <svelte:head>
@@ -187,15 +164,11 @@
 
 <header
   class="fixed top-0 left-0 right-0 z-30 transition-all duration-300 ease-out"
-  class:scrolled={isScrolled}
+  class:header-transparent={!isScrolled}
+  class:header-scrolled={isScrolled}
   aria-label="Main navigation"
-  style="background-color: {isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'}; 
-         backdrop-filter: {isScrolled ? 'blur(12px)' : 'none'}; 
-         border-bottom: {isScrolled ? '1px solid rgba(0, 0, 0, 0.08)' : 'none'};
-         transform: {!isHeaderVisible ? 'translateY(-100%)' : 'translateY(0)'};"
   data-scrolled={isScrolled}
-  data-visible={isHeaderVisible}
-  class:hidden={!isMenuOpen}
+
 >
   <div class="container mx-auto px-4 sm:px-6 h-full flex items-center">
     <nav class="flex items-center justify-between w-full h-full">
@@ -295,68 +268,68 @@
 </header>
 
 <style>
-  /* Header base styles */
-  header {
+  /* Header base styles with proper padding */
+  :global(header) {
     padding: 1.5rem 0;
-    height: 90px;
+    padding-top: 3rem; /* Add space above the header */
+    height: 100px;
     display: flex;
     align-items: center;
-    transition: all 0.3s ease-out;
-    will-change: transform, background-color, backdrop-filter, border-bottom;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background-color, backdrop-filter, border-bottom, height, padding;
     backface-visibility: hidden;
     perspective: 1000px;
     transform: translate3d(0, 0, 0);
+    contain: layout style;
   }
 
-  /* Scrolled state - more compact header */
-  header.scrolled {
-    padding: 1rem 0;
-    height: 70px;
-    margin-top: 0; /* Remove top margin when scrolled */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Transparent state (not scrolled) */
+  :global(header.header-transparent) {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    border-bottom: none !important;
   }
 
-  /* Hidden state */
-  header.hidden {
-    transform: translate3d(0, -100%, 0);
+  /* Scrolled state - more compact header with smooth transitions */
+  :global(header.header-scrolled) {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    padding: 1rem 0 !important;
+    padding-top: 1rem !important; /* Reduce top padding when scrolled */
+    height: 70px !important;
+    margin-top: 0 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
   }
 
-  /* Logo sizing */
+  /* Logo sizing with optimized transitions */
   .logo-img {
     height: 100px;
-    transition: all 0.3s ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: height;
   }
 
-  header.scrolled .logo-img {
+  :global(header.header-scrolled .logo-img) {
     height: 50px;
-  }
-  
-  /* Header height and spacing */
-  header {
-    height: 100px;
-    padding-top: 3rem;/* Add space above the header when not scrolled */
-  }
-  
-  header.scrolled {
-    height: 70px;
   }
 
   /* Navigation link styles - white by default */
   .nav-link {
     position: relative;
     padding: 0.75rem 1rem;
-    color: white; /* Default text color over transparent/dark background */
+    color: white;
     font-weight: 500;
     text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.9;
     display: inline-block;
     text-decoration: none;
+    will-change: color, opacity;
   }
 
   /* Scrolled state - dark text */
-  header.scrolled .nav-link {
-    color: #113946; /* Changed to dark color for contrast on white background */
+  :global(header.header-scrolled .nav-link) {
+    color: #113946;
     text-shadow: none;
   }
 
@@ -410,8 +383,8 @@
     transition: all 0.3s ease;
   }
 
-  header.scrolled .mobile-menu-btn {
-    color: #113946 !important; /* Dark teal when scrolled */
+  :global(header.header-scrolled .mobile-menu-btn) {
+    color: #113946 !important;
   }
 
   .mobile-menu-btn:hover {
@@ -420,12 +393,12 @@
 
   /* Language buttons - white by default */
   .language-btn {
-    color: white; /* Default icon color over transparent/dark background */
+    color: white;
   }
 
   /* Scrolled state - dark color */
-  header.scrolled .language-btn {
-    color: #113946; /* Changed to dark color for contrast on white background */
+  :global(header.header-scrolled .language-btn) {
+    color: #113946;
   }
 
   /* Smooth scrolling for the whole app */
@@ -434,21 +407,10 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* CRITICAL: Better mobile menu scroll lock */
-  :global(html.menu-open),
-  :global(body.menu-open) {
-    overflow: hidden !important;
-    position: fixed !important;
-    width: 100% !important;
-    height: 100% !important;
-    -webkit-overflow-scrolling: auto !important;
-  }
-
   /* Mobile menu improvements */
   #mobile-menu-overlay {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    /* Prevent scrolling issues */
     position: fixed;
     top: 0;
     left: 0;
@@ -473,11 +435,8 @@
     text-align: center;
     padding: 0.75rem 0;
     -webkit-tap-highlight-color: transparent;
-    color: white !important; /* Ensure white text in mobile menu */
+    color: white !important;
   }
-  
-  /* Ensure active state is visible on mobile */
- 
 
   /* Language switcher visual feedback */
   button[aria-label*="Switch"] {
@@ -490,5 +449,21 @@
 
   button[aria-label*="Switch"]:active {
     transform: scale(0.95);
+  }
+
+  /* Performance optimizations */
+  @media (prefers-reduced-motion: reduce) {
+    /* Keep essential header transitions for functionality */
+    header {
+      transition: background-color 0.1s ease, backdrop-filter 0.1s ease, border-bottom 0.1s ease !important;
+    }
+    
+    /* Disable decorative animations */
+    .logo-img,
+    .nav-link,
+    .mobile-menu-btn,
+    .language-btn {
+      transition: none !important;
+    }
   }
 </style>
