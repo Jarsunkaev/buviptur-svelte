@@ -66,8 +66,7 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				manualChunks: {
-					vendor: ['svelte-i18n'],
-					utils: ['vanilla-cookieconsent']
+					vendor: ['svelte-i18n']
 				}
 			}
 		},
