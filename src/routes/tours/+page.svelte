@@ -5,80 +5,236 @@
     import { onMount } from 'svelte';
     import { t, locale } from 'svelte-i18n';
     import { fade, fly } from 'svelte/transition';
+    import { languages } from '$lib/i18n/index.js';
 
     // Modal state
     let showModal = false;
     let selectedTour = null;
 
-    // Detailed tour data
-    $: detailedTour = {
-        title: $t('tours.detailed.budapest.title') || 'Hungarian Heritage & Danube Bend Discovery',
-        subtitle: $t('tours.detailed.budapest.subtitle') || 'Budapest - Esztergom - Visegrád - Szentendre',
-        description: $t('tours.detailed.budapest.description') || 'Embark on a captivating journey through Hungary\'s most treasured historical sites. From the majestic Buda Castle to the charming Danube Bend towns, experience the rich heritage that shaped Central Europe.',
-        duration: $t('tours.detailed.budapest.duration') || '2 Nights, 3 Days',
-        mainImage: 'parli.webp',
-        languages: [
-            $t('tours.languages.english.name') || 'English',
-            $t('tours.languages.hungarian.name') || 'Hungarian', 
-            $t('tours.languages.turkish.name') || 'Turkish'
-        ],
-        summary: $t('tours.detailed.budapest.summary') || 'Experience the best of Hungary\'s rich cultural heritage and stunning Danube bend landscapes in this comprehensive 3-day adventure.',
-        destinations: $t('tours.detailed.budapest.destinations') || 'Budapest • Esztergom • Visegrád • Szentendre',
-        itinerary: [
-            {
-                day: 1,
-                title: $t('tours.detailed.budapest.day1.title') || 'Day 1',
-                image: 'maty.webp',
-                activities: [
-                    $t('tours.detailed.budapest.day1.activities.arrival') || 'Arrival in Budapest',
-                    $t('tours.detailed.budapest.day1.activities.castle') || 'Buda Castle and Fisherman\'s Bastion',
-                    $t('tours.detailed.budapest.day1.activities.parliament') || 'Explore Hungarian Parliament and St. Stephen\'s Basilica',
-                    $t('tours.detailed.budapest.day1.activities.shopping') || 'Vaci Street and Great Market Hall',
-                    $t('tours.detailed.budapest.day1.activities.cruise') || 'Danube River Cruise'
-                ]
-            },
-            {
-                day: 2,
-                title: $t('tours.detailed.budapest.day2.title') || 'Day 2',
-                image: 'eszti.webp',
-                activities: [
-                    $t('tours.detailed.budapest.day2.activities.dayTrip') || 'Hungarian Heritage Day Trip',
-                    $t('tours.detailed.budapest.day2.activities.esztergom') || 'Visit Esztergom Basilica',
-                    $t('tours.detailed.budapest.day2.activities.visegrad') || 'Explore Visegrád Castle',
-                    $t('tours.detailed.budapest.day2.activities.szentendre') || 'Discover charming Szentendre town',
-                    $t('tours.detailed.budapest.day2.activities.return') || 'Return to Budapest'
-                ]
-            },
-            {
-                day: 3,
-                title: $t('tours.detailed.budapest.day3.title') || 'Day 3',
-                image: 'margit.webp',
-                activities: [
-                    $t('tours.detailed.budapest.day3.activities.heroes') || 'Heroes\' Square guided tour',
-                    $t('tours.detailed.budapest.day3.activities.margaret') || 'Relaxing walk through Margaret Island'
-                ]
-            }
-        ]
-    };
+    // Tour data
+    $: tours = [
+        {
+            id: 'budapest',
+            title: $t('tours.detailed.budapest.title') || 'Hungarian Heritage & Danube Bend Discovery',
+            subtitle: $t('tours.detailed.budapest.subtitle') || 'Budapest - Esztergom - Visegrád - Szentendre',
+            description: $t('tours.detailed.budapest.description') || 'Embark on a captivating journey through Hungary\'s most treasured historical sites. From the majestic Buda Castle to the charming Danube Bend towns, experience the rich heritage that shaped Central Europe.',
+            duration: $t('tours.detailed.budapest.duration') || '2 Nights, 3 Days',
+            mainImage: 'parli.webp',
+            languages: languages,
+            summary: $t('tours.detailed.budapest.summary') || 'Experience the best of Hungary\'s rich cultural heritage and stunning Danube bend landscapes in this comprehensive 3-day adventure.',
+            destinations: $t('tours.detailed.budapest.destinations') || 'Budapest • Esztergom • Visegrád • Szentendre',
+            itinerary: [
+                {
+                    day: 1,
+                    title: $t('tours.detailed.budapest.day1.title') || 'Day 1',
+                    image: 'maty.webp',
+                    activities: [
+                        $t('tours.detailed.budapest.day1.activities.arrival') || 'Arrival in Budapest',
+                        $t('tours.detailed.budapest.day1.activities.castle') || 'Buda Castle and Fisherman\'s Bastion',
+                        $t('tours.detailed.budapest.day1.activities.parliament') || 'Explore Hungarian Parliament and St. Stephen\'s Basilica',
+                        $t('tours.detailed.budapest.day1.activities.shopping') || 'Vaci Street and Great Market Hall',
+                        $t('tours.detailed.budapest.day1.activities.cruise') || 'Danube River Cruise'
+                    ]
+                },
+                {
+                    day: 2,
+                    title: $t('tours.detailed.budapest.day2.title') || 'Day 2',
+                    image: 'eszti.webp',
+                    activities: [
+                        $t('tours.detailed.budapest.day2.activities.dayTrip') || 'Hungarian Heritage Day Trip',
+                        $t('tours.detailed.budapest.day2.activities.esztergom') || 'Visit Esztergom Basilica',
+                        $t('tours.detailed.budapest.day2.activities.visegrad') || 'Explore Visegrád Castle',
+                        $t('tours.detailed.budapest.day2.activities.szentendre') || 'Discover charming Szentendre town',
+                        $t('tours.detailed.budapest.day2.activities.return') || 'Return to Budapest'
+                    ]
+                },
+                {
+                    day: 3,
+                    title: $t('tours.detailed.budapest.day3.title') || 'Day 3',
+                    image: 'margit.webp',
+                    activities: [
+                        $t('tours.detailed.budapest.day3.activities.heroes') || 'Heroes\' Square guided tour',
+                        $t('tours.detailed.budapest.day3.activities.margaret') || 'Relaxing walk through Margaret Island'
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'centralEurope5',
+            title: $t('tours.detailed.centralEurope5.title') || '5-Day Central Europe Tour',
+            subtitle: $t('tours.detailed.centralEurope5.subtitle') || 'Budapest  Bratislava  Vienna',
+            description: $t('tours.detailed.centralEurope5.description') || 'Discover 3 countries in just 5 unforgettable days! From the thermal baths of Budapest, through the charming streets of Bratislava, to the imperial elegance of Vienna.',
+            duration: $t('tours.detailed.centralEurope5.duration') || '5 Days / 4 Nights',
+            mainImage: '/5-day.webp',
+            languages: languages.filter(lang => ['en', 'tr'].includes(lang.code)),
+            summary: $t('tours.detailed.centralEurope5.summary') || 'Experience the best of Central Europe with this comprehensive 5-day adventure across Hungary, Slovakia, and Austria.',
+            destinations: $t('tours.detailed.centralEurope5.destinations') || 'Budapest • Bratislava • Vienna',
+            route: $t('tours.detailed.centralEurope5.route') || 'Budapest  Bratislava  Vienna',
+            startingPoint: $t('tours.detailed.centralEurope5.startingPoint') || 'Budapest',
+            endingPoint: $t('tours.detailed.centralEurope5.endingPoint') || 'Vienna',
+            included: $t('tours.detailed.centralEurope5.included') || [
+                '4 nights hotel accommodation (with breakfast)',
+                'All private transfers (including airport & intercity)',
+                'Professional guide services (English / Turkish)',
+                'City tours in Budapest, Bratislava, and Vienna'
+            ],
+            itinerary: [
+                {
+                    day: 1,
+                    title: $t('tours.detailed.centralEurope5.day1.title') || 'Day 1 – Arrival & Budapest City Tour',
+                    image: 'maty.webp',
+                    activities: $t('tours.detailed.centralEurope5.day1.activities') || [
+                        'Arrival: Budapest Airport / Train Station',
+                        'Transfer: Private vehicle transfer to your hotel',
+                        'City Tour Highlights:',
+                        'Buda Castle',
+                        'Fisherman\'s Bastion',
+                        'Matthias Church',
+                        'Chain Bridge',
+                        'Hungarian Parliament Building (exterior view)',
+                        'Evening: Optional Danube River Cruise'
+                    ]
+                },
+                {
+                    day: 2,
+                    title: $t('tours.detailed.centralEurope5.day2.title') || 'Day 2 – Budapest Culture & Thermal Experience',
+                    image: 'heroes.webp',
+                    activities: $t('tours.detailed.centralEurope5.day2.activities') || [
+                        'After breakfast:',
+                        'Heroes\' Square',
+                        'Széchenyi Thermal Baths (entry included)',
+                        'Andrassy Avenue & Budapest Opera House',
+                        'Afternoon: Free time for shopping or café break',
+                        'Evening: Dinner at an elegant local restaurant'
+                    ]
+                },
+                {
+                    day: 3,
+                    title: $t('tours.detailed.centralEurope5.day3.title') || 'Day 3 – Slovakia: Bratislava Day Trip',
+                    image: 'pozsony.webp',
+                    activities: $t('tours.detailed.centralEurope5.day3.activities') || [
+                        'Early Morning Departure: 2.5-hour journey by private vehicle',
+                        'Bratislava Tour Highlights:',
+                        'Bratislava Castle',
+                        'Old Town Center',
+                        'St. Martin\'s Cathedral',
+                        'Michael\'s Gate',
+                        'Lunch: Riverside restaurant by the Danube',
+                        'Evening: Transfer to Vienna (approx. 1 hour)'
+                    ]
+                },
+                {
+                    day: 4,
+                    title: $t('tours.detailed.centralEurope5.day4.title') || 'Day 4 – Vienna Classics',
+                    image: 'ausztria.webp',
+                    activities: $t('tours.detailed.centralEurope5.day4.activities') || [
+                        'Panoramic Vienna Tour:',
+                        'Schönbrunn Palace & Gardens',
+                        'Panoramic ride along Ringstraße',
+                        'St. Stephen\'s Cathedral',
+                        'Vienna State Opera',
+                        'Museum Option: Belvedere Palace or Kunsthistorisches Museum',
+                        'Evening: Traditional Viennese coffee and Sachertorte experience'
+                    ]
+                },
+                {
+                    day: 5,
+                    title: $t('tours.detailed.centralEurope5.day5.title') || 'Day 5 – Free Time & Departure',
+                    image: 'margaret.webp',
+                    activities: $t('tours.detailed.centralEurope5.day5.activities') || [
+                        'Morning: Free time for shopping, souvenirs, or a city walk',
+                        'Transfer: Private vehicle transfer to the airport'
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'centralEurope3',
+            title: $t('tours.detailed.centralEurope3.title') || '3-Day Central Europe Tour',
+            subtitle: $t('tours.detailed.centralEurope3.subtitle') || 'Budapest  Bratislava  Budapest',
+            description: $t('tours.detailed.centralEurope3.description') || 'Discover 2 countries in just 3 unforgettable days! From the thermal baths of Budapest, through the charming streets of Bratislava.',
+            duration: $t('tours.detailed.centralEurope3.duration') || '3 Days / 2 Nights',
+            mainImage: '/3-day.webp',
+            languages: languages.filter(lang => ['en', 'tr'].includes(lang.code)),
+            summary: $t('tours.detailed.centralEurope3.summary') || 'Experience the best of Central Europe with this 3-day adventure across Hungary and Slovakia.',
+            destinations: $t('tours.detailed.centralEurope3.destinations') || 'Budapest • Bratislava',
+            route: $t('tours.detailed.centralEurope3.route') || 'Budapest  Bratislava  Budapest',
+            startingPoint: $t('tours.detailed.centralEurope3.startingPoint') || 'Budapest',
+            endingPoint: $t('tours.detailed.centralEurope3.endingPoint') || 'Budapest',
+            included: $t('tours.detailed.centralEurope3.included') || [
+                '2 nights hotel accommodation (with breakfast)',
+                'All private transfers (including airport & intercity)',
+                'Professional guide services (English / Turkish)',
+                'City tours in Budapest and Bratislava'
+            ],
+            itinerary: [
+                {
+                    day: 1,
+                    title: $t('tours.detailed.centralEurope3.day1.title') || 'Day 1 – Arrival & Budapest City Tour',
+                    image: 'maty.webp',
+                    activities: $t('tours.detailed.centralEurope3.day1.activities') || [
+                        'Arrival: Budapest Airport / Train Station',
+                        'Transfer: Private vehicle transfer to your hotel',
+                        'City Tour Highlights:',
+                        'Buda Castle',
+                        'Fisherman\'s Bastion',
+                        'Matthias Church',
+                        'Chain Bridge',
+                        'Hungarian Parliament Building (exterior view)',
+                        'Evening: Optional Danube River Cruise'
+                    ]
+                },
+                // SWAPPED: Day 3 comes before Day 2
+                {
+                    day: 3,
+                    title: $t('tours.detailed.centralEurope3.day3.title') || 'Day 3 – Budapest Culture & Departure',
+                    image: 'heroes.webp',
+                    activities: $t('tours.detailed.centralEurope3.day3.activities') || [
+                        'Morning: Budapest Culture and Thermal Experience',
+                        'Heroes\' Square',
+                        'Széchenyi Thermal Baths (entry included)',
+                        'Andrassy Avenue & Budapest Opera House',
+                        'Afternoon: Free time for shopping or café break',
+                        'Evening: Dinner at an elegant local restaurant'
+                    ]
+                },
+                {
+                    day: 2,
+                    title: $t('tours.detailed.centralEurope3.day2.title') || 'Day 2 – Slovakia: Bratislava Day Trip',
+                    image: 'pozsony.webp',
+                    activities: $t('tours.detailed.centralEurope3.day2.activities') || [
+                        'Early Morning Departure: 2.5-hour journey by private vehicle',
+                        'Bratislava Tour Highlights:',
+                        'Bratislava Castle',
+                        'Old Town Center',
+                        'St. Martin\'s Cathedral',
+                        'Michael\'s Gate',
+                        'Lunch: Riverside restaurant by the Danube',
+                        'Evening: Return to Budapest'
+                    ]
+                }
+            ]
+        }
+    ];
 
     // Language data with direct emoji flags
     const tourLanguages = [
         { 
             key: 'english',
             name: 'English',
-            flag: '🇬🇧',
+            flag: '',
             available: true
         },
         { 
             key: 'hungarian',
             name: 'Magyar',
-            flag: '🇭🇺',
+            flag: '',
             available: true
         },
         { 
             key: 'turkish',
             name: 'Türkçe',
-            flag: '🇹🇷',
+            flag: '',
             available: true
         }
     ];
@@ -108,6 +264,8 @@
         showModal = true;
         // Prevent body scroll
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
     }
 
     function closeModal() {
@@ -115,6 +273,8 @@
         selectedTour = null;
         // Restore body scroll
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
     }
 
     // Close modal on escape key
@@ -164,6 +324,20 @@
 <svelte:head>
     <title>{$t('tours.title')} - BuVipTur</title>
     <meta name="description" content={$t('tours.meta.description')} />
+    <!-- Add the line-clamp plugin for Tailwind CSS if not already included -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            // ... your other theme extensions
+          }
+        },
+        plugins: [
+          require('@tailwindcss/line-clamp'),
+        ],
+      }
+    </script>
     <style>
         .hero-overlay {
             background: linear-gradient(135deg, rgba(17, 57, 70, 0.3) 0%, rgba(220, 182, 96, 0.2) 100%);
@@ -248,26 +422,23 @@
 
         .modal-header {
             background: linear-gradient(135deg, rgba(220, 182, 96, 0.1), rgba(17, 57, 70, 0.05));
-            padding: 2rem;
+            padding: 4rem 2rem 2rem 2rem; /* Increased top padding from 3rem to 4rem */
             border-bottom: 1px solid rgba(220, 182, 96, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 10;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            flex-shrink: 0; /* Prevent header from shrinking */
         }
 
         .modal-body {
             /* Use flex-grow to make it fill available space and handle its own scrolling */
             flex-grow: 1; 
             overflow-y: auto;
+            overflow-x: hidden;
             padding: 0;
             min-height: 0; /* Important for flex items with overflow */
         }
 
         .modal-close {
-            position: absolute;
+            position: fixed;
             top: 1rem;
             right: 1rem;
             background: rgba(220, 182, 96, 0.1);
@@ -280,7 +451,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            z-index: 20;
+            z-index: 1020;
         }
 
         .modal-close:hover {
@@ -301,13 +472,13 @@
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .modal-content {
-                max-width: 95vw;
-                max-height: 95vh;
+                max-width: 98vw;
+                max-height: 80vh;
                 border-radius: 16px;
             }
             
             .modal-header {
-                padding: 1.5rem;
+                padding: 1rem;
             }
             
             .tour-card {
@@ -315,9 +486,11 @@
             }
 
             .day-section-modal {
-                /* Make day cards wider on mobile by reducing horizontal margin */
-                margin-left: 0.5rem;
-                margin-right: 0.5rem;
+                margin-left: 0;
+                margin-right: 0;
+                margin-top: 0.75rem;
+                margin-bottom: 0.75rem;
+                width: 100%;
             }
         }
 
@@ -354,20 +527,6 @@
         /* Ensure header stays at top */
         .modal-header {
             flex-shrink: 0;
-            position: relative;
-            z-index: 10;
-        }
-        
-        /* Ensure CTA stays at bottom */
-        .package-cta {
-            flex-shrink: 0;
-            background: white;
-            position: sticky;
-            bottom: 0;
-            padding: 1rem 0;
-            margin: 0 -1.5rem;
-            padding: 1rem 1.5rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .day-image {
@@ -430,60 +589,50 @@
             </div>
 
             <!-- Tour Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Empty column on the left for medium and larger screens -->
-                <div class="hidden md:block"></div>
-                
-                <!-- Hungarian Heritage Tour Card - Centered in the middle column -->
-                <div class="tour-card rounded-2xl p-6 shadow-lg fade-up" on:click={() => openModal(detailedTour)} on:keydown={(e) => e.key === 'Enter' && openModal(detailedTour)} tabindex="0" role="button">
-                    <!-- Card Image -->
-                    <div class="relative overflow-hidden rounded-xl mb-4">
-                        <img 
-                            src={detailedTour.mainImage} 
-                            alt={detailedTour.title}
-                            class="tour-card-image w-full h-48 object-cover"
-                            loading="lazy"
-                            on:error={handleImageError}
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                        <div class="absolute top-3 right-3 bg-[#dcb660] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            {detailedTour.duration}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {#each tours as tour}
+                    <div class="tour-card rounded-2xl p-4 shadow-lg fade-up h-full flex flex-col" on:click={() => openModal(tour)} on:keydown={(e) => e.key === 'Enter' && openModal(tour)} tabindex="0" role="button">
+                        <!-- Card Image -->
+                        <div class="relative overflow-hidden rounded-xl mb-4">
+                            <img 
+                                src={tour.mainImage} 
+                                alt={tour.title}
+                                class="tour-card-image w-full h-72 object-cover {['/5-day.webp','/3-day.webp'].includes(tour.mainImage) ? 'zoomed-out' : ''}"
+                                loading="lazy"
+                                on:error={handleImageError}
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                            <div class="absolute top-3 right-3 bg-[#dcb660] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                {tour.duration}
+                            </div>
                         </div>
+
+                        <!-- Card Content -->
+                         <div class="flex flex-col flex-grow">
+                             <div>
+                                 <h3 class="text-xl font-bold text-[#113946] line-clamp-2">
+                                     {tour.title}
+                                 </h3>
+                                 
+                                 <p class="text-[#dcb660] font-semibold text-sm mt-1">
+                                     {tour.destinations}
+                                 </p>
+                                 
+                                 <p class="text-gray-600 text-sm leading-relaxed mt-2 line-clamp-3">
+                                     {tour.summary}
+                                 </p>
+                             </div>
+
+                             <!-- View Package Button -->
+                             <div class="mt-auto pt-4">
+                                 <button class="w-full btn-primary text-white font-semibold py-2.5 px-6 rounded-xl transition duration-300 text-sm">
+                                     {$t('tours.card.viewPackage') || 'View Package'}
+                                     <i class="fas fa-arrow-right ml-2"></i>
+                                 </button>
+                             </div>
+                         </div>
                     </div>
-
-                    <!-- Card Content -->
-                    <div class="space-y-3">
-                        <h3 class="text-xl font-bold text-[#113946] line-clamp-2">
-                            {detailedTour.title}
-                        </h3>
-                        
-                        <p class="text-[#dcb660] font-semibold text-sm">
-                            {detailedTour.destinations}
-                        </p>
-                        
-                        <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">
-                            {detailedTour.summary}
-                        </p>
-
-                        <!-- Languages -->
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            {#each tourLanguages as lang}
-                                <span class="language-chip px-2 py-1 rounded-full flex items-center text-xs">
-                                    <span class="mr-1">{lang.flag}</span>
-                                    <span>{lang.name}</span>
-                                </span>
-                            {/each}
-                        </div>
-
-                        <!-- View Package Button -->
-                        <div class="pt-4">
-                            <button class="w-full btn-primary text-white font-semibold py-3 px-6 rounded-xl transition duration-300 text-sm">
-                                {$t('tours.card.viewPackage') || 'View Package'}
-                                <i class="fas fa-arrow-right ml-2"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                {/each}
             </div>
         </div>
     </section>
@@ -518,47 +667,63 @@
                     <i class="fas fa-times text-[#113946]"></i>
                 </button>
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <div class="text-center">
-                        <div class="inline-block bg-[#dcb660] text-white px-4 py-2 rounded-full text-sm font-semibold mb-3">
-                            {$t('tours.package.featured') || 'Featured Tour Package'}
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <!-- Modal Header Content -->
+                    <div class="text-center p-8 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 border-b border-amber-200 -mx-6 -mt-6 pt-8">
+                        <div class="h-8 mb-4">
+                            <!-- Empty space where the pill was -->
                         </div>
-                        <h2 class="text-2xl md:text-3xl font-bold text-[#113946] mb-2">{selectedTour.title}</h2>
-                        <p class="text-lg text-[#dcb660] font-semibold mb-2">{selectedTour.subtitle}</p>
-                        <p class="text-gray-600 leading-relaxed">{selectedTour.description}</p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-[#113946] mb-3 leading-tight">{selectedTour.title}</h2>
+                        <p class="text-xl text-[#dcb660] font-semibold mb-4">{selectedTour.subtitle}</p>
+                        <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto text-lg">{selectedTour.description}</p>
                         
                         <!-- Package Info -->
-                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-                            <div class="flex items-center text-gray-700">
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8">
+                            <div class="flex items-center text-gray-700 bg-white/60 px-4 py-2 rounded-full shadow-sm">
                                 <i class="fas fa-clock mr-2 text-[#dcb660]"></i>
                                 <span class="font-semibold">{selectedTour.duration}</span>
                             </div>
                             <div class="flex flex-wrap gap-2 justify-center">
-                                {#each tourLanguages as lang}
-                                    <span class="language-chip px-3 py-1 rounded-full flex items-center text-sm">
-                                        <span class="mr-2">{lang.flag}</span>
-                                        <span>{lang.name}</span>
+                                {#each selectedTour.languages as lang}
+                                    <span class="language-chip px-3 py-1.5 rounded-full flex items-center justify-center text-sm bg-white/60 shadow-sm">
+                                        <span class="mr-2 w-4 h-4 flex-shrink-0 flex items-center justify-center">{@html lang.flag}</span>
+                                        <span class="flex items-center">{lang.name}</span>
                                     </span>
                                 {/each}
                             </div>
                         </div>
                     </div>
-                </div>
+                    <!-- What's Included Section for Central Europe Tours -->
+                    {#if selectedTour.included}
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200 mb-6 mx-6 mt-16">
+                            <h3 class="text-lg font-bold text-[#113946] mb-4">
+                                {$t('tours.package.whatsIncluded') || 'What\'s Included'}
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {#each selectedTour.included as item}
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mt-0.5">
+                                            <i class="fas fa-check text-white text-xs"></i>
+                                        </div>
+                                        <span class="text-gray-700 text-sm">{item}</span>
+                                    </div>
+                                {/each}
+                            </div>
+                        </div>
+                    {/if}
 
-                <!-- Modal Body -->
-                <div class="modal-body">
                     <!-- Daily Itinerary -->
-                    <div class="p-0 pt-6 space-y-6">
-                        <h3 class="text-xl font-bold text-[#113946] text-center mb-6">
-                            {$t('tours.package.itinerary') || 'Your 3-Day Adventure'}
+                    <div class="mb-6 px-6">
+                        <h3 class="text-xl font-bold text-[#113946] text-center mb-6 {selectedTour.id === 'budapest' ? 'mt-8' : ''}">
+                            {$t('tours.package.itinerary') || 'Your Adventure'}
                         </h3>
 
                         {#each selectedTour.itinerary as day, index}
-                            <div class="day-section-modal rounded-2xl p-6 shadow-sm">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center {index % 2 === 1 ? 'lg:grid-cols-2' : ''}">
+                            <div class="day-section-modal rounded-2xl p-6 shadow-sm mb-6">
+                                <div class="w-full">
                                     <!-- Content Side -->
-                                    <div class="{index % 2 === 1 ? 'lg:order-2' : ''}">
+                                    <div>
                                         <!-- Day Header -->
                                         <div class="flex items-center mb-4">
                                             <h4 class="text-xl font-bold text-[#113946]">{day.title}</h4>
@@ -573,42 +738,28 @@
                                             {/each}
                                         </div>
                                     </div>
-                                    
-                                    <!-- Image Side -->
-                                    <div class="{index % 2 === 1 ? 'lg:order-1' : ''} order-first lg:order-none">
-                                        <div class="relative overflow-hidden rounded-xl border border-amber-100">
-                                            <img 
-                                                src={day.image} 
-                                                alt="{day.title} activities" 
-                                                class="day-image w-full h-48 md:h-64 object-cover"
-                                                loading="lazy"
-                                                on:error={handleImageError}
-                                            />
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         {/each}
+                    </div>
 
-                        <!-- Package CTA -->
-                        <div class="text-center mt-8 pt-6 border-t border-gray-200">
-                            <p class="text-gray-600 mb-4">
-                                {$t('tours.package.cta.subtitle') || 'Ready to experience this amazing journey?'}
-                            </p>
-                            <a 
-                                href="/contact?tour={encodeURIComponent(selectedTour.title)}#top" 
-                                class="btn-primary inline-flex items-center px-8 py-3 text-white rounded-xl font-semibold"
-                                on:click|preventDefault={() => {
-                                    const href = `/contact?tour=${encodeURIComponent(selectedTour.title)}#top`;
-                                    closeModal();
-                                    setTimeout(() => window.location.href = href, 100);
-                                }}
-                            >
-                                <span>{$t('tours.package.cta.button') || 'Book This Package'}</span>
-                                <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
+                    <!-- Package CTA -->
+                    <div class="text-center pt-6 border-t border-gray-200 px-6">
+                        <p class="text-gray-600 mb-4">
+                            {$t('tours.package.cta.subtitle') || 'Ready to experience this amazing journey?'}
+                        </p>
+                        <a 
+                            href="/contact?tour={encodeURIComponent(selectedTour.title)}#top" 
+                            class="btn-primary inline-flex items-center px-8 py-3 text-white rounded-xl font-semibold"
+                            on:click|preventDefault={() => {
+                                const href = `/contact?tour=${encodeURIComponent(selectedTour.title)}#top`;
+                                closeModal();
+                                setTimeout(() => window.location.href = href, 100);
+                            }}
+                        >
+                            <span>{$t('tours.package.cta.button') || 'Book This Package'}</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>

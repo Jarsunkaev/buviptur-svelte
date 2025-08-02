@@ -300,7 +300,11 @@
     },
     "package": {
       "featured": "Öne Çıkan Tur Paketi",
-      "itinerary": "3 Günlük Maceranız",
+      "itinerary": "Maceranız",
+      "route": "Tur Güzergahı",
+      "startingPoint": "Başlangıç Noktası",
+      "endingPoint": "Bitiş Noktası",
+      "whatsIncluded": "Dahil Olanlar",
       "cta": {
         "subtitle": "Bu muhteşem yolculuğu deneyimlemeye hazır mısınız?",
         "button": "Bu Paketi Rezerve Edin"
@@ -344,6 +348,135 @@
             "heroes": "Kahramanlar Meydanı rehberli turu",
             "margaret": "Margaret Adası'nda rahatlatıcı yürüyüş"
           }
+        }
+      },
+      "centralEurope5": {
+        "title": "5 Günlük Orta Avrupa Turu",
+        "subtitle": "Budapeşte → Bratislava → Viyana",
+        "description": "Sadece 5 unutulmaz günde 3 ülke keşfedin! Budapeşte'nin termal banyolarından Bratislava'nın büyüleyici sokaklarından Viyana'nın imparatorluk zarafetine kadar — bu, Orta Avrupa'yı daha önce hiç olmadığı gibi keşfetme şansınız.",
+        "destinations": "Budapeşte • Bratislava • Viyana",
+        "summary": "Macaristan, Slovakya ve Avusturya'da bu kapsamlı 5 günlük macerayla Orta Avrupa'nın en iyilerini deneyimleyin.",
+        "duration": "5 Gün / 4 Gece",
+        "route": "Budapeşte → Bratislava → Viyana",
+        "startingPoint": "Budapeşte",
+        "endingPoint": "Viyana",
+        "included": [
+          "4 gece otel konaklaması (kahvaltı dahil)",
+          "Havaalanı ve şehirler arası tüm özel transferler",
+          "Profesyonel rehberlik hizmeti (İngilizce / Türkçe)",
+          "Budapeşte, Bratislava, Viyana şehir turları"
+        ],
+        "day1": {
+          "title": "1. Gün – Varış ve Budapeşte Şehir Turu",
+          "activities": [
+            "Varış: Budapeşte Havalimanı / Tren Garı",
+            "Transfer: Otelinize özel araçla transfer",
+            "Şehir Turu Kiemelikleri:",
+            "Buda Kalesi",
+            "Fisherman's Bastion (Balıkçı Tabyası)",
+            "Matthias Kilisesi",
+            "Zincirli Köprü",
+            "Parlamento Binası dışarıdan",
+            "Akşam: Tuna Nehri'nde tekne turu (Opsiyonel)"
+          ]
+        },
+        "day2": {
+          "title": "2. Gün – Budapeşte Kültür & Termal Deneyimi",
+          "activities": [
+            "Kahvaltı sonrası:",
+            "Kahramanlar Meydanı",
+            "Széchenyi Termal Banyoları",
+            "Andrassy Bulvarı ve Opera Binası",
+            "Öğle sonrası serbest zaman: Alışveriş veya kahve molası",
+            "Akşam: Şık restoranda yemek"
+          ]
+        },
+        "day3": {
+          "title": "3. Gün – Slovakya: Bratislava Günübirlik Turu",
+          "activities": [
+            "Sabah erken çıkış: Özel araçla 2.5 saatlik yolculuk",
+            "Bratislava Gezisi Kiemelikleri:",
+            "Bratislava Kalesi",
+            "Eski Şehir Merkezi",
+            "St. Martin Katedrali",
+            "Michael's Gate",
+            "Öğle yemeği: Tuna Nehri kıyısında",
+            "Akşam: Viyana'ya transfer (1 saat)"
+          ]
+        },
+        "day4": {
+          "title": "4. Gün – Viyana Klasikleri",
+          "activities": [
+            "Panoramik Viyana Turu:",
+            "Schönbrunn Sarayı ve Bahçeleri",
+            "Ringstraße boyunca panoramik tur",
+            "Aziz Stefan Katedrali",
+            "Opera Binası",
+            "Müze tercihi: Belvedere Sarayı veya Kunsthistorisches Müzesi",
+            "Akşam: Viyana kahvesi ve Sachertorte deneyimi"
+          ]
+        },
+        "day5": {
+          "title": "5. Gün – Serbest Zaman & Dönüş",
+          "activities": [
+            "Sabah: Serbest zaman – alışveriş, hediyelik veya yürüyüş",
+            "Transfer: Havalimanına özel araç ile"
+          ]
+        }
+      },
+      "centralEurope3": {
+        "title": "3 Günlük Orta Avrupa Turu",
+        "subtitle": "Budapeşte → Bratislava → Budapeşte",
+        "description": "Sadece 3 unutulmaz günde 2 ülke keşfedin! Budapeşte'nin termal banyolarından Bratislava'nın büyüleyici sokaklarından — bu, Orta Avrupa'yı daha önce hiç olmadığı gibi keşfetme şansınız.",
+        "destinations": "Budapeşte • Bratislava",
+        "summary": "Macaristan ve Slovakya'da bu 3 günlük macerayla Orta Avrupa'nın en iyilerini deneyimleyin.",
+        "duration": "3 Gün / 2 Gece",
+        "route": "Budapeşte → Bratislava → Budapeşte",
+        "startingPoint": "Budapeşte",
+        "endingPoint": "Budapeşte",
+        "included": [
+          "2 gece otel konaklaması (kahvaltı dahil)",
+          "Havaalanı ve şehirler arası tüm özel transferler",
+          "Profesyonel rehberlik hizmeti (İngilizce / Türkçe)",
+          "Budapeşte ve Bratislava şehir turları"
+        ],
+        "day1": {
+          "title": "1. Gün – Varış ve Budapeşte Şehir Turu",
+          "activities": [
+            "Varış: Budapeşte Havalimanı / Tren Garı",
+            "Transfer: Otelinize özel araçla transfer",
+            "Şehir Turu Kiemelikleri:",
+            "Buda Kalesi",
+            "Fisherman's Bastion (Balıkçı Tabyası)",
+            "Matthias Kilisesi",
+            "Zincirli Köprü",
+            "Parlamento Binası dışarıdan",
+            "Akşam: Tuna Nehri'nde tekne turu (Opsiyonel)"
+          ]
+        },
+        "day2": {
+          "title": "2. Gün – Slovakya: Bratislava Günübirlik Turu",
+          "activities": [
+            "Sabah erken çıkış: Özel araçla 2.5 saatlik yolculuk",
+            "Bratislava Gezisi Kiemelikleri:",
+            "Bratislava Kalesi",
+            "Eski Şehir Merkezi",
+            "St. Martin Katedrali",
+            "Michael's Gate",
+            "Öğle yemeği: Tuna Nehri kıyısında",
+            "Akşam: Budapeşte'ye dönüş"
+          ]
+        },
+        "day3": {
+          "title": "3. Gün – Budapeşte Kültür & Dönüş",
+          "activities": [
+            "Sabah: Budapeşte Kültür ve Termal Deneyimi",
+            "Kahramanlar Meydanı",
+            "Széchenyi Termal Banyoları",
+            "Andrassy Bulvarı ve Opera Binası",
+            "Öğle sonrası serbest zaman: Alışveriş veya kahve molası",
+            "Akşam: Şık restoranda yemek"
+          ]
         }
       }
     },

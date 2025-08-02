@@ -55,7 +55,6 @@ export default defineConfig({
 	],
 	optimizeDeps: {
 		exclude: [
-			'flatpickr',
 			'vanilla-cookieconsent',
 			'unsplash-js'
 		],

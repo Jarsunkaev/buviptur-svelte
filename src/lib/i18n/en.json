@@ -300,7 +300,11 @@
     },
     "package": {
       "featured": "Featured Tour Package",
-      "itinerary": "Your 3-Day Adventure",
+      "itinerary": "Your Adventure",
+      "route": "Tour Route",
+      "startingPoint": "Starting Point",
+      "endingPoint": "Ending Point",
+      "whatsIncluded": "What's Included",
       "cta": {
         "subtitle": "Ready to experience this amazing journey?",
         "button": "Book This Package"
@@ -344,6 +348,135 @@
             "heroes": "Heroes' Square guided tour",
             "margaret": "Relaxing walk through Margaret Island"
           }
+        }
+      },
+      "centralEurope5": {
+        "title": "5-Day Central Europe Tour",
+        "subtitle": "Budapest → Bratislava → Vienna",
+        "description": "Discover 3 countries in just 5 unforgettable days! From the thermal baths of Budapest, through the charming streets of Bratislava, to the imperial elegance of Vienna — this is your chance to explore Central Europe like never before.",
+        "destinations": "Budapest • Bratislava • Vienna",
+        "summary": "Experience the best of Central Europe with this comprehensive 5-day adventure across Hungary, Slovakia, and Austria.",
+        "duration": "5 Days / 4 Nights",
+        "route": "Budapest → Bratislava → Vienna",
+        "startingPoint": "Budapest",
+        "endingPoint": "Vienna",
+        "included": [
+          "4 nights hotel accommodation (with breakfast)",
+          "All private transfers (including airport & intercity)",
+          "Professional guide services (English / Turkish)",
+          "City tours in Budapest, Bratislava, and Vienna"
+        ],
+        "day1": {
+          "title": "Day 1 – Arrival & Budapest City Tour",
+          "activities": [
+            "Arrival: Budapest Airport / Train Station",
+            "Transfer: Private vehicle transfer to your hotel",
+            "City Tour Highlights:",
+            "Buda Castle",
+            "Fisherman's Bastion",
+            "Matthias Church",
+            "Chain Bridge",
+            "Hungarian Parliament Building (exterior view)",
+            "Evening: Optional Danube River Cruise"
+          ]
+        },
+        "day2": {
+          "title": "Day 2 – Budapest Culture & Thermal Experience",
+          "activities": [
+            "After breakfast:",
+            "Heroes' Square",
+            "Széchenyi Thermal Baths (entry included)",
+            "Andrassy Avenue & Budapest Opera House",
+            "Afternoon: Free time for shopping or café break",
+            "Evening: Dinner at an elegant local restaurant"
+          ]
+        },
+        "day3": {
+          "title": "Day 3 – Slovakia: Bratislava Day Trip",
+          "activities": [
+            "Early Morning Departure: 2.5-hour journey by private vehicle",
+            "Bratislava Tour Highlights:",
+            "Bratislava Castle",
+            "Old Town Center",
+            "St. Martin's Cathedral",
+            "Michael's Gate",
+            "Lunch: Riverside restaurant by the Danube",
+            "Evening: Transfer to Vienna (approx. 1 hour)"
+          ]
+        },
+        "day4": {
+          "title": "Day 4 – Vienna Classics",
+          "activities": [
+            "Panoramic Vienna Tour:",
+            "Schönbrunn Palace & Gardens",
+            "Panoramic ride along Ringstraße",
+            "St. Stephen's Cathedral",
+            "Vienna State Opera",
+            "Museum Option: Belvedere Palace or Kunsthistorisches Museum",
+            "Evening: Traditional Viennese coffee and Sachertorte experience"
+          ]
+        },
+        "day5": {
+          "title": "Day 5 – Free Time & Departure",
+          "activities": [
+            "Morning: Free time for shopping, souvenirs, or a city walk",
+            "Transfer: Private vehicle transfer to the airport"
+          ]
+        }
+      },
+      "centralEurope3": {
+        "title": "3-Day Central Europe Tour",
+        "subtitle": "Budapest → Bratislava → Budapest",
+        "description": "Discover 2 countries in just 3 unforgettable days! From the thermal baths of Budapest, through the charming streets of Bratislava — this is your chance to explore Central Europe like never before.",
+        "destinations": "Budapest • Bratislava",
+        "summary": "Experience the best of Central Europe with this 3-day adventure across Hungary and Slovakia.",
+        "duration": "3 Days / 2 Nights",
+        "route": "Budapest → Bratislava → Budapest",
+        "startingPoint": "Budapest",
+        "endingPoint": "Budapest",
+        "included": [
+          "2 nights hotel accommodation (with breakfast)",
+          "All private transfers (including airport & intercity)",
+          "Professional guide services (English / Turkish)",
+          "City tours in Budapest and Bratislava"
+        ],
+        "day1": {
+          "title": "Day 1 – Arrival & Budapest City Tour",
+          "activities": [
+            "Arrival: Budapest Airport / Train Station",
+            "Transfer: Private vehicle transfer to your hotel",
+            "City Tour Highlights:",
+            "Buda Castle",
+            "Fisherman's Bastion",
+            "Matthias Church",
+            "Chain Bridge",
+            "Hungarian Parliament Building (exterior view)",
+            "Evening: Optional Danube River Cruise"
+          ]
+        },
+        "day2": {
+          "title": "Day 2 – Slovakia: Bratislava Day Trip",
+          "activities": [
+            "Early Morning Departure: 2.5-hour journey by private vehicle",
+            "Bratislava Tour Highlights:",
+            "Bratislava Castle",
+            "Old Town Center",
+            "St. Martin's Cathedral",
+            "Michael's Gate",
+            "Lunch: Riverside restaurant by the Danube",
+            "Evening: Return to Budapest"
+          ]
+        },
+        "day3": {
+          "title": "Day 3 – Budapest Culture & Departure",
+          "activities": [
+            "Morning: Budapest Culture and Thermal Experience",
+            "Heroes' Square",
+            "Széchenyi Thermal Baths (entry included)",
+            "Andrassy Avenue & Budapest Opera House",
+            "Afternoon: Free time for shopping or café break",
+            "Evening: Dinner at an elegant local restaurant"
+          ]
         }
       }
     },

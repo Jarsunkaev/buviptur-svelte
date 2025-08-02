@@ -69,32 +69,13 @@
     const scrollY = window.pageYOffset || document.documentElement.scrollTop;
     const newIsScrolled = scrollY > 10; // Lower threshold for more responsive behavior
     
-    console.log('Header scroll event:', { 
-      scrollY, 
-      newIsScrolled, 
-      currentIsScrolled: isScrolled,
-      windowPageYOffset: window.pageYOffset,
-      documentElementScrollTop: document.documentElement.scrollTop,
-      documentBodyScrollTop: document.body.scrollTop,
-      windowScrollY: window.scrollY
-    });
-    
     if (newIsScrolled !== isScrolled) {
       isScrolled = newIsScrolled;
-      console.log('Header state changed to:', isScrolled);
     }
   }
 
   onMount(() => {
     if (!browser) return;
-    
-    // Test if page is scrollable
-    console.log('Document height:', document.documentElement.scrollHeight);
-    console.log('Window height:', window.innerHeight);
-    console.log('Is scrollable?', document.documentElement.scrollHeight > window.innerHeight);
-    console.log('Initial scroll position:', window.pageYOffset);
-    
-
     
     // Initial scroll state
     handleScroll();
@@ -229,6 +210,14 @@
       aria-modal="true"
       id="mobile-menu-overlay"
     >
+      <!-- Close button for mobile menu -->
+      <button
+        class="absolute top-4 right-4 text-white text-3xl p-2 rounded-full bg-black/30 hover:bg-black/60 transition-all duration-300 focus:outline-none z-50 lg:hidden"
+        aria-label="Close menu"
+        on:click={closeMenu}
+      >
+        <i class="fas fa-times"></i>
+      </button>
       <div class="w-full h-full flex flex-col items-center justify-center overflow-hidden">
         <nav class="flex flex-col items-center space-y-8 w-full max-w-md mx-auto px-4">
           {#each navItems as item, index}
@@ -270,42 +259,47 @@
 <style>
   /* Header base styles with proper padding */
   :global(header) {
+    background-color: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
     padding: 1.5rem 0;
-    padding-top: 3rem; /* Add space above the header */
+    padding-top: 3rem;
     height: 100px;
     display: flex;
     align-items: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, background-color, backdrop-filter, border-bottom, height, padding;
-    backface-visibility: hidden;
-    perspective: 1000px;
-    transform: translate3d(0, 0, 0);
-    contain: layout style;
+    box-shadow: none;
+    transition:
+      background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      border-bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-color, height, padding, box-shadow, border-bottom;
+    transform: translateZ(0);
   }
 
   /* Transparent state (not scrolled) */
   :global(header.header-transparent) {
-    background-color: transparent !important;
-    backdrop-filter: none !important;
-    border-bottom: none !important;
+    background-color: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
   }
 
   /* Scrolled state - more compact header with smooth transitions */
   :global(header.header-scrolled) {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(12px) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-    padding: 1rem 0 !important;
-    padding-top: 1rem !important; /* Reduce top padding when scrolled */
-    height: 70px !important;
-    margin-top: 0 !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1rem 0;
+    padding-top: 1rem;
+    height: 70px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   /* Logo sizing with optimized transitions */
   .logo-img {
     height: 100px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: height;
   }
 

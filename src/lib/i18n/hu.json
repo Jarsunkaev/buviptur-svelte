@@ -300,7 +300,11 @@
     },
     "package": {
       "featured": "Kiemelt Túracsomag",
-      "itinerary": "Az Ön 3 Napos Kalandja",
+      "itinerary": "Az Ön Kalandja",
+      "route": "Túra Útvonal",
+      "startingPoint": "Kezdőpont",
+      "endingPoint": "Végpont",
+      "whatsIncluded": "Mit Foglal Magába",
       "cta": {
         "subtitle": "Készen áll erre a csodálatos utazásra?",
         "button": "Foglalja Le Ezt a Csomagot"
@@ -344,6 +348,135 @@
             "heroes": "Hősök tere vezetett túrával",
             "margaret": "Relaxáló séta a Margitszigeten"
           }
+        }
+      },
+      "centralEurope5": {
+        "title": "5 Napos Közép-Európai Túra",
+        "subtitle": "Budapest → Pozsony → Bécs",
+        "description": "Fedezzen fel 3 országot mindössze 5 felejthetetlen nap alatt! A budapesti termálfürdőktől a pozsonyi bájos utcákon át a bécsi császári eleganciáig — ez az Ön esélye, hogy olyan módon fedezze fel Közép-Európát, mint még soha.",
+        "destinations": "Budapest • Pozsony • Bécs",
+        "summary": "Tapasztalja meg Közép-Európa legjobbjait ezzel az átfogó 5 napos kalanddal Magyarországon, Szlovákiában és Ausztriában.",
+        "duration": "5 Nap / 4 Éjszaka",
+        "route": "Budapest → Pozsony → Bécs",
+        "startingPoint": "Budapest",
+        "endingPoint": "Bécs",
+        "included": [
+          "4 éjszakai szállás reggelivel",
+          "Minden privát transzfer (repülőtér és városok között)",
+          "Szakértő idegenvezetői szolgáltatások (angol / török)",
+          "Városi túrák Budapesten, Pozsonyban és Bécsben"
+        ],
+        "day1": {
+          "title": "1. Nap – Érkezés és Budapest Városi Túra",
+          "activities": [
+            "Érkezés: Budapest Repülőtér / Vasútállomás",
+            "Transzfer: Privát járművel a szállodába",
+            "Városi Túra Kiemelések:",
+            "Budai Vár",
+            "Halászbástya",
+            "Mátyás Templom",
+            "Lánchíd",
+            "Magyar Országház (külső nézet)",
+            "Este: Opcionális Dunai hajóút"
+          ]
+        },
+        "day2": {
+          "title": "2. Nap – Budapest Kultúra és Termálélmény",
+          "activities": [
+            "Reggeli után:",
+            "Hősök tere",
+            "Széchenyi Gyógyfürdő (belépővel)",
+            "Andrássy út és Budapest Operaház",
+            "Délután: Szabadidő vásárlásra vagy kávézásra",
+            "Este: Vacsora elegáns helyi étteremben"
+          ]
+        },
+        "day3": {
+          "title": "3. Nap – Szlovákia: Pozsony Egynapos Kirándulás",
+          "activities": [
+            "Kora reggeli indulás: 2.5 órás utazás privát járművel",
+            "Pozsony Túra Kiemelések:",
+            "Pozsonyi Vár",
+            "Óváros Központ",
+            "Szent Márton Katedrális",
+            "Mihály Kapu",
+            "Ebéd: Folyóparti étterem a Duna mellett",
+            "Este: Transzfer Bécsbe (kb. 1 óra)"
+          ]
+        },
+        "day4": {
+          "title": "4. Nap – Bécs Klasszikusok",
+          "activities": [
+            "Panorámás Bécs Túra:",
+            "Schönbrunn Kastély és Kertjei",
+            "Panorámás út a Ringstraße mentén",
+            "Szent István Katedrális",
+            "Bécsi Állami Opera",
+            "Múzeum Opció: Belvedere Palota vagy Kunsthistorisches Múzeum",
+            "Este: Hagyományos bécsi kávé és Sachertorte élmény"
+          ]
+        },
+        "day5": {
+          "title": "5. Nap – Szabadidő és Indulás",
+          "activities": [
+            "Reggel: Szabadidő vásárlásra, ajándékokra vagy városi sétára",
+            "Transzfer: Privát járművel a repülőtérre"
+          ]
+        }
+      },
+      "centralEurope3": {
+        "title": "3 Napos Közép-Európai Túra",
+        "subtitle": "Budapest → Pozsony → Budapest",
+        "description": "Fedezzen fel 2 országot 3 felejthetetlen nap alatt! A budapesti termálfürdőktől a pozsonyi bájos utcákon át — ez az Ön esélye, hogy olyan módon fedezze fel Közép-Európát, mint még soha.",
+        "destinations": "Budapest • Pozsony",
+        "summary": "Tapasztalja meg Közép-Európa legjobbjait ezzel a 3 napos kalanddal Magyarországon és Szlovákiában.",
+        "duration": "3 Nap / 2 Éjszaka",
+        "route": "Budapest → Pozsony → Budapest",
+        "startingPoint": "Budapest",
+        "endingPoint": "Budapest",
+        "included": [
+          "2 éjszakai szállás reggelivel",
+          "Minden privát transzfer (repülőtér és városok között)",
+          "Szakértő idegenvezetői szolgáltatások (angol / török)",
+          "Városi túrák Budapesten és Pozsonyban"
+        ],
+        "day1": {
+          "title": "1. Nap – Érkezés és Budapest Városi Túra",
+          "activities": [
+            "Érkezés: Budapest Repülőtér / Vasútállomás",
+            "Transzfer: Privát járművel a szállodába",
+            "Városi Túra Kiemelések:",
+            "Budai Vár",
+            "Halászbástya",
+            "Mátyás Templom",
+            "Lánchíd",
+            "Magyar Országház (külső nézet)",
+            "Este: Opcionális Dunai hajóút"
+          ]
+        },
+        "day2": {
+          "title": "2. Nap – Szlovákia: Pozsony Egynapos Kirándulás",
+          "activities": [
+            "Kora reggeli indulás: 2.5 órás utazás privát járművel",
+            "Pozsony Túra Kiemelések:",
+            "Pozsonyi Vár",
+            "Óváros Központ",
+            "Szent Márton Katedrális",
+            "Mihály Kapu",
+            "Ebéd: Folyóparti étterem a Duna mellett",
+            "Este: Visszatérés Budapestre"
+          ]
+        },
+        "day3": {
+          "title": "3. Nap – Budapest Kultúra és Indulás",
+          "activities": [
+            "Reggel: Budapest Kultúra és Termálélmény",
+            "Hősök tere",
+            "Széchenyi Gyógyfürdő (belépővel)",
+            "Andrássy út és Budapest Operaház",
+            "Délután: Szabadidő vásárlásra vagy kávézásra",
+            "Este: Vacsora elegáns helyi étteremben"
+          ]
         }
       }
     },
