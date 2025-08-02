@@ -7,29 +7,6 @@ import compression from 'vite-plugin-compression';
 export default defineConfig({
 	plugins: [
 		sveltekit(),
-		VitePWA({
-			registerType: 'autoUpdate',
-			workbox: {
-				globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}']
-			},
-			includeAssets: ['favicon.png', '*.webp'],
-			manifest: {
-				name: 'BuVipTur - Premium Central Europe Tours',
-				short_name: 'BuVipTur',
-				description: 'Discover authentic Central Europe with expert guides',
-				theme_color: '#113946',
-				background_color: '#ffffff',
-				display: 'standalone',
-				start_url: '/',
-				icons: [
-					{
-						src: '/favicon.png',
-						sizes: '192x192',
-						type: 'image/png'
-					}
-				]
-			}
-		}),
 		ViteImageOptimizer({
 			png: {
 				quality: 80
