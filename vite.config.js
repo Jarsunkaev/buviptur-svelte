@@ -67,7 +67,7 @@ export default defineConfig({
 			output: {
 				manualChunks: {
 					vendor: ['svelte-i18n'],
-					utils: ['flatpickr', 'vanilla-cookieconsent']
+					utils: ['vanilla-cookieconsent']
 				}
 			}
 		},
