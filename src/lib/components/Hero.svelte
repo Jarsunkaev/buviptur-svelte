@@ -50,11 +50,16 @@
   // Optimized touch handling with passive listeners
   let touchStartX = 0;
   let touchEndX = 0;
+  let touchStartY = 0;
+  let touchEndY = 0;
+  let touchStartTime = 0;
   const SWIPE_THRESHOLD = 50;
   const SWIPE_TIME_THRESHOLD = 300;
 
   function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
     // Pause autoplay on touch
     if (carouselInterval) {
       clearInterval(carouselInterval);
@@ -65,9 +70,13 @@
   function handleTouchMove(e) {
     if (!touchStartX) return;
     touchEndX = e.touches[0].clientX;
-    
-    // Prevent scrolling if swiping horizontally
-    if (Math.abs(touchEndX - touchStartX) > 10) {
+    touchEndY = e.touches[0].clientY;
+
+    const deltaX = Math.abs(touchEndX - touchStartX);
+    const deltaY = Math.abs(touchEndY - touchStartY);
+
+    // Prevent scrolling only if swiping horizontally
+    if (deltaX > deltaY && deltaX > 10) {
       e.preventDefault();
     }
   }
@@ -87,9 +96,17 @@
       }
     }
     
+    // Restart autoplay after user interaction
+    if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (carouselInterval) clearInterval(carouselInterval);
+      carouselInterval = setInterval(nextSlide, 5000);
+    }
+
     // Reset touch tracking
     touchStartX = 0;
     touchEndX = 0;
+    touchStartY = 0;
+    touchEndY = 0;
   }
 
   // Initialize component with better performance
@@ -104,7 +121,7 @@
     }
     
     // Setup touch events with passive listeners
-    const carousel = document.querySelector('.carousel-container');
+    const carousel = document.querySelector('.hero-section');
     if (carousel) {
       carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
       carousel.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -133,9 +150,6 @@
 
 <section 
   class="hero-section relative min-h-screen flex items-center overflow-hidden"
-  ontouchstart={handleTouchStart}
-  ontouchmove={handleTouchMove}
-  ontouchend={handleTouchEnd}
 >
   <!-- Optimized Carousel with better performance -->
   <div class="absolute inset-0 z-0 carousel-container overflow-hidden">
