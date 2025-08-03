@@ -13,28 +13,28 @@
             title: $t('services.accommodation.title') || 'Accommodation',
             description: $t('services.accommodation.description') || 'We arrange and customize accommodation to perfectly suit your needs and preferences. From charming boutique hotels to unique historic stays, our team ensures every option offers quality, comfort, and authentic local character.',
             icon: 'fa-hotel',
-            image: 'accomodation.webp',
+            image: 'accomodation-optimized.webp',
             cta: $t('services.accommodation.cta') || 'View Accommodations'
         },
         {
             title: $t('services.visa.title') || 'Visa Assistance',
             description: $t('services.visa.description') || 'Navigate complex visa requirements with ease. Our specialized visa team provides comprehensive support to ensure a smooth application process, with expert guidance on documentation and application procedures tailored to your nationality and destination.',
             icon: 'fa-passport',
-            image: 'visa.webp',
+            image: 'visa-optimized.webp',
             cta: $t('services.visa.cta') || 'Learn About Visa Services'
         },
         {
             title: $t('services.transportation.title') || 'Transportation',
             description: $t('services.transportation.description') || 'Travel in comfort and style with our fleet of modern vehicles and expert drivers. From airport transfers to multi-city journeys, we ensure punctual, comfortable transportation that allows you to enjoy the scenery while we handle the logistics.',
             icon: 'fa-bus',
-            image: 'bus.webp',
+            image: 'bus-optimized.webp',
             cta: $t('services.transportation.cta') || 'Learn About Transportation'
         },
         {
             title: $t('services.tourPackages.title') || 'Tour Packages',
             description: $t('services.tourPackages.description') || 'Discover the heart of Central Europe with our carefully curated tour packages. Experience the rich culture, stunning architecture, and breathtaking landscapes of Hungary, Austria, Czech Republic, and Slovakia. Our expert guides will take you on an unforgettable journey through these magnificent destinations.',
             icon: 'fa-suitcase-rolling',
-            image: 'villi.webp',
+            image: 'villi-optimized.webp',
             cta: $t('services.tourPackages.cta') || 'Explore Tour Packages',
             destinations: $t('services.tourPackages.destinations')
         }

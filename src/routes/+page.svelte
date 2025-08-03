@@ -493,7 +493,7 @@ onDestroy(() => {
       <!-- Map Background -->
       <div class="absolute inset-0 z-0">
         <!-- OPTIMIZED: Use a smaller, optimized background image -->
-        <div class="absolute inset-0 bg-[url('/map.webp')] bg-cover bg-center opacity-30"></div>
+        <div class="absolute inset-0 bg-[url('/map-optimized.webp')] bg-cover bg-center opacity-30"></div>
         <div class="absolute inset-0 bg-white/60"></div>
         <div class="absolute inset-0 bg-[#113946]/10"></div>
       </div>
