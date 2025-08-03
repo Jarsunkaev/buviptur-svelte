@@ -219,7 +219,7 @@
         <i class="fas fa-times"></i>
       </button>
       <div class="w-full h-full flex flex-col items-center justify-center overflow-hidden">
-        <nav class="flex flex-col items-center space-y-8 w-full max-w-md mx-auto px-4">
+        <nav class="flex flex-col items-center space-y-4 w-full max-w-md mx-auto px-4">
           {#each navItems as item, index}
             <div class="relative w-full text-center">
               <button
@@ -234,7 +234,7 @@
             </div>
           {/each}
 
-          <div class="flex justify-center space-x-6 pt-4">
+          <div class="flex justify-center space-x-6 pt-2">
             {#each languages as lang, index}
               <button
                 in:fly={{ y: 20, delay: (navItems.length + index) * 75, duration: 200 }}
@@ -435,7 +435,7 @@
     display: inline-block;
     width: 100%;
     text-align: center;
-    padding: 1.25rem 0;
+    padding: 1rem 0;
     font-size: 1.5rem;
     font-weight: 600;
     -webkit-tap-highlight-color: transparent;
