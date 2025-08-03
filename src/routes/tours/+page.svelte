@@ -186,10 +186,10 @@
                 },
                 // SWAPPED: Day 3 comes before Day 2
                 {
-                    day: 3,
-                    title: $t('tours.detailed.centralEurope3.day3.title') || 'Day 3 – Budapest Culture & Departure',
+                    day: 2,
+                    title: $t('tours.detailed.centralEurope3.day2.title') || 'Day 2 – Budapest Culture & Departure',
                     image: 'heroes-optimized.webp',
-                    activities: $t('tours.detailed.centralEurope3.day3.activities') || [
+                    activities: $t('tours.detailed.centralEurope3.day2.activities') || [
                         'Morning: Budapest Culture and Thermal Experience',
                         'Heroes\' Square',
                         'Széchenyi Thermal Baths (entry included)',
@@ -199,10 +199,10 @@
                     ]
                 },
                 {
-                    day: 2,
-                    title: $t('tours.detailed.centralEurope3.day2.title') || 'Day 2 – Slovakia: Bratislava Day Trip',
+                    day: 3,
+                    title: $t('tours.detailed.centralEurope3.day3.title') || 'Day 3 – Slovakia: Bratislava Day Trip',
                     image: 'pozsony-optimized.webp',
-                    activities: $t('tours.detailed.centralEurope3.day2.activities') || [
+                    activities: $t('tours.detailed.centralEurope3.day3.activities') || [
                         'Early Morning Departure: 2.5-hour journey by private vehicle',
                         'Bratislava Tour Highlights:',
                         'Bratislava Castle',
