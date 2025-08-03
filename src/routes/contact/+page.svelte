@@ -179,7 +179,7 @@
 <main class="bg-white" id="top">
     <!-- Hero Section -->
     <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center"
-        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/villi.webp')">
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/villi-optimized.webp')">
         <div class="text-center max-w-4xl px-4">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#dcb660]">{$_('contact.title')}</h1>
             <p class="text-xl md:text-2xl mb-8">{$_('contact.subtitle')}</p>

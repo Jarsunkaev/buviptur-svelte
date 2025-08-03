@@ -302,6 +302,14 @@
     transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: height;
   }
+  @media (max-width: 640px) {
+    .logo-img {
+      height: 60px;
+    }
+    :global(header.header-scrolled .logo-img) {
+      height: 40px;
+    }
+  }
 
   :global(header.header-scrolled .logo-img) {
     height: 50px;
@@ -427,7 +435,9 @@
     display: inline-block;
     width: 100%;
     text-align: center;
-    padding: 0.75rem 0;
+    padding: 1.25rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
     -webkit-tap-highlight-color: transparent;
     color: white !important;
   }

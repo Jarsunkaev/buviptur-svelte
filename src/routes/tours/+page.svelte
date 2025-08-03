@@ -19,7 +19,7 @@
             subtitle: $t('tours.detailed.budapest.subtitle') || 'Budapest - Esztergom - Visegrád - Szentendre',
             description: $t('tours.detailed.budapest.description') || 'Embark on a captivating journey through Hungary\'s most treasured historical sites. From the majestic Buda Castle to the charming Danube Bend towns, experience the rich heritage that shaped Central Europe.',
             duration: $t('tours.detailed.budapest.duration') || '2 Nights, 3 Days',
-            mainImage: 'parli.webp',
+            mainImage: 'parli-optimized.webp',
             languages: languages,
             summary: $t('tours.detailed.budapest.summary') || 'Experience the best of Hungary\'s rich cultural heritage and stunning Danube bend landscapes in this comprehensive 3-day adventure.',
             destinations: $t('tours.detailed.budapest.destinations') || 'Budapest • Esztergom • Visegrád • Szentendre',
@@ -27,7 +27,7 @@
                 {
                     day: 1,
                     title: $t('tours.detailed.budapest.day1.title') || 'Day 1',
-                    image: 'maty.webp',
+                    image: 'maty-optimized.webp',
                     activities: [
                         $t('tours.detailed.budapest.day1.activities.arrival') || 'Arrival in Budapest',
                         $t('tours.detailed.budapest.day1.activities.castle') || 'Buda Castle and Fisherman\'s Bastion',
@@ -39,7 +39,7 @@
                 {
                     day: 2,
                     title: $t('tours.detailed.budapest.day2.title') || 'Day 2',
-                    image: 'eszti.webp',
+                    image: 'eszti-optimized.webp',
                     activities: [
                         $t('tours.detailed.budapest.day2.activities.dayTrip') || 'Hungarian Heritage Day Trip',
                         $t('tours.detailed.budapest.day2.activities.esztergom') || 'Visit Esztergom Basilica',
@@ -51,7 +51,7 @@
                 {
                     day: 3,
                     title: $t('tours.detailed.budapest.day3.title') || 'Day 3',
-                    image: 'margit.webp',
+                    image: 'margit-optimized.webp',
                     activities: [
                         $t('tours.detailed.budapest.day3.activities.heroes') || 'Heroes\' Square guided tour',
                         $t('tours.detailed.budapest.day3.activities.margaret') || 'Relaxing walk through Margaret Island'
@@ -65,7 +65,7 @@
             subtitle: $t('tours.detailed.centralEurope5.subtitle') || 'Budapest  Bratislava  Vienna',
             description: $t('tours.detailed.centralEurope5.description') || 'Discover 3 countries in just 5 unforgettable days! From the thermal baths of Budapest, through the charming streets of Bratislava, to the imperial elegance of Vienna.',
             duration: $t('tours.detailed.centralEurope5.duration') || '5 Days / 4 Nights',
-            mainImage: '/5-day.webp',
+            mainImage: '/5-day-optimized.webp',
             languages: languages.filter(lang => ['en', 'tr'].includes(lang.code)),
             summary: $t('tours.detailed.centralEurope5.summary') || 'Experience the best of Central Europe with this comprehensive 5-day adventure across Hungary, Slovakia, and Austria.',
             destinations: $t('tours.detailed.centralEurope5.destinations') || 'Budapest • Bratislava • Vienna',
@@ -82,7 +82,7 @@
                 {
                     day: 1,
                     title: $t('tours.detailed.centralEurope5.day1.title') || 'Day 1 – Arrival & Budapest City Tour',
-                    image: 'maty.webp',
+                    image: 'maty-optimized.webp',
                     activities: $t('tours.detailed.centralEurope5.day1.activities') || [
                         'Arrival: Budapest Airport / Train Station',
                         'Transfer: Private vehicle transfer to your hotel',
@@ -98,7 +98,7 @@
                 {
                     day: 2,
                     title: $t('tours.detailed.centralEurope5.day2.title') || 'Day 2 – Budapest Culture & Thermal Experience',
-                    image: 'heroes.webp',
+                    image: 'heroes-optimized.webp',
                     activities: $t('tours.detailed.centralEurope5.day2.activities') || [
                         'After breakfast:',
                         'Heroes\' Square',
@@ -111,7 +111,7 @@
                 {
                     day: 3,
                     title: $t('tours.detailed.centralEurope5.day3.title') || 'Day 3 – Slovakia: Bratislava Day Trip',
-                    image: 'pozsony.webp',
+                    image: 'pozsony-optimized.webp',
                     activities: $t('tours.detailed.centralEurope5.day3.activities') || [
                         'Early Morning Departure: 2.5-hour journey by private vehicle',
                         'Bratislava Tour Highlights:',
@@ -126,7 +126,7 @@
                 {
                     day: 4,
                     title: $t('tours.detailed.centralEurope5.day4.title') || 'Day 4 – Vienna Classics',
-                    image: 'ausztria.webp',
+                    image: 'ausztria-optimized.webp',
                     activities: $t('tours.detailed.centralEurope5.day4.activities') || [
                         'Panoramic Vienna Tour:',
                         'Schönbrunn Palace & Gardens',
@@ -140,7 +140,7 @@
                 {
                     day: 5,
                     title: $t('tours.detailed.centralEurope5.day5.title') || 'Day 5 – Free Time & Departure',
-                    image: 'margaret.webp',
+                    image: 'margaret-optimized.webp',
                     activities: $t('tours.detailed.centralEurope5.day5.activities') || [
                         'Morning: Free time for shopping, souvenirs, or a city walk',
                         'Transfer: Private vehicle transfer to the airport'
@@ -154,7 +154,7 @@
             subtitle: $t('tours.detailed.centralEurope3.subtitle') || 'Budapest  Bratislava  Budapest',
             description: $t('tours.detailed.centralEurope3.description') || 'Discover 2 countries in just 3 unforgettable days! From the thermal baths of Budapest, through the charming streets of Bratislava.',
             duration: $t('tours.detailed.centralEurope3.duration') || '3 Days / 2 Nights',
-            mainImage: '/3-day.webp',
+            mainImage: '/3-day-optimized.webp',
             languages: languages.filter(lang => ['en', 'tr'].includes(lang.code)),
             summary: $t('tours.detailed.centralEurope3.summary') || 'Experience the best of Central Europe with this 3-day adventure across Hungary and Slovakia.',
             destinations: $t('tours.detailed.centralEurope3.destinations') || 'Budapest • Bratislava',
@@ -171,7 +171,7 @@
                 {
                     day: 1,
                     title: $t('tours.detailed.centralEurope3.day1.title') || 'Day 1 – Arrival & Budapest City Tour',
-                    image: 'maty.webp',
+                    image: 'maty-optimized.webp',
                     activities: $t('tours.detailed.centralEurope3.day1.activities') || [
                         'Arrival: Budapest Airport / Train Station',
                         'Transfer: Private vehicle transfer to your hotel',
@@ -188,7 +188,7 @@
                 {
                     day: 3,
                     title: $t('tours.detailed.centralEurope3.day3.title') || 'Day 3 – Budapest Culture & Departure',
-                    image: 'heroes.webp',
+                    image: 'heroes-optimized.webp',
                     activities: $t('tours.detailed.centralEurope3.day3.activities') || [
                         'Morning: Budapest Culture and Thermal Experience',
                         'Heroes\' Square',
@@ -201,7 +201,7 @@
                 {
                     day: 2,
                     title: $t('tours.detailed.centralEurope3.day2.title') || 'Day 2 – Slovakia: Bratislava Day Trip',
-                    image: 'pozsony.webp',
+                    image: 'pozsony-optimized.webp',
                     activities: $t('tours.detailed.centralEurope3.day2.activities') || [
                         'Early Morning Departure: 2.5-hour journey by private vehicle',
                         'Bratislava Tour Highlights:',
@@ -464,13 +464,18 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(220, 182, 96, 0.1);
-            margin: 1.5rem; /* Default margin */
+
             border-radius: 16px;
             overflow: hidden;
         }
 
         /* Mobile optimizations */
         @media (max-width: 768px) {
+            .modal-body {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
             .modal-content {
                 max-width: 98vw;
                 max-height: 80vh;
@@ -495,11 +500,11 @@
         }
 
         /* Modal body scrollable area */
-        .modal-body {
+            .modal-body {
             flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 0 1.5rem 1.5rem;
+                padding: 0 1.5rem 1.5rem;
             scrollbar-width: thin;
             scrollbar-color: rgba(220, 182, 96, 0.5) rgba(220, 182, 96, 0.1);
         }
@@ -561,7 +566,7 @@
 <main class="bg-white">
     <!-- Hero Section -->
     <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center"
-        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80')">
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/unsplash-hero-optimized.webp')">
         <div class="text-center max-w-4xl px-4">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 {$t('tours.hero.title') || 'Discover Our Exclusive Tours'}
@@ -696,7 +701,7 @@
                     </div>
                     <!-- What's Included Section for Central Europe Tours -->
                     {#if selectedTour.included}
-                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200 mb-6 mx-6 mt-16">
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200 mb-6 mx-1 mt-16">
                             <h3 class="text-lg font-bold text-[#113946] mb-4">
                                 {$t('tours.package.whatsIncluded') || 'What\'s Included'}
                             </h3>
@@ -714,13 +719,13 @@
                     {/if}
 
                     <!-- Daily Itinerary -->
-                    <div class="mb-6 px-6">
+                    <div class="mb-6">
                         <h3 class="text-xl font-bold text-[#113946] text-center mb-6 {selectedTour.id === 'budapest' ? 'mt-8' : ''}">
                             {$t('tours.package.itinerary') || 'Your Adventure'}
                         </h3>
 
                         {#each selectedTour.itinerary as day, index}
-                            <div class="day-section-modal rounded-2xl p-6 shadow-sm mb-6">
+                            <div class="day-section-modal w-full rounded-2xl p-6 shadow-sm mb-6">
                                 <div class="w-full">
                                     <!-- Content Side -->
                                     <div>

@@ -149,177 +149,28 @@
   onMount(async () => {
     // Keep hero mounted in memory
     heroMounted = true;
-    
-    // Initialize data once to prevent re-renders
-    mainServices = [
-      {
-        id: "guidedTours",
-        title: $t('home.services.services.0.title') || "Guided Tours",
-        description: $t('home.services.services.0.description') || "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
-        icon: "fa-map-marked-alt",
-        imageSrc: "/guided.webp",
-        features: (() => {
-          const features = $t('home.services.services.0.features');
-          return Array.isArray(features) ? features : [
-            "Small groups of max 12 travelers",
-            "Expert university-educated guides",
-            "Hidden gems and local experiences",
-            "Flexible and customizable itineraries"
-          ];
-        })()
-      },
-      {
-        id: "multiCountry",
-        title: $t('home.services.services.1.title') || "Multi-Country Tours",
-        description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
-        icon: "fa-globe-europe",
-        imageSrc: "/country.webp",
-        features: (() => {
-          const features = $t('home.services.services.1.features');
-          return Array.isArray(features) ? features : [
-            "Hassle-free border crossings",
-            "Cohesive multi-country itineraries",
-            "Local guides in each location",
-            "Comprehensive cultural immersion"
-          ];
-        })()
-      },
-      {
-        id: "riverCruises",
-        title: $t('home.services.services.2.title') || "River Cruises",
-        description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
-        icon: "fa-ship",
-        imageSrc: "/river.webp",
-        features: (() => {
-          const features = $t('home.services.services.2.features');
-          return Array.isArray(features) ? features : [
-            "Intimate small-group cruises",
-            "Sunset and evening illumination tours",
-            "Historical commentary",
-            "Gourmet dining experiences"
-          ];
-        })()
-      }
-    ];
-    
-    supportServices = [
-      {
-        title: $t('home.supportServices.accommodation.title') || "Customized Accommodation",
-        description: $t('home.supportServices.accommodation.description') || "From boutique hotels to historic properties, we arrange accommodations that match your style, comfort needs, and budget.",
-        icon: "fa-hotel",
-        color: "#1a5f7a"
-      },
-      {
-        title: $t('home.supportServices.visa.title') || "Expert Visa Assistance",
-        description: $t('home.supportServices.visa.description') || "Navigate complex visa requirements with ease through our expert team's guidance on documentation and procedures.",
-        icon: "fa-passport",
-        color: "#228291"
-      },
-      {
-        title: $t('home.supportServices.transportation.title') || "Premium Transportation",
-        description: $t('home.supportServices.transportation.description') || "Travel in comfort with our modern vehicles and expert drivers, enjoying the scenery between destinations.",
-        icon: "fa-bus",
-        color: "#2aa1b7"
-      },
-      {
-        title: $t('home.supportServices.support.title') || "24/7 Support",
-        description: $t('home.supportServices.support.description') || "Our dedicated team ensures your journey runs smoothly from start to finish.",
-        icon: "fa-headset",
-        color: "#113946"
-      }
-    ];
-    
-    destinations = [
-      {
-        country: $t('home.destinations.countries.hungary') || "Hungary",
-        image: "/magyar.webp",
-        cities: [
-          {
-            name: $t('home.destinations.cities.budapest') || "Budapest",
-            highlight: $t('home.destinations.highlights.budapest') || "Cultural Heart",
-            icon: "fa-heart"
-          },
-          {
-            name: $t('home.destinations.cities.szentendre') || "Szentendre",
-            highlight: $t('home.destinations.highlights.szentendre') || "Artistic Town",
-            icon: "fa-palette"
-          },
-          {
-            name: $t('home.destinations.cities.visegrad') || "Visegrád",
-            highlight: $t('home.destinations.highlights.visegrad') || "Royal Castle",
-            icon: "fa-crown"
-          },
-          {
-            name: $t('home.destinations.cities.esztergom') || "Esztergom",
-            highlight: $t('home.destinations.highlights.esztergom') || "Basilica City",
-            icon: "fa-church"
-          }
-        ]
-      },
-      {
-        country: $t('home.destinations.countries.austria') || "Austria",
-        image: "/ausztria.webp",
-        cities: [
-          {
-            name: $t('home.destinations.cities.vienna') || "Vienna",
-            highlight: $t('home.destinations.highlights.vienna') || "City of Music",
-            icon: "fa-music"
-          },
-          {
-            name: $t('home.destinations.cities.salzburg') || "Salzburg",
-            highlight: $t('home.destinations.highlights.salzburg') || "Mozart's Birth",
-            icon: "fa-star"
-          }
-        ]
-      },
-      {
-        country: $t('home.destinations.countries.czechRepublic') || "Czech Republic",
-        image: "/cseh.webp",
-        cities: [
-          {
-            name: $t('home.destinations.cities.prague') || "Prague",
-            highlight: $t('home.destinations.highlights.prague') || "The Golden City",
-            icon: "fa-gem"
-          },
-          {
-            name: $t('home.destinations.cities.karlovyVary') || "Karlovy Vary",
-            highlight: $t('home.destinations.highlights.karlovyVary') || "Historic Spa",
-            icon: "fa-hot-tub"
-          }
-        ]
-      },
-      {
-        country: $t('home.destinations.countries.slovakia') || "Slovakia",
-        image: "/pozsony.webp",
-        cities: [
-          {
-            name: $t('home.destinations.cities.bratislava') || "Bratislava",
-            highlight: $t('home.destinations.highlights.bratislava') || "Little Big City",
-            icon: "fa-city"
-          }
-        ]
-      }
-    ];
-    
+
+    // Testimonials data (not translation-dependent)
     testimonialsData = [
       {
         title: 'Great Work',
-        content: "I think BuVipTur is the best tour company I've ever used. Amazing guides, easy to customize itineraries, and a quality experience from start to finish. The factory tour was incredible!",
-        author: 'Sophie Anderson',
-        position: 'Marketing Manager',
-        imageId: '1580489944761-15a19d654956',
+        text: 'The tour was amazing! Our guide was incredibly knowledgeable and friendly. We saw so much more than we ever could have on our own. Highly recommended!',
+        author: 'Sarah J., USA',
         rating: 5
       },
       {
         title: 'Unforgettable Experience',
-        content: 'We had the most amazing time on our castle tour. The guide was knowledgeable and passionate, showing us hidden spots tourists normally miss. Can\'t wait to book our next adventure!',
-        author: 'David Chen',
-        position: 'Software Engineer',
-        imageId: '1507003211169-0a1dd7228f2d',
+        text: 'From the seamless booking process to the final farewell, everything was perfect. The attention to detail and personalized service made our trip truly special.',
+        author: 'Michael B., UK',
+        rating: 5
+      },
+      {
+        title: 'Best of Central Europe',
+        text: 'We booked a multi-country tour and were blown away by the organization. Each city was a new adventure, and the logistics were handled flawlessly. Thank you!',
+        author: 'Anna L., Germany',
         rating: 5
       }
     ];
-    
     // Lazy load testimonials
     import('$lib/components/TestimonialsSection.svelte')
       .then(module => {
@@ -328,19 +179,15 @@
       .catch(error => {
         console.warn('Failed to load TestimonialsSection:', error);
       });
-    
     // Set up intersection observer
     setupIntersectionObserver();
-    
     // Set up event listeners for parallax effect
     if (typeof window !== 'undefined') {
       window.addEventListener('mousemove', handleMouseMove, { passive: true });
       window.addEventListener('mouseleave', resetParallax);
     }
-    
     // Auto-rotate slides every 5 seconds
     const interval = setInterval(nextSlide, 5000);
-    
     return () => {
       clearInterval(interval);
       if (parallaxTimeout) clearTimeout(parallaxTimeout);
@@ -351,11 +198,163 @@
       }
     };
   });
-  
-  onDestroy(() => {
-    // Cleanup hero when component is destroyed
-    heroMounted = false;
-  });
+
+// --- REACTIVE TRANSLATION ARRAYS ---
+
+$: mainServices = [
+  {
+    id: "guidedTours",
+    title: $t('home.services.services.0.title') || "Guided Tours",
+    description: $t('home.services.services.0.description') || "Experience the rich history and culture of Central Europe with our expert local guides who bring destinations to life with insider knowledge.",
+    icon: "fa-map-marked-alt",
+    imageSrc: "/guided-optimized.webp",
+    features: (() => {
+      const features = $t('home.services.services.0.features');
+      return Array.isArray(features) ? features : [
+        "Small groups of max 12 travelers",
+        "Expert university-educated guides",
+        "Hidden gems and local experiences",
+        "Flexible and customizable itineraries"
+      ];
+    })()
+  },
+  {
+    id: "multiCountry",
+    title: $t('home.services.services.1.title') || "Multi-Country Tours",
+    description: $t('home.services.services.1.description') || "Seamlessly explore multiple European countries in one journey, experiencing the diverse cultures, cuisines, and landscapes of Central Europe.",
+    icon: "fa-globe-europe",
+    imageSrc: "/country-optimized.webp",
+    features: (() => {
+      const features = $t('home.services.services.1.features');
+      return Array.isArray(features) ? features : [
+        "Hassle-free border crossings",
+        "Cohesive multi-country itineraries",
+        "Local guides in each location",
+        "Comprehensive cultural immersion"
+      ];
+    })()
+  },
+  {
+    id: "riverCruises",
+    title: $t('home.services.services.2.title') || "River Cruises",
+    description: $t('home.services.services.2.description') || "See iconic cities from their historic waterways with our exclusive boat tours and cruises, offering unique perspectives on riverside treasures.",
+    icon: "fa-ship",
+    imageSrc: "/river-optimized.webp",
+    features: (() => {
+      const features = $t('home.services.services.2.features');
+      return Array.isArray(features) ? features : [
+        "Intimate small-group cruises",
+        "Sunset and evening illumination tours",
+        "Historical commentary",
+        "Gourmet dining experiences"
+      ];
+    })()
+  }
+];
+
+$: supportServices = [
+  {
+    title: $t('home.supportServices.accommodation.title') || "Customized Accommodation",
+    description: $t('home.supportServices.accommodation.description') || "From boutique hotels to historic properties, we arrange accommodations that match your style, comfort needs, and budget.",
+    icon: "fa-hotel",
+    color: "#1a5f7a"
+  },
+  {
+    title: $t('home.supportServices.visa.title') || "Expert Visa Assistance",
+    description: $t('home.supportServices.visa.description') || "Navigate complex visa requirements with ease through our expert team's guidance on documentation and procedures.",
+    icon: "fa-passport",
+    color: "#228291"
+  },
+  {
+    title: $t('home.supportServices.transportation.title') || "Premium Transportation",
+    description: $t('home.supportServices.transportation.description') || "Travel in comfort with our modern vehicles and expert drivers, enjoying the scenery between destinations.",
+    icon: "fa-bus",
+    color: "#2aa1b7"
+  },
+  {
+    title: $t('home.supportServices.support.title') || "24/7 Support",
+    description: $t('home.supportServices.support.description') || "Our dedicated team ensures your journey runs smoothly from start to finish.",
+    icon: "fa-headset",
+    color: "#113946"
+  }
+];
+
+$: destinations = [
+  {
+    country: $t('home.destinations.countries.hungary') || "Hungary",
+    image: "/magyar-optimized.webp",
+    cities: [
+      {
+        name: $t('home.destinations.cities.budapest') || "Budapest",
+        highlight: $t('home.destinations.highlights.budapest') || "Cultural Heart",
+        icon: "fa-heart"
+      },
+      {
+        name: $t('home.destinations.cities.szentendre') || "Szentendre",
+        highlight: $t('home.destinations.highlights.szentendre') || "Artistic Town",
+        icon: "fa-palette"
+      },
+      {
+        name: $t('home.destinations.cities.visegrad') || "Visegrád",
+        highlight: $t('home.destinations.highlights.visegrad') || "Royal Castle",
+        icon: "fa-crown"
+      },
+      {
+        name: $t('home.destinations.cities.esztergom') || "Esztergom",
+        highlight: $t('home.destinations.highlights.esztergom') || "Basilica City",
+        icon: "fa-church"
+      }
+    ]
+  },
+  {
+    country: $t('home.destinations.countries.austria') || "Austria",
+    image: "/ausztria-optimized.webp",
+    cities: [
+      {
+        name: $t('home.destinations.cities.vienna') || "Vienna",
+        highlight: $t('home.destinations.highlights.vienna') || "City of Music",
+        icon: "fa-music"
+      },
+      {
+        name: $t('home.destinations.cities.salzburg') || "Salzburg",
+        highlight: $t('home.destinations.highlights.salzburg') || "Mozart's Birth",
+        icon: "fa-star"
+      }
+    ]
+  },
+  {
+    country: $t('home.destinations.countries.czechRepublic') || "Czech Republic",
+    image: "/cseh-optimized.webp",
+    cities: [
+      {
+        name: $t('home.destinations.cities.prague') || "Prague",
+        highlight: $t('home.destinations.highlights.prague') || "The Golden City",
+        icon: "fa-gem"
+      },
+      {
+        name: $t('home.destinations.cities.karlovyVary') || "Karlovy Vary",
+        highlight: $t('home.destinations.highlights.karlovyVary') || "Historic Spa",
+        icon: "fa-hot-tub"
+      }
+    ]
+  },
+  {
+    country: $t('home.destinations.countries.slovakia') || "Slovakia",
+    image: "/pozsony-optimized.webp",
+    cities: [
+      {
+        name: $t('home.destinations.cities.bratislava') || "Bratislava",
+        highlight: $t('home.destinations.highlights.bratislava') || "Little Big City",
+        icon: "fa-city"
+      }
+    ]
+  }
+];
+
+onDestroy(() => {
+  // Cleanup hero when component is destroyed
+  heroMounted = false;
+});
 </script>
 
 <svelte:head>

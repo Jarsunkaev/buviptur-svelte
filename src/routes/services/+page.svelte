@@ -84,7 +84,7 @@
 <main class="bg-white">
     <!-- Hero Section -->
     <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-white bg-cover bg-center"
-        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80')">
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/unsplash-hero-optimized.webp')">
         <div class="text-center max-w-4xl px-4">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#dcb660]">{$t('services.title') || 'Our Services'}</h1>
             <p class="text-xl md:text-2xl mb-8">{$t('services.subtitle') || 'Comprehensive travel solutions crafted with expertise and care'}</p>

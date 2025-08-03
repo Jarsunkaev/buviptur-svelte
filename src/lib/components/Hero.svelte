@@ -4,14 +4,14 @@
   
   // Optimized image paths - only load what we need
   const imageNames = [
-    'above.webp',
-    'margaret.webp',
-    'matyas.webp',
-    'parlament.webp',
-    'prague.webp',
-    'stefan.webp',
-    'var.webp',
-    'budapest.webp'
+    'above-optimized.webp',
+    'margaret-optimized.webp',
+    'matyas-optimized.webp',
+    'parlament-optimized.webp',
+    'prague-optimized.webp',
+    'stefan-optimized.webp',
+    'var-optimized.webp',
+    'budapest-optimized.webp'
   ];
   
   // State management with better performance
@@ -177,7 +177,9 @@
         </h1>
         
         <!-- Subtitle -->
-        <p class="text-base sm:text-lg text-white/95 mb-6 leading-relaxed max-w-sm mx-auto font-medium">
+        <p class="text-base sm:text-lg text-white/95 mb-6 leading-relaxed max-w-sm mx-auto font-extrabold drop-shadow-xl"
+          style="text-shadow: 0 2px 8px rgba(0,0,0,0.35);"
+        >
           {$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}
         </p>
         
@@ -222,7 +224,9 @@
         <h1 class="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
           {$t('hero.title') || 'Discover Authentic'} <span class="text-[#dcb660]">{$t('hero.titleHighlight') || 'Central Europe'}</span>
         </h1>
-        <p class="text-xl text-white/90 mb-8 leading-relaxed">
+        <p class="text-xl text-white/90 mb-8 leading-relaxed font-extrabold drop-shadow-xl"
+          style="text-shadow: 0 2px 8px rgba(0,0,0,0.35);"
+        >
           {$t('hero.formSubtitle') || 'From local escapes to far-flung adventures across Central Europe, crafted with expertise and attention to detail.'}
         </p>
         <div class="flex">
