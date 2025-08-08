@@ -401,7 +401,7 @@
                                 >
                                 <label for="terms" class="text-sm text-gray-700">
                                     {$_('contact.form.privacyPolicy1')}
-                                    <a href="/privacy-policy" class="text-[#dcb660] hover:underline font-medium">{$_('contact.form.privacyPolicyLink')}</a>
+                                    <a href="/privacy" class="text-[#dcb660] hover:underline font-medium">{$_('contact.form.privacyPolicyLink')}</a>
                                     {$_('contact.form.privacyPolicy2')}
                                 </label>
                             </div>
