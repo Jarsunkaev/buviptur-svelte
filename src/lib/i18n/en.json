@@ -801,7 +801,9 @@
       "tours": "Tours",
       "about": "About Us", 
       "services": "Services",
-      "contact": "Contact"
+      "contact": "Contact",
+      "impresszum": "Imprint",
+      "terms": "Terms & Conditions"
     },
     "contactInfo": {
       "title": "Contact Info"
@@ -840,5 +842,131 @@
     "yes": "Yes",
     "no": "No",
     "viewAllServices": "View All Services"
+  }
+  ,
+  "legal": {
+    "impresszum": {
+      "title": "Imprint",
+      "meta": "Company imprint and legal information",
+      "heading": "Imprint",
+      "subtitle": "Company details and legal information",
+      "shortName": "Short name",
+      "fullName": "Full name",
+      "founded": "Founded",
+      "taxNumber": "Tax number",
+      "mainActivity": "Main activity",
+      "registeredOffice": "Registered office",
+      "branches": "Number of branch offices",
+      "contactNote": "Contact: info@buviptur.com, +36 (70) 734-3444"
+    },
+    "terms": {
+      "title": "General Terms and Conditions",
+      "meta": "General Terms and Conditions",
+      "heading": "General Terms and Conditions",
+      "subtitle": "Contractual terms for our services",
+      "sections": {
+        "scope": {
+          "title": "Scope",
+          "body": "These Terms govern the use of services provided by BuVipTur Kft."
+        },
+        "booking": {
+          "title": "Booking and payment",
+          "body": "A booking becomes valid upon confirmation. Payment method and schedule are set out in the confirmation."
+        },
+        "cancellation": {
+          "title": "Cancellation and changes",
+          "body": "Cancellation and modification terms depend on the specific service. Unless otherwise agreed, standard terms apply."
+        },
+        "liability": {
+          "title": "Liability",
+          "body": "BuVipTur Kft. is liable for performance to the extent permitted by law. No liability in case of force majeure."
+        },
+        "privacy": {
+          "title": "Data processing",
+          "body": "Data processing is governed by the current Privacy Policy."
+        },
+        "final": {
+          "title": "Final provisions",
+          "body": "These terms are interpreted under Hungarian law. Disputes shall be settled amicably where possible."
+        }
+      }
+    }
+  }
+  ,
+  "privacyPage": {
+    "head": {
+      "title": "Privacy Policy - BuVipTur",
+      "description": "Our commitment to protecting your privacy and personal data."
+    },
+    "hero": {
+      "title": "Privacy Policy",
+      "subtitle": "Our commitment to protecting your privacy"
+    },
+    "sections": {
+      "info": {
+        "title": "Information We Collect",
+        "intro": "We collect information that you provide directly to us, including:",
+        "items": [
+          "Name and contact information",
+          "Booking and travel preferences",
+          "Payment information",
+          "Communication history"
+        ]
+      },
+      "use": {
+        "title": "How We Use Your Information",
+        "intro": "We use the information we collect to:",
+        "items": [
+          "Process your bookings and payments",
+          "Communicate with you about our services",
+          "Improve our website and services",
+          "Send you marketing communications (with your consent)"
+        ]
+      },
+      "cookies": {
+        "title": "Cookie Policy",
+        "intro": "We use cookies and similar technologies to:",
+        "items": [
+          "Remember your preferences",
+          "Analyze website traffic",
+          "Personalize content",
+          "Improve user experience"
+        ]
+      },
+      "rights": {
+        "title": "Your Rights",
+        "intro": "You have the right to:",
+        "items": [
+          "Access your personal data",
+          "Request data correction or deletion",
+          "Withdraw consent",
+          "Object to data processing"
+        ]
+      },
+      "contact": {
+        "title": "Contact Us",
+        "intro": "For privacy-related inquiries, contact us at:",
+        "email": "Email: info@buviptur.com"
+      }
+    },
+    "additional": {
+      "dataSecurity": {
+        "title": "Data Security",
+        "text": "We use industry-standard security measures to protect your personal information."
+      },
+      "yourControl": {
+        "title": "Your Control",
+        "text": "You have full control over your data and can request access, modification, or deletion at any time."
+      },
+      "cookieManagement": {
+        "title": "Cookie Management",
+        "text": "Easily manage your cookie preferences and control what data is collected about you."
+      }
+    },
+    "cta": {
+      "title": "Have Questions?",
+      "text": "If you have any questions about our Privacy Policy or how we handle your data, please don't hesitate to contact us.",
+      "button": "Contact Our Privacy Team"
+    }
   }
 }

@@ -794,7 +794,9 @@
       "tours": "Turlar",
       "about": "Hakkımızda", 
       "services": "Hizmetler",
-      "contact": "İletişim"
+      "contact": "İletişim",
+      "impresszum": "Künye",
+      "terms": "Şartlar ve Koşullar"
     },
     "contactInfo": {
       "title": "İletişim Bilgileri"
@@ -833,5 +835,131 @@
     "yes": "Evet",
     "no": "Hayır",
     "viewAllServices": "Tüm Hizmetlerimizi Görüntüle"
+  }
+  ,
+  "legal": {
+    "impresszum": {
+      "title": "Künye",
+      "meta": "Şirket künyesi ve yasal bilgiler",
+      "heading": "Künye",
+      "subtitle": "Şirket bilgileri ve yasal bilgiler",
+      "shortName": "Kısa ad",
+      "fullName": "Tam ad",
+      "founded": "Kuruluş yılı",
+      "taxNumber": "Vergi numarası",
+      "mainActivity": "Ana faaliyet",
+      "registeredOffice": "Merkez adresi",
+      "branches": "Şube sayısı",
+      "contactNote": "İletişim: info@buviptur.com, +36 (70) 734-3444"
+    },
+    "terms": {
+      "title": "Genel Hüküm ve Koşullar",
+      "meta": "Genel Hüküm ve Koşullar",
+      "heading": "Genel Hüküm ve Koşullar",
+      "subtitle": "Hizmetlerimiz için sözleşme şartları",
+      "sections": {
+        "scope": {
+          "title": "Kapsam",
+          "body": "Bu şartlar, BuVipTur Kft. tarafından sunulan hizmetlerin kullanımını düzenler."
+        },
+        "booking": {
+          "title": "Rezervasyon ve ödeme",
+          "body": "Rezervasyon, onay ile geçerli hale gelir. Ödeme yöntemi ve planı onayda belirtilir."
+        },
+        "cancellation": {
+          "title": "İptal ve değişiklikler",
+          "body": "İptal ve değişiklik koşulları, belirli hizmetin niteliğine bağlıdır. Aksi kararlaştırılmadıkça standart koşullar geçerlidir."
+        },
+        "liability": {
+          "title": "Sorumluluk",
+          "body": "BuVipTur Kft., kanunun izin verdiği ölçüde ifadan sorumludur. Mücbir sebep hallerinde sorumluluk doğmaz."
+        },
+        "privacy": {
+          "title": "Veri işleme",
+          "body": "Veri işleme, yürürlükteki Gizlilik Politikası tarafından düzenlenir."
+        },
+        "final": {
+          "title": "Son hükümler",
+          "body": "Bu şartlar Macaristan hukukuna göre yorumlanır. Uyuşmazlıklar mümkün olduğunca dostane yollarla çözülür."
+        }
+      }
+    }
+  }
+  ,
+  "privacyPage": {
+    "head": {
+      "title": "Gizlilik Politikası - BuVipTur",
+      "description": "Gizliliğinizi ve kişisel verilerinizi koruma taahhüdümüz."
+    },
+    "hero": {
+      "title": "Gizlilik Politikası",
+      "subtitle": "Gizliliğinizi korumaya kararlıyız"
+    },
+    "sections": {
+      "info": {
+        "title": "Topladığımız Bilgiler",
+        "intro": "Doğrudan bize sağladığınız bilgileri toplarız, bunlar şunları içerir:",
+        "items": [
+          "Ad ve iletişim bilgileri",
+          "Rezervasyon ve seyahat tercihleri",
+          "Ödeme bilgileri",
+          "İletişim geçmişi"
+        ]
+      },
+      "use": {
+        "title": "Bilgilerinizi Nasıl Kullanıyoruz",
+        "intro": "Topladığımız bilgileri şu amaçlarla kullanırız:",
+        "items": [
+          "Rezervasyonlarınızı ve ödemelerinizi işleme almak",
+          "Hizmetlerimiz hakkında sizinle iletişime geçmek",
+          "Web sitemizi ve hizmetlerimizi iyileştirmek",
+          "Pazarlama iletişimleri göndermek (onayınızla)"
+        ]
+      },
+      "cookies": {
+        "title": "Çerez Politikası",
+        "intro": "Çerezleri ve benzer teknolojileri şu amaçlarla kullanırız:",
+        "items": [
+          "Tercihlerinizi hatırlamak",
+          "Web sitesi trafiğini analiz etmek",
+          "İçeriği kişiselleştirmek",
+          "Kullanıcı deneyimini iyileştirmek"
+        ]
+      },
+      "rights": {
+        "title": "Haklarınız",
+        "intro": "Şu haklara sahipsiniz:",
+        "items": [
+          "Kişisel verilerinize erişim",
+          "Veri düzeltme veya silme talebi",
+          "Onayı geri çekme",
+          "Veri işlemeye itiraz etme"
+        ]
+      },
+      "contact": {
+        "title": "Bize Ulaşın",
+        "intro": "Gizlilikle ilgili sorularınız için bize şu adresten ulaşabilirsiniz:",
+        "email": "E-posta: info@buviptur.com"
+      }
+    },
+    "additional": {
+      "dataSecurity": {
+        "title": "Veri Güvenliği",
+        "text": "Kişisel bilgilerinizi korumak için sektör standartlarında güvenlik önlemleri kullanıyoruz."
+      },
+      "yourControl": {
+        "title": "Kontrol Sizde",
+        "text": "Verileriniz üzerinde tam kontrole sahipsiniz ve istediğiniz zaman erişim, değişiklik veya silme talep edebilirsiniz."
+      },
+      "cookieManagement": {
+        "title": "Çerez Yönetimi",
+        "text": "Çerez tercihlerinizi kolayca yönetebilir ve hakkınızda toplanan verileri kontrol edebilirsiniz."
+      }
+    },
+    "cta": {
+      "title": "Sorularınız mı var?",
+      "text": "Gizlilik Politikamız veya verilerinizi nasıl işlediğimizle ilgili herhangi bir sorunuz varsa, lütfen bizimle iletişime geçmekten çekinmeyin.",
+      "button": "Gizlilik Ekibimizle İletişime Geçin"
+    }
   }
 }

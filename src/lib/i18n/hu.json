@@ -794,7 +794,9 @@
       "tours": "Túrák",
       "about": "Rólunk", 
       "services": "Szolgáltatások",
-      "contact": "Kapcsolat"
+      "contact": "Kapcsolat",
+      "impresszum": "Impresszum",
+      "terms": "ÁSZF"
     },
     "contactInfo": {
       "title": "Kapcsolat"
@@ -833,5 +835,131 @@
     "yes": "Igen",
     "no": "Nem",
     "viewAllServices": "Tekintse meg minden szolgáltatásunkat"
+  }
+  ,
+  "legal": {
+    "impresszum": {
+      "title": "Impresszum",
+      "meta": "Cégjegyzék és jogi információk",
+      "heading": "Impresszum",
+      "subtitle": "Cégadatok és jogi információk",
+      "shortName": "Rövidített név",
+      "fullName": "Teljes név",
+      "founded": "Alapítás éve",
+      "taxNumber": "Adószám",
+      "mainActivity": "Főtevékenység",
+      "registeredOffice": "Székhely",
+      "branches": "Telephelyek száma",
+      "contactNote": "Kapcsolat: info@buviptur.com, +36 (70) 734-3444"
+    },
+    "terms": {
+      "title": "Általános Szerződési Feltételek",
+      "meta": "Általános Szerződési Feltételek",
+      "heading": "Általános Szerződési Feltételek",
+      "subtitle": "Szolgáltatásaink szerződéses feltételei",
+      "sections": {
+        "scope": {
+          "title": "A feltételek hatálya",
+          "body": "Jelen ÁSZF a BuVipTur Kft. által nyújtott szolgáltatások igénybevételének feltételeit szabályozza."
+        },
+        "booking": {
+          "title": "Foglalás és fizetés",
+          "body": "A foglalás a visszaigazolással válik érvényessé. A fizetés módja és ütemezése a visszaigazolásban kerül rögzítésre."
+        },
+        "cancellation": {
+          "title": "Lemondás és módosítás",
+          "body": "A lemondás és módosítás feltételei a konkrét szolgáltatás jellegétől függnek. Eltérő megállapodás hiányában a standard feltételek érvényesek."
+        },
+        "liability": {
+          "title": "Felelősség",
+          "body": "A BuVipTur Kft. a jogszabályok által megengedett mértékig felel a szolgáltatások teljesítéséért. Vis maior esetén felelősség nem terheli."
+        },
+        "privacy": {
+          "title": "Adatkezelés",
+          "body": "Az adatkezelésre a mindenkor hatályos Adatvédelmi Tájékoztató rendelkezései irányadóak."
+        },
+        "final": {
+          "title": "Záró rendelkezések",
+          "body": "Jelen feltételek magyar jog szerint értelmezendők. Vitás kérdésekben a felek békés úton igyekeznek megegyezni."
+        }
+      }
+    }
+  }
+  ,
+  "privacyPage": {
+    "head": {
+      "title": "Adatvédelmi tájékoztató - BuVipTur",
+      "description": "Elkötelezettségünk az Ön adatainak védelme mellett."
+    },
+    "hero": {
+      "title": "Adatvédelmi Tájékoztató",
+      "subtitle": "Elkötelezettek vagyunk az Ön adatainak védelmében"
+    },
+    "sections": {
+      "info": {
+        "title": "Milyen információkat gyűjtünk",
+        "intro": "Az Ön által közvetlenül megadott információkat gyűjtjük, beleértve:",
+        "items": [
+          "Név és elérhetőségek",
+          "Foglalási és utazási preferenciák",
+          "Fizetési adatok",
+          "Kapcsolattartási előzmények"
+        ]
+      },
+      "use": {
+        "title": "Az információk felhasználása",
+        "intro": "A gyűjtött adatokat az alábbi célokra használjuk:",
+        "items": [
+          "Foglalások és fizetések kezelése",
+          "Kapcsolattartás szolgáltatásainkról",
+          "Weboldalunk és szolgáltatásaink fejlesztése",
+          "Marketing kommunikáció küldése (az Ön hozzájárulásával)"
+        ]
+      },
+      "cookies": {
+        "title": "Sütikre vonatkozó szabályzat",
+        "intro": "Sütiket és hasonló technológiákat használunk az alábbiakra:",
+        "items": [
+          "Beállítások megjegyzése",
+          "Weboldal forgalmának elemzése",
+          "Tartalom személyre szabása",
+          "Felhasználói élmény javítása"
+        ]
+      },
+      "rights": {
+        "title": "Az Ön jogai",
+        "intro": "Önnek joga van:",
+        "items": [
+          "Hozzáférni személyes adataihoz",
+          "Az adatok helyesbítését vagy törlését kérni",
+          "A hozzájárulás visszavonásához",
+          "Tiltakozni az adatkezelés ellen"
+        ]
+      },
+      "contact": {
+        "title": "Kapcsolat",
+        "intro": "Adatvédelmi kérdésekben az alábbi címen érhet el minket:",
+        "email": "E-mail: info@buviptur.com"
+      }
+    },
+    "additional": {
+      "dataSecurity": {
+        "title": "Adatbiztonság",
+        "text": "Iparági szabványoknak megfelelő biztonsági intézkedéseket alkalmazunk személyes adatai védelme érdekében."
+      },
+      "yourControl": {
+        "title": "Az Ön irányítása",
+        "text": "Teljes mértékben Ön irányítja adatait, és bármikor kérheti azokhoz való hozzáférést, módosítást vagy törlést."
+      },
+      "cookieManagement": {
+        "title": "Sütikezelés",
+        "text": "Könnyedén kezelheti süti-beállításait, és szabályozhatja, milyen adatokat gyűjtünk Önről."
+      }
+    },
+    "cta": {
+      "title": "Kérdése van?",
+      "text": "Ha bármilyen kérdése van az Adatvédelmi Tájékoztatóval vagy adatkezelési gyakorlatunkkal kapcsolatban, kérjük, lépjen kapcsolatba velünk.",
+      "button": "Lépjen kapcsolatba adatvédelmi csapatunkkal"
+    }
   }
 }
