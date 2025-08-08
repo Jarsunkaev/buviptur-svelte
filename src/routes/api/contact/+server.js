@@ -118,8 +118,10 @@ export async function POST({ request }) {
                     
                     <h3 style="color: #2d3748; margin-top: 20px;">Tour Details</h3>
                     ${data.tour ? `<p><strong>Selected Package:</strong> ${data.tour}</p>` : ''}
-                    <p><strong>From:</strong> ${data.fromDate}</p>
-                    <p><strong>To:</strong> ${data.toDate}</p>
+                     <p><strong>From:</strong> ${data.fromDate}</p>
+                     <p><strong>To:</strong> ${data.toDate}</p>
+                     ${data.startCity ? `<p><strong>Start City:</strong> ${data.startCity}</p>` : ''}
+                     ${data.arrivalCity ? `<p><strong>Arrival City:</strong> ${data.arrivalCity}</p>` : ''}
                     <p><strong>Total Participants:</strong> ${data.participants}</p>
                     <p><strong>Age Groups:</strong> ${data.ageGroup}</p>
                     
@@ -156,7 +158,9 @@ export async function POST({ request }) {
                 <div style="background: white; padding: 15px; border-radius: 5px; margin: 15px 0;">
                     <h3 style="color: #2d3748; margin-top: 0;">Your Request Summary</h3>
                     ${data.tour ? `<p><strong>Selected Package:</strong> ${data.tour}</p>` : ''}
-                    <p><strong>Tour Dates:</strong> ${data.fromDate} to ${data.toDate}</p>
+                     <p><strong>Tour Dates:</strong> ${data.fromDate} to ${data.toDate}</p>
+                     ${data.startCity ? `<p><strong>Start City:</strong> ${data.startCity}</p>` : ''}
+                     ${data.arrivalCity ? `<p><strong>Arrival City:</strong> ${data.arrivalCity}</p>` : ''}
                     <p><strong>Number of Participants:</strong> ${data.participants}</p>
                     <p><strong>Age Groups:</strong> ${data.ageGroup}</p>
                     ${data.comments ? `<p><strong>Your Message:</strong> ${data.comments}</p>` : ''}

@@ -22,6 +22,8 @@
     let privacyAccepted = false;
     let isSubmitting = false;
     let submitSuccess = false;
+    let startCity = '';
+    let arrivalCity = '';
     let selectedTour = '';
     
     // Reactive list of tour package options (labels translated to current locale)
@@ -120,6 +122,8 @@
         phone,
         fromDate,
         toDate,
+        startCity,
+        arrivalCity,
         participants,
         ageGroup,
         comments,
@@ -322,6 +326,30 @@
                                         required
                                     />
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Start and Arrival Cities -->
+                        <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+                            <div class="w-full">
+                                <label for="startCity" class="block text-sm font-medium text-gray-700 mb-2">{$_('contact.form.startCity')}</label>
+                                <input
+                                    type="text"
+                                    id="startCity"
+                                    bind:value={startCity}
+                                    class="w-full max-w-md px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
+                                    placeholder={$_('contact.form.startCityPlaceholder')}
+                                >
+                            </div>
+                            <div class="w-full">
+                                <label for="arrivalCity" class="block text-sm font-medium text-gray-700 mb-2">{$_('contact.form.arrivalCity')}</label>
+                                <input
+                                    type="text"
+                                    id="arrivalCity"
+                                    bind:value={arrivalCity}
+                                    class="w-full max-w-md px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
+                                    placeholder={$_('contact.form.arrivalCityPlaceholder')}
+                                >
                             </div>
                         </div>
                         
