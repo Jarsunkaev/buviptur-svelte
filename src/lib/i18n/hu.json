@@ -717,7 +717,9 @@
       },
       "submit": "Kérés beküldése",
       "processing": "Feldolgozás...",
-      "required": "*"
+      "required": "*",
+      "tourPackage": "Túracsomag",
+      "tourPackagePlaceholder": "Válasszon csomagot (opcionális)"
     },
     "success": {
       "title": "Kérés sikeresen beküldve!",

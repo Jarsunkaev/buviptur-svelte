@@ -22,6 +22,14 @@
     let privacyAccepted = false;
     let isSubmitting = false;
     let submitSuccess = false;
+    let selectedTour = '';
+    
+    // Reactive list of tour package options (labels translated to current locale)
+    $: tourOptions = [
+        $_('tours.detailed.budapest.title') || 'Hungarian Heritage & Danube Bend Discovery',
+        $_('tours.detailed.centralEurope5.title') || '5-Day Central Europe Tour',
+        $_('tours.detailed.centralEurope3.title') || '3-Day Central Europe Tour'
+    ];
     let ageGroups = [
         { id: 1, value: '0-12', label: 'contact.form.ageGroup1', participants: 0 },
         { id: 2, value: '13-18', label: 'contact.form.ageGroup2', participants: 0 },
@@ -114,7 +122,8 @@
         toDate,
         participants,
         ageGroup,
-        comments
+        comments,
+        tour: selectedTour
     };
 
     try {
@@ -167,6 +176,8 @@
         name = params.get('name') || '';
         surname = params.get('surname') || '';
         email = params.get('email') || '';
+        // Preselect tour package if provided in query string
+        selectedTour = params.get('tour') || '';
     });
 </script>
 
@@ -262,6 +273,30 @@
                                     class="w-full max-w-md px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660]"
                                     placeholder={$_('contact.form.phonePlaceholder')}
                                 >
+                            </div>
+                        </div>
+
+                        <!-- Tour Package Selector -->
+                        <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+                            <div class="w-full md:col-span-2">
+                                <label for="tour" class="block text-sm font-medium text-gray-700 mb-2">{$_('contact.form.tourPackage') || 'Tour Package'}</label>
+                                <div class="relative inline-block w-full max-w-2xl">
+                                  <select
+                                    id="tour"
+                                    bind:value={selectedTour}
+                                    class="appearance-none w-full pr-12 pl-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#dcb660] bg-white"
+                                  >
+                                    <option value="">{$_('contact.form.tourPackagePlaceholder') || 'Select a package (optional)'}</option>
+                                    {#each tourOptions as option}
+                                        <option value={option}>{option}</option>
+                                    {/each}
+                                  </select>
+                                  <span class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
+                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.187l3.71-3.955a.75.75 0 111.08 1.04l-4.24 4.52a.75.75 0 01-1.08 0L5.25 8.27a.75.75 0 01-.02-1.06z" clip-rule="evenodd" />
+                                    </svg>
+                                  </span>
+                                </div>
                             </div>
                         </div>
                         

@@ -117,6 +117,7 @@ export async function POST({ request }) {
                     <p><strong>Phone:</strong> ${data.phone || 'Not provided'}</p>
                     
                     <h3 style="color: #2d3748; margin-top: 20px;">Tour Details</h3>
+                    ${data.tour ? `<p><strong>Selected Package:</strong> ${data.tour}</p>` : ''}
                     <p><strong>From:</strong> ${data.fromDate}</p>
                     <p><strong>To:</strong> ${data.toDate}</p>
                     <p><strong>Total Participants:</strong> ${data.participants}</p>
@@ -154,6 +155,7 @@ export async function POST({ request }) {
                 
                 <div style="background: white; padding: 15px; border-radius: 5px; margin: 15px 0;">
                     <h3 style="color: #2d3748; margin-top: 0;">Your Request Summary</h3>
+                    ${data.tour ? `<p><strong>Selected Package:</strong> ${data.tour}</p>` : ''}
                     <p><strong>Tour Dates:</strong> ${data.fromDate} to ${data.toDate}</p>
                     <p><strong>Number of Participants:</strong> ${data.participants}</p>
                     <p><strong>Age Groups:</strong> ${data.ageGroup}</p>

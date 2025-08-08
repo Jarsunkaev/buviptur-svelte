@@ -717,7 +717,9 @@
       },
       "submit": "Talebi Gönder",
       "processing": "İşleniyor...",
-      "required": "*"
+      "required": "*",
+      "tourPackage": "Tur Paketi",
+      "tourPackagePlaceholder": "Bir paket seçin (isteğe bağlı)"
     },
     "success": {
       "title": "Talep Başarıyla Gönderildi!",

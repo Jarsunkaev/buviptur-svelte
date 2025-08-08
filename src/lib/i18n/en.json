@@ -724,7 +724,9 @@
       "validation": {
         "required": "Please fill in all required fields",
         "email": "Please enter a valid email address"
-      }
+      },
+      "tourPackage": "Tour Package",
+      "tourPackagePlaceholder": "Select a package (optional)"
     },
     "success": {
       "title": "Request Submitted Successfully!",
