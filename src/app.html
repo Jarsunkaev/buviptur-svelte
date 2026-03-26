@@ -38,8 +38,6 @@
             }
 
             body {
-                overflow-x: hidden; /* Prevent horizontal scrollbar */
-                overflow-y: auto; /* Allow vertical scroll */
                 width: 100%;
                 position: relative;
                 -webkit-font-smoothing: antialiased;
@@ -55,9 +53,6 @@
 
             /* Prevent content shift when scrollbar appears */
             /* This is a good practice, keep it */
-            html {
-                overflow-y: scroll;
-            }
 
             /* Hide scrollbar for Chrome, Safari and Opera (custom styling) */
             ::-webkit-scrollbar {
@@ -106,13 +101,12 @@
                 html {
                     font-size: 15px;
                     /* Use dvh for dynamic height, as 100vh can be problematic with mobile UI */
-                    height: 100dvh; 
+                    /* height: 100dvh; Removed to prevent cutting off scroll */
                 }
                 
                 body {
                     min-height: 100dvh; 
                     position: relative;
-                    overflow-x: hidden;
                 }
                 
                 /* Fix viewport height issues */
